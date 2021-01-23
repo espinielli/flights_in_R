@@ -1,0 +1,54 @@
+# Data Types and CO2 Emissions
+
+In this chapter, we introduce some basic data types, and use them to produce graphs of aviation CO2 emissions per European State.
+
+```{r initialiseChapter, results='hide'}
+library(tidyverse)
+# library(readxl)
+
+```
+
+
+## CO2 Data
+
+We use public data from the [EUROCONTROL/AIU website](https://ansperformance.eu/data/). See the source for disclaimer. International conventions mean that CO2 emissions are measured from flights departing airports in a State. We choose this, apart from the interest in the data themselves, because it's a small set so quick to download, and it's already tidy (each variable in one column). 
+
+Because this is an `.xlsx` file on the web, there's a 3-line recipe to download it into a dataframe `aviation_co2`. `read_xlsx` automatically selects the first row as variable names.
+
+
+```{r getCO2}
+
+# read_xlsx doesn't support pulling directly from the web, so it takes 3 lines
+tf = tempfile(fileext = ".xlsx")
+curl::curl_download("https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx", tf)
+aviation_co2 <- readxl::read_xlsx(tf, 
+                                  sheet = "DATA")
+
+#quick summary
+summary(aviation_co2)
+
+```
+The `summary` function is fairly basic, but it gives a quick feel for what's in the data. Often more helpful with numeric than character.
+
+There are two other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the blue arrow-disk to see a summary. You get much the same thing in the console by typing `str(aviation_co2)` where `str` is for 'structure'. You should see something like this.
+![environment](images/CO2inEnvironment.png)
+
+
+We can see there are 3 numeric variables and 3 character variables.
+
+The other way gives more detail. Click on the dataset name next to the blue arrow or type `View(aviation_co2)` in the console (sorry about the upper case 'V') and you get a tabular data explorer, which allows you to sort and filter. You should see something like this. Try out the sorting and filtering.
+![environment](images/CO2inViewAndEnvironment.png)
+
+## CO2 Scatter
+
+### First draft
+
+```{r co2scatter}
+
+ggplot(aviation_co2, aes(Y_TF, Y_CO2_QTY_TONNES, colour = YEAR)) +
+  geom_point() + 
+  labs(x = "Departing Flights", 
+       y = "CO2 (Tonnes)")
+
+```
+

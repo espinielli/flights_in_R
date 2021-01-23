@@ -12,11 +12,6 @@ description: "This is a training and reference manual for Eurocontrol staff, on 
 
 # How to use this book {#howto}
 
-## What's gone wrong?
-
-Each chapter has a "what's gone wrong?" section near the end, discussing some typical potholes that we all fall into from time to time. Look there especially if you don't see the results from the code in the book that you were expecting.
-
-We actually start the book with one classic pitfall: R is *case sensitive*, which can be quite a culture shock if you're brought up on other systems. This matters for filenames as well as code. When in doubt, check the case!
 
 ## Before you start
 
@@ -59,4 +54,9 @@ The book aims to support you using it in a number of different ways:
 
 But it is never going to replace the huge amount of excellent information, especially in [stackoverflow](https://stackoverflow.com/). A key principle is that _"Google is your friend"_: even if I prefer [DuckDuckGo](https://www.duckduckgo.com) for many purposes, a google search is often more productive for R. Whether it's for how to do something, or how to respond to an error, usually someone has already suffered, and some kind person has answered. Google it.
 
+## What's gone wrong?
+
+Each chapter has a "what's gone wrong?" section near the end, discussing some typical potholes that we all fall into from time to time. Look there especially if you don't see the results from the code in the book that you were expecting.
+
+We actually start the book with one classic pitfall: R is *case sensitive*, which can be quite a culture shock if you're brought up on other systems. This matters for filenames as well as code. When in doubt, check the case!
 

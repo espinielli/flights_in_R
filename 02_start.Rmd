@@ -1,6 +1,6 @@
 # Getting started {#start}
 
-We said in chapter \@ref(howto) that you need first to install R and RStudio. These are separate pieces of software: R does all the statistical and graphics stuff, while RStudio provides the graphical user interface. 
+We said in chapter \@ref(howto) that you need first to install R and RStudio. These are separate pieces of software: R does all the statistical and graphics stuff, while RStudio provides the graphical user interface. In this chapter we get up and running in RStudio.
 
 ## Orientation in RStudio {#rstudio}
 
@@ -77,6 +77,75 @@ Unlike in the console, it doesn't get executed as you type. You have to run it. 
 
 Output appears in the console as a running log.
 
+## First packages {#packages}
+
+A 'package' provides a collection of functions, often some data and sometimes some new data types. If you're starting in R, and just aiming to find your way around in and use code, then mostly what you need to know is how to load packages (and what that means), and a little about the more common ones. That's what we cover in this section sections.
+
+### Package basics
+
+Some packages come bundled with a basic installation of 'R', such as `base` which provides, as the name suggests, many of the most basic functions. But there are thousands of other packages, coming from:
+
+* [CRAN](https://cran.r-project.org) or various 'mirror' (official copy) sites hosted elsewhere, such as at Ghent University. These packages have been through a degree of quality control, and are preferred to the less official sources.
+* [Github](https://github.com) and other public repositories. We share some there, such as [CODA taxi times](https://github.com/david6marsh/codaTaxi) and the [PRC dashboard](https://github.com/euctrl-pru/portal).
+* Home-made. Making them is out of the scope of the book, but you will want to load the `statfor` package (TBD) created by Sebastien Thonnard that builds some access to Eurocontrol datawarehouses as well as nice formatting.
+
+There are two^[actually, there's a third, but that's too much detail for here] steps to using a package, and sometimes these get confused:
+
+1) Installation. You type `install.packages("dplyr")` and R finds the files for that package and saves them on your machine or on a network drive. So the files are available. You've done the shopping and the food is in the kitchen cupboards.
+2) Attaching or Loading. You have to make a package _available_ for use for your session. You've pulled the ingredients for your recipe out of the cupboard and they're on the kitchen table. If there's a difference between 'attaching' and 'loading' then it doesn't matter here. 
+
+A very few packages are automatically loaded at the start of the session. In the packages pane, a package is listed if it is installed and ticked if it's loaded. In the screenshot, just the `base` package is loaded of the ones listed.
+
+![](images/packages.png){width=75%}
+
+Clicking on the package name takes you to the documentation. There's a manual for all functions together, as a pdf, but it's usually easier to use the help pane to get the same material, and perhaps copy examples from the end of each help entry. More importantly here there are links to **vignettes**, and often now to websites with more info. Vignettes are not little stickers, but essential how-to guides mixing text and code; often this can provide a skeleton that you can copy and adapt to your own need. 
+
+You can load a package by ticking the box, but normally it's done in code, as in this example.
+
+```{r loadingPackages}
+library(lubridate) # lots of date-related functions.
+
+```
+Two packages can define a function with the same name. That is not something CRAN controls, and when there's a clash, on loading the second one 'masks' the first, as in the message displayed above. Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
+
+There are often many different functions that you could use to achieve the same result, eg `base::paste()` and `stringr::str_c()` both concatenate strings (tbd). There's an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That's like the satisfaction of making the recipe from things you already have in the cupboard.
+
+But sometimes, you just don't want to make the flaky pastry yourself. There are times when you're looking at a complex task and should be thinking 'surely someone has already tackled this in R?'. A little googling might find you most of the pieces already in place. 
+
+In a way, you develop a personal 'dialect' of R, from the packages you choose to use most often. We'll discuss one of the most common dialects, the `tidyverse`, in more detail in the next section.
+
+### Tidyverse
+
+The [tidyverse](https://www.tidyverse.org) is our chosen dialect, in the sense that in most cases we'll use the functions and data structures, and way of organising, that go with this collection of packages. There's a lot of excellent documentation already available, so we will explain some basics here, and introduce other elements as we need them for flight data examples.
+
+The *tidy* in 'tidyverse' refers to a [tidy data structure](https://r4ds.had.co.nz/tidy-data.html): a table with each variable in its own column and each observation on one row. While we often put years across the table, and countries down the side, this is not 'tidy'.
+
+```{r twotables, echo=FALSE}
+knitr::kable(data.frame(Country = c("France", "Germany"), Flights2019 = c(1.3, 5.2), Flights2020= c(1.5, 6.0)),
+             booktabs = TRUE, caption = "An untidy table.")
+
+knitr::kable(data.frame(Country = c("France", "Germany"), Year = 2019:2020, Flights = c(1.3, 5.2, 1.5, 6.0)),
+             booktabs = TRUE, caption = "An tidy table.")
+
+```
+
+The main data structure used by the tidyverse is the dataframe, although increasingly the tidyverse prefers the 'tibble' `tbl`, which is a specific sort of dataframe. (TBD) We won't worry about the differences here.
+
+For most 'quick pieces of code', the easiest is to start with a `library(tidyverse)` to load all the parts of the tidyverse. If you were writing a package, that wouldn't be very efficient, because there's quite a lot of it. Sometimes you'll see individual parts of the tidyverse loaded including:
+
+* `ggplot2`: lots of plotting functions (see TBD)
+* `dplyr`: for manipulating and processing data
+* `tidyr`: for tidying data, such as pivot-table like actions, or splitting columns.
+
+And there are packages which are on the outskirts of the 'tidyverse' which get announced when you load.
+
+```{r loadtidyverse}
+library(tidyverse)
+```
+
+These include `lubridate` and `stringr` which we've already mentioned.
+
+
 ## File types {#filetypes}
 
 You will see lots of different file types (ie file extensions). The main ones to remember are:
@@ -104,7 +173,8 @@ If you're searching in 'help' and a function isn't appearing, for example in the
 3. Which ctrl-key combination takes you to the environment pane?
 4. What does an `.rda` file contain?
 5. What's the difference between typing into a source file and into the console?
-6. (teaser) What does `3 + 1:3` give?
+6. What is a 'vignette'?
+7 (teaser) What does `3 + 1:3` give?
 
 ### Answers
 
@@ -113,6 +183,7 @@ If you're searching in 'help' and a function isn't appearing, for example in the
 3. CTRL-8
 4. R data
 5. With the console, code is executed as each line is completed.
-6. `4 5 6`
+6. An extended entry in the documentation showing how to put the functions of the packages together.
+7. `4 5 6`
 
 
