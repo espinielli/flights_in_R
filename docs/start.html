@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Getting started | Analysing Flights with R</title>
+  <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Getting started | Analysing Flights with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Getting started | Analysing Flights with R" />
+  
+  <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data." />
+  
+
+<meta name="author" content="David Marsh" />
+
+
+<meta name="date" content="2021-01-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="first-look-at-data-and-co2-emissions.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analysing Flights in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#before-you-start"><i class="fa fa-check"></i><b>1.1</b> Before you start</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ways-to-use-the-material"><i class="fa fa-check"></i><b>1.2</b> Ways to Use the Material</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#whats-gone-wrong"><i class="fa fa-check"></i><b>1.3</b> What’s gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> Orientation in RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="start.html"><a href="start.html#first-project"><i class="fa fa-check"></i><b>2.2</b> First project</a></li>
+<li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
+<li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#package-basics"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
+<li class="chapter" data-level="2.6" data-path="start.html"><a href="start.html#whats-gone-wrong-1"><i class="fa fa-check"></i><b>2.6</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="2.7" data-path="start.html"><a href="start.html#test-yourself"><i class="fa fa-check"></i><b>2.7</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="start.html"><a href="start.html#questions"><i class="fa fa-check"></i><b>2.7.1</b> Questions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="start.html"><a href="start.html#answers"><i class="fa fa-check"></i><b>2.7.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> Emissions</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#extracting-variables"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.3" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#extracting-a-few-values"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
+<li class="chapter" data-level="3.4" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#first-draft"><i class="fa fa-check"></i><b>3.4.1</b> First draft</a></li>
+<li class="chapter" data-level="3.4.2" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#improve-the-titles"><i class="fa fa-check"></i><b>3.4.2</b> Improve the titles</a></li>
+<li class="chapter" data-level="3.4.3" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#statecluster"><i class="fa fa-check"></i><b>3.4.3</b> and with clustering by State</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#whats-gone-wrong-2"><i class="fa fa-check"></i><b>3.5</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="3.6" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#test-yourself-1"><i class="fa fa-check"></i><b>3.6</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#questions-1"><i class="fa fa-check"></i><b>3.6.1</b> Questions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="first-look-at-data-and-co2-emissions.html"><a href="first-look-at-data-and-co2-emissions.html#answers-1"><i class="fa fa-check"></i><b>3.6.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html"><i class="fa fa-check"></i><b>4</b> Filtering a dataset and refining the CO<sub>2</sub> graph</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#sequences-of-functions"><i class="fa fa-check"></i><b>4.1</b> Sequences of functions</a></li>
+<li class="chapter" data-level="4.2" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#filtering-datasets-and-logical-tests"><i class="fa fa-check"></i><b>4.2</b> Filtering datasets and Logical Tests</a></li>
+<li class="chapter" data-level="4.3" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#selecting-the-busiest-states"><i class="fa fa-check"></i><b>4.3</b> Selecting the busiest States</a></li>
+<li class="chapter" data-level="4.4" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#co2-graph-for-the-top-states"><i class="fa fa-check"></i><b>4.4</b> CO<sub>2</sub> graph for the top States</a></li>
+<li class="chapter" data-level="4.5" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#labelling-the-co2-graph"><i class="fa fa-check"></i><b>4.5</b> Labelling the CO<sub>2</sub> graph</a></li>
+<li class="chapter" data-level="4.6" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#what-does-the-graph-say-about-co2"><i class="fa fa-check"></i><b>4.6</b> What does the graph say about CO<sub>2</sub>?</a></li>
+<li class="chapter" data-level="4.7" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#whats-gone-wrong-3"><i class="fa fa-check"></i><b>4.7</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="4.8" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#exercises"><i class="fa fa-check"></i><b>4.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#questions-2"><i class="fa fa-check"></i><b>4.8.1</b> Questions</a></li>
+<li class="chapter" data-level="4.8.2" data-path="filtering-a-dataset-and-refining-the-co2-graph.html"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#answers-2"><i class="fa fa-check"></i><b>4.8.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="start" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Getting started</h1>
+<p>We said in chapter <a href="index.html#howto">1</a> that you need first to install R and RStudio. These are separate pieces of software: R does all the statistical and graphics stuff, while RStudio provides the graphical user interface. In this chapter we get up and running in RStudio.</p>
+<div id="rstudio" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Orientation in RStudio</h2>
+<p>Here we take a brief look around the RStudio interface. Use ‘RStudio/Help’ to get more detailed help.</p>
+<p>The RStudio interface can be customised almost beyond recognition. We’ll use a mix of styles in the book so that you don’t get too fixed, but it’s probably helpful to your colleagues not to re-order the main four panes, otherwise they’ll find looking over your shoulder or screen-sharing a disorienting experience.</p>
+<p>A basic MS Windows RStudio looks something like this.</p>
+<div class="figure">
+<img src="images/RStudio.png" style="width:75.0%" alt="" />
+<p class="caption">RStudio snapshot</p>
+</div>
+<p>The main panes of the screen are:</p>
+<ul>
+<li>Top left: source code, shown as a number of tabs one for each file;</li>
+<li>Bottom left: the ‘console,’ which is a scratchpad for entering code, and where log output is usually shown (and some other tabs which we don’t need here);</li>
+<li>Top right: the ‘environment’ and ‘history’ tabs are of main interest. Environment is where you can explore all the data you’ve created. History is useful for re-doing something, particularly as you can search for code.</li>
+<li>Bottom right: This has several important tabs
+<ul>
+<li>Files: for exploring files within a project, can be quicker than using the windows explorer</li>
+<li>Plots: is where plots will appear (usually)</li>
+<li>Packages: is for checking which packages are installed, or active (see TBD)</li>
+<li>Help: all the details of the functions that you will need - this is usually quicker to use than googling a function (though the help files come up when you google, from various providers).</li>
+</ul></li>
+</ul>
+<p>The buttons that appear around the panes are context-sensitive: they will change according to the type of file that you have open.</p>
+<p>There are some hot-keys for moving rapidly around the panes: I most use ctrl-1 to go to the source code, ctrl-2 for the console. You can then guess the others.</p>
+<p>Recent versions of <code>RStudio</code> have a tutorial (tab in top right pane) if you need more detail.</p>
+</div>
+<div id="first-project" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> First project</h2>
+<p>While you can work with ‘bare’ files of R code, we think it’s tidier to use ‘projects,’ for two main reasons: you can keep several shorter files of code together, which makes it easier to navigate; and a project automatically remembers which directory it’s working in, so you can manage data input and output and graphic output more neatly.</p>
+<p>Create yourself a new project ‘File/New Project,’ selecting the options new project (not new package), give it the name ‘justlearning’ and browse to put it in your personal R directory. (TBD templates).</p>
+<p>It will open without a code panel, because you have no code yet. It looks like this.
+<img src="images/NewJustLearning.png" style="width:75.0%" alt="new justlearning project" /></p>
+<p>You can already execute R code in the console (bottom left, ctrl-2), but we want to save and organise code. So we do a bit more organising, and then in the next section, create a file for the code.</p>
+<p>In this book we’ll assume that projects always keep data in the <code>data</code> directory, and save graphs to the <code>graphs</code> directory. You can create these quickly in your new project by copying the code (quick-copy icon appears top right in the code block) and pasting it into the console (and press return).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="start.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># good to have these in every project</span></span>
+<span id="cb1-2"><a href="start.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>)</span>
+<span id="cb1-3"><a href="start.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;graphs&quot;</span>)</span></code></pre></div>
+<p>If for some reason the directories already exist, don’t worry, you’ll just get a warning. You can also do this manually using ‘New Folder’ in the files tab (ctrl-5), but then look out for lower case! You could even use your operating system file explorer - these are just ordinary directories (‘folders’).</p>
+<p>When you quit RStudio it will save any data and open files in your project. So you can re-open and continue from where you left off. If you’ve opened very large files, just beware that saving a copy as you close can take some time. (see TBD)</p>
+</div>
+<div id="first-code" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> First code</h2>
+<p>Now you’ve got a blank project, add a new blank R script using <code>File/New File/R Script</code>, or the ‘file plus’ icon top left. It appears in the source code pane, top left.</p>
+<p>Immediately save it; ‘chapter2’ for example. The name isn’t critical here, but avoid spaces and punctuation. By default, it will be saved to the top level in the project. This is fine for many projects, though in some cases we might choose to organise code differently.</p>
+<p>Type this code into your script, either manually or copy paste.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="start.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span>
+<span id="cb2-2"><a href="start.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I know pi</span></span>
+<span id="cb2-3"><a href="start.html#cb2-3" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb2-4"><a href="start.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span>
+<span id="cb2-5"><a href="start.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cos</span>(pi<span class="sc">/</span><span class="dv">3</span>) <span class="co"># angle is in radians</span></span></code></pre></div>
+<p>Unlike in the console, it doesn’t get executed as you type. You have to run it. Usually you’re either:</p>
+<ul>
+<li>stepping through code, running a bit at a time, in which case ctrl-enter (cmd-enter on the Mac) is easy to use: it runs where the cursor currently sits, and then moves to the next line of code, jumping over comments that are preceded by <code>#</code>;</li>
+<li>running all the code, which you can do by pressing the ‘source’ button (or select all and ctrl-enter).</li>
+</ul>
+<p>Output appears in the console as a running log.</p>
+</div>
+<div id="packages" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> First packages</h2>
+<p>A ‘package’ provides a collection of functions, often some data and sometimes some new data types. If you’re starting in R, and just aiming to find your way around in and use code, then mostly what you need to know is how to load packages (and what that means), and a little about the more common ones. That’s what we cover in this section sections.</p>
+<div id="package-basics" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Package basics</h3>
+<p>Some packages come bundled with a basic installation of ‘R,’ such as <code>base</code> which provides, as the name suggests, many of the most basic functions. But there are thousands of other packages, coming from:</p>
+<ul>
+<li><a href="https://cran.r-project.org">CRAN</a> or various ‘mirror’ (official copy) sites hosted elsewhere, such as at Ghent University. These packages have been through a degree of quality control, and are preferred to the less official sources.</li>
+<li><a href="https://github.com">Github</a> and other public repositories. We share some there, such as <a href="https://github.com/david6marsh/codaTaxi">CODA taxi times</a> and the <a href="https://github.com/euctrl-pru/portal">PRC dashboard</a>.</li>
+<li>Home-made. Making them is out of the scope of the book, but you will want to load the <code>statfor</code> package (TBD) created by Sebastien Thonnard that builds some access to Eurocontrol datawarehouses as well as nice formatting.</li>
+</ul>
+<p>There are two<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> steps to using a package, and sometimes these get confused:</p>
+<ol style="list-style-type: decimal">
+<li>Installation. You type <code>install.packages("dplyr")</code> and R finds the files for that package and saves them on your machine or on a network drive. So the files are available. You’ve done the shopping and the food is in the kitchen cupboards.</li>
+<li>Attaching or Loading. You have to make a package <em>available</em> for use for your session. You’ve pulled the ingredients for your recipe out of the cupboard and they’re on the kitchen table. If there’s a difference between ‘attaching’ and ‘loading’ then it doesn’t matter here.</li>
+</ol>
+<p>A very few packages are automatically loaded at the start of the session. In the packages pane, a package is listed if it is installed and ticked if it’s loaded. In the screenshot, just the <code>base</code> package is loaded of the ones listed.</p>
+<p><img src="images/packages.png" style="width:75.0%" /></p>
+<p>Clicking on the package name takes you to the documentation. There’s a manual for all functions together, as a pdf, but it’s usually easier to use the help pane to get the same material, and perhaps copy examples from the end of each help entry. More importantly here there are links to <strong>vignettes</strong>, and often now to websites with more info. Vignettes are not little stickers, but essential how-to guides mixing text and code; often this can provide a skeleton that you can copy and adapt to your own need.</p>
+<p>You can load a package by ticking the box, but normally it’s done in code, as in this example.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="start.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># lots of date-related functions.</span></span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<p>Two packages can define a function with the same name. That is not something CRAN controls, and when there’s a clash, on loading the second one ‘masks’ the first, as in the message displayed above. Sometimes, as an alternative to loading the full package, you might see in code a ‘two colon’ usage, such as <code>base::union</code>. This is very common inside packages (it’s recommended), and it’s a way to insist that the first package version of the function should be used.</p>
+<p>There are often many different functions that you could use to achieve the same result, eg <code>base::paste()</code> and <code>stringr::str_c()</code> both concatenate strings (tbd). There’s an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That’s like the satisfaction of making the recipe from things you already have in the cupboard.</p>
+<p>But sometimes, you just don’t want to make the flaky pastry yourself. There are times when you’re looking at a complex task and should be thinking ‘surely someone has already tackled this in R?’ A little googling might find you most of the pieces already in place.</p>
+<p>In a way, you develop a personal ‘dialect’ of R, from the packages you choose to use most often. We’ll discuss one of the most common dialects, the <code>tidyverse</code>, in more detail in the next section.</p>
+</div>
+<div id="tidyverse" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Tidyverse</h3>
+<p>The <a href="https://www.tidyverse.org">tidyverse</a> is our chosen dialect, in the sense that in most cases we’ll use the functions and data structures, and way of organising, that go with this collection of packages. There’s a lot of excellent documentation already available, so we will explain some basics here, and introduce other elements as we need them for flight data examples.</p>
+<p>The <em>tidy</em> in ‘tidyverse’ refers to a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy data structure</a>: a table with each variable in its own column and each observation on one row. While we often put years across the table, and countries down the side, this is not ‘tidy.’</p>
+<table>
+<caption><span id="tab:twotables">Table 2.1: </span>An untidy table.</caption>
+<thead>
+<tr class="header">
+<th align="left">Country</th>
+<th align="right">Flights2019</th>
+<th align="right">Flights2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">France</td>
+<td align="right">1.3</td>
+<td align="right">1.5</td>
+</tr>
+<tr class="even">
+<td align="left">Germany</td>
+<td align="right">5.2</td>
+<td align="right">6.0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:twotables">Table 2.1: </span>An tidy table.</caption>
+<thead>
+<tr class="header">
+<th align="left">Country</th>
+<th align="right">Year</th>
+<th align="right">Flights</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">France</td>
+<td align="right">2019</td>
+<td align="right">1.3</td>
+</tr>
+<tr class="even">
+<td align="left">Germany</td>
+<td align="right">2020</td>
+<td align="right">5.2</td>
+</tr>
+<tr class="odd">
+<td align="left">France</td>
+<td align="right">2019</td>
+<td align="right">1.5</td>
+</tr>
+<tr class="even">
+<td align="left">Germany</td>
+<td align="right">2020</td>
+<td align="right">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>The main data structure used by the tidyverse is the dataframe, although increasingly the tidyverse prefers the ‘tibble’ <code>tbl</code>, which is a specific sort of dataframe. (TBD) We won’t worry about the differences here.</p>
+<p>For most ‘quick pieces of code,’ the easiest is to start with a <code>library(tidyverse)</code> to load all the parts of the tidyverse. If you were writing a package, that wouldn’t be very efficient, because there’s quite a lot of it. Sometimes you’ll see individual parts of the tidyverse loaded including:</p>
+<ul>
+<li><code>ggplot2</code>: lots of plotting functions (see TBD)</li>
+<li><code>dplyr</code>: for manipulating and processing data</li>
+<li><code>tidyr</code>: for tidying data, such as pivot-table like actions, or splitting columns.</li>
+</ul>
+<p>And there are packages which are on the outskirts of the ‘tidyverse’ which get announced when you load.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="start.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>These include <code>lubridate</code> and <code>stringr</code> which we’ve already mentioned.</p>
+</div>
+</div>
+<div id="filetypes" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> File types</h2>
+<p>You will see lots of different file types (ie file extensions). The main ones to remember are:</p>
+<ul>
+<li><code>.R</code>, <code>.Rmd</code>: both contain R code, though <code>.Rmd</code> is actually ‘r markdown’ which is a mix of code and text;</li>
+<li><code>.RProj</code>: contains an R ‘project’ - if you see one of these in the directory, this is the one to open - everything else works from there (see TBD);</li>
+<li><code>.rda</code>, <code>.RDS</code>: are different types of data file. R works easily also with <code>.csv</code> and <code>.xls(x)</code> see TBD.</li>
+</ul>
+</div>
+<div id="whats-gone-wrong-1" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> What’s gone wrong?</h2>
+<p>If you see a window like this, then you have started R rather than RStudio. That is a GUI and you can use it to execute R code, but you’ll find RStudio easier for all but the quickest snippets of code. <img src="images/RGui.png" style="width:50.0%" alt="basic RGui" /></p>
+<p>If it keeps on happening you will find it helpful to associate R files (<code>.R, .RMD</code> and others) with RStudio rather than R.</p>
+<p>If you get errors saying a certain package is only compatible with version xx and higher (of R), and you think you’ve recently updated, are you sure you updated R rather than RStudio? The RStudio version is found from the top menu ‘RStudio/About R Studio,’ the R version is seen when you first start up (see the image just above), or is printed if you type <code>version</code> in the console (see TBD).</p>
+<p>If you’re searching in ‘help’ and a function isn’t appearing, for example in the drop-down as you type, it is probably because it comes from a package that isn’t loaded. You can finish typing, and the system will search and may find it, but also some other less good matches. Or if you know the package name, you can type <code>?ggplot2::geom_line</code> for example, in the console to go straight there.</p>
+</div>
+<div id="test-yourself" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> Test yourself</h2>
+<div id="questions" class="section level3" number="2.7.1">
+<h3><span class="header-section-number">2.7.1</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li>In which pane will you (usually) find the help on functions?</li>
+<li>Which of these provides a graphical user interface (GUI): R, RStudio?</li>
+<li>Which ctrl-key combination takes you to the environment pane?</li>
+<li>What does an <code>.rda</code> file contain?</li>
+<li>What’s the difference between typing into a source file and into the console?</li>
+<li>What is a ‘vignette?’
+7 (teaser) What does <code>3 + 1:3</code> give?</li>
+</ol>
+</div>
+<div id="answers" class="section level3" number="2.7.2">
+<h3><span class="header-section-number">2.7.2</span> Answers</h3>
+<ol style="list-style-type: decimal">
+<li>Bottom right.</li>
+<li>Both, though you’ll nearly always want to use RStudio.</li>
+<li>CTRL-8</li>
+<li>R data</li>
+<li>With the console, code is executed as each line is completed.</li>
+<li>An extended entry in the documentation showing how to put the functions of the packages together.</li>
+<li><code>4 5 6</code></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>actually, there’s a third, but that’s too much detail for here<a href="start.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="first-look-at-data-and-co2-emissions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["flights_in_R.pdf", "flights_in_R.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
