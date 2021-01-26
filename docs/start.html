@@ -292,11 +292,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Clicking on the package name takes you to the documentation. There’s a manual for all functions together, as a pdf, but it’s usually easier to use the help pane to get the same material, and perhaps copy examples from the end of each help entry. More importantly here there are links to <strong>vignettes</strong>, and often now to websites with more info. Vignettes are not little stickers, but essential how-to guides mixing text and code; often this can provide a skeleton that you can copy and adapt to your own need.</p>
 <p>You can load a package by ticking the box, but normally it’s done in code, as in this example.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="start.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># lots of date-related functions.</span></span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
 <p>Two packages can define a function with the same name. That is not something CRAN controls, and when there’s a clash, on loading the second one ‘masks’ the first, as in the message displayed above. Sometimes, as an alternative to loading the full package, you might see in code a ‘two colon’ usage, such as <code>base::union</code>. This is very common inside packages (it’s recommended), and it’s a way to insist that the first package version of the function should be used.</p>
 <p>There are often many different functions that you could use to achieve the same result, eg <code>base::paste()</code> and <code>stringr::str_c()</code> both concatenate strings (tbd). There’s an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That’s like the satisfaction of making the recipe from things you already have in the cupboard.</p>
 <p>But sometimes, you just don’t want to make the flaky pastry yourself. There are times when you’re looking at a complex task and should be thinking ‘surely someone has already tackled this in R?’ A little googling might find you most of the pieces already in place.</p>
@@ -368,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>tidyr</code>: for tidying data, such as pivot-table like actions, or splitting columns.</li>
 </ul>
 <p>And there are packages which are on the outskirts of the ‘tidyverse’ which get announced when you load.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="start.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="start.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>These include <code>lubridate</code> and <code>stringr</code> which we’ve already mentioned.</p>
 </div>
 </div>
