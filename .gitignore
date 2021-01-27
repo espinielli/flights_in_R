@@ -2,6 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
+flights_in_R.log
+scratchpad.R
 
 /_bookdown_files
 /images
+/_book
+/data
