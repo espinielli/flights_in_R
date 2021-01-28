@@ -23,7 +23,7 @@ This book is available as html here (TBD) and can be downloaded complete with da
 
 If you're working through the book as training, then it will help to install (TBD - training bundle)
 
-If you want a more speedy introduction, then Enrico Spinielli has covered the [important steps here.](https://github.com/euctrl-pru/portal/wiki/Intro-to-everything).
+If you want a more speedy introduction, then Enrico Spinielli has covered the [important steps here.](https://github.com/euctrl-pru/portal/wiki/Intro-to-everything). Sebastien Thonnard and others have compiled an (internal) [wiki on the intranet](https://ost.eurocontrol.int/sites/STATFO/WikiPages/R_documentation.aspx).
 
 There are also several useful 'cheat sheets' see (TBD)
 

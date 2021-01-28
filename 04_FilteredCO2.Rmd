@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Filtering a dataset and refining the CO~2~ graph 
 
 In this chapter we improve the CO~2~ emissions graph, _en route_ learning how to filter observations from a dataset, to add new variables, and to use the `pipe` operator `%>%`.
