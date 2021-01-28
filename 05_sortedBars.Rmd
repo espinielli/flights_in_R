@@ -1,11 +1,10 @@
-# Sorting Bars, Saving Graphs, Vectors and Loops
+# Sorting Bars, Saving Graphs, Facets
+-- UNDER CONSTRUCTION! ---
 
-While nothing beats a well hand-crafted chart, there are times when you want to just run the code and get a quick update, as a .png say. , probably multiple graphs covering different 
-
-In this chapter we see how to do a classic sorted-bar chart and to save it to a file for future use. 
+While nothing beats a well hand-crafted chart, there are times when you want to just run the code and get a quick update, as a .png say. In this chapter we see how to do a classic sorted-bar chart and to save it to a file for future use. We need slightly different methods for simple bar charts and more complex ones.
 
 ```{r, echo=FALSE}
-knitr::kable(data.frame(syl=c("`geom_col()`, `reorder()`, `ggsave()`, `coord_flip()`, `slice_max()`, `%>%`, `geom_text_repel()`")),
+knitr::kable(data.frame(syl=c("`geom_col()`, `dodge`, `reorder()`, `ggsave()`, `as.factor()`, 'factor()`, `arrange()`, `facet_wrap()`, `select`")),
              col.names = c("In this chapter"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages filling up the book
 aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx", 
@@ -55,7 +54,7 @@ ggsave("graphs/FirstSortedBars.png", width = 15, height = 15, units = "cm")
 
 ### Plotting more than one year
 
-I can think of four ways to plot more than one year: 
+I can think of four ways to plot more than one year, and there are no doubt more than that: 
 
 1) as staggered bars, though we probably will have to work hard to make enough space;
 2) as 'facets', creating one sub-plot per year;
@@ -64,12 +63,19 @@ I can think of four ways to plot more than one year:
 
 Number (3) is a bit heavy. It's particularly useful for combining graphs of different variables. We'll deal with (4) in section (TBD) when we look at loops. The first two we will do in the next sections.
 
-#### Staggered bars, and factors
+#### Staggered bars, and factors {#factors}
 
-We took some shortcuts in \@ref{firstsortedbar}, which will need sorting out for the staggered bars. First we need to choose a couple of years, since there certainly isn't room for more than two. We used `state_label` before, but this only exists for 2019, so we have to go back to using `STATE_NAME`. It's probably time to make this name title case once and for all.
+We took some shortcuts in \@ref{firstsortedbar}, which will need sorting out for the staggered bars. First we need to choose a couple of years, since there certainly isn't room for more than two. Secondly, we used `state_label` before because it was prettier, but this only exists for 2019, so we have to go back to using `STATE_NAME`. It's probably time to turn this name into title case once and for all.
 
+The separation by year is done in the aesthetic `aes()` as you might expect. We want the bars to be different colours by year. In this case it's the `fill` that we specify; `colour` would add an outline to the bars. To get the bars side by side we set the `position = "dodge"` parameter in `geom_col()`.
 
+The least obvious, final step is that 'year' needs to be a discrete variable, whereas currently it's `num` which is a continuous number. Slightly oddly, `as.integer()` doesn't work: it's still treated as continuous by `ggplot`, presumably because there are potentially still quite a lot of them.
 
+We could convert to a string with `as.character`, but we need to start using factors, so let's do that here. 
+
+Factors in R were originally a way to save space with character variables in a dataset. In `aviation_co2` for example, rather than store 'ALBANIA' 10 times, for each row, a factor would give `ALBANIA` a numeric code and store that. The character strings become the levels. [Try `z <- as.factor(aviation_co2$STATE_NAME)` and see what is said for z in the environment pane. `rm(z)` to tidy up, if you wish.] 
+
+For this example, we'll convert `YEAR` on the fly, with an `as.factor` in the `aes()` call.
 
 ```{r}
 aviation_co2 <- aviation_co2 %>% 
@@ -79,27 +85,112 @@ ggplot(aviation_co2 %>%
          filter(YEAR %in% c(2010, 2019)), 
        aes(reorder(STATE_NAME, Y_CO2_QTY_TONNES),
            Y_CO2_QTY_TONNES/1e6,
-           fill = as_factor(YEAR))) +
+           fill = as.factor(YEAR))) +  # make discrete
   geom_col(position = "dodge") +
   labs(x = "", 
        y = bquote(~CO[2]~" (million tonnes)"),
        title = "Aviation Emissions in 2019",
        caption = "Source: EUROCONTROL.",
-       fill = "Year") +
+       fill = "Year") + # nicer label for legend
   coord_flip()
 
 ```
+
+Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019 bars are actually in order. We've asked `reorder` to do too much. It seems to have sorted by the total of the 2 years, which is a reasonable thing to do in the circumstances. But I think that's hard for the user of the graph to interpret, and I'd like the ordering to be by 2019. 
+
+We can do this ordering with factors. First define a vector that is in the order we want, using `arrange()` to sort it. The `desc()` reverses the order. Then define a factor version of the state names, and insist that it's in this fixed order. `factor()` is like `as.factor()` which we used in the previous chunk of code, but allows these extra parameters.
+
+```{r}
+state_order <- aviation_co2 %>% 
+  filter(YEAR == 2019) %>%     # in year 2019
+  arrange(desc(Y_CO2_QTY_TONNES)) %>%  # descending order
+  pull(STATE_NAME) 
+
+aviation_co2 <- aviation_co2 %>% 
+  mutate(ordered_states = factor(STATE_NAME, 
+                                 levels = state_order, ordered = TRUE))
+
+ggplot(aviation_co2 %>% 
+         filter(YEAR %in% c(2010, 2019)), 
+       aes(ordered_states,
+           Y_CO2_QTY_TONNES/1e6,
+           fill = as.factor(YEAR))) +  # make discrete
+  geom_col(position = "dodge") +
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions",
+       caption = "Ordering by 2019 emissions. Source: EUROCONTROL.",
+       fill = "Year") + # nicer label for legend
+  coord_flip()
+
+```
+
+#### Chart facets, more years in the bar chart
+
+If you want the reader to compare things, a good rule of thumb is to make sure these things are all in the same graph. We've achieved this for comparisons between years and between countries. However, this is a bit of a squeeze, vertically, while there's lots of empty space. Plus, it doesn't look like this method would easily cope with a third year, say.
+
+`ggplot` provides a simple way to split charts into 'facets', which can sometimes be a way to show variation across a dimension with just a few values (2 or 3 years, say), while aligning the axes in a sensible way. There's a bit of a twist in the notation: you can't just mention a variable name (as you can in `aes()`), you need either to say `vars(YEAR)` or use a 'formula' notation, which involves less typing so that's what I've done here. The `_wrap` would allow wrapping onto multiple rows, but I just want one row here.
+
+```{r}
+ggplot(aviation_co2 %>% 
+         filter(YEAR %in% c(2010, 2015, 2019)), 
+       aes(ordered_states,
+           Y_CO2_QTY_TONNES/1e6)) +  
+  geom_col() +
+  facet_wrap(~YEAR, nrow = 1) + 
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions",
+       caption = "Source: EUROCONTROL.") + 
+  coord_flip()
+
+```
+
+`facet_wrap` has given all the x- and y-axes the same scale, and not bothered to repeat the y-axis labels. So it's compact. The graph is not bad for comparing relative sizes of the larger States in a given year, and for seeing how the ranking changes. But it's not that easy to compare amounts between years.
+
+However, we can use facets to split in a different way, if we arbitrarily put the States into two groups. Remember that `[ ]` is a way to select elements of the vector, in this case the first 19. We could equally have used `head(state_order, 19)`, but the `[1:19]` is a model that is used more often. 
+
+We turn off the scale-matching (`scales = "free"`), so really it's two separate graphs, but with one piece of code. 
+
+```{r}
+aviation_co2 <- aviation_co2 %>% 
+  mutate(size = if_else(ordered_states %in% state_order[1:19], 
+                        "Larger Emitters", "Smaller Emitters"))
+
+ggplot(aviation_co2 %>% 
+         filter(YEAR %in% c(2010, 2015, 2019)), 
+       aes(ordered_states,
+           Y_CO2_QTY_TONNES/1e6,
+           fill = as.factor(YEAR))) +  
+  geom_col(position = "dodge") +
+  facet_wrap(~size, nrow = 1, scales = "free") + 
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions",
+       caption = "Source: EUROCONTROL.",
+       fill = "Year") + # nicer label for legend
+  coord_flip()
+
+```
+
+This certainly allows better comparisons of some of the mid-range emitters, and between years. Assuming you're not after comparison of of Luxembourg and Finland, perhaps this is fit for purpose.
+
+There are many different distributions in flight data that have this long tail challenge: with most of the flights in a few airports, or a few countries, or by a few aircraft types. It's easy enough to switch to a logarithmic scale, but that's then often hard to read. Facets like this are a reasonable alternative.
 
 ## Exercises
 
 ### Questions
 
-* Plot the bar chart of section \@ref{firstsortedbard} with the longest bars at the bottom.
-* Plot the bar chart of section \@ref{firstsortedbard} without the 3 near-zero entries. (Hints: View the data. Filter on 2019 and choose a threshold.)
-* Read the description of `geom_bar` in the help file. In the first bar chart, switch to using `geom_bar` instead. [Hint: A minor addition to the `aes()`.]
+1) Plot the bar chart of section \@ref{firstsortedbard} with the longest bars at the bottom.
+2) Plot the bar chart of section \@ref{firstsortedbard} without the 3 near-zero entries. (Hints: View the data. Filter on 2019 and choose a threshold.)
+3) Test the statement that `aes(..., colour=)` gives an outline to the bars.
+4) Use `select` and `!` to remove the `size` variable again. [Hint: Until you're sure it works, don't overwrite your dataset but make a temporary one, eg. start with `z <-`.]
+5) Read the description of `geom_bar` in the help file. In the first bar chart, switch to using `geom_bar` instead. [Hint: A minor addition to the `aes()`.]
 
 ### Answers
 
-* Use reorder(state_label, -Y_CO2_QTY_TONNES).
-* Use `filter(YEAR == 2019 & Y_CO2_QTY_TONNES > 100000)`.
-* Replace `geom_col` with `geom_bar` and add `weight = ` in front of `Y_CO2_QTY_TONNES/1e6`, thus switching it from the `y` parameter to the `weight`.
+1) Use reorder(state_label, -Y_CO2_QTY_TONNES).
+2) Use `filter(YEAR == 2019 & Y_CO2_QTY_TONNES > 100000)`.
+3) Did it?
+4) `z <- aviation_co2 %>% select(!size)`, then if it works, replace `z`.
+5) Replace `geom_col` with `geom_bar` and add `weight = ` in front of `Y_CO2_QTY_TONNES/1e6`, thus switching it from the `y` parameter to the `weight`.

@@ -56,6 +56,8 @@ In this dataset we have:
 * Y_CO2_QTY_TONNES: Total annual CO2 emissions, in (metric) tonnes.
 * Y_TF: Total flights. Presumably this is departing flights (TBD)
 
+You'll notice a few names in there which aren't States, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some States with a '*' next to their names, which means (TBD).
+ 
 There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the blue arrow-disk to see a summary. You get much the same thing in the console by typing `str(aviation_co2)` where `str` is for 'structure'. You should see something like this.
 
 ![](images/CO2inEnvironment.png)

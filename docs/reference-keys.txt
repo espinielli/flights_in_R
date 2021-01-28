@@ -2,6 +2,7 @@ tab:twotables
 howto
 before-you-start
 ways-to-use-the-material
+structure-of-the-book
 whats-gone-wrong
 start
 rstudio
@@ -38,12 +39,13 @@ whats-gone-wrong-3
 exercises
 questions-2
 answers-2
-sorting-bars-saving-graphs-vectors-and-loops
+sorting-bars-saving-graphs-facets
 co2-bar-chart
 firstsortedbar
 saving-a-plot
 plotting-more-than-one-year
-staggered-bars-and-factors
+factors
+chart-facets-more-years-in-the-bar-chart
 exercises-1
 questions-3
 answers-3
