@@ -3,9 +3,9 @@
 While nothing beats a well hand-crafted chart, there are times when you want to just run the code and get a quick update, as a .png say. In this chapter we see how to do a classic sorted-bar chart and to save it to a file for use elsewhere. We need slightly different methods for simple bar charts and more complex ones.
 
 ```{r, echo=FALSE}
-knitr::kable(data.frame(syl=c("`geom_col()`, `dodge`, `reorder()`, `ggsave()`, `as.factor()`, `factor()`, `arrange()`, `facet_wrap()`, `select`")),
+knitr::kable(data.frame(syl=c("`geom_col()`, `dodge`, `reorder()`, `ggsave()`, `as.factor()`, `factor()`, `arrange()`, `facet_wrap()`, `select`, plots pane")),
              col.names = c("In this chapter"))
-suppressPackageStartupMessages(library(tidyverse)) # without lots of messages filling up the book
+suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
 aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx", 
                                   sheet = "DATA") %>% 
   mutate(state_label = if_else(YEAR == 2019, str_to_title(STATE_NAME), ""))
@@ -178,8 +178,8 @@ There are many different distributions in flight data that have this long tail c
 
 ### Questions
 
-1) Plot the bar chart of section \@ref(firstsortedbard) with the longest bars at the bottom.
-2) Plot the bar chart of section \@ref(firstsortedbard) without the 3 near-zero entries. (Hints: View the data. Filter on 2019 and choose a threshold.)
+1) Plot the bar chart of section \@ref(firstsortedbar) with the longest bars at the bottom.
+2) Plot the bar chart of section \@ref(firstsortedbar) without the 3 near-zero entries. (Hints: View the data. Filter on 2019 and choose a threshold.)
 3) Test the statement in the text that `aes(..., colour=as.factor(YEAR))` gives an outline to the bars.
 4) Use `select` and `!` to remove the `size` variable again. [Hint: Until you're sure it works, don't overwrite your dataset but make a temporary one, eg. start with `z <-`.]
 5) Read the description of `geom_bar` in the help file. In the first bar chart, switch to using `geom_bar` instead. [Hint: A minor addition to the `aes()`.]

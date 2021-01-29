@@ -31,7 +31,7 @@ answers-1
 filtering-a-dataset-and-refining-the-co2-graph
 sequences-of-functions
 filtering-datasets-and-logical-tests
-selecting-the-busiest-states
+topStates
 co2-graph-for-the-top-states
 labelling-the-co2-graph
 what-does-the-graph-say-about-co2
@@ -40,7 +40,6 @@ exercises
 questions-2
 answers-2
 sorting-bars-saving-graphs-facets
-co2-bar-chart
 firstsortedbar
 saving-a-plot
 plotting-more-than-one-year

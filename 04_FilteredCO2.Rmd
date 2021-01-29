@@ -58,7 +58,7 @@ Note that:
 * but "CZECHIA" is a _value_ of a variable so needs to be a string in quotes
 * and the test is case-sensitive.
 
-## Selecting the busiest States
+## Selecting the busiest States {#topStates}
 
 In the previous chapter we selected the first-named States with `head()`. Now we do something more useful: selecting the top States by flights, using `slice_max()`. We need to define this a bit more clearly. 'Top' could mean in a particular year, or over the whole period (where flights have decreased as well as increased). We choose to mean 'top by flights in 2019'. This is partly out of habit (top in the latest year is often the meaning) and partly because we need to introduce fewer new bits of R to implement it.
 
@@ -171,8 +171,6 @@ Watch that case! We are using the function `filter()`, not the function `Filter(
 
 `if_else` is a fussy version of the base function `ifelse`, that we use here to maximise use of tidyverse functions. If it warns you that the 'false' must be something, then it has your long-term interests at heart. It just means that it's a different type to the 'true'. Compare `ifelse(1<2,"true",NA)` and `if_else(1<2,"true",NA)` where `NA` is the code for missing. 
 
-It pays to looks closely at the graph and try to explain what you see. In fact, it was only once I'd tidied the colours up that I noticed that they were not in order along the line. I had used `geom_line` (join in x-axis order) in place of `geom_path` (join in data order). So story-telling can help debugging too. Also, it pays to read the help file, even if you think you know how the function works!
-
 ## Exercises
 
 ### Questions
@@ -185,7 +183,7 @@ It pays to looks closely at the graph and try to explain what you see. In fact, 
 ### Answers
 
 1) `geom_text()` inherits all aesthetics from the opening `ggplot(..., aes(...))`, which can be supplemented or over-written by its own `aes()`. In fact you could put the `label=` into the first `aes()`.
-2) `geom_text(aes(label = state_label), nudge_y = 2)`. If you put the `nudge_y` inside the `aes()` you get an error because it's not something that can vary with the values of a variable ("not an aesthetic").
+2) `geom_text(aes(label = state_label), nudge_y = 2)`. If you put the `nudge_y` inside the `aes()` you get an error ('Ignoring unknown aesthetics: nudge_y') because it's not something that can vary with the values of a variable ("not an aesthetic").
 3) `geom_text_repel` uses call-out lines when it can't get the text close. You could experiment with making these a less confusing colour. You might also drop the 'millions'.
 ```{r}
 small_states <- aviation_co2 %>% 
@@ -208,7 +206,7 @@ ggplot(aviation_co2 %>%
        caption = "Source: EUROCONTROL. 'Busiest' means most flights in 2019.")
 ```
 
-4) A pedant might say this shouldn't be a line chart, but here's one possibility.
+4) A pedant might say this shouldn't be a line chart, but here's one possibility. We'll see a different version of this in section (TBD)
 
 ```{r}
 ggplot(aviation_co2 %>% 
