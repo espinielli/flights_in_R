@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 First look at data and CO2 Emissions | Analysing Flights with R</title>
+  <title>Chapter 3 First look at data and CO2 Emissions | Analysing Flights with R - UNDER CONSTRUCTION</title>
   <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 First look at data and CO2 Emissions | Analysing Flights with R" />
+  <meta property="og:title" content="Chapter 3 First look at data and CO2 Emissions | Analysing Flights with R - UNDER CONSTRUCTION" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 First look at data and CO2 Emissions | Analysing Flights with R" />
+  <meta name="twitter:title" content="Chapter 3 First look at data and CO2 Emissions | Analysing Flights with R - UNDER CONSTRUCTION" />
   
   <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   
@@ -219,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
           </h1>
         </div>
 
@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="first-look-at-data-and-co2-emissions.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aviation_co2, </span>
 <span id="cb20-2"><a href="first-look-at-data-and-co2-emissions.html#cb20-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(Y_TF, Y_CO2_QTY_TONNES, <span class="at">colour =</span> YEAR)) <span class="sc">+</span></span>
 <span id="cb20-3"><a href="first-look-at-data-and-co2-emissions.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Even this simple example illustrates that:</p>
 <ul>
 <li>a parameter can be another function call <code>aes()</code>;</li>
@@ -356,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-4"><a href="first-look-at-data-and-co2-emissions.html#cb21-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;CO2 (million tonnes)&quot;</span>,</span>
 <span id="cb21-5"><a href="first-look-at-data-and-co2-emissions.html#cb21-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
 <span id="cb21-6"><a href="first-look-at-data-and-co2-emissions.html#cb21-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions per State&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="statecluster" class="section level3" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> and with clustering by State</h3>
@@ -372,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-6"><a href="first-look-at-data-and-co2-emissions.html#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
 <span id="cb22-7"><a href="first-look-at-data-and-co2-emissions.html#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
 <span id="cb22-8"><a href="first-look-at-data-and-co2-emissions.html#cb22-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions per State&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>The graph isn’t ready for a presentation yet, but a story is already emerging. The lines do the job of grouping the years for each State together. We see a graph with 6 busy States, 3 of which are fairly linear, so a relatively fixed CO<sub>2</sub>/flight. Three others are more variable from year to year.</p>
 <p>Then there are two States, with flights in the 0.25-0.5 million flights range and that diverge from the main trend line, respectively higher and lower. The remaining, smaller States rather overlap in this graph.</p>
 <p>We’ll find out how to pick out and label States in the next chapter.</p>
@@ -462,7 +462,8 @@ gitbook.start({
 "download": ["flights_in_R.pdf", "flights_in_R.epub"],
 "toc": {
 "collapse": "subsection"
-}
+},
+"theme": "sepia"
 });
 });
 </script>

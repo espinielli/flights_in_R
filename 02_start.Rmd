@@ -1,6 +1,6 @@
 # Getting started {#start}
 
-We said in chapter \@ref(howto) that you need first to install R and RStudio. These are separate pieces of software: R does all the statistical and graphics stuff, while RStudio provides the graphical user interface. In this chapter we get up and running in RStudio.
+We said in chapter \@ref(howto) that you need first to install R and RStudio. These are separate pieces of software: R does all the statistical and graphics stuff, while RStudio provides the graphical user interface. In this chapter we get up and running in RStudio, and see some very basic R code.
 
 ## Orientation in RStudio {#rstudio}
 
@@ -8,9 +8,9 @@ Here we take a brief look around the RStudio interface. Use 'RStudio/Help' to ge
 
 The RStudio interface can be customised almost beyond recognition. We'll use a mix of styles in the book so that you don't get too fixed, but it's probably helpful to your colleagues not to re-order the main four panes, otherwise they'll find looking over your shoulder or screen-sharing a disorienting experience.
 
-A basic MS Windows RStudio looks something like this.
+A basic MS Windows RStudio, with work on the go, looks something like this.
 
-![RStudio snapshot](images/RStudio.png){width=75%}
+![RStudio snapshot](images/RStudio.png)
 
 The main panes of the screen are:
 
@@ -20,12 +20,12 @@ The main panes of the screen are:
 * Bottom right: This has several important tabs
   + Files: for exploring files within a project, can be quicker than using the windows explorer
   + Plots: is where plots will appear (usually)
-  + Packages: is for checking which packages are installed, or active (see TBD)
-  + Help: all the details of the functions that you will need - this is usually quicker to use than googling a function (though the help files come up when you google, from various providers).
+  + Packages: is for checking which packages are installed, or active (see section \@ref(packages))
+  + Help: all the details of the functions that you will need - this is usually quicker to use than googling a function (though the help files also come up when you google, from various providers around the web).
   
 The buttons that appear around the panes are context-sensitive: they will change according to the type of file that you have open.
 
-There are some hot-keys for moving rapidly around the panes: I most use ctrl-1 to go to the source code, ctrl-2 for the console. You can then guess the others.
+There are some hot-keys for moving rapidly around the panes: I most use ctrl-1 to go to the source code, ctrl-2 for the console. You can then guess the others, or find them by trial and error.
 
 Recent versions of `RStudio` have a tutorial (tab in top right pane) if you need more detail.
 
@@ -36,11 +36,11 @@ While you can work with 'bare' files of R code, we think it's tidier to use 'pro
 Create yourself a new project 'File/New Project', selecting the options new project (not new package), give it the name 'justlearning' and browse to put it in your personal R directory. (TBD templates). 
 
 It will open without a code panel, because you have no code yet. It looks like this.
-![new justlearning project](images/NewJustLearning.png){width=75%}
+![new justlearning project](images/NewJustLearning.png)
 
 You can already execute R code in the console (bottom left, ctrl-2), but we want to save and organise code. So we do a bit more organising, and then in the next section, create a file for the code.
 
-In this book we'll assume that projects always keep data in the `data` directory, and save graphs to the `graphs` directory. You can create these quickly in your new project by copying the code (quick-copy icon appears top right in the code block) and pasting it into the console (and press return).
+In this book we'll assume that projects always keep data in the `data` directory, and save graphs to the `graphs` directory. You can create these quickly in your new project by copying the code from here (quick-copy icon appears top right in the code block when you move the mouse over it) and pasting it into the console (and press return).
 
 ```{r new_project, eval=FALSE}
 # good to have these in every project
@@ -56,7 +56,7 @@ When you quit RStudio it will save any data and open files in your project. So y
 
 Now you've got a blank project, add a new blank R script using `File/New File/R Script`, or the 'file plus' icon top left. It appears in the source code pane, top left. 
 
-Immediately save it; 'chapter2' for example. The name isn't critical here, but avoid spaces and punctuation. By default, it will be saved to the top level in the project. This is fine for many projects, though in some cases we might choose to organise code differently.
+Immediately save it; call it 'chapter2' for example. The name isn't critical here, but avoid spaces and punctuation. By default, it will be saved to the top level in the project. This is fine for many projects, though in some cases we might choose to organise code differently.
 
 Type this code into your script, either manually or copy paste. 
 
@@ -66,66 +66,64 @@ Type this code into your script, either manually or copy paste.
 pi
 1:50
 cos(pi/3) # angle is in radians
-
-
 ```
 
 Unlike in the console, it doesn't get executed as you type. You have to run it. Usually you're either:
 
-* stepping through code, running a bit at a time, in which case ctrl-enter (cmd-enter on the Mac) is easy to use: it runs where the cursor currently sits, and then moves to the next line of code, jumping over comments that are preceded by `#`;
+* stepping through code, running a bit at a time, in which case ctrl-enter (cmd-enter on the Mac) is easy to use: it runs the code where the cursor currently sits most of the time intelligently selecting other lines that need to run at the same time, and then moves to the next line of code, jumping over comments that are preceded by `#`;
 * running all the code, which you can do by pressing the 'source' button (or select all and ctrl-enter).
 
 Output appears in the console as a running log.
 
 ## First packages {#packages}
 
-A 'package' provides a collection of functions, often some data and sometimes some new data types. If you're starting in R, and just aiming to find your way around in and use code, then mostly what you need to know is how to load packages (and what that means), and a little about the more common ones. That's what we cover in this section sections.
+A 'package' provides a collection of functions, often some data and sometimes some new data types. If you're starting in R, and just aiming to find your way around in and use code, then mostly what you need to know is how to load packages (and what that means), and a little about the more common ones. That's what we cover in this section.
 
 ### Package basics
 
-Some packages come bundled with a basic installation of 'R', such as `base` which provides, as the name suggests, many of the most basic functions. But there are thousands of other packages, coming from:
+Some packages are already bundled in the basic installation of 'R', such as `base` which provides, as the name suggests, many of the most basic functions. But there are thousands of other packages, coming from:
 
 * [CRAN](https://cran.r-project.org) or various 'mirror' (official copy) sites hosted elsewhere, such as at Ghent University. These packages have been through a degree of quality control, and are preferred to the less official sources.
 * [Github](https://github.com) and other public repositories. We share some there, such as [CODA taxi times](https://github.com/david6marsh/codaTaxi) and the [PRC dashboard](https://github.com/euctrl-pru/portal).
-* Home-made. Making them is out of the scope of the book, but you will want to load the `statfor` package (TBD) created by Sebastien Thonnard that builds some access to Eurocontrol datawarehouses as well as nice formatting.
+* Home-made. Making them is out of the scope of the book, but you may want to load the `statfor` package (see section TBD) created by Sebastien Thonnard that builds some access to Eurocontrol datawarehouses as well as nice formatting.
 
 There are two^[actually, there's a third, but that's too much detail for here] steps to using a package, and sometimes these get confused:
 
 1) Installation. You type `install.packages("dplyr")` and R finds the files for that package and saves them on your machine or on a network drive. So the files are available. You've done the shopping and the food is in the kitchen cupboards.
-2) Attaching or Loading. You have to make a package _available_ for use for your session. You've pulled the ingredients for your recipe out of the cupboard and they're on the kitchen table. If there's a difference between 'attaching' and 'loading' then it doesn't matter here. 
+2) Attaching or Loading. You have to make a package _available_ for use for your session, usually with `library( )`. You've pulled the ingredients for your recipe out of the cupboard and they're on the kitchen table. If there's a difference between 'attaching' and 'loading' then it doesn't matter here. 
 
-A very few packages are automatically loaded at the start of the session. In the packages pane, a package is listed if it is installed and ticked if it's loaded. In the screenshot, just the `base` package is loaded of the ones listed.
+A very few packages are automatically loaded at the start of the session. In the packages pane, a package is listed if it is installed and ticked if it's loaded. In the screenshot, just the `base` package is loaded of the ones listed in this screenshot.
 
-![](images/packages.png){width=75%}
+![](images/packages.png)
 
-Clicking on the package name takes you to the documentation. There's a manual for all functions together, as a pdf, but it's usually easier to use the help pane to get the same material, and perhaps copy examples from the end of each help entry. More importantly here there are links to **vignettes**, and often now to websites with more info. Vignettes are not little stickers, but essential how-to guides mixing text and code; often this can provide a skeleton that you can copy and adapt to your own need. 
+Clicking on the package name takes you to the documentation. There's a manual for all functions together, as a pdf, but it's usually easier to use the help pane to get the same material, and perhaps copy examples from the end of each help entry. More importantly here there are links to **vignettes**, and often now to websites with more info. Vignettes are not little stickers, but essential how-to guides mixing text and code. Often this can provide a skeleton end-to-end structure showing how to use functions, and that you can copy and adapt to your own need. 
 
-You can load a package by ticking the box, but normally it's done in code, as in this example.
+You can load a package by ticking the box in the packages pane, but normally it's done in code, as in this example.
 
 ```{r loadingPackages}
 library(lubridate) # lots of date-related functions.
 
 ```
-Two packages can define a function with the same name. That is not something CRAN controls, and when there's a clash, on loading the second one 'masks' the first, as in the message displayed above. Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
+Two packages can define a function with the same name. That is not something CRAN controls, and when there's a clash, on loading the second one 'masks' the first (you might see this above). Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
 
-There are often many different functions that you could use to achieve the same result, eg `base::paste()` and `stringr::str_c()` both concatenate strings (tbd). There's an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That's like the satisfaction of making the recipe from things you already have in the cupboard.
+There are often many different functions that you could use to achieve the same result, eg `base::paste()` and `stringr::str_c()` both concatenate strings. There's an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That's like the satisfaction of making the recipe from things you already have in the cupboard.
 
-But sometimes, you just don't want to make the flaky pastry yourself. There are times when you're looking at a complex task and should be thinking 'surely someone has already tackled this in R?'. A little googling might find you most of the pieces already in place. 
+But sometimes, you just don't want to make the flaky pastry yourself. There are times when you're looking at a complex task and should be thinking 'surely someone has already tackled this in R?'. A little googling might find you most of the pieces already in place in a new package, or one you have but had forgotten about. 
 
-In a way, you develop a personal 'dialect' of R, from the packages you choose to use most often. We'll discuss one of the most common dialects, the `tidyverse`, in more detail in the next section.
+You develop a personal 'dialect' of R, from the packages you choose to use most often. We'll discuss one of the most common dialects, the `tidyverse`, in more detail in the next section. Since it helps if you and colleagues share a dialect, everyone adopting the tidyverse is a good start.
 
 ### Tidyverse
 
 The [tidyverse](https://www.tidyverse.org) is our chosen dialect, in the sense that in most cases we'll use the functions and data structures, and way of organising, that go with this collection of packages. There's a lot of excellent documentation already available, so we will explain some basics here, and introduce other elements as we need them for flight data examples.
 
-The *tidy* in 'tidyverse' refers to a [tidy data structure](https://r4ds.had.co.nz/tidy-data.html): a table with each variable in its own column and each observation on one row. While we often put years across the table, and countries down the side, this is not 'tidy'.
+The *tidy* in 'tidyverse' refers to a [tidy data structure](https://r4ds.had.co.nz/tidy-data.html): a table with each variable in its own column and each observation on one row. While we often find flight data with years displayed across the table, and countries down the side, this is not 'tidy'.
 
 ```{r twotables, echo=FALSE}
 knitr::kable(data.frame(Country = c("France", "Germany"), Flights2019 = c(1.3, 5.2), Flights2020= c(1.5, 6.0)),
              booktabs = TRUE, caption = "An untidy table.")
 
 knitr::kable(data.frame(Country = c("France", "Germany"), Year = 2019:2020, Flights = c(1.3, 5.2, 1.5, 6.0)),
-             booktabs = TRUE, caption = "An tidy table.")
+             booktabs = TRUE, caption = "A tidy table.")
 
 ```
 
@@ -133,14 +131,15 @@ The main data structure used by the tidyverse is the dataframe, although increas
 
 For most 'quick pieces of code', the easiest is to start with a `library(tidyverse)` to load all the parts of the tidyverse. If you were writing a package, that wouldn't be very efficient, because there's quite a lot of it. Sometimes you'll see individual parts of the tidyverse loaded including:
 
-* `ggplot2`: lots of plotting functions (see TBD)
+* `ggplot2`: lots of plotting functions (see next chapters)
 * `dplyr`: for manipulating and processing data
 * `tidyr`: for tidying data, such as pivot-table like actions, or splitting columns.
 
-And there are packages which are on the outskirts of the 'tidyverse' which get announced when you load.
+And there are packages which are on the outskirts of the 'tidyverse' which get announced when you first load. The full list is as follows. 
 
-```{r loadtidyverse}
+```{r echo = FALSE}
 library(tidyverse)
+tidyverse_packages()
 ```
 
 These include `lubridate` and `stringr` which we've already mentioned.
@@ -148,7 +147,7 @@ These include `lubridate` and `stringr` which we've already mentioned.
 
 ## File types {#filetypes}
 
-You will see lots of different file types (ie file extensions). The main ones to remember are:
+You will see lots of different file types (ie file extensions), in the files pane. The main ones to remember are:
 
 * `.R`, `.Rmd`: both contain R code, though `.Rmd` is actually 'r markdown' which is a mix of code and text;
 * `.RProj`: contains an R 'project' - if you see one of these in the directory, this is the one to open - everything else works from there (see TBD);
@@ -156,11 +155,11 @@ You will see lots of different file types (ie file extensions). The main ones to
 
 ## What's gone wrong?
 
-If you see a window like this, then you have started R rather than RStudio. That is a GUI and you can use it to execute R code, but you'll find RStudio easier for all but the quickest snippets of code. ![basic RGui](images/RGui.png){width=50%}
+If you see a window like this, then you have started R rather than RStudio. That is a GUI and you can use it to execute R code, but you'll find RStudio easier for all but the quickest snippets of code. ![basic RGui](images/RGui.png){width=60%}
 
 If it keeps on happening you will find it helpful to associate R files (`.R, .RMD` and others) with RStudio rather than R.
 
-If you get errors saying a certain package is only compatible with version xx and higher (of R), and you think you've recently updated, are you sure you updated R rather than RStudio? The RStudio version is found from the top menu 'RStudio/About R Studio', the R version is seen when you first start up (see the image just above), or is printed if you type `version` in the console (see TBD).
+If you get errors saying a certain package is only compatible with version xx and higher (of R), and you think you've recently updated, are you sure you updated R rather than RStudio? The RStudio version is found from the top menu 'RStudio/About R Studio', the R version is seen when you first start up (see the image just above), or is printed if you type `version` in the console.
 
 If you're searching in 'help' and a function isn't appearing, for example in the drop-down as you type, it is probably because it comes from a package that isn't loaded. You can finish typing, and the system will search and may find it, but also some other less good matches. Or if you know the package name, you can type `?ggplot2::geom_line` for example, in the console to go straight there.
 
@@ -168,13 +167,13 @@ If you're searching in 'help' and a function isn't appearing, for example in the
 
 ### Questions
 
-1. In which pane will you (usually) find the help on functions?
+1. Where will you (usually) find the help on functions?
 2. Which of these provides a graphical user interface (GUI): R, RStudio?
 3. Which ctrl-key combination takes you to the environment pane?
 4. What does an `.rda` file contain?
 5. What's the difference between typing into a source file and into the console?
 6. What is a 'vignette'?
-7 (teaser) What does `3 + 1:3` give?
+7. (teaser) What does `3 + 1:3` give?
 
 ### Answers
 

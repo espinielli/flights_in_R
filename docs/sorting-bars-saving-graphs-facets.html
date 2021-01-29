@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R</title>
+  <title>Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION</title>
   <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R" />
+  <meta property="og:title" content="Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R" />
+  <meta name="twitter:title" content="Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION" />
   
   <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   
@@ -219,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
           </h1>
         </div>
 
@@ -260,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-8"><a href="sorting-bars-saving-graphs-facets.html#cb32-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions in 2019&quot;</span>,</span>
 <span id="cb32-9"><a href="sorting-bars-saving-graphs-facets.html#cb32-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="sc">+</span></span>
 <span id="cb32-10"><a href="sorting-bars-saving-graphs-facets.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>If you were to google ‘ggplot ordered bar chart,’ you might find references to ‘factors.’ That becomes necessary when the charts are more complicated. We’ll look at that in section <a href="sorting-bars-saving-graphs-facets.html#factors">5.3.1</a>.</p>
 </div>
 <div id="saving-a-plot" class="section level2" number="5.2">
@@ -304,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-13"><a href="sorting-bars-saving-graphs-facets.html#cb34-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>,</span>
 <span id="cb34-14"><a href="sorting-bars-saving-graphs-facets.html#cb34-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="co"># nicer label for legend</span></span>
 <span id="cb34-15"><a href="sorting-bars-saving-graphs-facets.html#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019 bars are actually in order. We’ve asked <code>reorder</code> to do too much. It seems to have sorted by the total of the 2 years, which is a reasonable thing to do in the circumstances. But I think that’s hard for the user of the graph to interpret, and I’d like the ordering to be by 2019.</p>
 <p>We can do this ordering with factors. First define a vector that is in the order we want, using <code>arrange()</code> to sort it. The <code>desc()</code> reverses the order. Then define a factor version of the state names, and insist that it’s in this fixed order. <code>factor()</code> is like <code>as.factor()</code> which we used in the previous chunk of code, but allows these extra parameters.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sorting-bars-saving-graphs-facets.html#cb35-1" aria-hidden="true" tabindex="-1"></a>state_order <span class="ot">&lt;-</span> aviation_co2 <span class="sc">%&gt;%</span> </span>
@@ -328,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb35-19"><a href="sorting-bars-saving-graphs-facets.html#cb35-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Ordering by 2019 emissions. Source: EUROCONTROL.&quot;</span>,</span>
 <span id="cb35-20"><a href="sorting-bars-saving-graphs-facets.html#cb35-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="co"># nicer label for legend</span></span>
 <span id="cb35-21"><a href="sorting-bars-saving-graphs-facets.html#cb35-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="chart-facets-more-years-in-the-bar-chart" class="section level3" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> Chart facets, more years in the bar chart</h3>
@@ -345,7 +345,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb36-9"><a href="sorting-bars-saving-graphs-facets.html#cb36-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions&quot;</span>,</span>
 <span id="cb36-10"><a href="sorting-bars-saving-graphs-facets.html#cb36-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb36-11"><a href="sorting-bars-saving-graphs-facets.html#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p><code>facet_wrap</code> has given all the x- and y-axes the same matching scale, and not bothered to repeat the y-axis labels. So it’s compact. The graph is not bad for comparing relative sizes of the larger States in a given year, and for seeing how the ranking changes. But it’s not that easy to compare amounts between years.</p>
 <p>However, we can use facets to split in a different way, if we arbitrarily put the States into two groups. Remember that <code>[ ]</code> is a way to select elements of the vector, in this case the first 19. We could equally have used <code>head(state_order, 19)</code>, but the <code>[1:19]</code> is a model that is used more often.</p>
 <p>We turn off the scale-matching (<code>scales = "free"</code>), so really it’s two separate graphs, but with one piece of code.</p>
@@ -366,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb37-15"><a href="sorting-bars-saving-graphs-facets.html#cb37-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>,</span>
 <span id="cb37-16"><a href="sorting-bars-saving-graphs-facets.html#cb37-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="co"># nicer label for legend</span></span>
 <span id="cb37-17"><a href="sorting-bars-saving-graphs-facets.html#cb37-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>This certainly allows better comparisons of some of the mid-range emitters, and between years. Assuming you’re not after comparison of of Luxembourg and Finland, perhaps this is fit for purpose.</p>
 <p>There are many different distributions in flight data that have this long tail challenge: with most of the flights in a few airports, or a few countries, or by a few aircraft types. It’s easy enough to switch to a logarithmic scale, but that’s then often hard to read. Facets like this are a reasonable alternative, and adaptable.</p>
 </div>
@@ -449,7 +449,8 @@ gitbook.start({
 "download": ["flights_in_R.pdf", "flights_in_R.epub"],
 "toc": {
 "collapse": "subsection"
-}
+},
+"theme": "sepia"
 });
 });
 </script>

@@ -1,5 +1,5 @@
 --- 
-title: "Analysing Flights with R"
+title: "Analysing Flights with R - UNDER CONSTRUCTION"
 author: "David Marsh"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -19,7 +19,7 @@ You need to have RStudio and R installed on your machine. These are available fr
 
 We assume that you are familiar with air traffic data, so won't spend time explaining the concepts.
 
-This book is available as html here (https://david6marsh.github.io/flights_in_R/) and can be downloaded complete with data from here (TBD).
+This book is available as [html here](https://david6marsh.github.io/flights_in_R/) and can be downloaded complete with data from here (TBD).
 
 If you're working through the book as training, then it will help to install (TBD - training bundle)
 
@@ -40,19 +40,20 @@ knitr::write_bib(c(
 The book aims to support you using it in a number of different ways:
 
 * Training. Work through chapters in order, or pick out specific chapters if you need a refresher on a topic. Read the explanations, grab the code and run it, and test your understanding by answering questions [in square brackets in the text] and doing exercises.
-* Reference. Use the search to find some how-to material directly.
+* Reference. Use the book search to find some how-to material directly.
 * Snippets. The book builds up snippets of usable code (TBD - how complete?) for you to cut-and-paste.
 
 But it is never going to replace the huge amount of excellent information, especially in [stackoverflow](https://stackoverflow.com/). A key principle is that _"Google is your friend"_: even if I prefer [DuckDuckGo](https://www.duckduckgo.com) for many purposes, a google search is often more productive for R. Whether it's for how to do something, or how to respond to an error, usually someone has already suffered, and some kind person has answered. Google it.
 
 ## Structure of the book
 
-* Chapters 1 and 2 
-* Chapters 3 to 
+* Chapters 1 and 2 should get you up and running in RStudio.
+* Chapters 3 to 5 start with how to look at data, using a data viewer and with some initial graphs. If you're mostly using existing code that creates simple charts, written by someone else, then these chapters should help you find your way around, and start to adapt the code for your own needs.
+* Chapters ... (TBD)
 
 ## What's gone wrong?
 
-Each chapter has a "what's gone wrong?" section near the end, discussing some typical potholes that we all fall into from time to time. Look there especially if you don't see the results from the code in the book that you were expecting.
+Learning from mistakes is essential, so each chapter has a "what's gone wrong?" section near the end, discussing some typical potholes that we all fall into from time to time. Look there especially if you don't see the results from the code in the book that you were expecting.
 
-We actually start the book with one classic pitfall: R is *case sensitive*, which can be quite a culture shock if you're brought up on other systems. This matters for filenames as well as code. When in doubt, check the case!
+We start the book with one classic pitfall: R is *case sensitive*, which can be quite a culture shock if you're brought up on other systems. This matters for filenames as well as code. When in doubt, check the case!
 
