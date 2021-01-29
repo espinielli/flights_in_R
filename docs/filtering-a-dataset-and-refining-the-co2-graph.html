@@ -312,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-9"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb27-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
 <span id="cb27-10"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb27-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 States&quot;</span>,</span>
 <span id="cb27-11"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb27-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>One advantage of filtering on the fly is that we can change on the fly. [Change the filter to the States <em>not</em> in the top 8. It takes one key press. Re-run the graph. Update the titles too.]</p>
 <p>As an analyst, I really want to know which country is which. With just 8 States shown, maybe I can use symbols? At one level it’s quick to do. Just replace <code>group =</code> with <code>shape =</code>. [Try this.] <code>ggplot</code> complains that it doesn’t really like using more than 6 symbols, because it becomes hard for the reader to jump between legend and graph. We could roll with it and learn how to extend the pallette, but is there another solution?</p>
 <p>We can separate States by colours. Again, quite quick: replace <code>colour = YEAR, group = STATE_NAME</code> with <code>colour = STATE_NAME</code>. [Try this.] The line means we can work out the ordering of the years easily, so losing the year isn’t a big issue here. But eight colours is also a lot to tell apart. Even without colour blindness, you might think they’re clear but when projected onto a screen or printed or on a tiny phone screen, perhaps not.</p>
@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb28-13"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb28-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
 <span id="cb28-14"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb28-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 States&quot;</span>,</span>
 <span id="cb28-15"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb28-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>This is close, but not quite good enough. The text is centred on the 2019 point, and this creates some ugly overlaps. There are lots of options in <code>geom_text()</code> to adjust the position, and you’ll find lots of examples on the web. So we could spend time adjusting the positions. But this is a first example of the rule: ‘surely someone has already come across this problem?’</p>
 <p>Someone has indeed spent time to come up with good ways to deconflict and position labels on graphs. The package is called <code>ggrepel</code>, which you might need to install with <code>install.packages("ggrepel")</code>, and it provides a ‘drop in’ replacement for <code>geom_text</code> naturally called <code>geom_text_repel</code>. To avoid using <code>library("ggrepel")</code> when we’re just using one function from the package on one occasion, we use the double-colon syntax in the code.</p>
 <p>The defaults for this function work pretty well in this particular case. But there are a couple of things I’d like to fix: the block capitals and the year legend. Title case would be nicer, so we convert the <code>STATE_NAME</code> using the <code>stringr</code> package function <code>str_to_title()</code>. <code>stringr</code> is already loaded as part of the tidyverse, and since most of its functions begin ‘str_’ it’s quite easy to start searching in the help pane for the right one [Try this.]. In this case <code>state_label</code> already exists and we overwrite it.</p>
@@ -358,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb29-14"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb29-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
 <span id="cb29-15"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb29-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 States&quot;</span>,</span>
 <span id="cb29-16"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb29-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="what-does-the-graph-say-about-co2" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> What does the graph say about CO<sub>2</sub>?</h2>
@@ -408,7 +408,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb30-16"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb30-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
 <span id="cb30-17"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb30-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the least-busy States&quot;</span>,</span>
 <span id="cb30-18"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb30-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>A pedant might say this shouldn’t be a line chart, but here’s one possibility. We’ll see a different version of this in section (TBD)</li>
 </ol>
@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-10"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb31-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (tonnes per flight)&quot;</span>),</span>
 <span id="cb31-11"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb31-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 States&quot;</span>,</span>
 <span id="cb31-12"><a href="filtering-a-dataset-and-refining-the-co2-graph.html#cb31-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 
 </div>
 </div>
