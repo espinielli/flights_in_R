@@ -10,11 +10,12 @@ In this chapter, we introduce some of the ways to take a quick look at your data
 
 ```{r, echo=FALSE}
 knitr::kable(data.frame(syl=c("`read_xlsx()`, `<-`, `summary`, `str`, environment pane, `View()`, `unique`, `head`, `c()`, `[]`, `ggplot()`")),
-             col.names = c("In this chapter"))
+             col.names = c("In this chapter, you'll be introduced to:"))
 ```
 
+Re-open your `justlearning` project (File:Recent Projects, or 'justLearning.Rproj'). Create a new source file (File:New File:R script), to copy and paste the examples into, and save it as 'chapter 3'.
 
-Re-open your `justlearning` project and start a new source file, to copy and paste the examples into. This starts a new R session, which means you have to re-load the package(s) that you need.
+This starts a new R session, which means you have to re-load the package(s) that you need, as in this code.
 
 ```{r initialiseChapter, results='hide'}
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
@@ -27,9 +28,9 @@ suppressPackageStartupMessages(library(tidyverse)) # without lots of messages
 We use public data on national CO~2~ emissions from aviation available on the [EUROCONTROL/AIU website](https://ansperformance.eu/data/). We choose this, apart from the interest in the data themselves, because it's a small set so quick to download, and it's already tidy (each variable in one column).
 
 ```{r getCO2}
-# download the file to the data folder
-# download.file("https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx", 
-#               "data/CO2_emissions_by_state.xlsx")
+# download the file to the data folder, the 'mode' parameter is needed on Windows machines
+download.file("https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx",
+              "data/CO2_emissions_by_state.xlsx", mode = "wb")
 
 # load from the DATA worksheet - case sensitive!
 aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx", 
@@ -52,9 +53,10 @@ The `summary` function is fairly basic, but it gives a quick feel for what's in 
 In this dataset we have:
 
 * YEAR: An integer, not a date, but read_xlsx reads this as a real number.
+* MONTH: An integer, giving the month in the year.
 * STATE_NAME, STATE_CODE: A long name and the 2-letter 'country code' derived from the ICAO 4-letter communication address, of which the less said, the better.
-* Y_CO2_QTY_TONNES: Total annual CO2 emissions, in (metric) tonnes.
-* Y_TF: Total flights. This is departing flights. Flights through the State airspace that do not land are not counted, nor are arrivals from outside the State. A domestic flight is counted once, as a departure.
+* CO2_QTY_TONNES: Total annual CO2 emissions, in (metric) tonnes.
+* TF: Total flights. This is departing flights. Flights through the State airspace that do not land are not counted, nor are arrivals from outside the State. A domestic flight is counted once, as a departure.
 
 You'll notice a few names in there which aren't States, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some States with a '*' next to their names, which means (TBD).
  
@@ -93,7 +95,7 @@ The order in which the elements are shown is as in the original data, there's no
 
 So in this case, even if the `states` are in alphabetical order, that's just because the original Excel file was.
 
-## Extracting a few values
+## Extracting a few values {#someValues}
 
 We've just seen how to pull a variable out of a tibble, as a vector. How do we extract one or more values out of the vector that we created?
 
@@ -132,7 +134,7 @@ In the simplest code we have:
 
 ```{r}
 ggplot(aviation_co2, 
-       aes(Y_TF, Y_CO2_QTY_TONNES, colour = YEAR)) +
+       aes(TF, CO2_QTY_TONNES, colour = YEAR)) +
   geom_point() 
 
 ```
@@ -153,7 +155,7 @@ The label on the legend is meaningful, but to avoid the block capitals we can ch
 
 ```{r}
 
-ggplot(aviation_co2, aes(Y_TF/1e6, Y_CO2_QTY_TONNES/1e6, colour = YEAR)) +
+ggplot(aviation_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, colour = YEAR)) +
   geom_point() + 
   labs(x = "Departing Flights (millions)", 
        y = "CO2 (million tonnes)",
@@ -173,7 +175,7 @@ We need both to add a line, which follows the pattern of `geom_point`, and group
 Out of a sense of neatness, we also add a subscript to CO~2~. The code `bquote(~CO[2]~" (million tonnes)")` took some googling and is cryptic, but it works!
 
 ```{r}
-ggplot(aviation_co2, aes(Y_TF/1e6, Y_CO2_QTY_TONNES/1e6, 
+ggplot(aviation_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, 
                          colour = YEAR, group = STATE_NAME)) +
   geom_point() + 
   geom_path() +

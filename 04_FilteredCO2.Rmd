@@ -4,7 +4,7 @@ In this chapter we improve the CO~2~ emissions graph, _en route_ learning how to
 
 ```{r, echo=FALSE}
 knitr::kable(data.frame(syl=c("`filter()`, `==`, `%in%`, `mutate()`, `slice_max()`, `%>%`, `geom_text_repel()`, `scales_colour_...`")),
-             col.names = c("In this chapter"))
+             col.names = c("In this chapter, you'll be introduced to:"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages filling up the book
 aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx", 
                                   sheet = "DATA")
@@ -67,7 +67,7 @@ The code is like this. A final novelty is that we use `pull()` which, as its hel
 ```{r}
 top_states <- aviation_co2 %>% 
   filter(YEAR == 2019) %>%     # top in year 2019
-  slice_max(Y_TF, n = 8) %>%  # top 8 
+  slice_max(TF, n = 8) %>%  # top 8 
   pull(STATE_NAME) 
 ```
 
@@ -84,7 +84,7 @@ We update the title, and add a footnote (`caption`) to explain what's going on. 
 ```{r}
 ggplot(aviation_co2 %>% 
          filter(STATE_NAME %in% top_states), 
-       aes(Y_TF/1e6, Y_CO2_QTY_TONNES/1e6, 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
            colour = YEAR, group = STATE_NAME)) +
   geom_point() + 
   geom_path() +
@@ -116,7 +116,7 @@ aviation_co2 <- aviation_co2 %>%
 
 ggplot(aviation_co2 %>% 
          filter(STATE_NAME %in% top_states), 
-       aes(Y_TF/1e6, Y_CO2_QTY_TONNES/1e6, 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
            colour = YEAR, group = STATE_NAME)) +
   geom_point() + 
   geom_path() +
@@ -142,7 +142,7 @@ aviation_co2 <- aviation_co2 %>%
 
 ggplot(aviation_co2 %>% 
          filter(STATE_NAME %in% top_states), 
-       aes(Y_TF/1e6, Y_CO2_QTY_TONNES/1e6, 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
            colour = YEAR, group = STATE_NAME)) +
   geom_point() + 
   geom_path() +
@@ -188,12 +188,12 @@ Watch that case! We are using the function `filter()`, not the function `Filter(
 ```{r}
 small_states <- aviation_co2 %>% 
   filter(YEAR == 2019) %>%     #  in year 2019
-  slice_min(Y_TF, n = 8) %>%  # smallest 8 
+  slice_min(TF, n = 8) %>%  # smallest 8 
   pull(STATE_NAME)
 
 ggplot(aviation_co2 %>% 
          filter(STATE_NAME %in% small_states), 
-       aes(Y_TF/1e6, Y_CO2_QTY_TONNES/1e6, 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
            colour = YEAR, group = STATE_NAME)) +
   geom_point() + 
   geom_path() +
@@ -211,7 +211,7 @@ ggplot(aviation_co2 %>%
 ```{r}
 ggplot(aviation_co2 %>% 
          filter(STATE_NAME %in% top_states), 
-       aes(YEAR, Y_CO2_QTY_TONNES/Y_TF, 
+       aes(YEAR, CO2_QTY_TONNES/TF, 
            colour = STATE_NAME)) +
   geom_path() + # I decided the points looked too heavy
   ggrepel::geom_text_repel(aes(label = state_label)) +

@@ -4,7 +4,7 @@ While nothing beats a well hand-crafted chart, there are times when you want to 
 
 ```{r, echo=FALSE}
 knitr::kable(data.frame(syl=c("`geom_col()`, `dodge`, `reorder()`, `ggsave()`, `as.factor()`, `factor()`, `arrange()`, `facet_wrap()`, `select`, plots pane")),
-             col.names = c("In this chapter"))
+             col.names = c("In this chapter, you'll be introduced to:"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
 aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx", 
                                   sheet = "DATA") %>% 
@@ -15,15 +15,15 @@ aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx",
 
 A classic visualisation is the bar chart, sorted from longest to shortest. With `ggplot` there are a couple of ways to get a bar chart. If you want `ggplot` to count the rows for you, use `geom_bar`. Here we already have values for the length of the bar, so we use `geom_col` instead. 
 
-For the simplest bar charts, there is a quick way to get the order you want. In place of `state_label` for the x-axis, you give `reorder(state_label, Y_CO2_QTY_TONNES)`, the second being the variable to sort by. If you find the bars a bit top-heavy, put a `-` in front of `Y_CO2...` to reverse the order.
+For the simplest bar charts, there is a quick way to get the order you want. In place of `state_label` for the x-axis, you give `reorder(state_label, CO2_QTY_TONNES)`, the second being the variable to sort by. If you find the bars a bit top-heavy, put a `-` in front of `Y_CO2...` to reverse the order.
 
 The final novelty in this graph is `coord_flip()`. Forty-something State names is a lot of text to cram onto the horizontal axis. So we flip the axes. You'll need to decide if this trick works where you want to use the graph. We'll see other ways to separate the labels on the axes in (TBD).
 
 ```{r}
 ggplot(aviation_co2 %>% 
          filter(YEAR == 2019), 
-       aes(reorder(state_label, Y_CO2_QTY_TONNES),
-           Y_CO2_QTY_TONNES/1e6)) +
+       aes(reorder(state_label, CO2_QTY_TONNES),
+           CO2_QTY_TONNES/1e6)) +
   geom_col() +
   labs(x = "", 
        y = bquote(~CO[2]~" (million tonnes)"),
@@ -80,8 +80,8 @@ aviation_co2 <- aviation_co2 %>%
 
 ggplot(aviation_co2 %>% 
          filter(YEAR %in% c(2010, 2019)), 
-       aes(reorder(STATE_NAME, Y_CO2_QTY_TONNES),
-           Y_CO2_QTY_TONNES/1e6,
+       aes(reorder(STATE_NAME, CO2_QTY_TONNES),
+           CO2_QTY_TONNES/1e6,
            fill = as.factor(YEAR))) +  # make discrete
   geom_col(position = "dodge") +
   labs(x = "", 
@@ -100,7 +100,7 @@ We can do this ordering with factors. First define a vector that is in the order
 ```{r}
 state_order <- aviation_co2 %>% 
   filter(YEAR == 2019) %>%     # in year 2019
-  arrange(desc(Y_CO2_QTY_TONNES)) %>%  # descending order
+  arrange(desc(CO2_QTY_TONNES)) %>%  # descending order
   pull(STATE_NAME) 
 
 aviation_co2 <- aviation_co2 %>% 
@@ -110,7 +110,7 @@ aviation_co2 <- aviation_co2 %>%
 ggplot(aviation_co2 %>% 
          filter(YEAR %in% c(2010, 2019)), 
        aes(ordered_states,
-           Y_CO2_QTY_TONNES/1e6,
+           CO2_QTY_TONNES/1e6,
            fill = as.factor(YEAR))) +  # make discrete
   geom_col(position = "dodge") +
   labs(x = "", 
@@ -132,7 +132,7 @@ If you want the reader to compare things, a good rule of thumb is to make sure t
 ggplot(aviation_co2 %>% 
          filter(YEAR %in% c(2010, 2015, 2019)), 
        aes(ordered_states,
-           Y_CO2_QTY_TONNES/1e6)) +  
+           CO2_QTY_TONNES/1e6)) +  
   geom_col() +
   facet_wrap(~YEAR, nrow = 1) + 
   labs(x = "", 
@@ -157,7 +157,7 @@ aviation_co2 <- aviation_co2 %>%
 ggplot(aviation_co2 %>% 
          filter(YEAR %in% c(2010, 2015, 2019)), 
        aes(ordered_states,
-           Y_CO2_QTY_TONNES/1e6,
+           CO2_QTY_TONNES/1e6,
            fill = as.factor(YEAR))) +  
   geom_col(position = "dodge") +
   facet_wrap(~size, nrow = 1, scales = "free") + 
@@ -187,10 +187,10 @@ There are many different distributions in flight data that have this long tail c
 
 ### Answers
 
-1) Use reorder(state_label, -Y_CO2_QTY_TONNES).
-2) Use `filter(YEAR == 2019 & Y_CO2_QTY_TONNES > 100000)`.
+1) Use reorder(state_label, -CO2_QTY_TONNES).
+2) Use `filter(YEAR == 2019 & CO2_QTY_TONNES > 100000)`.
 3) Did it?
 4) `z <- aviation_co2 %>% select(!size)`, then if it works, replace `z`.
-5) Replace `geom_col` with `geom_bar` and add `weight = ` in front of `Y_CO2_QTY_TONNES/1e6`, thus switching it from the `y` parameter to the `weight`.
+5) Replace `geom_col` with `geom_bar` and add `weight = ` in front of `CO2_QTY_TONNES/1e6`, thus switching it from the `y` parameter to the `weight`.
 6) `ggsave("graphs/2facet co2.png", width = 15, height = 10, units = "cm")` or some other appropriate proportions. Did you save the correct graph? Remember that by default it saves the last one plotted.
 

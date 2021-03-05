@@ -25,22 +25,32 @@ The main panes of the screen are:
   
 The buttons that appear around the panes are context-sensitive: they will change according to the type of file that you have open.
 
-There are some hot-keys for moving rapidly around the panes: I most use ctrl-1 to go to the source code, ctrl-2 for the console. You can then guess the others, or find them by trial and error.
+There are some hot-keys for moving rapidly around the panes: most often, I use ctrl-1 to go to the source code, ctrl-2 for the console. You can then guess the others, or find them by trial and error.
 
 Recent versions of `RStudio` have a tutorial (tab in top right pane) if you need more detail.
 
+Try out the console (bottom left, ctrl-2). Try typing `3 + 4 * 2` there (and press 'enter'). You should see "[1] 11", meaning that the first "[1]" (and in this case only) element of your answer is 11. The spaces in that calculation are optional, but recommended for ease of reading. [Try it without the spaces.]
+
+If you'd like to see an answer with more than one element, type `letters` into the console. This is a built-in constant. Check the 'help' for 'letters' to see some others.
+
 ## First project
 
-While you can work with 'bare' files of R code, we think it's tidier to use 'projects', for two main reasons: you can keep several shorter files of code together, which makes it easier to navigate; and a project automatically remembers which directory it's working in, so you can manage data input and output and graphic output more neatly.
+The console is good for quick, throw-away calculations. But it's a bit like treating R as a pocket calculator. Instead, we want to save R code in files. 
 
-Create yourself a new project 'File/New Project', selecting the options new project (not new package), give it the name 'justlearning' and browse to put it in your personal R directory. (TBD templates). 
+While you can work with 'bare' files of R code, we think it's tidier to use 'projects', for two main reasons: 
 
-It will open without a code panel, because you have no code yet. It looks like this.
+* you can keep several shorter files of code together, which makes it easier to organise and navigate; 
+* and a project automatically remembers which directory it's working in, so you can manage data input and output and graphic output more neatly.
+
+Create yourself a new project 'File/New Project', selecting the options new project, give it the name 'justlearning' and browse to put it in your personal R directory. (TBD templates). The sequence should look a little like this, with variation coming from where you create the new project subdirectory. That final part depends on your system and filing habits.
+![new project](images/new project 1.png) 
+![new project](images/new project 2.png) 
+![new project](images/new project 3.png) 
+
+The project will open without a code panel, because you have no code yet. It looks like this.
 ![new justlearning project](images/NewJustLearning.png)
 
-You can already execute R code in the console (bottom left, ctrl-2), but we want to save and organise code. So we do a bit more organising, and then in the next section, create a file for the code.
-
-In this book we'll assume that projects always keep data in the `data` directory, and save graphs to the `graphs` directory. You can create these quickly in your new project by copying the code from here (quick-copy icon appears top right in the code block when you move the mouse over it) and pasting it into the console (and press return).
+In this book we'll assume that projects always keep data in the `data` directory, and save graphs to the `graphs` directory. You can create these quickly in your new project by copying the code from here (quick-copy icon appears top right in the code block when you move the mouse over it) and pasting it into the console (and press 'enter').
 
 ```{r new_project, eval=FALSE}
 # good to have these in every project
@@ -48,7 +58,9 @@ dir.create("data")
 dir.create("graphs")
 
 ```
-If for some reason the directories already exist, don't worry, you'll just get a warning. You can also do this manually using 'New Folder' in the files tab (ctrl-5), but then look out for lower case! You could even use your operating system file explorer - these are just ordinary directories ('folders').
+If for some reason the directories already exist, don't worry, you'll just get a warning. The line beginning with '#' is a comment which is ignored.
+
+You can also create these directories manually using 'New Folder' in the files tab (ctrl-5), but then make sure both folder names are in lower case! You could even use your operating system file explorer - these are just ordinary directories ('folders').
 
 When you quit RStudio it will save any data and open files in your project. So you can re-open and continue from where you left off. If you've opened very large files, just beware that saving a copy as you close can take some time. (see TBD) 
 
@@ -58,7 +70,7 @@ Now you've got a blank project, add a new blank R script using `File/New File/R 
 
 Immediately save it; call it 'chapter2' for example. The name isn't critical here, but avoid spaces and punctuation. By default, it will be saved to the top level in the project. This is fine for many projects, though in some cases we might choose to organise code differently.
 
-Type this code into your script, either manually or copy paste. 
+Type this code into your new 'chapter2' script, either manually or copy paste. 
 
 ```{r first_code, eval=FALSE}
 3 + 4
@@ -68,12 +80,13 @@ pi
 cos(pi/3) # angle is in radians
 ```
 
-Unlike in the console, it doesn't get executed as you type. You have to run it. Usually you're either:
+Unlike in the console, in a script file code doesn't get executed as you type. You have to run it. Usually you're either:
 
 * stepping through code, running a bit at a time, in which case ctrl-enter (cmd-enter on the Mac) is easy to use: it runs the code where the cursor currently sits most of the time intelligently selecting other lines that need to run at the same time, and then moves to the next line of code, jumping over comments that are preceded by `#`;
-* running all the code, which you can do by pressing the 'source' button (or select all and ctrl-enter).
+* running all of the code, which you can do by pressing the 'source' button (or select all and ctrl-enter).
 
-Output appears in the console as a running log.
+The output appears in the console as a running log. It should look like this:
+![](images/result of 3 plus 4.png)
 
 ## First packages {#packages}
 
@@ -83,13 +96,13 @@ A 'package' provides a collection of functions, often some data and sometimes so
 
 Some packages are already bundled in the basic installation of 'R', such as `base` which provides, as the name suggests, many of the most basic functions. But there are thousands of other packages, coming from:
 
-* [CRAN](https://cran.r-project.org) or various 'mirror' (official copy) sites hosted elsewhere, such as at Ghent University. These packages have been through a degree of quality control, and are preferred to the less official sources.
+* [CRAN](https://cran.r-project.org), the "Comprehensive R Archive Network" is the authoritative collection of packages. There are also various 'mirror' (official copy) sites hosted elsewhere, such as at Ghent University. Packages in CRAN have been through a degree of quality control, and are preferred to the less official sources.
 * [Github](https://github.com) and other public repositories. We share some there, such as [CODA taxi times](https://github.com/david6marsh/codaTaxi) and the [PRC dashboard](https://github.com/euctrl-pru/portal).
 * Home-made. Making them is out of the scope of the book, but you may want to load the `statfor` package (see section TBD) created by Sebastien Thonnard that builds some access to Eurocontrol datawarehouses as well as nice formatting.
 
 There are two^[actually, there's a third, but that's too much detail for here] steps to using a package, and sometimes these get confused:
 
-1) Installation. You type `install.packages("dplyr")` and R finds the files for that package and saves them on your machine or on a network drive. So the files are available. You've done the shopping and the food is in the kitchen cupboards.
+1) Installation. You type `install.packages("package_name")` and R finds the files for that package and saves them on your machine or on a network drive. So the files are available. You've done the shopping and the food is in the kitchen cupboards.
 2) Attaching or Loading. You have to make a package _available_ for use for your session, usually with `library( )`. You've pulled the ingredients for your recipe out of the cupboard and they're on the kitchen table. If there's a difference between 'attaching' and 'loading' then it doesn't matter here. 
 
 A very few packages are automatically loaded at the start of the session. In the packages pane, a package is listed if it is installed and ticked if it's loaded. In the screenshot, just the `base` package is loaded of the ones listed in this screenshot.
@@ -104,10 +117,20 @@ You can load a package by ticking the box in the packages pane, but normally it'
 library(lubridate) # lots of date-related functions.
 
 ```
-Two packages can define a function with the same name. That is not something CRAN controls, and when there's a clash, on loading the second one 'masks' the first (you might see this above). Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
+Two packages can define a function with the same name. The CRAN repository of packages performs quality checks, but overlap between packages is not something CRAN controls: it is an excellent library rather than an 'Académie française' for R controlling what is acceptable in the language. When there is overlap in packages, both defining a function with the same name, say, then on loading the second one 'masks' the first (you might see this above). Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
 
-There are often many different functions that you could use to achieve the same result, eg `base::paste()` and `stringr::str_c()` both concatenate strings. There's an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That's like the satisfaction of making the recipe from things you already have in the cupboard.
+As well as function with the same name and different results, there are often many different functions that you could use to achieve the same result, eg `base::paste0()` and `stringr::str_c()` both concatenate strings.
 
+```{r concatenate}
+# both concatenate two strings, inserting no separator between them
+base::paste0("On Ilkley Moo", "r.")
+stringr::str_c("On Ilkley Moo", "r.")
+```
+
+In this example, notice that the strings to be concatenated are written in quotes. It's recommended to use double ", rather than single '. And while we're on such conventions, the space after the ',' in the parameter list is optional, but recommended for ease of reading. In fact you'll see that when there are lots of parameters or long ones, we tend to move to a new line, also for ease of reading. Meanwhile, there should be no space between the function name and the '('.
+
+There's an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That's like the satisfaction of making the recipe from things you already have in the cupboard.
+ 
 But sometimes, you just don't want to make the flaky pastry yourself. There are times when you're looking at a complex task and should be thinking 'surely someone has already tackled this in R?'. A little googling might find you most of the pieces already in place in a new package, or one you have but had forgotten about. 
 
 You develop a personal 'dialect' of R, from the packages you choose to use most often. We'll discuss one of the most common dialects, the `tidyverse`, in more detail in the next section. Since it helps if you and colleagues share a dialect, everyone adopting the tidyverse is a good start.
@@ -144,6 +167,34 @@ tidyverse_packages()
 
 These include `lubridate` and `stringr` which we've already mentioned.
 
+We'll see a lot more `tidyverse` usage in chapters TBD, when we get to grips with data wrangling. Just to whet your appetite, here we show two quick examples. Start with the untidy dataframe shown above. Use `pivot_longer` to make it tidy, all in one go selecting a number of columns (those that start with 'Flights') and extracting the 'year' from this, then pivoting to the tidy form. Then we show a pairing of `group_by` and `summarise` to produce some annual totals. 
+
+```{r}
+untidy <- data.frame(Country = c("France", "Germany"), 
+                     Flights2019 = c(1.3, 5.2), 
+                     Flights2020= c(1.5, 6.0))
+# tidy the data
+tidier <- pivot_longer(untidy, 
+                       # pivot the two columns starting with 'Flights'
+                       cols = starts_with("Flights"),
+                       # put the column names in a column called 'year'
+                       names_to= "year",
+                       # ignore the 'Flights' bit of the name, and treat as integer
+                       names_pattern = "Flights(.*)",
+                       names_transform = list(year = as.integer),
+                       # put the column values in a column called 'flights'
+                       values_to = "flights")
+print(tidier)
+
+# using groups - just print the result
+tidier %>% group_by(year) %>% 
+  summarise(total_flights = sum(flights))
+
+
+```
+
+
+Don't worry if this demo seems complicated, or to come out of nowhere - we'll take it more slowly in Chapter TBD. But it illustrates the principle we mentioned earlier: for many operations (like tidying a table), you're not the first to need to do this, so there's probably a neat way to do it in R.
 
 ## File types {#filetypes}
 

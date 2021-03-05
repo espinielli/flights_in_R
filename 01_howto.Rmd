@@ -55,5 +55,5 @@ But it is never going to replace the huge amount of excellent information, espec
 
 Learning from mistakes is essential, so each chapter has a "what's gone wrong?" section near the end, discussing some typical potholes that we all fall into from time to time. Look there especially if you don't see the results from the code in the book that you were expecting.
 
-We start the book with one classic pitfall: R is *case sensitive*, which can be quite a culture shock if you're brought up on other systems. This matters for filenames as well as code. When in doubt, check the case!
+We start the book with one classic pitfall: R is *case sensitive*, which can be quite a culture shock if you're brought up on other systems. This matters for filenames as well as code. When in doubt, check the case of what you've typed!
 
