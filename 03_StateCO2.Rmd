@@ -25,16 +25,19 @@ suppressPackageStartupMessages(library(tidyverse)) # without lots of messages
 
 ## Looking at data: CO~2~ Data {#loadco2}
 
-We use public data on national CO~2~ emissions from aviation available on the [EUROCONTROL/AIU website](https://ansperformance.eu/data/). We choose this, apart from the interest in the data themselves, because it's a small set so quick to download, and it's already tidy (each variable in one column).
+We use public data on national CO~2~ emissions from aviation available on the [EUROCONTROL/AIU website](https://ansperformance.eu/data/). We choose this, apart from the interest in the data themselves, because it's a small set so quick to download, and it's already tidy (each variable in one column). To isolate this book from changes in the original file, we use a version that we've saved to github.
+
 
 ```{r getCO2}
 # download the file to the data folder, the 'mode' parameter is needed on Windows machines
-download.file("https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx",
-              "data/CO2_emissions_by_state.xlsx", mode = "wb")
+co2_url <- "https://github.com/david6marsh/flights_in_R/raw/main/data/CO2_emissions_by_state.xlsx"
+# co2_url <- "https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx"
+download.file(co2_url, "data/CO2_emissions.xlsx", mode = "wb")
 
+  
 # load from the DATA worksheet - case sensitive!
-aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx", 
-                                  sheet = "DATA")
+aviation_co2 <- readxl::read_excel("data/CO2_emissions.xlsx", 
+                                  sheet = "DATA") 
 
 ```
 
@@ -59,16 +62,31 @@ In this dataset we have:
 * TF: Total flights. This is departing flights. Flights through the State airspace that do not land are not counted, nor are arrivals from outside the State. A domestic flight is counted once, as a departure.
 
 You'll notice a few names in there which aren't States, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some States with a '*' next to their names, which means (TBD).
+
+We want to keep things simple, so we will use a little data wrangling to get rid of the month, then save the result as an `r` dataset. This is a fairly common pattern for re-organising your data: `group_by` the relevant variables, then summarise within those groups. Here we use the `summarise_at` variant of summarise, which allows us quickly to apply a function `sum` to multiple variables. Often you want to keep your groups, but here we don't need to, so we `ungroup`. 
+
+There will be more examples of this sort of data manipulation in Chapter TBD.
+
+```{r}
+annual_co2 <- aviation_co2 %>%
+  group_by(YEAR, STATE_NAME, STATE_CODE) %>%
+  summarise_at(vars(CO2_QTY_TONNES, TF), sum) %>%
+  ungroup()
+
+save(annual_co2, file = "data/annual_co2.rda")
+
+```
+
  
-There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the first line, with name on, to see a summary. You get much the same thing in the console by typing `str(aviation_co2)` where `str` is for 'structure'. You should see something like this.
+There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the first line, with name on, to see a summary. You get much the same thing in the console by typing `str(annual_co2)` where `str` is for 'structure'. You should see something like this.
 
 ![](images/CO2inEnvironment.png)
 
-We can see that there are three numeric variables (`num`) and two character variables (`chr`). All five variables have the same number of observations (`r nrow(aviation_co2)` - but maybe this is more by the time you download it). In a tibble or data.frame the columns are always the same length.
+We can see that there are three numeric variables (`num`) and two character variables (`chr`). All five variables have the same number of observations (`r nrow(annual_co2)` - but maybe this is more by the time you download it). In a tibble or data.frame the columns are always the same length.
 
 The second way to explore the structure, because this is a tibble, is just to type its name in the console. [Try it] This is useful but just bear in mind that for some data structures, this might fill up your console with a lot of output. Save it for when you're sure you've a tibble. You can check by typing `class(my_thing)` into the console to see if `my_thing` is a tibble (shown as `tbl`).
 
-The third way gives a window to explore every observation. Click on the dataset name next to the blue arrow or type `View(aviation_co2)` in the console (sorry about the upper case 'V') and you get a tabular data explorer, which allows you to sort and filter. You should see something like this. [Try out the sorting and filtering in the view window. Filter to show only the Netherlands, and sort by total flights.]
+The third way gives a window to explore every observation. Click on the dataset name next to the blue arrow or type `View(annual_co2)` in the console (sorry about the upper case 'V') and you get a tabular data explorer, which allows you to sort and filter. You should see something like this. [Try out the sorting and filtering in the view window. Filter to show only the Netherlands, and sort by total flights.]
 
 ![](images/CO2inViewAndEnvironment.png)
 
@@ -80,12 +98,12 @@ There are several ways to pull one variable out of your data. We'll use the `$` 
 
 ```{r whichStates}
 # pull out all values in the column
-state_vbl <- aviation_co2$STATE_NAME
+state_vbl <- annual_co2$STATE_NAME
 
 states <- unique(state_vbl)
 ```
 
-Look in the environment pane, `state_vbl` is listed under 'Values'. It's a (column) vector, one of the simple data types in R which is why it's listed under 'Values' and not under 'Data'. You've just pulled a column out of `aviation_co2` so not surprising that it has the same number of rows as `aviation_co2`. And the first values are all `r states[1]`, or were when this book was compiled.
+Look in the environment pane, `state_vbl` is listed under 'Values'. It's a (column) vector, one of the simple data types in R which is why it's listed under 'Values' and not under 'Data'. You've just pulled a column out of `annual_co2` so not surprising that it has the same number of rows as `annual_co2`. And the first values are all `r states[1]`, or were when this book was compiled.
 
 Really we want to know how many different States there are, and which ones. `unique` does what it says, and we've saved these as `states`; a variable name which to me implies 'unique States'. You can tell how many there are from the environment pane, or you could use `length(states)`. [How many are there?]
 
@@ -133,7 +151,7 @@ In the simplest code we have:
 * `geom_point`: says to plot points with these data, ie a scatter plot.
 
 ```{r}
-ggplot(aviation_co2, 
+ggplot(annual_co2, 
        aes(TF, CO2_QTY_TONNES, colour = YEAR)) +
   geom_point() 
 
@@ -155,7 +173,7 @@ The label on the legend is meaningful, but to avoid the block capitals we can ch
 
 ```{r}
 
-ggplot(aviation_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, colour = YEAR)) +
+ggplot(annual_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, colour = YEAR)) +
   geom_point() + 
   labs(x = "Departing Flights (millions)", 
        y = "CO2 (million tonnes)",
@@ -175,7 +193,7 @@ We need both to add a line, which follows the pattern of `geom_point`, and group
 Out of a sense of neatness, we also add a subscript to CO~2~. The code `bquote(~CO[2]~" (million tonnes)")` took some googling and is cryptic, but it works!
 
 ```{r}
-ggplot(aviation_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+ggplot(annual_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, 
                          colour = YEAR, group = STATE_NAME)) +
   geom_point() + 
   geom_path() +
@@ -196,6 +214,8 @@ We'll find out how to pick out and label States in the next chapter.
 
 It pays to looks closely at the graph and try to explain what you see. In fact, it was only once I'd tidied the colours up that I noticed that they were not in order along the line. I had used `geom_line` (join in x-axis order) in place of `geom_path` (join in data order). So story-telling can help debugging too. Also, it pays to read the help file, even if you think you know how the function works!
 
+We'll see more about grouping in later chapters. It's quite common that I get errors in some tidyverse data wrangling, because the dataset is grouped, and I had forgotten that. So grouping is powerful and quick, but R remembers your groups longer than you do! 
+
 ## Test yourself
 
 ### Questions
@@ -214,7 +234,7 @@ It pays to looks closely at the graph and try to explain what you see. In fact, 
 1) `head(states, 10)`
 2) `head` is documented alongside `tail`: use `tail(states)`
 3) (In my version of the data), typing `states` into the console, and by eye I see 4 States with a '*'. We'll see other ways to do this, later.
-4) `unique(aviation_co2$STATE_CODE)`
+4) `unique(annual_co2$STATE_CODE)`
 5) `states[c(3, 23, 33)]`
 6) It puts the results of whatever is on the right-hand side into the object on the left.
 7) It connects parts of the definition of a graph together.

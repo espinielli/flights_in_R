@@ -193,8 +193,9 @@ tidier %>% group_by(year) %>%
 
 ```
 
-
 Don't worry if this demo seems complicated, or to come out of nowhere - we'll take it more slowly in Chapter TBD. But it illustrates the principle we mentioned earlier: for many operations (like tidying a table), you're not the first to need to do this, so there's probably a neat way to do it in R.
+
+You'll see another short bit of tidyverse at the beginning of the next chapter.
 
 ## File types {#filetypes}
 

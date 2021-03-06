@@ -6,8 +6,9 @@ While nothing beats a well hand-crafted chart, there are times when you want to 
 knitr::kable(data.frame(syl=c("`geom_col()`, `dodge`, `reorder()`, `ggsave()`, `as.factor()`, `factor()`, `arrange()`, `facet_wrap()`, `select`, plots pane")),
              col.names = c("In this chapter, you'll be introduced to:"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
-aviation_co2 <- readxl::read_xlsx("data/CO2_emissions_by_state.xlsx", 
-                                  sheet = "DATA") %>% 
+
+load("data/annual_co2.rda")
+annual_co2 <- annual_co2 %>% 
   mutate(state_label = if_else(YEAR == 2019, str_to_title(STATE_NAME), ""))
 ```
 
@@ -20,7 +21,7 @@ For the simplest bar charts, there is a quick way to get the order you want. In 
 The final novelty in this graph is `coord_flip()`. Forty-something State names is a lot of text to cram onto the horizontal axis. So we flip the axes. You'll need to decide if this trick works where you want to use the graph. We'll see other ways to separate the labels on the axes in (TBD).
 
 ```{r}
-ggplot(aviation_co2 %>% 
+ggplot(annual_co2 %>% 
          filter(YEAR == 2019), 
        aes(reorder(state_label, CO2_QTY_TONNES),
            CO2_QTY_TONNES/1e6)) +
@@ -70,15 +71,15 @@ The least obvious, final step is that 'year' needs to be a discrete variable, wh
 
 We could convert to a string with `as.character`, but we need to start using factors, so let's do that here. 
 
-Factors in R were originally a way to save space with character variables in a dataset. In `aviation_co2` for example, rather than store 'ALBANIA' 10 times, for each row, a factor would give `ALBANIA` a numeric code and store that. The character strings become the levels. [Try `z <- as.factor(aviation_co2$STATE_NAME)` and see what is said for z in the environment pane. `rm(z)` to tidy up, if you wish.] 
+Factors in R were originally a way to save space with character variables in a dataset. In `annual_co2` for example, rather than store 'ALBANIA' 10 times, for each row, a factor would give `ALBANIA` a numeric code and store that. The character strings become the levels. [Try `z <- as.factor(annual_co2$STATE_NAME)` and see what is said for z in the environment pane. `rm(z)` to tidy up, if you wish.] 
 
 For this example, we'll convert `YEAR` on the fly, with an `as.factor` in the `aes()` call.
 
 ```{r}
-aviation_co2 <- aviation_co2 %>% 
+annual_co2 <- annual_co2 %>% 
   mutate(STATE_NAME = str_to_title(STATE_NAME))
 
-ggplot(aviation_co2 %>% 
+ggplot(annual_co2 %>% 
          filter(YEAR %in% c(2010, 2019)), 
        aes(reorder(STATE_NAME, CO2_QTY_TONNES),
            CO2_QTY_TONNES/1e6,
@@ -98,16 +99,16 @@ Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019
 We can do this ordering with factors. First define a vector that is in the order we want, using `arrange()` to sort it. The `desc()` reverses the order. Then define a factor version of the state names, and insist that it's in this fixed order. `factor()` is like `as.factor()` which we used in the previous chunk of code, but allows these extra parameters.
 
 ```{r}
-state_order <- aviation_co2 %>% 
+state_order <- annual_co2 %>% 
   filter(YEAR == 2019) %>%     # in year 2019
   arrange(desc(CO2_QTY_TONNES)) %>%  # descending order
   pull(STATE_NAME) 
 
-aviation_co2 <- aviation_co2 %>% 
+annual_co2 <- annual_co2 %>% 
   mutate(ordered_states = factor(STATE_NAME, 
                                  levels = state_order, ordered = TRUE))
 
-ggplot(aviation_co2 %>% 
+ggplot(annual_co2 %>% 
          filter(YEAR %in% c(2010, 2019)), 
        aes(ordered_states,
            CO2_QTY_TONNES/1e6,
@@ -129,7 +130,7 @@ If you want the reader to compare things, a good rule of thumb is to make sure t
 `ggplot` provides a simple way to split charts into 'facets', which can sometimes be a way to show variation across a dimension with just a few values (2 or 3 years, say), while aligning the axes in a sensible way. There's a bit of a twist in the notation: you can't just mention a variable name (as you can in `aes()`), you need either to say `vars(YEAR)` or use a 'formula' notation starting with a tilde `~`, which involves less typing so that's what I've done here. The `_wrap` would allow wrapping onto multiple rows, but I just want one row here.
 
 ```{r}
-ggplot(aviation_co2 %>% 
+ggplot(annual_co2 %>% 
          filter(YEAR %in% c(2010, 2015, 2019)), 
        aes(ordered_states,
            CO2_QTY_TONNES/1e6)) +  
@@ -150,11 +151,11 @@ However, we can use facets to split in a different way, if we arbitrarily put th
 We turn off the scale-matching (`scales = "free"`), so really it's two separate graphs, but with one piece of code. 
 
 ```{r}
-aviation_co2 <- aviation_co2 %>% 
+annual_co2 <- annual_co2 %>% 
   mutate(size = if_else(ordered_states %in% state_order[1:19], 
                         "Larger Emitters", "Smaller Emitters"))
 
-ggplot(aviation_co2 %>% 
+ggplot(annual_co2 %>% 
          filter(YEAR %in% c(2010, 2015, 2019)), 
        aes(ordered_states,
            CO2_QTY_TONNES/1e6,
@@ -190,7 +191,7 @@ There are many different distributions in flight data that have this long tail c
 1) Use reorder(state_label, -CO2_QTY_TONNES).
 2) Use `filter(YEAR == 2019 & CO2_QTY_TONNES > 100000)`.
 3) Did it?
-4) `z <- aviation_co2 %>% select(!size)`, then if it works, replace `z`.
+4) `z <- annual_co2 %>% select(!size)`, then if it works, replace `z`.
 5) Replace `geom_col` with `geom_bar` and add `weight = ` in front of `CO2_QTY_TONNES/1e6`, thus switching it from the `y` parameter to the `weight`.
 6) `ggsave("graphs/2facet co2.png", width = 15, height = 10, units = "cm")` or some other appropriate proportions. Did you save the correct graph? Remember that by default it saves the last one plotted.
 
