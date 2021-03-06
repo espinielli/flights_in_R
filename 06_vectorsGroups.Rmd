@@ -1,0 +1,65 @@
+# Vectors and grouping - Loops of a sort
+
+In the next few chapters we move away from tweaking code for graphs and get more hands-on with manipulating data. With another software language, this might be the time to discuss loops. In a manner of speaking we will be looping, but in a very R way. R does have a 'for..next' syntax, but it's a little like the chips on the menu of an Indian restaurant: most of the time you're better off with something else.
+
+```{r, echo=FALSE}
+knitr::kable(data.frame(syl=c("")),
+             col.names = c("In this chapter, you'll be introduced to:"))
+suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
+
+```
+
+## Vectors
+
+We met vectors in passing in Chapter \@ref(start): `1:50`. We saw other ways to construct them in section \@ref(someValues): `c(1, 5, 10)`. But we can do more than just use them for filtering. Many functions in R are 'vector friendly', in the sense that they will operate on an entire vector, and return a vector result. This can then be used in another function. 
+
+The use of vectors is a sort of looping through a set of values. Or if you prefer the Excel analogy, it's like filling a column of cells with a sequence of values and then creating another with a set of formulas using those vales, but without all the repetitious clicking, dragging and filling.
+
+```{r}
+c(1, 3, 7) + 2
+1:4 + 1:2 # values of the second vector are recycled
+1:3^2 # ^ happens before :
+(1:3)^2
+sin(pi/1:4) %>% round(3)  # = round(sin(pi/1:4), 3)
+round(pi, 0:4) # vectors can work in surprising places
+str_c("Year_", unique(aviation_co2$YEAR))
+
+```
+
+The examples illustrate there are still some rules of precedence: `:` is evaluated after `^`, but before `+`. They also show 'recycling': `1:4` needs a length 4 vector to be added to it, so the values in `1:2` are recycled. Strictly speaking, this is happening with the first example (the `2` is being recycled into a vector of length 3), and also in the last example with "Year_".
+
+If the recycling can't be done neatly, you get an error. [Evaluate `1:4 + 1:3`.]
+
+There are plenty of other ways to create simple vectors when you need them. 
+
+```{r}
+seq(10, 50, by = 5) # when 10:50 won't do
+rep(4, 3) # repeat 3 times
+seq.Date(as.Date("2020/1/15"), as.Date("2020/12/15"), by = "month") # ides of 2020
+letters # 'letters' and 'LETTERS' are built in
+
+```
+
+While vectors and vector-savvy functions are, in a sense, loops with an R flavour, it's probably better to think of them as working 'in parallel' calculated all at the same time, rather than one by one as they would be in a 'for...next' loop. (TBD)
+
+## Exercises
+
+### Questions
+
+* What code generates the vector `2 6 10 14`?
+* What code generates the vector `1 2 1 2 1 2 1 2`?
+* What code generates the vector `"A1" "B2" "C3" "D4" "E5"`?
+* What code generates the vector `1.000 0.500 0.333 0.250 0.200`?
+* What code generates the vector `"1/1" "1/2" "1/3" "1/4" "1/5"`?
+
+### Answers
+
+For the first 5 there are several answers that work. The ones here are relatively compact.
+
+* `seq(2, 14, by = 4)` (or `c(2, 6, 10, 14)`)
+* `rep(1:2, 4)`
+* `str_c(LETTERS[1:5], 1:5)`
+* `1/1:5`
+* `str_c("1/", 1:5)`
+
+

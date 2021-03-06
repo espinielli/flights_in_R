@@ -1,4 +1,5 @@
 tab:twotables
+contents
 howto
 before-you-start
 ways-to-use-the-material
@@ -19,7 +20,7 @@ answers
 first-look-at-data-and-co2-emissions
 loadco2
 extracting-variables
-extracting-a-few-values
+someValues
 co2-scatter-plot
 first-draft
 improve-the-titles
@@ -48,3 +49,8 @@ chart-facets-more-years-in-the-bar-chart
 exercises-1
 questions-3
 answers-3
+vectors-and-grouping---loops-of-a-sort
+vectors
+exercises-2
+questions-4
+answers-4
