@@ -1,5 +1,4 @@
 tab:twotables
-contents
 howto
 before-you-start
 ways-to-use-the-material
@@ -17,7 +16,7 @@ whats-gone-wrong-1
 test-yourself
 questions
 answers
-first-look-at-data-and-co2-emissions
+firstLook
 loadco2
 extracting-variables
 someValues
