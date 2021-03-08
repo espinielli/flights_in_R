@@ -1,5 +1,4 @@
 tab:twotables
-contents
 howto
 before-you-start
 ways-to-use-the-material
@@ -17,7 +16,7 @@ whats-gone-wrong-1
 test-yourself
 questions
 answers
-first-look-at-data-and-co2-emissions
+firstLook
 loadco2
 extracting-variables
 someValues
@@ -29,12 +28,12 @@ whats-gone-wrong-2
 test-yourself-1
 questions-1
 answers-1
-filtering-a-dataset-and-refining-the-co2-graph
+filter
 sequences-of-functions
 filtering-datasets-and-logical-tests
 topStates
 co2-graph-for-the-top-states
-labelling-the-co2-graph
+labelco2
 what-does-the-graph-say-about-co2
 whats-gone-wrong-3
 exercises
@@ -46,6 +45,7 @@ saving-a-plot
 plotting-more-than-one-year
 factors
 chart-facets-more-years-in-the-bar-chart
+whats-gone-wrong-4
 exercises-1
 questions-3
 answers-3

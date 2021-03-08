@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Filtering a dataset and refining the CO2 graph | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Filtering a dataset and refining the CO2 graph | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Filtering a dataset and refining the CO2 graph | Analysing Flights with R - UNDER CONSTRUCTION" />
+  
+  <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+<meta name="author" content="David Marsh" />
+
+
+<meta name="date" content="2021-03-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="firstLook.html"/>
+<link rel="next" href="sorting-bars-saving-graphs-facets.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analysing Flights in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#before-you-start"><i class="fa fa-check"></i><b>1.1</b> Before you start</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ways-to-use-the-material"><i class="fa fa-check"></i><b>1.2</b> Ways to Use the Material</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i><b>1.3</b> Structure of the book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#whats-gone-wrong"><i class="fa fa-check"></i><b>1.4</b> What’s gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> Orientation in RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="start.html"><a href="start.html#first-project"><i class="fa fa-check"></i><b>2.2</b> First project</a></li>
+<li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
+<li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#package-basics"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
+<li class="chapter" data-level="2.6" data-path="start.html"><a href="start.html#whats-gone-wrong-1"><i class="fa fa-check"></i><b>2.6</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="2.7" data-path="start.html"><a href="start.html#test-yourself"><i class="fa fa-check"></i><b>2.7</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="start.html"><a href="start.html#questions"><i class="fa fa-check"></i><b>2.7.1</b> Questions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="start.html"><a href="start.html#answers"><i class="fa fa-check"></i><b>2.7.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="firstLook.html"><a href="firstLook.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> emissions</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="firstLook.html"><a href="firstLook.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extracting-variables"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.3" data-path="firstLook.html"><a href="firstLook.html#someValues"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
+<li class="chapter" data-level="3.4" data-path="firstLook.html"><a href="firstLook.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="firstLook.html"><a href="firstLook.html#first-draft"><i class="fa fa-check"></i><b>3.4.1</b> First draft</a></li>
+<li class="chapter" data-level="3.4.2" data-path="firstLook.html"><a href="firstLook.html#improve-the-titles"><i class="fa fa-check"></i><b>3.4.2</b> Improve the titles</a></li>
+<li class="chapter" data-level="3.4.3" data-path="firstLook.html"><a href="firstLook.html#statecluster"><i class="fa fa-check"></i><b>3.4.3</b> and with clustering by state</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="firstLook.html"><a href="firstLook.html#whats-gone-wrong-2"><i class="fa fa-check"></i><b>3.5</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="3.6" data-path="firstLook.html"><a href="firstLook.html#test-yourself-1"><i class="fa fa-check"></i><b>3.6</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="firstLook.html"><a href="firstLook.html#questions-1"><i class="fa fa-check"></i><b>3.6.1</b> Questions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="firstLook.html"><a href="firstLook.html#answers-1"><i class="fa fa-check"></i><b>3.6.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> Filtering a dataset and refining the CO<sub>2</sub> graph</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#sequences-of-functions"><i class="fa fa-check"></i><b>4.1</b> Sequences of functions</a></li>
+<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filtering-datasets-and-logical-tests"><i class="fa fa-check"></i><b>4.2</b> Filtering datasets and logical tests</a></li>
+<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#topStates"><i class="fa fa-check"></i><b>4.3</b> Selecting the busiest states</a></li>
+<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#co2-graph-for-the-top-states"><i class="fa fa-check"></i><b>4.4</b> CO<sub>2</sub> graph for the top states</a></li>
+<li class="chapter" data-level="4.5" data-path="filter.html"><a href="filter.html#labelco2"><i class="fa fa-check"></i><b>4.5</b> Labelling the CO<sub>2</sub> graph</a></li>
+<li class="chapter" data-level="4.6" data-path="filter.html"><a href="filter.html#what-does-the-graph-say-about-co2"><i class="fa fa-check"></i><b>4.6</b> What does the graph say about CO<sub>2</sub>?</a></li>
+<li class="chapter" data-level="4.7" data-path="filter.html"><a href="filter.html#whats-gone-wrong-3"><i class="fa fa-check"></i><b>4.7</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="4.8" data-path="filter.html"><a href="filter.html#exercises"><i class="fa fa-check"></i><b>4.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="filter.html"><a href="filter.html#questions-2"><i class="fa fa-check"></i><b>4.8.1</b> Questions</a></li>
+<li class="chapter" data-level="4.8.2" data-path="filter.html"><a href="filter.html#answers-2"><i class="fa fa-check"></i><b>4.8.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html"><i class="fa fa-check"></i><b>5</b> Sorting Bars, Saving Graphs, Facets</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#firstsortedbar"><i class="fa fa-check"></i><b>5.1</b> The simple sorted bar chart - more on CO<sub>2</sub></a></li>
+<li class="chapter" data-level="5.2" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#saving-a-plot"><i class="fa fa-check"></i><b>5.2</b> Saving a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#plotting-more-than-one-year"><i class="fa fa-check"></i><b>5.3</b> Plotting more than one year</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#factors"><i class="fa fa-check"></i><b>5.3.1</b> Staggered bars, and factors</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#chart-facets-more-years-in-the-bar-chart"><i class="fa fa-check"></i><b>5.3.2</b> Chart facets, more years in the bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#whats-gone-wrong-4"><i class="fa fa-check"></i><b>5.4</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="5.5" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#exercises-1"><i class="fa fa-check"></i><b>5.5</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#questions-3"><i class="fa fa-check"></i><b>5.5.1</b> Questions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="sorting-bars-saving-graphs-facets.html"><a href="sorting-bars-saving-graphs-facets.html#answers-3"><i class="fa fa-check"></i><b>5.5.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html"><i class="fa fa-check"></i><b>6</b> Vectors and grouping - Loops of a sort</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#vectors"><i class="fa fa-check"></i><b>6.1</b> Vectors</a></li>
+<li class="chapter" data-level="6.2" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#exercises-2"><i class="fa fa-check"></i><b>6.2</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#questions-4"><i class="fa fa-check"></i><b>6.2.1</b> Questions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#answers-4"><i class="fa fa-check"></i><b>6.2.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="filter" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Filtering a dataset and refining the CO<sub>2</sub> graph</h1>
+<p>In this chapter we improve the CO<sub>2</sub> emissions graph, <em>en route</em> learning how to filter observations from a dataset, to add new variables, and to use the <code>pipe</code> operator <code>%&gt;%</code>.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">In this chapter, you’ll be introduced to:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>filter()</code>, <code>==</code>, <code>%in%</code>, <code>mutate()</code>, <code>slice_max()</code>, <code>%&gt;%</code>, <code>geom_text_repel()</code>, <code>scales_colour_...</code></td>
+</tr>
+</tbody>
+</table>
+<p>On re-opening your <code>justlearning</code> project, you should still have the <code>annual_co2</code> dataset in your environment, since RStudio saves these data and reloads on restart. If not, you should find that <code>annual_co2.rda</code> is saved in the <code>data</code> folder, and you can load it using <code>load("data/annual_co2.rda")</code>. One R speciality here is that you don’t need to assign the result with a <code>annual_co2 &lt;- ...</code>; in fact the single file that we saved could have contained a number of datasets, and they’re all reloaded <em>with their original dataset names</em>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>If you have closed RStudio and re-opened it, then you have a new session and need to reload packages, in this case <code>library(tidyverse)</code>. Make yourself a new R script file for ‘chapter4’ starting with this.</p>
+<div id="sequences-of-functions" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Sequences of functions</h2>
+<p>It’s time for a bit more syntax. We saw already that you can combine functions by making one the parameter to another. Or to put it another way, wrapping one around the other. As you combine more functions, this soon becomes hard to read, and you have to rely on the editor to help you spot whether you’ve enough brackets closed at the right point.</p>
+<p>For that reason we use a different syntax, the ‘pipe’ operator <code>%&gt;%</code> introduced by the <code>magrittr</code> package and adopted by the tidyverse. If you learn only one control-key combination in RStudio, do learn shift-ctrl-M (also shift-command-M on Mac). This must be the fastest way to type ‘%&gt;%!’ [Try it in your console.]</p>
+<p>With a new line after each <code>%&gt;%</code> and appropriate indenting (RStudio helps with that), you get code that looks like this. This says, fill <code>a</code> with what you get from dataset <code>b</code> after applying function <code>fun1</code>, then function <code>fun2</code>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="filter.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># which is clearer</span></span>
+<span id="cb33-2"><a href="filter.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># with a pipe?</span></span>
+<span id="cb33-3"><a href="filter.html#cb33-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="filter.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fun1</span>(p1) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="filter.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fun2</span>(p2, p3)</span>
+<span id="cb33-6"><a href="filter.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or without?</span></span>
+<span id="cb33-7"><a href="filter.html#cb33-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">fun2</span>(<span class="fu">fun1</span>(b, p1), p2, p3)</span></code></pre></div>
+<p>The pipe syntax works because <code>fun1</code> actually has a parameter list that <em>starts</em> with the dataset to which it should be applied <code>fun1(data, p1,...)</code>. So <code>b %&gt;% fun1(p1)</code> is just another way of writing <code>fun1(b, p1)</code>. Or, the other way around, you can use <code>%&gt;%</code> whenever you have a function whose first parameter is the dataset to be operated on. It turns out that this is true for very many of them, and the tidyverse is designed that way. [Does the code to summarise by year that you saw in section <a href="firstLook.html#loadco2">3.1</a> make more sense now that you know about <code>%&gt;%</code>?]</p>
+</div>
+<div id="filtering-datasets-and-logical-tests" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Filtering datasets and logical tests</h2>
+<p>As is so often the case, in R there are several of ways to select rows from a dataframe or tibble. We’ll focus on the <code>filter(data, test)</code> function. For this we need to know how to construct a logical test.</p>
+<p>There are three parts to this: the logic, the test functions and what’s being tested.</p>
+<ol style="list-style-type: decimal">
+<li>Logic is mostly given by <code>&amp;</code>, <code>!</code> and <code>|</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> for ‘and,’ ‘not’ and ‘or,’ grouped with round brackets in the normal way.</li>
+<li>The test functions are <em>almost</em> as you might expect: <code>&gt;</code>, <code>&lt;</code>. However, in R you need to use <code>==</code> not <code>=</code> to test for equality. I suspect this creates the most common typo in R code! Check the documentation of <code>dplyr::filter</code> for a more complete list of test functions: in particular look out for <code>%in%</code>, which we will use shortly.</li>
+<li>One really nice touch in <code>filter()</code> is in the third part: what’s being tested. One of the trickiest bits of learning R is knowing how, within a function, to refer to one or more variables of the dataset. In <code>filter()</code> you can just use the name of the variable; so no quotes needed around the name, and the code assumes it is a variable from the <code>data</code> parameter, so no need to use <code>annual_co2$...</code>.</li>
+</ol>
+<p>In this example, we don’t push the result into a dataset (no <code>a &lt;-</code>), so it gets printed out directly.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="filter.html#cb34-1" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="filter.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2018</span> <span class="sc">&amp;</span> STATE_NAME <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CZECHIA&quot;</span>, <span class="st">&quot;ALBANIA&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##    YEAR STATE_NAME CO2_QTY_TONNES    TF
+##   &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;
+## 1  2018 ALBANIA           143871. 12744
+## 2  2018 CZECHIA          1381672. 90679</code></pre>
+<p>Note that:</p>
+<ul>
+<li>the order of the rows is as in the original dataset, not at all influenced by the order of the naming of the states in the test</li>
+<li><code>YEAR</code> and <code>STATE_NAME</code> in the <code>filter</code> function are so-called ‘bare’ strings (ie without quotes) that <em>name</em> variables, and are shorthand for <code>annual_co2$YEAR</code> etc</li>
+<li>but “CZECHIA” is a <em>value</em> of a variable so needs to be a string in quotes</li>
+<li>and the test is case-sensitive. [Try changing it to “Czechia.”]</li>
+</ul>
+</div>
+<div id="topStates" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Selecting the busiest states</h2>
+<p>In the previous chapter we selected the first-named states with <code>head()</code>. Now we do something more useful: selecting the top states by flights, using <code>slice_max()</code>. We need to define this a bit more clearly. ‘Top’ could mean in a particular year, or over the whole period (where flights have decreased as well as increased). We choose to mean ‘top by flights in 2019.’ This is partly out of habit (top in the latest year is often the meaning) and partly because we need to introduce fewer new bits of R to implement it.</p>
+<p>The code is like this. A final novelty is that we use <code>pull()</code> which, as its help-file says, does the same as <code>$</code> (learned in the last chapter) but looks nicer in pipes. [Where can you look at <code>top_states</code> to check that there are 8 values?]</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="filter.html#cb36-1" aria-hidden="true" tabindex="-1"></a>top_states <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="filter.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span>     <span class="co"># top in year 2019</span></span>
+<span id="cb36-3"><a href="filter.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(TF, <span class="at">n =</span> <span class="dv">8</span>) <span class="sc">%&gt;%</span>  <span class="co"># top 8 </span></span>
+<span id="cb36-4"><a href="filter.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(STATE_NAME) </span></code></pre></div>
+<p><code>slice_max()</code> is a good example of how R changes with time. New versions of packages introduce minor or major changes. Sometimes a function is <code>superseded</code> (left to rot), other times it may be <code>deprecated</code> (you have some time to switch to a new version before it’s removed). The function <code>top_n</code>, which you might see lying around in legacy code, has been superseded by <code>slice_max()</code>. [Check out the documentation of <code>top_n</code> for some of the reasons.]</p>
+<p>These changes mean that just updating to the latest version of the package is not always the best idea, because you might have to spend some time checking for changes. It also means that, when searching on the web for hints, snippets and answers, you need to look at the date of the answer. <code>ggplot</code> in particular has changed quite a bit, so answers more than 5 years old or so might not be that helpful.</p>
+</div>
+<div id="co2-graph-for-the-top-states" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> CO<sub>2</sub> graph for the top states</h2>
+<p>With <code>top_states</code> in place we can easily plot the data for the busiest states.</p>
+<p>We update the title, and add a footnote (<code>caption</code>) to explain what’s going on. We could have created a new dataset, eg <code>top_co2 &lt;- annual_co2 %&gt;% filter(STATE_NAME %in% top_states)</code>, and then used this in the <code>ggplot</code>. But we only plan to use this filter once, so to avoid cluttering the environment with datasets, we filter ‘on the fly,’ within the <code>ggplot</code> statement. In this case, this is a matter of personal preference. If the datasets were a lot larger, and we intended analysing and transforming just the top states in further graphs, the decision might be different.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="filter.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="filter.html#cb37-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> top_states), </span>
+<span id="cb37-3"><a href="filter.html#cb37-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
+<span id="cb37-4"><a href="filter.html#cb37-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="filter.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb37-6"><a href="filter.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb37-7"><a href="filter.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb37-8"><a href="filter.html#cb37-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb37-9"><a href="filter.html#cb37-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb37-10"><a href="filter.html#cb37-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 states&quot;</span>,</span>
+<span id="cb37-11"><a href="filter.html#cb37-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>One advantage of filtering on the fly is that we can change on the fly. [Change the filter to the states <em>not</em> in the top 8. It takes one key press. Re-run the graph. Update the titles too.]</p>
+<p>As an analyst, I really want to know which country is which. With just 8 states shown, maybe I can use symbols? At one level it’s quick to do. Just replace <code>group =</code> with <code>shape =</code>. [Try this.] <code>ggplot</code> complains that it doesn’t really like using more than 6 symbols, because it becomes hard for the reader to jump between legend and graph. We could roll with it and learn how to extend the palette, but is there another solution?</p>
+<p>We can separate states by colours. Again, quite quick: replace <code>colour = YEAR, group = STATE_NAME</code> with <code>colour = STATE_NAME</code>. [Try this.] The line means we can work out the ordering of the years easily, so losing the year isn’t a big issue here. But eight colours is also a lot to tell apart. Even without colour blindness, you might think they’re clear but when projected onto a screen or printed or on a tiny phone screen, perhaps not.</p>
+</div>
+<div id="labelco2" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Labelling the CO<sub>2</sub> graph</h2>
+<p>It’s relatively easy to follow a slightly different route: adding state names directly to the graph. This is done with <code>geom_text</code> added to the <code>ggplot</code>. We only want to label the point in 2019 rather than all years, so we create a new variable which is empty except in rows for the year 2019. <code>mutate(a = ...)</code> is the function for adding a variable ‘a’ to the dataset<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. <code>if_else()</code> is how we give a value for only some years. As with the <code>filter()</code> function, we can refer to other variables in <code>annual_co2</code> without inverted commas.</p>
+<p>This time, we amend the <code>annual_co2</code> dataset itself, because we want to be able to use this in several places, not just in a single graph. The syntax <code>a &lt;- a %&gt;% ...</code> follows the same pattern as you saw earlier, but you’re overwriting the original dataset.</p>
+<p>The <code>geom_text()</code> <em>inherits</em> all of the aesthetics from the <code>ggplot</code> function, so it already knows where to find x and y coordinates, and what colour to use. We still need to tell <code>geom_text()</code> where to find the labels. This is also an aesthetic.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="filter.html#cb38-1" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="filter.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_label =</span> <span class="fu">if_else</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>, STATE_NAME, <span class="st">&quot;&quot;</span>))</span>
+<span id="cb38-3"><a href="filter.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="filter.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb38-5"><a href="filter.html#cb38-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> top_states), </span>
+<span id="cb38-6"><a href="filter.html#cb38-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
+<span id="cb38-7"><a href="filter.html#cb38-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb38-8"><a href="filter.html#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb38-9"><a href="filter.html#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb38-10"><a href="filter.html#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label)) <span class="sc">+</span></span>
+<span id="cb38-11"><a href="filter.html#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb38-12"><a href="filter.html#cb38-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb38-13"><a href="filter.html#cb38-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb38-14"><a href="filter.html#cb38-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 states&quot;</span>,</span>
+<span id="cb38-15"><a href="filter.html#cb38-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>This is close, but not quite good enough. The text is centred on the 2019 point, and this creates some ugly overlaps. There are lots of options in <code>geom_text()</code> to adjust the position, and you’ll find lots of examples on the web. So we could spend time adjusting the positions. But this is a first example of the rule: ‘surely someone has already come across this problem?’</p>
+<p>Someone has indeed spent time to come up with good ways to deconflict and position labels on graphs. The package is called <code>ggrepel</code>, which you might need to install with <code>install.packages("ggrepel")</code>, and it provides a ‘drop in’ replacement for <code>geom_text</code> naturally called <code>geom_text_repel</code>. To avoid using <code>library("ggrepel")</code> when we’re just using one function from the package on one occasion, we use the double-colon syntax in the code (see (twocolons)).</p>
+<p>The defaults for this function work pretty well in this particular case. But there are a couple of things I’d like to fix: the block capitals and the year legend. Title case would be nicer, so we convert the <code>STATE_NAME</code> using the <code>stringr</code> package function <code>str_to_title()</code>. <code>stringr</code> is already loaded as part of the tidyverse, and since most of its functions begin ‘str_’ it’s quite easy to start searching in the help pane for the right one [Try this.]. In this case <code>state_label</code> already exists and we overwrite it.</p>
+<p>The other thing to improve is the year scale, which shows with meaningless decimals. We use a quick-ish fix, rather than the tidiest-possible solution. Scales, whether the axes or colours, are controlled by <code>ggplot</code> functions starting <code>scales_</code> in this case <code>scales_colour_steps()</code> gets us a scale that shows the individual years. This is a ‘dirty’ solution in the sense that, if the data for 2020 get included, you might need to tweak the code; but then, we’ve hard-coded 2019 in a number of places, so this is dirty elsewhere. We’ll see cleaner options later (for example in section <a href="sorting-bars-saving-graphs-facets.html#factors">5.3.1</a>).</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="filter.html#cb39-1" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="filter.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_label =</span> <span class="fu">if_else</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>, <span class="fu">str_to_title</span>(STATE_NAME), <span class="st">&quot;&quot;</span>))</span>
+<span id="cb39-3"><a href="filter.html#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="filter.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb39-5"><a href="filter.html#cb39-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> top_states), </span>
+<span id="cb39-6"><a href="filter.html#cb39-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
+<span id="cb39-7"><a href="filter.html#cb39-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="filter.html#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb39-9"><a href="filter.html#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb39-10"><a href="filter.html#cb39-10" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label)) <span class="sc">+</span></span>
+<span id="cb39-11"><a href="filter.html#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_steps</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">show.limits =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb39-12"><a href="filter.html#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb39-13"><a href="filter.html#cb39-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb39-14"><a href="filter.html#cb39-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb39-15"><a href="filter.html#cb39-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 states&quot;</span>,</span>
+<span id="cb39-16"><a href="filter.html#cb39-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="what-does-the-graph-say-about-co2" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> What does the graph say about CO<sub>2</sub>?</h2>
+<p>Longer-haul flights use heavier aircraft and therefore the <a href="https://www.eurocontrol.int/publication/eurocontrol-data-snapshot-co2-emissions-flight-distance">proportion of long-haul flights in a national mix is a major influence on CO<sub>2</sub> per flight</a>. For example, the Netherlands has more CO<sub>2</sub> per flight than Norway: Norway has a significant domestic (so short-range) market, which the Netherlands does not, being instead a major long-haul hub. These two states have been relatively stable.</p>
+<p>The UK also has a proportionally larger long-haul market. And a decline in its domestic market has led to quite a rapid increase in CO<sub>2</sub> per flight in recent years.</p>
+<p>So, the graph helps to build a story: though we needed some supporting information to provide some of the explanation. It has also become clear that we’re interested in CO<sub>2</sub> per flight. See the exercises for a graph on that more directly.</p>
+</div>
+<div id="whats-gone-wrong-3" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> What’s gone wrong?</h2>
+<p>It’s inevitable that you will type <code>=</code> in tests where you mean <code>==</code>. Some functions have friendly messages, since this is so common. Others less so.</p>
+<p>Watch that case! We are using the function <code>filter()</code>, not the function <code>Filter()</code> which is something else entirely.</p>
+<p><code>if_else</code> is a fussy version of the base function <code>ifelse</code>, that we use here to maximise use of tidyverse functions. If it warns you that the ‘false’ must be something, then it has your long-term interests at heart. It just means that it’s a different type to the ‘true.’ Compare <code>ifelse(1&lt;2,"true",NA)</code> and <code>if_else(1&lt;2,"true",NA)</code> where <code>NA</code> is the code for missing.</p>
+</div>
+<div id="exercises" class="section level2" number="4.8">
+<h2><span class="header-section-number">4.8</span> Exercises</h2>
+<div id="questions-2" class="section level3" number="4.8.1">
+<h3><span class="header-section-number">4.8.1</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Where can you look to see that <code>top_states</code> has 8 values?</li>
+<li>How does <code>geom_text()</code> know where to place the text on the graph?</li>
+<li>Adapt <code>geom_text()</code> to shift all labels up 2 (million tonnes!). (Hint: Check the help file.)</li>
+<li>Adapt the final graph to show the smallest 8 states instead. (Hints: What’s the most likely counterpart to <code>slice_max</code>? Closely-related functions are often to be found in the <em>same</em> help file, so checking the help for a function you know might help you find similar ones that you don’t.)</li>
+<li>Adapt the graph to show year on the x-axis and CO<sub>2</sub>/flight on the y-axis. (Hints: Mostly changing the first <code>aes()</code> and deleting some elements. For a pretty graph you might google how to hide the legend “ggplot hide legend,” and how to set the breaks on the x-axis.)</li>
+</ol>
+</div>
+<div id="answers-2" class="section level3" number="4.8.2">
+<h3><span class="header-section-number">4.8.2</span> Answers</h3>
+<ol style="list-style-type: decimal">
+<li>The environment pane, but you need to scroll down to “values” because it’s a simple vector.</li>
+<li><code>geom_text()</code> inherits all aesthetics from the opening <code>ggplot(..., aes(...))</code>, which can be supplemented or over-written by its own <code>aes()</code>. In fact you could put the <code>label=</code> into the first <code>aes()</code>.</li>
+<li><code>geom_text(aes(label = state_label), nudge_y = 2)</code>. If you put the <code>nudge_y</code> inside the <code>aes()</code> you get an error (‘Ignoring unknown aesthetics: nudge_y’) because it’s not something that can vary with the values of a variable (“not an aesthetic”).</li>
+<li><code>geom_text_repel</code> uses call-out lines when it can’t get the text close. You could experiment with making these a less confusing colour. You might also drop the ‘millions.’</li>
+</ol>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="filter.html#cb40-1" aria-hidden="true" tabindex="-1"></a>small_states <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="filter.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span>     <span class="co">#  in year 2019</span></span>
+<span id="cb40-3"><a href="filter.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(TF, <span class="at">n =</span> <span class="dv">8</span>) <span class="sc">%&gt;%</span>  <span class="co"># smallest 8 </span></span>
+<span id="cb40-4"><a href="filter.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(STATE_NAME)</span>
+<span id="cb40-5"><a href="filter.html#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="filter.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb40-7"><a href="filter.html#cb40-7" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> small_states), </span>
+<span id="cb40-8"><a href="filter.html#cb40-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
+<span id="cb40-9"><a href="filter.html#cb40-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb40-10"><a href="filter.html#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb40-11"><a href="filter.html#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb40-12"><a href="filter.html#cb40-12" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label)) <span class="sc">+</span></span>
+<span id="cb40-13"><a href="filter.html#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_steps</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">show.limits =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb40-14"><a href="filter.html#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb40-15"><a href="filter.html#cb40-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb40-16"><a href="filter.html#cb40-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb40-17"><a href="filter.html#cb40-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the least-busy states&quot;</span>,</span>
+<span id="cb40-18"><a href="filter.html#cb40-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>A pedant might say this shouldn’t be a line chart, but here’s one possibility. We’ll see a different version of this in section (TBD)</li>
+</ol>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="filter.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="filter.html#cb41-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> top_states), </span>
+<span id="cb41-3"><a href="filter.html#cb41-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(YEAR, CO2_QTY_TONNES<span class="sc">/</span>TF, </span>
+<span id="cb41-4"><a href="filter.html#cb41-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb41-5"><a href="filter.html#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span> <span class="co"># I decided the points looked too heavy</span></span>
+<span id="cb41-6"><a href="filter.html#cb41-6" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label)) <span class="sc">+</span></span>
+<span id="cb41-7"><a href="filter.html#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span>  <span class="co"># turn off legend</span></span>
+<span id="cb41-8"><a href="filter.html#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2019</span>, <span class="at">minor_breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="co"># control the breaks</span></span>
+<span id="cb41-9"><a href="filter.html#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, </span>
+<span id="cb41-10"><a href="filter.html#cb41-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (tonnes per flight)&quot;</span>),</span>
+<span id="cb41-11"><a href="filter.html#cb41-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 states&quot;</span>,</span>
+<span id="cb41-12"><a href="filter.html#cb41-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>If even that doesn’t work, and for some reason the <code>rda</code> file is not in your data folder, go back to section <a href="firstLook.html#loadco2">3.1</a>, load the Excel file again, and find the code to summarise over years.<a href="filter.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>that’s a vertical bar, not an ‘l’ or ‘I’<a href="filter.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>and we use lower case for the variable name, because that’s our preference, even if the imported names don’t do this<a href="filter.html#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="firstLook.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sorting-bars-saving-graphs-facets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["flights_in_R.pdf", "flights_in_R.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"theme": "sepia"
+});
+});
+</script>
+
+</body>
+
+</html>

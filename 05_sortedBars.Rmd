@@ -14,9 +14,9 @@ annual_co2 <- annual_co2 %>%
 
 ## The simple sorted bar chart - more on CO~2~ {#firstsortedbar}
 
-A classic visualisation is the bar chart, sorted from longest to shortest. With `ggplot` there are a couple of ways to get a bar chart. If you want `ggplot` to count the rows for you, use `geom_bar`. Here we already have values for the length of the bar, so we use `geom_col` instead. 
+A classic visualisation is the bar chart, sorted from longest to shortest. With `ggplot` there are a couple of ways to get a bar chart. If you want `ggplot` to count the rows for you, use `geom_bar`. Here we already have values for the length of the bar, so we use `geom_col` instead (for 'column' chart). 
 
-For the simplest bar charts, there is a quick way to get the order you want. In place of `state_label` for the x-axis, you give `reorder(state_label, CO2_QTY_TONNES)`, the second being the variable to sort by. If you find the bars a bit top-heavy, put a `-` in front of `Y_CO2...` to reverse the order.
+For the simplest bar charts, there is a quick way to get the order you want. In place of `state_label` for the x-axis, you give `reorder(state_label, CO2_QTY_TONNES)`, the second being the variable to sort by. If you find the bars a bit top-heavy, put a `-` in front of `CO2_QTY_...` to reverse the order.
 
 The final novelty in this graph is `coord_flip()`. Forty-something State names is a lot of text to cram onto the horizontal axis. So we flip the axes. You'll need to decide if this trick works where you want to use the graph. We'll see other ways to separate the labels on the axes in (TBD).
 
@@ -34,7 +34,7 @@ ggplot(annual_co2 %>%
 
 ```
 
-If you were to google 'ggplot ordered bar chart', you might find references to 'factors'. That becomes necessary when the charts are more complicated. We'll look at that in section \@ref(factors).
+If you were to google 'ggplot ordered bar chart', you might find references to 'factors'. That becomes necessary, in place of `reorder`, when the charts are more complicated. We'll look at that in section \@ref(factors).
 
 ## Saving a plot
 
@@ -42,9 +42,9 @@ You might be looking at the bar chart and thinking that it's the wrong proportio
 
 The proportions on your screen will depend on a number of things including the space you have allowed for the 'Plots' window. Now, the plots window has an export button which you could use. It allows for re-sizing, but that means you have to do the same manual intervention each time.
 
-We prefer to use `ggsave()` to save the most-recent plot, and at the same time set the aspect ratio that we need. Usually it's worth doing this before working too much on the font sizes, since you don't really know if there's a problem until you've seen the png. 
+We prefer to use `ggsave()` to save the most-recent plot, and at the same time set the aspect ratio. Usually it's worth doing this before working too much on the font sizes, since you don't really know if there's a problem until you've seen the png. 
 
-Finally, we use the `graphs` folder we created for the project. Square seems about right for this graph; and having one of the dimensions around 15cm also seems to produce png that are good enough for reports and slides without being too big.
+Finally, we use the `graphs` folder we created for the project. Square seems about right for this graph (the width includes the axis text); and having one of the dimensions around 15cm also seems to produce png that are good enough for reports and slides without being too big a file.
 
 ```{r}
 ggsave("graphs/FirstSortedBars.png", width = 15, height = 15, units = "cm")
@@ -59,7 +59,7 @@ I can think of four ways to plot more than one year, and there are no doubt more
 3) as a few graphs, merged and aligned using an dedicated package like `cowplot`;
 4) as multiple graphs using a loop
 
-Number (3) is particularly useful for combining graphs of different variables, but it's a bit heavy to deal with here. We'll deal with (4) in section (TBD) when we look at loops. The first two we will do in the next sections.
+Number (3) is particularly useful for combining graphs of different variables, but it's a bit heavy to deal with here. We'll deal with (4) in section (TBD) when we look at loops. The first two we will demonstrate in the next sections.
 
 ### Staggered bars, and factors {#factors}
 
@@ -99,11 +99,13 @@ Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019
 We can do this ordering with factors. First define a vector that is in the order we want, using `arrange()` to sort it. The `desc()` reverses the order. Then define a factor version of the state names, and insist that it's in this fixed order. `factor()` is like `as.factor()` which we used in the previous chunk of code, but allows these extra parameters.
 
 ```{r}
+# get the state names in the specific order that we want
 state_order <- annual_co2 %>% 
   filter(YEAR == 2019) %>%     # in year 2019
   arrange(desc(CO2_QTY_TONNES)) %>%  # descending order
   pull(STATE_NAME) 
 
+# create an ordered factor with this
 annual_co2 <- annual_co2 %>% 
   mutate(ordered_states = factor(STATE_NAME, 
                                  levels = state_order, ordered = TRUE))
@@ -173,7 +175,13 @@ ggplot(annual_co2 %>%
 
 This certainly allows better comparisons of some of the mid-range emitters, and between years. Assuming you're not after comparison of of Luxembourg and Finland, perhaps this is fit for purpose.
 
-There are many different distributions in flight data that have this long tail challenge: with most of the flights in a few airports, or a few countries, or by a few aircraft types. It's easy enough to switch to a logarithmic scale, but that's then often hard to read. Facets like this are a reasonable alternative, and adaptable.
+There are many different distributions in flight data that have this long tail challenge: with most of the flights in a few airports, or a few countries, or by a few aircraft types. It's easy enough to switch to a logarithmic scale, but that's then often hard to read. Facets like this are a reasonable alternative, and adaptable. The results are a little distorted by the length of some of the names, for which a crude solution is in question (2) below.
+
+## What's gone wrong?
+
+If your saved .png file seems very large, check that you specified the units. `ggsave` defaults to inches.
+
+If your axis labels are switched, remember that `coord_flip` will affect these.
 
 ## Exercises
 
@@ -182,8 +190,8 @@ There are many different distributions in flight data that have this long tail c
 1) Plot the bar chart of section \@ref(firstsortedbar) with the longest bars at the bottom.
 2) Plot the bar chart of section \@ref(firstsortedbar) without the 3 near-zero entries. (Hints: View the data. Filter on 2019 and choose a threshold.)
 3) Test the statement in the text that `aes(..., colour=as.factor(YEAR))` gives an outline to the bars.
-4) Use `select` and `!` to remove the `size` variable again. [Hint: Until you're sure it works, don't overwrite your dataset but make a temporary one, eg. start with `z <-`.]
-5) Read the description of `geom_bar` in the help file. In the first bar chart, switch to using `geom_bar` instead. [Hint: A minor addition to the `aes()`.]
+4) Use `select` and `!` to remove the `size` variable again. (Hint: Until you're sure it works, don't overwrite your dataset but make a temporary one, eg. start with `z <-`.)
+5) Read the description of `geom_bar` in the help file. In the first bar chart, switch to using `geom_bar` instead - to get the same results. (Hint: A minor addition to the `aes()`.)
 6) Save the final faceted bar chart to a png file.
 
 ### Answers
