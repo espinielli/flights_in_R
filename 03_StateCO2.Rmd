@@ -6,7 +6,11 @@ It's hard to get far in an analysis without first looking at the data to ask que
 * What time period does it cover?
 * Which countries, or airports etc, are included?
 
+<<<<<<< HEAD
 In this chapter, we introduce some of the ways to take a quick look at your data. We also introduce some data on CO~2~ emissions per European state from aviation. 
+=======
+In this chapter, we introduce some of the ways to take a quick look at your data. We also introduce some data on CO~2~ emissions per European State from aviation. 
+>>>>>>> 991853ca752d87c46155e65dbf672ed9a57d3a43
 
 ```{r, echo=FALSE}
 knitr::kable(data.frame(syl=c("`read_xlsx()`, `<-`, `summary`, `str`, environment pane, `View()`, `unique`, `head`, `c()`, `[]`, `ggplot()`")),
@@ -46,8 +50,13 @@ We've already seen the `function(parameter)` way to call a function in the `cos(
 Now that the Excel data are downloaded, in your R script comment out the line `download.files(...`, because we don't need to keep downloading if you happen to re-run the code. Comment means putting a `#` in front of it. Pressing shift-ctrl-C (shift-cmd-C on a Mac) does the same, and also works over many lines at once.
 
 Notice that R doesn't mind if a function is split over several lines. If there were frequent updates, maybe you would repeatedly download (so not comment out). See (TBD) for an example. [See the Excel, now in your project `data` folder, for disclaimer and details.] 
+<<<<<<< HEAD
 
 International conventions mean that CO~2~ emissions are measured from flights departing airports in a state. `read_xlsx` automatically selects the first row as variable names.
+=======
+>>>>>>> 991853ca752d87c46155e65dbf672ed9a57d3a43
+
+One tool in the 'explore your data' toolbox is `summary`.
 
 One tool in the 'explore your data' toolbox is `summary`.
 
@@ -65,9 +74,21 @@ In this dataset we have:
 * CO2_QTY_TONNES: Total annual CO2 emissions, in (metric) tonnes.
 * TF: Total flights. This is departing flights. Flights through a state's airspace that do not land are not counted, nor are arrivals from outside the state. A domestic flight is counted once, as a departure.
 
+<<<<<<< HEAD
 You'll notice a few names in there which aren't states, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some states with a '*' next to their names, which isn't explained in the data.
 
 We want to keep things simple, so we will use a little data wrangling to get rid of the month, then save the result as an R dataset, rather than an Excel file. So here's an early look at some fairly normal data wrangling patterns.
+=======
+You'll notice a few names in there which aren't States, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some States with a '*' next to their names, which isn't explained in the data.
+
+We want to keep things simple, so we will use a little data wrangling to get rid of the month, then save the result as an R dataset, rather than an Excel file. 
+
+This code is a fairly common pattern for re-organising your data: `group_by` the relevant variables, then summarise within those groups. Here we use the `summarise_at` variant of summarise, which allows us quickly to apply a function `sum` to multiple variables.
+
+There are few families and business unaffected by COVID-19. Aviation is of course no exception, and the data from 2020 are really an outlier for this reason. To keep things simple here, we omit 2020, using a `filter` that says 'keep only the values before 2020'. The `group_by` isn't _essential_ for the filter, but I think it's probably faster as written here, since the grouping process has already found all of the year 2020 values.
+
+Often you want to keep your groups, but here we don't need to, so we `ungroup` at the end. Then we save the data into the `data` subdirectory of the project.
+>>>>>>> 991853ca752d87c46155e65dbf672ed9a57d3a43
 
 * Drop some variables. Here, just `select` anything other than `STATE_CODE`.
 * Summarise. `group_by` the relevant variables, then summarise within those groups. Here we use the `summarise_at` variant of summarise, which allows us quickly to apply a function `sum` to multiple variables.
@@ -173,7 +194,11 @@ Even this simple example illustrates that:
 
 * a parameter to a function (here `ggplot`) can be another function call (here `aes()`);
 * we can specify parameters by position of appearance in the list (`x` and `y` are first and second for `aes`) so we don't have to name them, or we can specify a parameter by name (`colour`), or a mix of both (as long as the position ones come first!);
+<<<<<<< HEAD
 * `geom_point` takes its aesthetics by default from the `ggplot` statement. We'll see later that you can add to or override this default (eg section \@ref(labelco2)).
+=======
+* `geom_point` takes its aesthetics by default from the `ggplot` statement. We'll see later that you can add to or override this default (TBD).
+>>>>>>> 991853ca752d87c46155e65dbf672ed9a57d3a43
 
 There's a (very) rough correlation along a diagonal line, but it would be interesting to know which states are above the line (more CO~2~ per flight) and which below. And is the change gradual, or is there much variability?
 
@@ -198,7 +223,11 @@ ggplot(annual_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, colour = YEAR)) +
 
 It's tempting to read the graph as having a number of small clusters, each with flights and CO~2~ increasing with time, and assume that each of these corresponds to a single state. It would be nice to use the graph to see if that's true.
 
+<<<<<<< HEAD
 There are too many countries to give each its own shape (we'll see shapes used more effectively in section TBD), but we can easily add a line to join the points for each state. [Working from `geom_point`, how do you think you would add a line?]
+=======
+There are too many countries to give each its own shape (we'll see shapes used more effectively in section TBD), but we can easily add a line to join the points for each State. [Working from `geom_point`, how do you think you would add a line?]
+>>>>>>> 991853ca752d87c46155e65dbf672ed9a57d3a43
 
 We need both to add a line, which follows the pattern of `geom_point`, and group by state. That's done in the same way that we coloured by year, in the aesthetics. There are several ways to plot a line. The most obvious one, having seen `geom_point` previously, is `geom_line`. However, this joins the points in x-axis order. We want data order, so that's `geom_path`.
 
@@ -224,9 +253,15 @@ We'll find out how to pick out and label states in the next chapter.
 
 ## What's gone wrong?
 
+<<<<<<< HEAD
 Why do I get a message saying something like "could not find function ..."? When you re-open RStudio, remember that it goes some of the way to restarting where you left off (opening files and loading datasets for you), but it opens in a new R 'session'. That means that only the base packages are available. That's why your R scripts usually start with a bunch of `library()` statements - you have to start by running these to get the packages back for this session.
 
 It pays to looks closely at the graph and try to explain what you see. In fact, it was only once I'd tidied the colours up that I noticed that they were not in order along the line. I had used `geom_line` (join in x-axis order) in place of `geom_path` (join in data order). So story-telling can help debugging too. Also, it pays to read the help file, even if you think you know how the function works.
+=======
+Why do I get a message saying something like 'could not find function ...'? When you re-open RStudio, remember that it goes some of the way to restarting where you left off (opening files and loading datasets for you), but it opens in a new R 'session'. That means that only the base packages are available. That's why your R scripts usually start with a bunch of `library()` statements - you have to start by running these.
+
+It pays to looks closely at the graph and try to explain what you see. In fact, it was only once I'd tidied the colours up that I noticed that they were not in order along the line. I had used `geom_line` (join in x-axis order) in place of `geom_path` (join in data order). So story-telling can help debugging too. Also, it pays to read the help file, even if you think you know how the function works!
+>>>>>>> 991853ca752d87c46155e65dbf672ed9a57d3a43
 
 We'll see more about grouping in later chapters. It's quite common that I get errors in some tidyverse data wrangling, because the dataset is grouped, and I had forgotten that. So grouping is powerful and quick, but R remembers your groups longer than you do! 
 
