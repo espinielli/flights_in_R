@@ -72,6 +72,8 @@ Now that you've got a blank project, add a new blank R script file using `File/N
 
 Immediately save it; call it 'chapter2' for example. The name isn't critical here, but avoid spaces and punctuation. By default, it will be saved to the top level in the project. This is fine for many projects, though in some cases we might choose to organise code differently.
 
+It's good practice to comment as you go along, using `#`. At the top of your new script put some comments saying who you are, the date, and what it is for. Then add a comment for each chunk of code, or for any lines you think might be difficult for you to understand when you come back. I forget where I read this idea, but think of comments as 'notes for a future you'.
+
 Type this code into your new 'chapter2' script, either manually or copy paste. 
 
 ```{r first_code, eval=FALSE}
@@ -239,7 +241,7 @@ If you're searching in 'help' and a function isn't appearing, for example in the
 1. Bottom right.
 2. Both, though you'll nearly always want to use RStudio.
 3. CTRL-8
-4. R data
+4. One or more R datasets
 5. With the console, code is executed as each line is completed.
 6. An extended entry in the documentation showing how to put the functions of the packages together.
 7. `4 5 6`

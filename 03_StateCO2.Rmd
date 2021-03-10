@@ -65,7 +65,7 @@ In this dataset we have:
 * CO2_QTY_TONNES: Total annual CO2 emissions, in (metric) tonnes.
 * TF: Total flights. This is departing flights. Flights through a state's airspace that do not land are not counted, nor are arrivals from outside the state. A domestic flight is counted once, as a departure.
 
-You'll notice a few names in there which aren't states, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some States with a '*' next to their names, which isn't explained in the data.
+You'll notice a few names in there which aren't states, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some States with a '*' next to their names, which means there's a footnote elsewhere in the spreadsheet.
 
 We want to keep things simple, so we will use a little data wrangling to get rid of the month, then save the result as an R dataset, rather than an Excel file. These are some quite common patterns of wrangling.
 

@@ -39,7 +39,7 @@ whats-gone-wrong-3
 exercises
 questions-2
 answers-2
-sorting-bars-saving-graphs-facets
+sortbars
 firstsortedbar
 saving-a-plot
 plotting-more-than-one-year
@@ -49,8 +49,12 @@ whats-gone-wrong-4
 exercises-1
 questions-3
 answers-3
+extended-exercises---emissions-graphs
+questions-4
+co2hints
+answers-4
 vectors-and-grouping---loops-of-a-sort
 vectors
 exercises-2
-questions-4
-answers-4
+questions-5
+answers-5

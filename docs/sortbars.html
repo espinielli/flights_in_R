@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION" />
+  
+  <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+<meta name="author" content="David Marsh" />
+
+
+<meta name="date" content="2021-03-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="filter.html"/>
+<link rel="next" href="extended-exercises-emissions-graphs.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analysing Flights in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#before-you-start"><i class="fa fa-check"></i><b>1.1</b> Before you start</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ways-to-use-the-material"><i class="fa fa-check"></i><b>1.2</b> Ways to Use the Material</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i><b>1.3</b> Structure of the book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#whats-gone-wrong"><i class="fa fa-check"></i><b>1.4</b> What’s gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> Orientation in RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="start.html"><a href="start.html#first-project"><i class="fa fa-check"></i><b>2.2</b> First project</a></li>
+<li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
+<li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#package-basics"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
+<li class="chapter" data-level="2.6" data-path="start.html"><a href="start.html#whats-gone-wrong-1"><i class="fa fa-check"></i><b>2.6</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="2.7" data-path="start.html"><a href="start.html#test-yourself"><i class="fa fa-check"></i><b>2.7</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="start.html"><a href="start.html#questions"><i class="fa fa-check"></i><b>2.7.1</b> Questions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="start.html"><a href="start.html#answers"><i class="fa fa-check"></i><b>2.7.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="firstLook.html"><a href="firstLook.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> emissions</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="firstLook.html"><a href="firstLook.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extracting-variables"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.3" data-path="firstLook.html"><a href="firstLook.html#someValues"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
+<li class="chapter" data-level="3.4" data-path="firstLook.html"><a href="firstLook.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="firstLook.html"><a href="firstLook.html#first-draft"><i class="fa fa-check"></i><b>3.4.1</b> First draft</a></li>
+<li class="chapter" data-level="3.4.2" data-path="firstLook.html"><a href="firstLook.html#improve-the-titles"><i class="fa fa-check"></i><b>3.4.2</b> Improve the titles</a></li>
+<li class="chapter" data-level="3.4.3" data-path="firstLook.html"><a href="firstLook.html#statecluster"><i class="fa fa-check"></i><b>3.4.3</b> and with clustering by state</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="firstLook.html"><a href="firstLook.html#whats-gone-wrong-2"><i class="fa fa-check"></i><b>3.5</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="3.6" data-path="firstLook.html"><a href="firstLook.html#test-yourself-1"><i class="fa fa-check"></i><b>3.6</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="firstLook.html"><a href="firstLook.html#questions-1"><i class="fa fa-check"></i><b>3.6.1</b> Questions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="firstLook.html"><a href="firstLook.html#answers-1"><i class="fa fa-check"></i><b>3.6.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> Filtering a dataset and refining the CO<sub>2</sub> graph</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#sequences-of-functions"><i class="fa fa-check"></i><b>4.1</b> Sequences of functions</a></li>
+<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filtering-datasets-and-logical-tests"><i class="fa fa-check"></i><b>4.2</b> Filtering datasets and logical tests</a></li>
+<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#topStates"><i class="fa fa-check"></i><b>4.3</b> Selecting the busiest states</a></li>
+<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#co2-graph-for-the-top-states"><i class="fa fa-check"></i><b>4.4</b> CO<sub>2</sub> graph for the top states</a></li>
+<li class="chapter" data-level="4.5" data-path="filter.html"><a href="filter.html#labelco2"><i class="fa fa-check"></i><b>4.5</b> Labelling the CO<sub>2</sub> graph</a></li>
+<li class="chapter" data-level="4.6" data-path="filter.html"><a href="filter.html#what-does-the-graph-say-about-co2"><i class="fa fa-check"></i><b>4.6</b> What does the graph say about CO<sub>2</sub>?</a></li>
+<li class="chapter" data-level="4.7" data-path="filter.html"><a href="filter.html#whats-gone-wrong-3"><i class="fa fa-check"></i><b>4.7</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="4.8" data-path="filter.html"><a href="filter.html#exercises"><i class="fa fa-check"></i><b>4.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="filter.html"><a href="filter.html#questions-2"><i class="fa fa-check"></i><b>4.8.1</b> Questions</a></li>
+<li class="chapter" data-level="4.8.2" data-path="filter.html"><a href="filter.html#answers-2"><i class="fa fa-check"></i><b>4.8.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sortbars.html"><a href="sortbars.html"><i class="fa fa-check"></i><b>5</b> Sorting Bars, Saving Graphs, Facets</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sortbars.html"><a href="sortbars.html#firstsortedbar"><i class="fa fa-check"></i><b>5.1</b> The simple sorted bar chart - more on CO<sub>2</sub></a></li>
+<li class="chapter" data-level="5.2" data-path="sortbars.html"><a href="sortbars.html#saving-a-plot"><i class="fa fa-check"></i><b>5.2</b> Saving a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="sortbars.html"><a href="sortbars.html#plotting-more-than-one-year"><i class="fa fa-check"></i><b>5.3</b> Plotting more than one year</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="sortbars.html"><a href="sortbars.html#factors"><i class="fa fa-check"></i><b>5.3.1</b> Staggered bars, and factors</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sortbars.html"><a href="sortbars.html#chart-facets-more-years-in-the-bar-chart"><i class="fa fa-check"></i><b>5.3.2</b> Chart facets, more years in the bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="sortbars.html"><a href="sortbars.html#whats-gone-wrong-4"><i class="fa fa-check"></i><b>5.4</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="5.5" data-path="sortbars.html"><a href="sortbars.html#exercises-1"><i class="fa fa-check"></i><b>5.5</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="sortbars.html"><a href="sortbars.html#questions-3"><i class="fa fa-check"></i><b>5.5.1</b> Questions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="sortbars.html"><a href="sortbars.html#answers-3"><i class="fa fa-check"></i><b>5.5.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extended-exercises-emissions-graphs.html"><a href="extended-exercises-emissions-graphs.html"><i class="fa fa-check"></i><b>6</b> Extended Exercises - Emissions Graphs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="extended-exercises-emissions-graphs.html"><a href="extended-exercises-emissions-graphs.html#questions-4"><i class="fa fa-check"></i><b>6.1</b> Questions</a></li>
+<li class="chapter" data-level="6.2" data-path="extended-exercises-emissions-graphs.html"><a href="extended-exercises-emissions-graphs.html#co2hints"><i class="fa fa-check"></i><b>6.2</b> Hints</a></li>
+<li class="chapter" data-level="6.3" data-path="extended-exercises-emissions-graphs.html"><a href="extended-exercises-emissions-graphs.html#answers-4"><i class="fa fa-check"></i><b>6.3</b> Answers</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="7" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html"><i class="fa fa-check"></i><b>7</b> Vectors and grouping - Loops of a sort</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#vectors"><i class="fa fa-check"></i><b>7.1</b> Vectors</a></li>
+<li class="chapter" data-level="7.2" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#exercises-2"><i class="fa fa-check"></i><b>7.2</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#questions-5"><i class="fa fa-check"></i><b>7.2.1</b> Questions</a></li>
+<li class="chapter" data-level="7.2.2" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#answers-5"><i class="fa fa-check"></i><b>7.2.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sortbars" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Sorting Bars, Saving Graphs, Facets</h1>
+<p>While nothing beats a well hand-crafted chart, there are times when you want to just run the code and get a quick update, as a .png say. In this chapter we see how to do a classic sorted-bar chart and to save it to a file for use elsewhere. We need slightly different methods for simple bar charts and more complex ones.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">In this chapter, you’ll be introduced to:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>geom_col()</code>, <code>dodge</code>, <code>reorder()</code>, <code>ggsave()</code>, <code>as.factor()</code>, <code>factor()</code>, <code>arrange()</code>, <code>facet_wrap()</code>, <code>select</code>, plots pane</td>
+</tr>
+</tbody>
+</table>
+<div id="firstsortedbar" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> The simple sorted bar chart - more on CO<sub>2</sub></h2>
+<p>A classic visualisation is the bar chart, sorted from longest to shortest. With <code>ggplot</code> there are a couple of ways to get a bar chart. If you want <code>ggplot</code> to count the rows for you, use <code>geom_bar</code>. Here we already have values for the length of the bar, so we use <code>geom_col</code> instead (for ‘column’ chart).</p>
+<p>For the simplest bar charts, there is a quick way to get the order you want. In place of <code>state_label</code> for the x-axis, you give <code>reorder(state_label, CO2_QTY_TONNES)</code>, the second being the variable to sort by. If you find the bars a bit top-heavy, put a <code>-</code> in front of <code>CO2_QTY_...</code> to reverse the order.</p>
+<p>The final novelty in this graph is <code>coord_flip()</code>. Forty-something State names is a lot of text to cram onto the horizontal axis. So we flip the axes. You’ll need to decide if this trick works where you want to use the graph. We’ll see other ways to separate the labels on the axes in (TBD).</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sortbars.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="sortbars.html#cb42-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>), </span>
+<span id="cb42-3"><a href="sortbars.html#cb42-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="fu">reorder</span>(state_label, CO2_QTY_TONNES),</span>
+<span id="cb42-4"><a href="sortbars.html#cb42-4" aria-hidden="true" tabindex="-1"></a>           CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>)) <span class="sc">+</span></span>
+<span id="cb42-5"><a href="sortbars.html#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb42-6"><a href="sortbars.html#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb42-7"><a href="sortbars.html#cb42-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb42-8"><a href="sortbars.html#cb42-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions in 2019&quot;</span>,</span>
+<span id="cb42-9"><a href="sortbars.html#cb42-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb42-10"><a href="sortbars.html#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>If you were to google ‘ggplot ordered bar chart,’ you might find references to ‘factors.’ That becomes necessary, in place of <code>reorder</code>, when the charts are more complicated. We’ll look at that in section <a href="sortbars.html#factors">5.3.1</a>.</p>
+</div>
+<div id="saving-a-plot" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Saving a plot</h2>
+<p>You might be looking at the bar chart and thinking that it’s the wrong proportions for your need (portrait rather than landscape, or vice versa) or you might be thinking the axis labels are still a bit squashed together.</p>
+<p>The proportions on your screen will depend on a number of things including the space you have allowed for the ‘Plots’ window. Now, the plots window has an export button which you could use. It allows for re-sizing, but that means you have to do the same manual intervention each time.</p>
+<p>We prefer to use <code>ggsave()</code> to save the most-recent plot, and at the same time set the aspect ratio. Usually it’s worth doing this before working too much on the font sizes, since you don’t really know if there’s a problem until you’ve seen the png.</p>
+<p>Finally, we use the <code>graphs</code> folder we created for the project. Square seems about right for this graph (the width includes the axis text); and having one of the dimensions around 15cm also seems to produce png that are good enough for reports and slides without being too big a file.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sortbars.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;graphs/FirstSortedBars.png&quot;</span>, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">15</span>, <span class="at">units =</span> <span class="st">&quot;cm&quot;</span>)</span></code></pre></div>
+</div>
+<div id="plotting-more-than-one-year" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Plotting more than one year</h2>
+<p>I can think of four ways to plot more than one year, and there are no doubt more than that:</p>
+<ol style="list-style-type: decimal">
+<li>as staggered bars, though we probably will have to work hard to make enough space;</li>
+<li>as ‘facets,’ creating one sub-plot per year;</li>
+<li>as a few graphs, merged and aligned using an dedicated package like <code>cowplot</code>;</li>
+<li>as multiple graphs using a loop</li>
+</ol>
+<p>Number (3) is particularly useful for combining graphs of different variables, but it’s a bit heavy to deal with here. We’ll deal with (4) in section (TBD) when we look at loops. The first two we will demonstrate in the next sections.</p>
+<div id="factors" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Staggered bars, and factors</h3>
+<p>We took some shortcuts in section <a href="sortbars.html#firstsortedbar">5.1</a>, which will need sorting out for the staggered bars. First we need to choose a couple of years, since there certainly isn’t room for more than two. That’s a filter that we’ve seen before. Secondly, we used <code>state_label</code> before because it was prettier, but this only exists for 2019, so we have to go back to using <code>STATE_NAME</code>. It’s probably time to turn this name into title case once and for all.</p>
+<p>The separation by year is done in the aesthetic <code>aes()</code> as you might expect. We want the bars to be different colours by year. In this case it’s the <code>fill</code> that we specify; <code>colour</code> would add an outline to the bars. To get the bars side by side we set the <code>position = "dodge"</code> parameter in <code>geom_col()</code>.</p>
+<p>The least obvious, final step is that ‘year’ needs to be a discrete variable, whereas currently it’s <code>num</code> which is a continuous number. Slightly oddly, <code>as.integer()</code> doesn’t work: it’s still treated as continuous by <code>ggplot</code>, presumably because there are potentially still quite a lot of integers.</p>
+<p>We could convert to a string with <code>as.character</code>, but we need to start using factors, so let’s do that here.</p>
+<p>Factors in R were originally a way to save space with character variables in a dataset. In <code>annual_co2</code> for example, rather than store ‘ALBANIA’ 10 times, for each row, a factor would give <code>ALBANIA</code> a numeric code and store that. The character strings become the levels. [Try <code>z &lt;- as.factor(annual_co2$STATE_NAME)</code> and see what is said for z in the environment pane. <code>rm(z)</code> to tidy up, if you wish.]</p>
+<p>For this example, we’ll convert <code>YEAR</code> on the fly, with an <code>as.factor</code> in the <code>aes()</code> call.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sortbars.html#cb44-1" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a href="sortbars.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">STATE_NAME =</span> <span class="fu">str_to_title</span>(STATE_NAME))</span>
+<span id="cb44-3"><a href="sortbars.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="sortbars.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb44-5"><a href="sortbars.html#cb44-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(YEAR <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2019</span>)), </span>
+<span id="cb44-6"><a href="sortbars.html#cb44-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="fu">reorder</span>(STATE_NAME, CO2_QTY_TONNES),</span>
+<span id="cb44-7"><a href="sortbars.html#cb44-7" aria-hidden="true" tabindex="-1"></a>           CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>,</span>
+<span id="cb44-8"><a href="sortbars.html#cb44-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="fu">as.factor</span>(YEAR))) <span class="sc">+</span>  <span class="co"># make discrete</span></span>
+<span id="cb44-9"><a href="sortbars.html#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="sortbars.html#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb44-11"><a href="sortbars.html#cb44-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb44-12"><a href="sortbars.html#cb44-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions in 2019&quot;</span>,</span>
+<span id="cb44-13"><a href="sortbars.html#cb44-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>,</span>
+<span id="cb44-14"><a href="sortbars.html#cb44-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="co"># nicer label for legend</span></span>
+<span id="cb44-15"><a href="sortbars.html#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019 bars are actually in order. We’ve asked <code>reorder</code> to do too much. It seems to have sorted by the total of the 2 years, which is a reasonable thing to do in the circumstances. But I think that’s hard for the user of the graph to interpret, and I’d like the ordering to be by 2019.</p>
+<p>We can do this ordering with factors. First define a vector that is in the order we want, using <code>arrange()</code> to sort it. The <code>desc()</code> reverses the order. Then define a factor version of the state names, and insist that it’s in this fixed order. <code>factor()</code> is like <code>as.factor()</code> which we used in the previous chunk of code, but allows these extra parameters.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sortbars.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the state names in the specific order that we want</span></span>
+<span id="cb45-2"><a href="sortbars.html#cb45-2" aria-hidden="true" tabindex="-1"></a>state_order <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href="sortbars.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span>     <span class="co"># in year 2019</span></span>
+<span id="cb45-4"><a href="sortbars.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(CO2_QTY_TONNES)) <span class="sc">%&gt;%</span>  <span class="co"># descending order</span></span>
+<span id="cb45-5"><a href="sortbars.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(STATE_NAME) </span>
+<span id="cb45-6"><a href="sortbars.html#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="sortbars.html#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create an ordered factor with this</span></span>
+<span id="cb45-8"><a href="sortbars.html#cb45-8" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb45-9"><a href="sortbars.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ordered_states =</span> <span class="fu">factor</span>(STATE_NAME, </span>
+<span id="cb45-10"><a href="sortbars.html#cb45-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> state_order, <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb45-11"><a href="sortbars.html#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="sortbars.html#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb45-13"><a href="sortbars.html#cb45-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(YEAR <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2019</span>)), </span>
+<span id="cb45-14"><a href="sortbars.html#cb45-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(ordered_states,</span>
+<span id="cb45-15"><a href="sortbars.html#cb45-15" aria-hidden="true" tabindex="-1"></a>           CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>,</span>
+<span id="cb45-16"><a href="sortbars.html#cb45-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="fu">as.factor</span>(YEAR))) <span class="sc">+</span>  <span class="co"># make discrete</span></span>
+<span id="cb45-17"><a href="sortbars.html#cb45-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb45-18"><a href="sortbars.html#cb45-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb45-19"><a href="sortbars.html#cb45-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb45-20"><a href="sortbars.html#cb45-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions&quot;</span>,</span>
+<span id="cb45-21"><a href="sortbars.html#cb45-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Ordering by 2019 emissions. Source: EUROCONTROL.&quot;</span>,</span>
+<span id="cb45-22"><a href="sortbars.html#cb45-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="co"># nicer label for legend</span></span>
+<span id="cb45-23"><a href="sortbars.html#cb45-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<div id="chart-facets-more-years-in-the-bar-chart" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Chart facets, more years in the bar chart</h3>
+<p>If you want the reader to compare things, a good rule of thumb is to make sure these things are all in the same graph. We’ve achieved this for comparisons between years and between countries. However, this is a bit of a squeeze, vertically, while there’s lots of empty space. Plus, it doesn’t look like this method would easily cope with a third year, say.</p>
+<p><code>ggplot</code> provides a simple way to split charts into ‘facets,’ which can sometimes be a way to show variation across a dimension with just a few values (2 or 3 years, say), while aligning the axes in a sensible way. There’s a bit of a twist in the notation: you can’t just mention a variable name (as you can in <code>aes()</code>), you need either to say <code>vars(YEAR)</code> or use a ‘formula’ notation starting with a tilde <code>~</code>, which involves less typing so that’s what I’ve done here. The <code>_wrap</code> would allow wrapping onto multiple rows, but I just want one row here.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="sortbars.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="sortbars.html#cb46-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(YEAR <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2019</span>)), </span>
+<span id="cb46-3"><a href="sortbars.html#cb46-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(ordered_states,</span>
+<span id="cb46-4"><a href="sortbars.html#cb46-4" aria-hidden="true" tabindex="-1"></a>           CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>)) <span class="sc">+</span>  </span>
+<span id="cb46-5"><a href="sortbars.html#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb46-6"><a href="sortbars.html#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>YEAR, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb46-7"><a href="sortbars.html#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb46-8"><a href="sortbars.html#cb46-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb46-9"><a href="sortbars.html#cb46-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions&quot;</span>,</span>
+<span id="cb46-10"><a href="sortbars.html#cb46-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb46-11"><a href="sortbars.html#cb46-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><code>facet_wrap</code> has given all the x- and y-axes the same matching scale, and not bothered to repeat the y-axis labels. So it’s compact. The graph is not bad for comparing relative sizes of the larger States in a given year, and for seeing how the ranking changes. But it’s not that easy to compare amounts between years.</p>
+<p>However, we can use facets to split in a different way, if we arbitrarily put the States into two groups. Remember that <code>[ ]</code> is a way to select elements of the vector, in this case the first 19. We could equally have used <code>head(state_order, 19)</code>, but the <code>[1:19]</code> is a model that is used more often.</p>
+<p>We turn off the scale-matching (<code>scales = "free"</code>), so really it’s two separate graphs, but with one piece of code.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sortbars.html#cb47-1" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="sortbars.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">size =</span> <span class="fu">if_else</span>(ordered_states <span class="sc">%in%</span> state_order[<span class="dv">1</span><span class="sc">:</span><span class="dv">19</span>], </span>
+<span id="cb47-3"><a href="sortbars.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;Larger Emitters&quot;</span>, <span class="st">&quot;Smaller Emitters&quot;</span>))</span>
+<span id="cb47-4"><a href="sortbars.html#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="sortbars.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb47-6"><a href="sortbars.html#cb47-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(YEAR <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2019</span>)), </span>
+<span id="cb47-7"><a href="sortbars.html#cb47-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(ordered_states,</span>
+<span id="cb47-8"><a href="sortbars.html#cb47-8" aria-hidden="true" tabindex="-1"></a>           CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>,</span>
+<span id="cb47-9"><a href="sortbars.html#cb47-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="fu">as.factor</span>(YEAR))) <span class="sc">+</span>  </span>
+<span id="cb47-10"><a href="sortbars.html#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb47-11"><a href="sortbars.html#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>size, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb47-12"><a href="sortbars.html#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb47-13"><a href="sortbars.html#cb47-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb47-14"><a href="sortbars.html#cb47-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions&quot;</span>,</span>
+<span id="cb47-15"><a href="sortbars.html#cb47-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>,</span>
+<span id="cb47-16"><a href="sortbars.html#cb47-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="sc">+</span> <span class="co"># nicer label for legend</span></span>
+<span id="cb47-17"><a href="sortbars.html#cb47-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>This certainly allows better comparisons of some of the mid-range emitters, and between years. Assuming you’re not after comparison of of Luxembourg and Finland, perhaps this is fit for purpose.</p>
+<p>There are many different distributions in flight data that have this long tail challenge: with most of the flights in a few airports, or a few countries, or by a few aircraft types. It’s easy enough to switch to a logarithmic scale, but that’s then often hard to read. Facets like this are a reasonable alternative, and adaptable. The results are a little distorted by the length of some of the names, for which a crude solution is in question (2) below.</p>
+</div>
+</div>
+<div id="whats-gone-wrong-4" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> What’s gone wrong?</h2>
+<p>If your saved .png file seems very large, check that you specified the units. <code>ggsave</code> defaults to inches.</p>
+<p>If your axis labels are switched, remember that <code>coord_flip</code> will affect these.</p>
+</div>
+<div id="exercises-1" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Exercises</h2>
+<div id="questions-3" class="section level3" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Plot the bar chart of section <a href="sortbars.html#firstsortedbar">5.1</a> with the longest bars at the bottom.</li>
+<li>Plot the bar chart of section <a href="sortbars.html#firstsortedbar">5.1</a> without the 3 near-zero entries. (Hints: View the data. Filter on 2019 and choose a threshold.)</li>
+<li>Test the statement in the text that <code>aes(..., colour=as.factor(YEAR))</code> gives an outline to the bars.</li>
+<li>Use <code>select</code> and <code>!</code> to remove the <code>size</code> variable again. (Hint: Until you’re sure it works, don’t overwrite your dataset but make a temporary one, eg. start with <code>z &lt;-</code>.)</li>
+<li>Read the description of <code>geom_bar</code> in the help file. In the first bar chart, switch to using <code>geom_bar</code> instead - to get the same results. (Hint: A minor addition to the <code>aes()</code>.)</li>
+<li>Save the final faceted bar chart to a png file.</li>
+</ol>
+</div>
+<div id="answers-3" class="section level3" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Answers</h3>
+<ol style="list-style-type: decimal">
+<li>Use reorder(state_label, -CO2_QTY_TONNES).</li>
+<li>Use <code>filter(YEAR == 2019 &amp; CO2_QTY_TONNES &gt; 100000)</code>.</li>
+<li>Did it?</li>
+<li><code>z &lt;- annual_co2 %&gt;% select(!size)</code>, then if it works, replace <code>z</code>.</li>
+<li>Replace <code>geom_col</code> with <code>geom_bar</code> and add <code>weight =</code> in front of <code>CO2_QTY_TONNES/1e6</code>, thus switching it from the <code>y</code> parameter to the <code>weight</code>.</li>
+<li><code>ggsave("graphs/2facet co2.png", width = 15, height = 10, units = "cm")</code> or some other appropriate proportions. Did you save the correct graph? Remember that by default it saves the last one plotted.</li>
+</ol>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="filter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="extended-exercises-emissions-graphs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["flights_in_R.pdf", "flights_in_R.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"theme": "sepia"
+});
+});
+</script>
+
+</body>
+
+</html>

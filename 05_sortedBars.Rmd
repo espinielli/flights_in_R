@@ -1,4 +1,4 @@
-# Sorting Bars, Saving Graphs, Facets
+# Sorting Bars, Saving Graphs, Facets {#sortbars}
 
 While nothing beats a well hand-crafted chart, there are times when you want to just run the code and get a quick update, as a .png say. In this chapter we see how to do a classic sorted-bar chart and to save it to a file for use elsewhere. We need slightly different methods for simple bar charts and more complex ones.
 
