@@ -58,3 +58,12 @@ vectors
 exercises-2
 questions-5
 answers-5
+splitparse
+splitting-a-column-into-many
+splitting-a-column-at-a-character
+splitting-a-column-at-a-regular-expression
+splitting-a-column-at-an-either-or
+exercises-3
+questions-6
+answers-6
+list-columns-listcolumns

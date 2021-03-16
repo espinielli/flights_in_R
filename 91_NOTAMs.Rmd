@@ -1,0 +1,193 @@
+# NOTAMS: Splitting and parsing strings {#splitparse}
+
+NOTE: This chapter has been written out of sequence, so jumps some steps and may feel a bit of a jump from the (current) previous chapter. Need to add in between chapters on: dates, mutate-across TBD.
+
+This chapter uses the example of NOTAMs (notices to airmen) to explore R functions for turning text into more useable data, by splitting and parsing.
+
+The parsing of NOTAMs here is _NOT_ for operational use. It's for statistical analysis, post operations. NOTAMs are very varied, and we will not handle all the possible ways in which the parsing might fail. We assume that failures can be picked up in later statistical analysis, or will just be outliers that can be ignored as 1 in millions of cases. This code is NOT A SUBSTITUTE FOR READING THE NOTAM BEFORE THE FLIGHT.
+
+```{r, echo=FALSE}
+knitr::kable(data.frame(syl=c("`split()`, `")),
+             col.names = c("In this chapter, you'll be introduced to:"))
+suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
+
+```
+
+The sections are ordered _not_ in the order you'd have to work, starting with a full NOTAM text, but in a rough order of simple to more complex. The final section puts it all together.
+
+We assume throughout that you have not just a single string, but a dataframe of strings for processing. This is because we want to illustrate this way of working: vectorised in the R jargon. 
+
+You could write a function that takes a single string and parses it. Then call it many times and stack the results together with `rbind` or `bind_rows`. But we're planning to run this millions of times, so that's millions of function calls. So instead we write in a way that works on the whole dataset at once, and leaves the tidyverse to do that in the most efficient way.
+
+## Splitting a column into many
+
+Within the tidyverse `tidyr` provides some useful tools for parsing text. In this chapter we see a simpler and a more complex use of `tidyr::separate`.
+
+### Splitting a column at a character
+
+In the simplest case, a string is to be separated at a single separator character. In field Q of the NOTAM this is "/". We just need to tell `separate` what the new columns are called, as in the following code.
+
+```{r}
+library(tidyverse)
+# a couple of examples, in a dataframe
+q_fields <- data.frame(q = c("GLRB/QPLXX/IV/NBO/E /000/999/0620N01206W483", "LYBA/QKKKK/K /K  /K /000/999/4234N02102E999") )
+
+q_parsed <- q_fields %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+            sep = "/")
+
+#pretty view for the book
+knitr::kable(q_parsed)
+
+```
+
+There are some fields here which could be parsed further (`qgroup` and `geo`), but we leave that. I suspect that the 'K' is a missing value, which we could translate into an R `NA` value, but we don't go that far here.
+
+We will assume that all the q-fields are properly formed, of these 8 fields. A more robust piece of code would check this is true. This is for analysis, not operations - you're getting the message I think.
+
+Inspecting the raw strings (always essential!) shows that there are some blank spaces. So in our result we have some fields with trailing spaces. We could use `stringr::str_trim` on the results to get rid of trailing spaces, and indeed, that would probably be a good idea anyway. But we can use this to illustrate the next level in use of `separate`, which we do in the next section. 
+
+### Splitting a column at a regular expression
+
+The `sep=` is a 'regular expression'. Entire books have been written about regular expressions, so my advice would be to find a page you like, or download a cheatsheet of which there are many. [This is the one I use, being R-focused.](https://rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf)
+
+A regular expression is a search or matching pattern. We want to split the q-field at not just `\` but any number of spaces followed by a `\`. That will remove the trailing spaces, because they'll be treated as part of the separator. 
+
+Our string has some 'newlines' in it `\n` as well as spaces, and in other applications perhaps tabs are used. So we use a `\\s` code, rather than just a space character " ". `\\s` stands for all of these types of 'space', and some others [check in the cheatsheet].
+
+In regular expression terms this is `\\s*/`, which you can read as zero-or-more spaces followed by a back slash.
+
+We can show that this gives the same result as using trim. 
+
+```{r}
+# what you'd get using trim
+q_parsed_trim <- q_fields %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+            sep = "/") %>% 
+  mutate(across(.fns = str_trim))
+
+#what you get with the search pattern
+q_parsed_regex <- q_fields %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+           # separate on any number of spaces followed by a backslash
+            sep = "\\s*/")
+
+# are they the same?
+identical(q_parsed_trim, q_parsed_regex)
+
+```
+
+They are identical. Which do you prefer? The second involves one less line of code, but you might feel the need to add a comment, as I've done here, because the code is more obscure. 
+
+That's a qualitative judgement. If you wanted to run this thousands of times, maybe you would run timing tests. Something like this.
+
+```{r}
+q_many <- data.frame(q = rep(q_fields$q, 100000))
+  
+# what you'd get using trim
+system.time(
+q_parsed_trim <- q_many %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+            sep = "/") %>% 
+  mutate(across(.fns = str_trim))
+)
+
+#what you get with the search pattern
+system.time(
+q_parsed_regex <- q_many %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+           # separate on any number of spaces followed by a backslash
+            sep = "\\s*/")
+)
+
+# and for fun, what does calling the function many times look like?
+# just do 1/100th of the rows
+system.time(
+z <- lapply(q_many$q[1:1000], function(x) data.frame(q=x) %>% separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+           sep = "\\s*/"))
+)
+
+# are they the same?
+identical(q_parsed_trim, q_parsed_regex)
+
+```
+
+On my machine, the first takes about 40% longer in elapsed time, and twice the system time. So having fewer lines of code is more efficient. Calling the function each time, ok with code that isn't carefully designed for speed, but for a dataset 100 times smaller already takes longer than either of these. Letting R do its vectorised thing is indeed better!
+
+### Splitting a column at an either-or
+
+Taking this one step further, we can also work on the NOTAM header. This has NOTAM in it, which isn't that useful information, so we can ditch in, but it has this in the form 'NOTAMC', 'NOTAMR', 'NOTAMN' depending on whether this is cancelling, replacing or a new NOTAM, respectively. The structure of the field varies between these cases.
+
+As always, there are several ways to approach this. We could first remove the 'NOTAM' then split at spaces. But that's two steps. So instead, we split at either ' NOTAM' or ' ' , in one go. In regular expressions, either or is given by "|", just as in R syntax for 'or'. And to be on the safe side, we use the more general code for a 'space', though a new line is unlikely in this position.
+
+```{r}
+header_fields <- data.frame(header = c(
+  "A0001/13 NOTAMN ",
+  "A0001/13 NOTAMR A0032/12",
+  "W0809/13 NOTAMC W0808/13"
+))
+
+header_parsed <- header_fields %>% 
+  separate(header,
+           c("notam", "type", "replaces"),
+           sep = "\\sNOTAM|\\s")
+
+#pretty view for the book
+knitr::kable(header_parsed)
+
+```
+
+This works neatly, partly because there's a trailing space at the end of the first one. [In the code, delete the space and re-run. What happens? How does the `header-parsed` dataframe change?]
+
+In bulk use, you could either live with the `Expected 3 pieces....` errors, or add an extra space. Probably this is a sign that we should look for a better way to split, but this will always be tricky when the number of parts varies from one to the next, as it does here.
+
+### Exercises
+
+#### Questions
+
+1) If `\\s` matches a space, what matches everything that is not a space?
+2) How did the `header_parsed` dataframe change when you removed the space?
+3) Look up the format of q_parsed$geo on the internet. Split it into 3 parts of _fixed length_, not based on a separator, but appropriately to the meaning.
+
+#### Answers
+
+1) `\\S`, from the cheat sheet. There's also a more complex version of the same thing `[^[:space]]`.
+2) One value changed from empty string, "", to `NA`.
+3) The help file explains that sep can also be positions. Try `separate(geo, c("Lat","Long","Radius"), c(5, 11))`.
+
+## List columns {listcolumns}
+
+In the last section we saw various ways to split one column into several. Here we use another approach. Conceptually, it's harder, but it keep the parts 'similar' for longer, so we can modify them further _en masse_ rather than one column at a time. As usual this is not the only way this could be done, but it's a good example of the use of list columns.
+
+List columns? Up to now, you might have been thinking of tidy datasets like a table in a spreadsheet. Not a bad analogy, but R has more tricks up its sleeve. One particularly powerful one is that any column can contain, not just single values, but lists. There's a whole package in `tidyverse` called `purrr` (yes, 3 rs) to help handle such things. 
+
+List columns are great for modelling. You can have rows with 3 cells, say, country names, historic time series, forecast. Extremely compact. The application here is simpler. 
+
+The pattern we'll introduce here has 4 steps:
+
+1) Split a complex text column into a list (one column)
+2) Flip that list to generate extra rows in the dataset
+3) Manipulate those rows, in groups
+4) Pivot to generate 1 row per text, again, and multiple columns.
+
+Why might this be easier than approaches using `separate`? Because we want to manipulate what would be the column names after `separate`, it's easier to do if these are instead text fields.
+
+We load a set of NOTAM texts. Based on real ones, but some have been manipulated to create parsing challenges that have been seen in larger sets. The problems are in the later ones, so we will use short samples to begin with: start with a slice is a good principle anyway. (see TBD handling large datasets)
+
+When adding rows, as we will, we need an index that lets us identify all of the rows that go with one piece of text. We generate a simple integer for this.
+
+```{r}
+
+notam_texts <- read.csv("data/NOTAMSample.csv") %>% 
+  mutate(index = row_number())
+
+
+
+```
+

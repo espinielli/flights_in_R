@@ -49,6 +49,8 @@ Create yourself a new project using 'File/New Project', selecting the options ne
 
 ![new project, step 3](images/new project 3.png){width=75%}
 
+In that final step, if you are working on a Windows machine you will see a slightly different path to your 'user directory' under 'Create project as a subdirectory of:'. It's rare that you need to change this, anyway.
+
 The project will open without a code panel (which would have been top left), because you have no code yet. It looks like this.
 ![new justlearning project](images/NewJustLearning.png)
 
@@ -220,7 +222,7 @@ If you see a window like this, then you have started R rather than RStudio. That
 
 If it keeps on happening you will find it helpful to associate R files (`.R, .RMD` and others) with RStudio rather than R.
 
-If you get errors saying a certain package is only compatible with version xx and higher (of R), and you think you've recently updated, are you sure you updated R rather than RStudio? The RStudio version is found from the top menu 'RStudio/About R Studio', the R version is seen when you first start up (see the image just above), or is printed if you type `version` in the console.
+If you get errors saying a certain package is only compatible with version xx and higher (of R), and you think you've recently updated, are you sure you updated R rather than RStudio? (Even if this is a task for IT, perhaps they misunderstood and updated the wrong one?) The RStudio version is found from the top menu 'RStudio/About R Studio', the R version is seen when you first start up (see the image just above), or is printed if you type `version` in the console.
 
 If you're searching in 'help' and a function isn't appearing, for example in the drop-down as you type, it is probably because it comes from a package that isn't loaded. You can finish typing, and the system will search and may find it, but also some other less good matches. Or if you know the package name, you can type `?ggplot2::geom_line` for example, in the console to go straight there.
 

@@ -249,7 +249,7 @@ We'll see more about grouping in later chapters. It's quite common that I get er
 1) `head(states, 10)`
 2) `head` is documented alongside `tail`: use `tail(states)`
 3) (In my version of the data), typing `states` into the console, and by eye I see 4 states with a '*'. We'll see other ways to do this, later.
-4) `unique(annual_co2$STATE_CODE)`
+4) `unique(aviation_co2$STATE_CODE)`
 5) `states[c(3, 23, 33)]`
 6) It puts the results of whatever is on the right-hand side into the object on the left.
 7) It connects parts of the definition of a graph together.
