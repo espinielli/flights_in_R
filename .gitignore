@@ -4,6 +4,7 @@
 .Ruserdata
 flights_in_R.log
 scratchpad.R
+/data/annual_co2.rda
 
 /_bookdown_files
 /images

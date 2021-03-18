@@ -1,5 +1,7 @@
 # Vectors and grouping - Loops of a sort
 
+[Incomplete]
+
 In the next few chapters we move away from tweaking code for graphs and get more hands-on with manipulating data. With another software language, this might be the time to discuss loops. In a manner of speaking we will be looping, but in a very R way. R does have a 'for..next' syntax, but it's a little like the chips on the menu of an Indian restaurant: most of the time you're better off with something else.
 
 ```{r, echo=FALSE}
