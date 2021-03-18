@@ -98,7 +98,7 @@ The output appears in the console as a running log. It should look like this:
 
 The R language is expanding continually as people publish new packages for it. A 'package' provides a collection of functions, often some data and sometimes some new data types. If you're starting in R, and just aiming to find your way around in and use code, then mostly what you need to know is how to load packages (and what that means), and a little about the more common ones. That's what we cover in this section.
 
-### Package basics
+### Package basics {#twocolons}
 
 Some packages are already bundled in the basic installation of 'R', such as `base` which provides, as the name suggests, many of the most basic functions. But there are thousands of other packages, coming from:
 
@@ -124,7 +124,7 @@ library(lubridate) # lots of date-related functions.
 
 ```
 
-{#twocolons} Two packages can define a function with the same name. The CRAN repository of packages performs quality checks, but overlap between packages is not something CRAN controls. Think of CRAN as an excellent library rather than an 'Académie française' for R  that controls which words are allowed into the language^[Actually, CRAN does enforce some quality control but that's more about how packages work than what packages there might be, with which functions.]. When there is overlap in packages, both defining a function with the same name, say, then on loading the second one 'masks' the first (you should see this above). Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
+Two packages can define a function with the same name. The CRAN repository of packages performs quality checks, but overlap between packages is not something CRAN controls. Think of CRAN as an excellent library rather than an 'Académie française' for R  that controls which words are allowed into the language^[Actually, CRAN does enforce some quality control but that's more about how packages work than what packages there might be, with which functions.]. When there is overlap in packages, both defining a function with the same name, say, then on loading the second one 'masks' the first (you should see this above). Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
 
 As well as function with the same name and different results, there are often many different functions that you could use to achieve the same result, eg `base::paste0()` and `stringr::str_c()` both concatenate strings.
 
@@ -148,7 +148,7 @@ The [tidyverse](https://www.tidyverse.org) is our chosen dialect, in the sense t
 
 The *tidy* in 'tidyverse' refers to a [tidy data structure](https://r4ds.had.co.nz/tidy-data.html): a table with each variable in its own column and each observation on one row. While we often find flight data with years displayed across the table, and countries down the side, this is not 'tidy'. 
 
-```{r twotables, echo=FALSE}
+```{r echo=FALSE}
 knitr::kable(data.frame(Country = c("France", "Germany"), Flights2019 = c(1.3, 5.2), Flights2020= c(1.5, 6.0)),
              booktabs = TRUE, caption = "An untidy table.")
 

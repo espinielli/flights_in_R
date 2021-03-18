@@ -24,7 +24,7 @@
 <meta name="author" content="David Marsh" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="start.html"/>
 <link rel="next" href="filter.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
 <li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#package-basics"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#twocolons"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
 <li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
@@ -227,12 +227,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>8.1</b> Splitting a column into many</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-character"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
 <li class="chapter" data-level="8.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>8.1.2</b> Splitting a column at a regular expression</a></li>
 <li class="chapter" data-level="8.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>8.1.3</b> Splitting a column at an either-or</a></li>
 <li class="chapter" data-level="8.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-3"><i class="fa fa-check"></i><b>8.1.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#list-columns-listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns {listcolumns}</a></li>
+<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>8.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="8.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>8.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="8.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>8.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-4"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -280,40 +286,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>Re-open your <code>justlearning</code> project (<a href="File:Recent" class="uri">File:Recent</a> Projects, or ‘justLearning.Rproj’). Create a new script file (<a href="File:New" class="uri">File:New</a> <a href="File:R" class="uri">File:R</a> script), to copy and paste the examples into, and save it as ‘chapter3.’</p>
 <p>Although the project re-opens your datasets and scripts, it starts in a new R session. That means that you have to re-load the package(s) that you need, as in this code. So you might find it easier to have this at the start of your ‘chapter3’ script.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="firstLook.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="firstLook.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span></code></pre></div>
 <div id="loadco2" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Looking at data: CO<sub>2</sub> Data</h2>
 <p>We use public data on national CO<sub>2</sub> emissions from aviation available on the <a href="https://ansperformance.eu/data/">EUROCONTROL/AIU website</a>. We choose this, apart from the interest in the data themselves, because it’s a small set so quick to download, and it’s already tidy (each variable in one column). To isolate this book from changes in the original file, we use a version that we’ve saved to github.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="firstLook.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download the file to the data folder, the &#39;mode&#39; parameter is needed on Windows machines</span></span>
-<span id="cb17-2"><a href="firstLook.html#cb17-2" aria-hidden="true" tabindex="-1"></a>co2_url <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/david6marsh/flights_in_R/raw/main/data/CO2_emissions_by_state.xlsx&quot;</span></span>
-<span id="cb17-3"><a href="firstLook.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if you want the original, which might have been updated, use this instead</span></span>
-<span id="cb17-4"><a href="firstLook.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># co2_url &lt;- &quot;https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx&quot;</span></span>
-<span id="cb17-5"><a href="firstLook.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(co2_url, <span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb17-6"><a href="firstLook.html#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="firstLook.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-8"><a href="firstLook.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># load from the DATA worksheet - case sensitive!</span></span>
-<span id="cb17-9"><a href="firstLook.html#cb17-9" aria-hidden="true" tabindex="-1"></a>aviation_co2 <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, </span>
-<span id="cb17-10"><a href="firstLook.html#cb17-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sheet =</span> <span class="st">&quot;DATA&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="firstLook.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download the file to the data folder, the &#39;mode&#39; parameter is needed on Windows machines</span></span>
+<span id="cb15-2"><a href="firstLook.html#cb15-2" aria-hidden="true" tabindex="-1"></a>co2_url <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/david6marsh/flights_in_R/raw/main/data/CO2_emissions_by_state.xlsx&quot;</span></span>
+<span id="cb15-3"><a href="firstLook.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if you want the original, which might have been updated, use this instead</span></span>
+<span id="cb15-4"><a href="firstLook.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># co2_url &lt;- &quot;https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx&quot;</span></span>
+<span id="cb15-5"><a href="firstLook.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(co2_url, <span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb15-6"><a href="firstLook.html#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="firstLook.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-8"><a href="firstLook.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># load from the DATA worksheet - case sensitive!</span></span>
+<span id="cb15-9"><a href="firstLook.html#cb15-9" aria-hidden="true" tabindex="-1"></a>aviation_co2 <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, </span>
+<span id="cb15-10"><a href="firstLook.html#cb15-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sheet =</span> <span class="st">&quot;DATA&quot;</span>) </span></code></pre></div>
 <p>We’ve already seen the <code>function(parameter)</code> way to call a function in the <code>cos(pi/3)</code> example. Now we have <code>something &lt;- function(parameter, parameter)</code>. This is a peculiarity of R that you just need to get used to. Think of it as saying: create <code>something</code> in the environment (without saying what it is just yet), then fill it (<code>&lt;-</code>) with the results of the <code>function()</code>. While you might occasionally have used a function in Excel, for example, in R basically everything you do is call functions.</p>
 <p>Now that the Excel data are downloaded, in your R script comment out the line <code>download.files(...</code>, because we don’t need to keep downloading if you happen to re-run the code. Comment means putting a <code>#</code> in front of it. Pressing shift-ctrl-C (shift-cmd-C on a Mac) does the same, and also works over many lines at once.</p>
 <p>Notice that R doesn’t mind if a function is split over several lines. If there were frequent updates, maybe you would repeatedly download (so not comment out). See (TBD) for an example. [See the Excel, now in your project <code>data</code> folder, for disclaimer and details.]</p>
 <p>International conventions mean that CO<sub>2</sub> emissions are measured from flights departing airports in a state. <code>read_xlsx</code> automatically selects the first row as variable names.</p>
 <p>One tool in the ‘explore your data’ toolbox is <code>summary</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="firstLook.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aviation_co2)</span></code></pre></div>
-<pre><code>##       YEAR          MONTH         STATE_NAME         STATE_CODE        CO2_QTY_TONNES   
-##  Min.   :2010   Min.   : 1.000   Length:5694        Length:5694        Min.   :      0  
-##  1st Qu.:2012   1st Qu.: 3.250   Class :character   Class :character   1st Qu.:  15665  
-##  Median :2015   Median : 6.000   Mode  :character   Mode  :character   Median :  84312  
-##  Mean   :2015   Mean   : 6.498                                         Mean   : 336396  
-##  3rd Qu.:2018   3rd Qu.: 9.000                                         3rd Qu.: 279711  
-##  Max.   :2020   Max.   :12.000                                         Max.   :3541111  
-##        TF        
-##  Min.   :     1  
-##  1st Qu.:  1364  
-##  Median :  4605  
-##  Mean   : 16376  
-##  3rd Qu.: 17073  
-##  Max.   :120473</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="firstLook.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aviation_co2)</span></code></pre></div>
+<pre><code>##       YEAR          MONTH         STATE_NAME         STATE_CODE        CO2_QTY_TONNES          TF        
+##  Min.   :2010   Min.   : 1.000   Length:5694        Length:5694        Min.   :      0   Min.   :     1  
+##  1st Qu.:2012   1st Qu.: 3.250   Class :character   Class :character   1st Qu.:  15665   1st Qu.:  1364  
+##  Median :2015   Median : 6.000   Mode  :character   Mode  :character   Median :  84312   Median :  4605  
+##  Mean   :2015   Mean   : 6.498                                         Mean   : 336396   Mean   : 16376  
+##  3rd Qu.:2018   3rd Qu.: 9.000                                         3rd Qu.: 279711   3rd Qu.: 17073  
+##  Max.   :2020   Max.   :12.000                                         Max.   :3541111   Max.   :120473</code></pre>
 <p>The <code>summary</code> function is fairly basic, but it gives a quick feel for what’s in the data. Often more helpful with numeric than character variables, but also useful for spotting if there are missing values <code>NA</code>. So we can see there are no missing values here.</p>
 <p>In this dataset we have:</p>
 <ul>
@@ -332,14 +331,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Often you want to keep your groups, but here we don’t need to, so we <code>ungroup</code> at the end. Then we save the data into the <code>data</code> subdirectory of the project.</p>
 <p>There will be more examples of this sort of data manipulation in Chapter <a href="filter.html#filter">4</a>, with more explanation of what’s happening.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="firstLook.html#cb20-1" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> aviation_co2 <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="firstLook.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>STATE_CODE) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href="firstLook.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR, STATE_NAME) <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="firstLook.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(CO2_QTY_TONNES, TF), sum) <span class="sc">%&gt;%</span></span>
-<span id="cb20-5"><a href="firstLook.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&lt;</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-6"><a href="firstLook.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb20-7"><a href="firstLook.html#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="firstLook.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(annual_co2, <span class="at">file =</span> <span class="st">&quot;data/annual_co2.rda&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="firstLook.html#cb18-1" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> aviation_co2 <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="firstLook.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>STATE_CODE) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="firstLook.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR, STATE_NAME) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="firstLook.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(CO2_QTY_TONNES, TF), sum) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="firstLook.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&lt;</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-6"><a href="firstLook.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb18-7"><a href="firstLook.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="firstLook.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(annual_co2, <span class="at">file =</span> <span class="st">&quot;data/annual_co2.rda&quot;</span>)</span></code></pre></div>
 <p>There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the first line, with name on, to see a summary. You get much the same thing in the console by typing <code>str(annual_co2)</code> where <code>str</code> is for ‘structure.’ You should see something like this.</p>
 <p><img src="images/CO2inEnvironment.png" /></p>
 <p>We can see that there are three numeric variables (<code>num</code>) and two character variables (<code>chr</code>). All five variables have the same number of observations (437). In a tibble or dataframe the columns are always the same length.</p>
@@ -351,10 +350,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.2</span> Extracting variables</h2>
 <p>To answer more questions about the data there are some more tools to summarise the values that it takes. We saw <code>summary()</code> works for numeric values, but what about discrete ones?</p>
 <p>There are several ways to pull one variable out of your data. We’ll use the <code>$</code> notation, partly because there’s a reminder of this in the environment tab. [Where is this ‘reminder?’]</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="firstLook.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull out all values in the column</span></span>
-<span id="cb21-2"><a href="firstLook.html#cb21-2" aria-hidden="true" tabindex="-1"></a>state_vbl <span class="ot">&lt;-</span> annual_co2<span class="sc">$</span>STATE_NAME</span>
-<span id="cb21-3"><a href="firstLook.html#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="firstLook.html#cb21-4" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">unique</span>(state_vbl)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="firstLook.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull out all values in the column</span></span>
+<span id="cb19-2"><a href="firstLook.html#cb19-2" aria-hidden="true" tabindex="-1"></a>state_vbl <span class="ot">&lt;-</span> annual_co2<span class="sc">$</span>STATE_NAME</span>
+<span id="cb19-3"><a href="firstLook.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="firstLook.html#cb19-4" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">unique</span>(state_vbl)</span></code></pre></div>
 <p>Look in the environment pane, <code>state_vbl</code> is listed under ‘Values.’ It’s a (column) vector, one of the simple data types in R which is why it’s listed under ‘Values’ and not under ‘Data.’ ‘Data’ is for more complex data structures, such as dataframes and tibbles. You’ve just pulled a column out of <code>annual_co2</code> so not surprising that it has the same number of rows as <code>annual_co2</code>. And the first values are all ALBANIA, or were when this book was compiled.</p>
 <p>Really we want to know how many different states there are, and which ones. <code>unique</code> does what it says, and we’ve saved these as <code>states</code>; a variable name which to me implies ‘unique states.’ You can tell how many there are from the environment pane, or you could use <code>length(states)</code>. [How many are there?]</p>
 <p>To inspect all of these values you can just type <code>states</code> into the console, a good way to check the spelling of some, perhaps. [Try this. Is it ‘Canaries’ or ‘Canarias?’]</p>
@@ -365,17 +364,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.3</span> Extracting a few values</h2>
 <p>We’ve just seen how to pull a variable out of a tibble, as a vector. How do we extract one or more values out of the vector that we created?</p>
 <p>The <code>states</code> are quite a lot to show in the console. Sometimes you just need to see a quick sample, eg to check if they’re in title case, or if they’re codes or names. <code>head()</code> is useful for showing you the first few (6 by default).</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="firstLook.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
-<pre><code>## [1] &quot;ALBANIA&quot;                &quot;ARMENIA&quot;                &quot;AUSTRIA&quot;               
-## [4] &quot;BELGIUM&quot;                &quot;BOSNIA AND HERZEGOVINA&quot; &quot;BULGARIA&quot;</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="firstLook.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(states)</span></code></pre></div>
+<pre><code>## [1] &quot;ALBANIA&quot;                &quot;ARMENIA&quot;                &quot;AUSTRIA&quot;                &quot;BELGIUM&quot;                &quot;BOSNIA AND HERZEGOVINA&quot;
+## [6] &quot;BULGARIA&quot;</code></pre>
 <p>If you want to pull out a single value, or a few of them, again there are multiple ways to do this, but the simplest is this. We show here two ways to select with a vector of numbers: creating a consecutive sequence of numbers (<code>1:3</code>); and creating a vector with an arbitrary selection (<code>c(1, 5, 10)</code>).</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="firstLook.html#cb24-1" aria-hidden="true" tabindex="-1"></a>states[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="firstLook.html#cb22-1" aria-hidden="true" tabindex="-1"></a>states[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;ALBANIA&quot;</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="firstLook.html#cb26-1" aria-hidden="true" tabindex="-1"></a>states[<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="firstLook.html#cb24-1" aria-hidden="true" tabindex="-1"></a>states[<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;AUSTRIA&quot;</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="firstLook.html#cb28-1" aria-hidden="true" tabindex="-1"></a>states[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="firstLook.html#cb26-1" aria-hidden="true" tabindex="-1"></a>states[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;ALBANIA&quot; &quot;ARMENIA&quot; &quot;AUSTRIA&quot;</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="firstLook.html#cb30-1" aria-hidden="true" tabindex="-1"></a>states[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="firstLook.html#cb28-1" aria-hidden="true" tabindex="-1"></a>states[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;ALBANIA&quot;                &quot;BOSNIA AND HERZEGOVINA&quot; &quot;CZECHIA&quot;</code></pre>
 <p>We’ll deal with subsetting the whole dataset, rather than just a vector extracted from it, in the next chapter.</p>
 </div>
@@ -391,10 +390,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>aes</code>: gives the x and y first, and here also says choose colour based on year;</li>
 <li><code>geom_point</code>: says to plot points with these data, ie a scatter plot.</li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="firstLook.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2, </span>
-<span id="cb32-2"><a href="firstLook.html#cb32-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF, CO2_QTY_TONNES, <span class="at">colour =</span> YEAR)) <span class="sc">+</span></span>
-<span id="cb32-3"><a href="firstLook.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="firstLook.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2, </span>
+<span id="cb30-2"><a href="firstLook.html#cb30-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF, CO2_QTY_TONNES, <span class="at">colour =</span> YEAR)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="firstLook.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Even this simple example illustrates that:</p>
 <ul>
 <li>a parameter to a function (here <code>ggplot</code>) can be another function call (here <code>aes()</code>);</li>
@@ -407,13 +406,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.4.2</span> Improve the titles</h3>
 <p>Let’s at least label the axes so that someone else can see quickly what has been plotted. We can transform variables on the fly (using the rule that a parameter can be a function call, here to the function <code>/</code>), so let’s convert both axes to millions (<code>1e6</code> means 1*10^6, so millions with less risk of getting the number of 0s wrong).</p>
 <p>The label on the legend is meaningful, but to avoid the block capitals we can change that too within the <code>labs()</code> statement. It’s a ‘colour’ legend (that’s what is in the <code>aes</code> call), so you need to refer to ‘colour’ in the <code>labs()</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="firstLook.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2, <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, <span class="at">colour =</span> YEAR)) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="firstLook.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb33-3"><a href="firstLook.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
-<span id="cb33-4"><a href="firstLook.html#cb33-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;CO2 (million tonnes)&quot;</span>,</span>
-<span id="cb33-5"><a href="firstLook.html#cb33-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb33-6"><a href="firstLook.html#cb33-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions per state&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="firstLook.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2, <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, <span class="at">colour =</span> YEAR)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="firstLook.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb31-3"><a href="firstLook.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb31-4"><a href="firstLook.html#cb31-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;CO2 (million tonnes)&quot;</span>,</span>
+<span id="cb31-5"><a href="firstLook.html#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb31-6"><a href="firstLook.html#cb31-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions per state&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="statecluster" class="section level3" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> and with clustering by state</h3>
@@ -421,15 +420,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are too many countries to give each its own shape (we’ll see shapes used more effectively in section TBD), but we can easily add a line to join the points for each state. [Working from <code>geom_point</code>, how do you think you would add a line?]</p>
 <p>We need both to add a line, which follows the pattern of <code>geom_point</code>, and group by state. That’s done in the same way that we coloured by year, in the aesthetics. There are several ways to plot a line. The most obvious one, having seen <code>geom_point</code> previously, is <code>geom_line</code>. However, this joins the points in x-axis order. We want data order, so that’s <code>geom_path</code>.</p>
 <p>Out of a sense of neatness, we also add a subscript to CO<sub>2</sub>. The code <code>bquote(~CO[2]~" (million tonnes)")</code> took some googling and is cryptic, but it works!</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="firstLook.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2, <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
-<span id="cb34-2"><a href="firstLook.html#cb34-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
-<span id="cb34-3"><a href="firstLook.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb34-4"><a href="firstLook.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
-<span id="cb34-5"><a href="firstLook.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
-<span id="cb34-6"><a href="firstLook.html#cb34-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
-<span id="cb34-7"><a href="firstLook.html#cb34-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb34-8"><a href="firstLook.html#cb34-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions per state&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="firstLook.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2, <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
+<span id="cb32-2"><a href="firstLook.html#cb32-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="firstLook.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="firstLook.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb32-5"><a href="firstLook.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb32-6"><a href="firstLook.html#cb32-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb32-7"><a href="firstLook.html#cb32-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb32-8"><a href="firstLook.html#cb32-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions per state&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>The graph isn’t ready for a presentation yet, but a story is already emerging. The lines do a pretty good job of grouping the years for each state together. We see a graph with 6 busy states, 3 of which are fairly linear, so a relatively fixed CO<sub>2</sub>/flight. Three others are more variable from year to year.</p>
 <p>Then there are two states, with flights in the 0.25-0.5 million flights range and that diverge from the main trend line, respectively higher and lower. The remaining, smaller states rather overlap in this graph.</p>
 <p>We’ll find out how to pick out and label states in the next chapter.</p>

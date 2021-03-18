@@ -1,7 +1,5 @@
 # NOTAMS: Splitting and parsing strings {#splitparse}
 
-[Incomplete]
-
 NOTE: This chapter has been written out of sequence, so jumps some steps and may feel a bit of a leap from the (current) previous chapter. Need to add in between chapters on: dates, mutate-across, lapply, named list (extracting from) TBD.
 
 This chapter uses the example of NOTAMs (notices to airmen) to explore R functions for turning text into more useable data, by splitting and parsing.
@@ -9,23 +7,21 @@ This chapter uses the example of NOTAMs (notices to airmen) to explore R functio
 The parsing of NOTAMs here is _NOT_ for operational use. It's for statistical analysis, post operations. NOTAMs are very varied, and we will not handle all the possible ways in which the parsing might fail. We assume that failures can be picked up in later statistical analysis, or will just be outliers that can be ignored as 1 in millions of cases. This code is NOT A SUBSTITUTE FOR READING THE NOTAM BEFORE THE FLIGHT.
 
 ```{r, echo=FALSE}
-knitr::kable(data.frame(syl=c("`split()`, `")),
+knitr::kable(data.frame(syl=c("`separate()`, regular expressions, list fields, `system.time()`, `identical()`, `str_match`, `str_split()`, `str_replace(_all)()`, `str_sub()`, `unnest_(wider/longer)()`, `map()`, `relocate`")),
              col.names = c("In this chapter, you'll be introduced to:"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
 
 ```
 
-The sections are ordered _not_ in the order you'd have to work, starting with a full NOTAM text, but in a rough order of simple to more complex. The final section puts it all together.
+The sections are ordered _not_ in the order you'd have to work, starting with a full NOTAM text, but in a rough order of simple to more complex. We assume throughout that you have not just a single string, but a dataframe of strings for processing. This is because we want to illustrate this way of working: 'vectorised' in the R jargon. 
 
-We assume throughout that you have not just a single string, but a dataframe of strings for processing. This is because we want to illustrate this way of working: vectorised in the R jargon. 
-
-You could write a function that takes a single string and parses it. Then call it many times and stack the results together with `rbind` or `bind_rows`. But we're planning to run this millions of times, so that's millions of function calls. So instead we write in a way that works on the whole dataset at once, and leaves the tidyverse to do that in the most efficient way.
+You could write a function that takes a single string and parses it. Then call it many times and stack the results together with `rbind` or `bind_rows`. But we're planning to run this millions of times, so that's millions of function calls. So instead we write in a way that works on the whole dataset at once, and leaves the tidyverse to do that in the most efficient way. (There's an illustration of the time penalty later in the chapter.)
 
 ## Splitting a column into many
 
 Within the tidyverse `tidyr` provides some useful tools for parsing text. In this chapter we see a simpler and a more complex use of `tidyr::separate`.
 
-### Splitting a column at a character {splitatcharacter}
+### Splitting a column at a character {#splitatcharacter}
 
 In the simplest case, a string is to be separated at a single separator character. In field Q of the NOTAM this is "/". We just need to tell `separate` what the new columns are called, as in the following code.
 
@@ -126,7 +122,7 @@ On my machine, the first takes about 40% longer in elapsed time, and twice the s
 
 Taking this one step further, we can also work on the NOTAM header. This has NOTAM in it, which isn't that useful information, so we can ditch in, but it has this in the form 'NOTAMC', 'NOTAMR', 'NOTAMN' depending on whether this is cancelling, replacing or a new NOTAM, respectively. The structure of the field varies between these cases.
 
-As always, there are several ways to approach this. We could first remove the 'NOTAM' then split at spaces. But that's two steps. So instead, we split at either ' NOTAM' or ' ' , in one go. In regular expressions, either or is given by "|", just as in R syntax for 'or'. And to be on the safe side, we use the more general code for a 'space', though a new line is unlikely in this position.
+As always, there are several ways to approach this. We could first remove the 'NOTAM' then split at spaces. But that's two steps. So instead, we split at either ' NOTAM' or ' ' , in one go. In regular expressions, either or is given by `|`, just as in R syntax for 'or'. And to be on the safe side, we use the more general code for a 'space', though a new line is unlikely in this position.
 
 ```{r}
 header_fields <- data.frame(header = c(
@@ -163,7 +159,7 @@ In bulk use, you could either live with the `Expected 3 pieces....` errors, or a
 2) One value changed from empty string, "", to `NA`.
 3) The help file explains that sep can also be positions. Try `separate(geo, c("Lat","Long","Radius"), c(5, 11))`.
 
-## List columns {listcolumns}
+## List columns {#listcolumns}
 
 In the last section we saw various ways to split one column into several. Here we use another approach. Conceptually, it's harder, but it keep the parts 'similar' for longer, so we can modify them further _en masse_ rather than one column at a time. As usual this is not the only way this could be done, but it's a good example of the use of list columns.
 
@@ -182,7 +178,7 @@ Why might this be easier than approaches using `separate`? Because we want to ma
 
 ### Splitting a field into a list
 
-We load a set of NOTAM texts. Based on real ones, but some have been manipulated to create parsing challenges that have been seen in larger sets. The problems are in the later ones, so we will use short samples to begin with: start with a small `slice` is a good principle to follow anyway. (see TBD handling large datasets)
+We load a set of NOTAM texts from Github. These are based on real ones, but some have been manipulated to create parsing challenges that have been seen in larger sets. The problems are in the later ones, so we will use short samples to begin with: *start with a small `slice`* is a good principle to follow anyway. (see TBD handling large datasets) Sites like [Eurocontrol's EAD Basic](https://www.ead.eurocontrol.int/cms-eadbasic/opencms/en/login/ead-basic/) provide views onto ready-parsed NOTAM data. So this chapter is relevant either (a) to learn string manipulation with regular expressions or (b) if you happen to receive bulk data for analysis, or both.
 
 When adding rows, as we will, we need an index that lets us identify all of the rows that go with one piece of text. We generate a simple integer `index` for this.
 
@@ -194,7 +190,8 @@ The regular expression is `\\s+[QABCDEFG]\\)\\s` to match any of the allowable h
 
 ```{r}
 # get the NOTAM texts and add an ID
-notam_texts <- read.csv("data/NOTAMSample.csv") %>% 
+notam_url <- "https://github.com/david6marsh/flights_in_R/raw/main/data/NOTAMSample.csv"
+notam_texts <- read.csv(notam_url) %>% 
   mutate(index = row_number())
 
 notams <- notam_texts %>% 
@@ -240,7 +237,7 @@ notams <- notam_texts %>%
 
 ```
 
-We can now split out the fields from the first part as in our first attempt, splitting at "\\s+(?=[QABCD]\\)\\s)". The second part is still tricky, because "F)" and "G)" can be fields or bullets in a bulleted list. The two fields are rare, and describe the vertical extent of the NOTAM. We find the 'real' fields by looking for something that resembles a vertical extent. Inspection of many cases shows we have values such as:
+We can now split out the fields from the first part as in our first attempt, splitting at `\\s+(?=[QABCD]\\)\\s)`. The second part is still tricky, because "F)" and "G)" can be fields or bullets in a bulleted list. The two fields are rare, and describe the vertical extent of the NOTAM. We find the 'real' fields by looking for something that resembles a vertical extent. Inspection of many cases shows we have values such as:
 
 * 1200FT AMSL (above mean sea level), or that could be in metres 'M' or above ground level (AGL) or surface SFC. There might or might not be a space between. [What would the regular expression look like?]
 * FL310 (flight level)
@@ -317,26 +314,45 @@ notams <- notams %>%
 
 ```
 
-That's as far as we need to go. The exercises explore a bit further, including how this 'basic' set of code might fail for some NOTAMs.
+That's as far as we need to go. The code generates some warnings of 'missing pieces', but otherwise works on these examples. The exercises explore a bit further, including how this 'basic' set of code might fail for some NOTAMs.
 
 ### Exercises
 
 #### Questions
 
- 1) How does the regular expression "^\\(|\\)$" achieve what we need?
+ 1) How does the regular expression `^\\(|\\)$` achieve what we need?
  2) What would `str_replace` have done differently to `str_replace_all`?
- 3) `stringr::str_replace_all` would also accept a vector of regular expresssions. Predict what using c("^\\(","\\)$") would deliver. Then try it out. [Hint: there are 2 rows.]
- 4) In "\\s+(?=[QABCDEFG]\\)\\s)", which closing bracket goes with the opening bracket?
+ 3) `stringr::str_replace_all` would also accept a vector of regular expressions. Predict what using `c("^\\(","\\)$")` would deliver. Then try it out. [Hint: there are 2 rows.]
+ 4) In `\\s+(?=[QABCDEFG]\\)\\s)`, which closing bracket goes with the opening bracket?
  5) Create a dataframe with a named list column, for which each entry is a named list. [Hint: I find this surprisingly fiddly. Create a 2-row, 1 field dataframe. Then add the named list column.]
  6) How can you pull out a single value from this?
+ 7) Use `str_match` to pull the A field directly from the NOTAM field in `notam_texts`. Try two approaches, one assuming that the string ends in "B)" and another based only on the likely content of the field. 
+ 8) Create a function that takes a dataframe like 'notam_texts' and returns the result of the whole process. What happens if you run it on the last NOTAM in the file and why? In words, how might you solve this?
+ 9) In words, how might you solve the 'missing pieces' warnings?
  
- #### Answers
- 1) The cheat sheet will tell you: "^" matches at the start of the string, "$" at the end. "(" and ")" are reserved tokens in regular expressions, so you need to 'escape' them to use them as literal characters. "|" we saw earlier, means 'or'.
+#### Answers
+
+ 1) The cheat sheet will tell you: `^` matches at the start of the string, `$` at the end. `(` and `)` are reserved tokens in regular expressions, so you need to 'escape' them to use them as literal characters. `|` we saw earlier, means 'or'.
  2) It just changes the first occurrence. Compare `str_replace(q_fields$q, "/", "-$-")` and `str_replace_all(q_fields$q, "/", "-$-")`.
  3) The usual R behaviour is to cycle through the values. So it alternates, using the first for the odd rows (ie the first one) and the second for the even rows. So the first loses the starting ( and the second loses just the ending ).
  4) The first closing bracket is preceded by `\\` so it is treated as a literal character, not part of the code. By elimination, then, it has to be the second one.
  5) For example `z <- data.frame(id = 1:2)   z$named <- list(a=c(x=1, y=2), b=c(z=4))`
  6) With that example, you can use `z$named$a["y"]`, for example.
+ 7) Amongst many possible solutions, these work. How would you select A if it contains multiple 3 or 4 letter strings separated by spaces?
+ 
+```{r}
+ans <- notam_texts %>% 
+  mutate(v1 = str_match(NOTAM, "A\\)\\s+[^(B\\))]+"),
+         v2 = str_match(NOTAM, "A\\)\\s+[[:upper:]]{4}"),
+        # multiply one field, for testing 
+        notam_plus = str_replace(NOTAM, "RPXX", "RPXX EGLL"),
+         vMult = str_match(notam_plus, "A\\)(\\s+[[:upper:]]{4})+"))
+
+```
+ 
+ 8) (Essentially a cut-paste exercise, so result not provided here.) The final NOTAM has a missing "E)" header for the E field, so the splitting approach fails. Two possible solutions: filter to remove, if "E)" not found would perhaps be ok as one outlier amongst thousands; or detect and insert "E)" after C or D to allow the code to work properly.
+ 9) Perhaps there's a 'quiet' option for the function (;-)). Otherwise, since the problem is whether or not there's text to say which NOTAM is being replaced, you could test for length and `separate` in two different ways: `if_else(header is long, separate with 3 column names, separate with 2 column names).
+ 
  
  
  

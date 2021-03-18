@@ -1,4 +1,4 @@
-tab:twotables
+tab:unnamed-chunk-2
 howto
 before-you-start
 ways-to-use-the-material
@@ -9,7 +9,7 @@ rstudio
 first-project
 first-code
 packages
-package-basics
+twocolons
 tidyverse
 filetypes
 whats-gone-wrong-1
@@ -60,10 +60,16 @@ questions-5
 answers-5
 splitparse
 splitting-a-column-into-many
-splitting-a-column-at-a-character
+splitatcharacter
 splitting-a-column-at-a-regular-expression
 splitting-a-column-at-an-either-or
 exercises-3
 questions-6
 answers-6
-list-columns-listcolumns
+listcolumns
+splitting-a-field-into-a-list
+more-realistic-splitting
+manipulate-fields-in-rows
+exercises-4
+questions-7
+answers-7

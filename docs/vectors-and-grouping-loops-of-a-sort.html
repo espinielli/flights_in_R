@@ -24,7 +24,7 @@
 <meta name="author" content="David Marsh" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="references.html"/>
 <link rel="next" href="splitparse.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
 <li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#package-basics"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#twocolons"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
 <li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
@@ -227,12 +227,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>8.1</b> Splitting a column into many</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-character"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
 <li class="chapter" data-level="8.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>8.1.2</b> Splitting a column at a regular expression</a></li>
 <li class="chapter" data-level="8.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>8.1.3</b> Splitting a column at an either-or</a></li>
 <li class="chapter" data-level="8.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-3"><i class="fa fa-check"></i><b>8.1.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#list-columns-listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns {listcolumns}</a></li>
+<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>8.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="8.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>8.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="8.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>8.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-4"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -256,6 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="vectors-and-grouping---loops-of-a-sort" class="section level1" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Vectors and grouping - Loops of a sort</h1>
+<p>[Incomplete]</p>
 <p>In the next few chapters we move away from tweaking code for graphs and get more hands-on with manipulating data. With another software language, this might be the time to discuss loops. In a manner of speaking we will be looping, but in a very R way. R does have a ‘for..next’ syntax, but it’s a little like the chips on the menu of an Indian restaurant: most of the time you’re better off with something else.</p>
 <table>
 <thead>
@@ -273,34 +280,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.1</span> Vectors</h2>
 <p>We met vectors in passing in Chapter <a href="start.html#start">2</a>: <code>1:50</code>. We saw other ways to construct them in section <a href="firstLook.html#someValues">3.3</a>: <code>c(1, 5, 10)</code>. But we can do more than just use them for filtering. Many functions in R are ‘vector friendly,’ in the sense that they will operate on an entire vector, and return a vector result. This can then be used in another function.</p>
 <p>The use of vectors is a sort of looping through a set of values. Or if you prefer the Excel analogy, it’s like filling a column of cells with a sequence of values and then creating another with a set of formulas using those vales, but without all the repetitious clicking, dragging and filling.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">7</span>) <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">7</span>) <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 3 5 9</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> <span class="co"># values of the second vector are recycled</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> <span class="co"># values of the second vector are recycled</span></span></code></pre></div>
 <pre><code>## [1] 2 4 4 6</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="co"># ^ happens before :</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="co"># ^ happens before :</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb59-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb57-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 1 4 9</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi<span class="sc">/</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)  <span class="co"># = round(sin(pi/1:4), 3)</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi<span class="sc">/</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)  <span class="co"># = round(sin(pi/1:4), 3)</span></span></code></pre></div>
 <pre><code>## [1] 0.000 1.000 0.866 0.707</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(pi, <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>) <span class="co"># vectors can work in surprising places</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(pi, <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>) <span class="co"># vectors can work in surprising places</span></span></code></pre></div>
 <pre><code>## [1] 3.0000 3.1000 3.1400 3.1420 3.1416</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">&quot;Year_&quot;</span>, <span class="fu">unique</span>(aviation_co2<span class="sc">$</span>YEAR))</span></code></pre></div>
-<pre><code>##  [1] &quot;Year_2010&quot; &quot;Year_2011&quot; &quot;Year_2012&quot; &quot;Year_2013&quot; &quot;Year_2014&quot; &quot;Year_2015&quot; &quot;Year_2016&quot;
-##  [8] &quot;Year_2017&quot; &quot;Year_2018&quot; &quot;Year_2019&quot; &quot;Year_2020&quot;</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">&quot;Year_&quot;</span>, <span class="fu">unique</span>(aviation_co2<span class="sc">$</span>YEAR))</span></code></pre></div>
+<pre><code>##  [1] &quot;Year_2010&quot; &quot;Year_2011&quot; &quot;Year_2012&quot; &quot;Year_2013&quot; &quot;Year_2014&quot; &quot;Year_2015&quot; &quot;Year_2016&quot; &quot;Year_2017&quot; &quot;Year_2018&quot; &quot;Year_2019&quot; &quot;Year_2020&quot;</code></pre>
 <p>The examples illustrate there are still some rules of precedence: <code>:</code> is evaluated after <code>^</code>, but before <code>+</code>. They also show ‘recycling’: <code>1:4</code> needs a length 4 vector to be added to it, so the values in <code>1:2</code> are recycled. Strictly speaking, this is happening with the first example (the <code>2</code> is being recycled into a vector of length 3), and also in the last example with “Year_.”</p>
 <p>If the recycling can’t be done neatly, you get an error. [Evaluate <code>1:4 + 1:3</code>.]</p>
 <p>There are plenty of other ways to create simple vectors when you need them.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>) <span class="co"># when 10:50 won&#39;t do</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>) <span class="co"># when 10:50 won&#39;t do</span></span></code></pre></div>
 <pre><code>## [1] 10 15 20 25 30 35 40 45 50</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">4</span>, <span class="dv">3</span>) <span class="co"># repeat 3 times</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">4</span>, <span class="dv">3</span>) <span class="co"># repeat 3 times</span></span></code></pre></div>
 <pre><code>## [1] 4 4 4</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2020/1/15&quot;</span>), <span class="fu">as.Date</span>(<span class="st">&quot;2020/12/15&quot;</span>), <span class="at">by =</span> <span class="st">&quot;month&quot;</span>) <span class="co"># ides of 2020</span></span></code></pre></div>
-<pre><code>##  [1] &quot;2020-01-15&quot; &quot;2020-02-15&quot; &quot;2020-03-15&quot; &quot;2020-04-15&quot; &quot;2020-05-15&quot; &quot;2020-06-15&quot; &quot;2020-07-15&quot;
-##  [8] &quot;2020-08-15&quot; &quot;2020-09-15&quot; &quot;2020-10-15&quot; &quot;2020-11-15&quot; &quot;2020-12-15&quot;</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb73-1" aria-hidden="true" tabindex="-1"></a>letters <span class="co"># &#39;letters&#39; and &#39;LETTERS&#39; are built in</span></span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot;
-## [24] &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2020/1/15&quot;</span>), <span class="fu">as.Date</span>(<span class="st">&quot;2020/12/15&quot;</span>), <span class="at">by =</span> <span class="st">&quot;month&quot;</span>) <span class="co"># ides of 2020</span></span></code></pre></div>
+<pre><code>##  [1] &quot;2020-01-15&quot; &quot;2020-02-15&quot; &quot;2020-03-15&quot; &quot;2020-04-15&quot; &quot;2020-05-15&quot; &quot;2020-06-15&quot; &quot;2020-07-15&quot; &quot;2020-08-15&quot; &quot;2020-09-15&quot; &quot;2020-10-15&quot;
+## [11] &quot;2020-11-15&quot; &quot;2020-12-15&quot;</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="vectors-and-grouping-loops-of-a-sort.html#cb71-1" aria-hidden="true" tabindex="-1"></a>letters <span class="co"># &#39;letters&#39; and &#39;LETTERS&#39; are built in</span></span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
 <p>While vectors and vector-savvy functions are, in a sense, loops with an R flavour, it’s probably better to think of them as working ‘in parallel’ calculated all at the same time, rather than one by one as they would be in a ‘for…next’ loop. (TBD)</p>
 </div>
 <div id="exercises-2" class="section level2" number="7.2">

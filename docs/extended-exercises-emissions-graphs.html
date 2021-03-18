@@ -24,7 +24,7 @@
 <meta name="author" content="David Marsh" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="sortbars.html"/>
 <link rel="next" href="references.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
 <li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#package-basics"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#twocolons"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
 <li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
@@ -227,12 +227,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>8.1</b> Splitting a column into many</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-character"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
 <li class="chapter" data-level="8.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>8.1.2</b> Splitting a column at a regular expression</a></li>
 <li class="chapter" data-level="8.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>8.1.3</b> Splitting a column at an either-or</a></li>
 <li class="chapter" data-level="8.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-3"><i class="fa fa-check"></i><b>8.1.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#list-columns-listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns {listcolumns}</a></li>
+<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>8.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="8.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>8.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="8.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>8.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-4"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -284,83 +290,83 @@ In the end, it’s an ugly chart but let’s not worry too much about that.</li>
 </ol>
 <p>Notice that we have two <code>colour</code> aesthetics: the default one which is by <code>YEAR</code> and one specifically for the <code>geom_text_repel</code>.</p>
 <p>The other catch is that, because the colour of the text is constant, it appears outside the <code>aes()</code>, not inside.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="extended-exercises-emissions-graphs.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the dataset</span></span>
-<span id="cb50-2"><a href="extended-exercises-emissions-graphs.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/annual_co2.rda&quot;</span>)</span>
-<span id="cb50-3"><a href="extended-exercises-emissions-graphs.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="extended-exercises-emissions-graphs.html#cb50-4" aria-hidden="true" tabindex="-1"></a>top_states <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span></span>
-<span id="cb50-5"><a href="extended-exercises-emissions-graphs.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span>     <span class="co"># top in year 2019</span></span>
-<span id="cb50-6"><a href="extended-exercises-emissions-graphs.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(TF, <span class="at">n =</span> <span class="dv">8</span>) <span class="sc">%&gt;%</span>  <span class="co"># top 8 </span></span>
-<span id="cb50-7"><a href="extended-exercises-emissions-graphs.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(STATE_NAME) </span>
-<span id="cb50-8"><a href="extended-exercises-emissions-graphs.html#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-9"><a href="extended-exercises-emissions-graphs.html#cb50-9" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
-<span id="cb50-10"><a href="extended-exercises-emissions-graphs.html#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_label =</span> <span class="fu">if_else</span>(YEAR <span class="sc">==</span> <span class="dv">2015</span>, <span class="fu">str_to_title</span>(STATE_NAME), <span class="st">&quot;&quot;</span>))</span>
-<span id="cb50-11"><a href="extended-exercises-emissions-graphs.html#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-12"><a href="extended-exercises-emissions-graphs.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
-<span id="cb50-13"><a href="extended-exercises-emissions-graphs.html#cb50-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> top_states), </span>
-<span id="cb50-14"><a href="extended-exercises-emissions-graphs.html#cb50-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
-<span id="cb50-15"><a href="extended-exercises-emissions-graphs.html#cb50-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
-<span id="cb50-16"><a href="extended-exercises-emissions-graphs.html#cb50-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb50-17"><a href="extended-exercises-emissions-graphs.html#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
-<span id="cb50-18"><a href="extended-exercises-emissions-graphs.html#cb50-18" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb50-19"><a href="extended-exercises-emissions-graphs.html#cb50-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_steps</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">show.limits =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb50-20"><a href="extended-exercises-emissions-graphs.html#cb50-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
-<span id="cb50-21"><a href="extended-exercises-emissions-graphs.html#cb50-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
-<span id="cb50-22"><a href="extended-exercises-emissions-graphs.html#cb50-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb50-23"><a href="extended-exercises-emissions-graphs.html#cb50-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 states&quot;</span>,</span>
-<span id="cb50-24"><a href="extended-exercises-emissions-graphs.html#cb50-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="extended-exercises-emissions-graphs.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the dataset</span></span>
+<span id="cb48-2"><a href="extended-exercises-emissions-graphs.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/annual_co2.rda&quot;</span>)</span>
+<span id="cb48-3"><a href="extended-exercises-emissions-graphs.html#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="extended-exercises-emissions-graphs.html#cb48-4" aria-hidden="true" tabindex="-1"></a>top_states <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="extended-exercises-emissions-graphs.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span>     <span class="co"># top in year 2019</span></span>
+<span id="cb48-6"><a href="extended-exercises-emissions-graphs.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(TF, <span class="at">n =</span> <span class="dv">8</span>) <span class="sc">%&gt;%</span>  <span class="co"># top 8 </span></span>
+<span id="cb48-7"><a href="extended-exercises-emissions-graphs.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(STATE_NAME) </span>
+<span id="cb48-8"><a href="extended-exercises-emissions-graphs.html#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="extended-exercises-emissions-graphs.html#cb48-9" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb48-10"><a href="extended-exercises-emissions-graphs.html#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_label =</span> <span class="fu">if_else</span>(YEAR <span class="sc">==</span> <span class="dv">2015</span>, <span class="fu">str_to_title</span>(STATE_NAME), <span class="st">&quot;&quot;</span>))</span>
+<span id="cb48-11"><a href="extended-exercises-emissions-graphs.html#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="extended-exercises-emissions-graphs.html#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb48-13"><a href="extended-exercises-emissions-graphs.html#cb48-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> top_states), </span>
+<span id="cb48-14"><a href="extended-exercises-emissions-graphs.html#cb48-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
+<span id="cb48-15"><a href="extended-exercises-emissions-graphs.html#cb48-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb48-16"><a href="extended-exercises-emissions-graphs.html#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb48-17"><a href="extended-exercises-emissions-graphs.html#cb48-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb48-18"><a href="extended-exercises-emissions-graphs.html#cb48-18" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb48-19"><a href="extended-exercises-emissions-graphs.html#cb48-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_steps</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">show.limits =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb48-20"><a href="extended-exercises-emissions-graphs.html#cb48-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb48-21"><a href="extended-exercises-emissions-graphs.html#cb48-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb48-22"><a href="extended-exercises-emissions-graphs.html#cb48-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb48-23"><a href="extended-exercises-emissions-graphs.html#cb48-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the busiest 8 states&quot;</span>,</span>
+<span id="cb48-24"><a href="extended-exercises-emissions-graphs.html#cb48-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>This is an exercise in logic in the <code>filter</code>. Did you remember to update the title, footnotes and the legend title?</li>
 </ol>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="extended-exercises-emissions-graphs.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the dataset</span></span>
-<span id="cb51-2"><a href="extended-exercises-emissions-graphs.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/annual_co2.rda&quot;</span>)</span>
-<span id="cb51-3"><a href="extended-exercises-emissions-graphs.html#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-4"><a href="extended-exercises-emissions-graphs.html#cb51-4" aria-hidden="true" tabindex="-1"></a>selected_states <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span></span>
-<span id="cb51-5"><a href="extended-exercises-emissions-graphs.html#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2010</span> <span class="sc">&amp;</span> TF <span class="sc">&gt;</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span>     <span class="co"># more than 10k flights</span></span>
-<span id="cb51-6"><a href="extended-exercises-emissions-graphs.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(TF, <span class="at">n =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  <span class="co"># bottom 6 </span></span>
-<span id="cb51-7"><a href="extended-exercises-emissions-graphs.html#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(STATE_NAME) </span>
-<span id="cb51-8"><a href="extended-exercises-emissions-graphs.html#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-9"><a href="extended-exercises-emissions-graphs.html#cb51-9" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
-<span id="cb51-10"><a href="extended-exercises-emissions-graphs.html#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_label =</span> <span class="fu">if_else</span>(YEAR <span class="sc">==</span> <span class="dv">2015</span>, <span class="fu">str_to_title</span>(STATE_NAME), <span class="st">&quot;&quot;</span>))</span>
-<span id="cb51-11"><a href="extended-exercises-emissions-graphs.html#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-12"><a href="extended-exercises-emissions-graphs.html#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
-<span id="cb51-13"><a href="extended-exercises-emissions-graphs.html#cb51-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> selected_states), </span>
-<span id="cb51-14"><a href="extended-exercises-emissions-graphs.html#cb51-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
-<span id="cb51-15"><a href="extended-exercises-emissions-graphs.html#cb51-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
-<span id="cb51-16"><a href="extended-exercises-emissions-graphs.html#cb51-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> STATE_NAME)) <span class="sc">+</span> </span>
-<span id="cb51-17"><a href="extended-exercises-emissions-graphs.html#cb51-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
-<span id="cb51-18"><a href="extended-exercises-emissions-graphs.html#cb51-18" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb51-19"><a href="extended-exercises-emissions-graphs.html#cb51-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_steps</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">show.limits =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb51-20"><a href="extended-exercises-emissions-graphs.html#cb51-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
-<span id="cb51-21"><a href="extended-exercises-emissions-graphs.html#cb51-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
-<span id="cb51-22"><a href="extended-exercises-emissions-graphs.html#cb51-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb51-23"><a href="extended-exercises-emissions-graphs.html#cb51-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">shape =</span> <span class="st">&quot;State&quot;</span>,</span>
-<span id="cb51-24"><a href="extended-exercises-emissions-graphs.html#cb51-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the least-busy 6 states&quot;</span>,</span>
-<span id="cb51-25"><a href="extended-exercises-emissions-graphs.html#cb51-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Least-busy&#39; means fewest flights in 2010, but more than 10k flights.&quot;</span>)</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="extended-exercises-emissions-graphs.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the dataset</span></span>
+<span id="cb49-2"><a href="extended-exercises-emissions-graphs.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/annual_co2.rda&quot;</span>)</span>
+<span id="cb49-3"><a href="extended-exercises-emissions-graphs.html#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="extended-exercises-emissions-graphs.html#cb49-4" aria-hidden="true" tabindex="-1"></a>selected_states <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="extended-exercises-emissions-graphs.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">==</span> <span class="dv">2010</span> <span class="sc">&amp;</span> TF <span class="sc">&gt;</span> <span class="dv">10000</span>) <span class="sc">%&gt;%</span>     <span class="co"># more than 10k flights</span></span>
+<span id="cb49-6"><a href="extended-exercises-emissions-graphs.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(TF, <span class="at">n =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  <span class="co"># bottom 6 </span></span>
+<span id="cb49-7"><a href="extended-exercises-emissions-graphs.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(STATE_NAME) </span>
+<span id="cb49-8"><a href="extended-exercises-emissions-graphs.html#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="extended-exercises-emissions-graphs.html#cb49-9" aria-hidden="true" tabindex="-1"></a>annual_co2 <span class="ot">&lt;-</span> annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb49-10"><a href="extended-exercises-emissions-graphs.html#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_label =</span> <span class="fu">if_else</span>(YEAR <span class="sc">==</span> <span class="dv">2015</span>, <span class="fu">str_to_title</span>(STATE_NAME), <span class="st">&quot;&quot;</span>))</span>
+<span id="cb49-11"><a href="extended-exercises-emissions-graphs.html#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="extended-exercises-emissions-graphs.html#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb49-13"><a href="extended-exercises-emissions-graphs.html#cb49-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(STATE_NAME <span class="sc">%in%</span> selected_states), </span>
+<span id="cb49-14"><a href="extended-exercises-emissions-graphs.html#cb49-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(TF<span class="sc">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>, </span>
+<span id="cb49-15"><a href="extended-exercises-emissions-graphs.html#cb49-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> YEAR, <span class="at">group =</span> STATE_NAME)) <span class="sc">+</span></span>
+<span id="cb49-16"><a href="extended-exercises-emissions-graphs.html#cb49-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> STATE_NAME)) <span class="sc">+</span> </span>
+<span id="cb49-17"><a href="extended-exercises-emissions-graphs.html#cb49-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span></span>
+<span id="cb49-18"><a href="extended-exercises-emissions-graphs.html#cb49-18" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_label), <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-19"><a href="extended-exercises-emissions-graphs.html#cb49-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_steps</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">show.limits =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb49-20"><a href="extended-exercises-emissions-graphs.html#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb49-21"><a href="extended-exercises-emissions-graphs.html#cb49-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb49-22"><a href="extended-exercises-emissions-graphs.html#cb49-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb49-23"><a href="extended-exercises-emissions-graphs.html#cb49-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">shape =</span> <span class="st">&quot;State&quot;</span>,</span>
+<span id="cb49-24"><a href="extended-exercises-emissions-graphs.html#cb49-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Emissions for the least-busy 6 states&quot;</span>,</span>
+<span id="cb49-25"><a href="extended-exercises-emissions-graphs.html#cb49-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Least-busy&#39; means fewest flights in 2010, but more than 10k flights.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>You could load from Excel and immediately filter. I do it in two steps, because then I can check the correct field names for the <code>filter</code> and <code>mutate</code> using the environment pane.</li>
 </ol>
 <p>This is an exercise in building up quite complex statements from simple functions. Formatting with line breaks should help a lot.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="extended-exercises-emissions-graphs.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go back to the excel file</span></span>
-<span id="cb52-2"><a href="extended-exercises-emissions-graphs.html#cb52-2" aria-hidden="true" tabindex="-1"></a>aviation_co2 <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, </span>
-<span id="cb52-3"><a href="extended-exercises-emissions-graphs.html#cb52-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sheet =</span> <span class="st">&quot;DATA&quot;</span>)</span>
-<span id="cb52-4"><a href="extended-exercises-emissions-graphs.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># just the data that we need</span></span>
-<span id="cb52-5"><a href="extended-exercises-emissions-graphs.html#cb52-5" aria-hidden="true" tabindex="-1"></a>monthly_co2 <span class="ot">&lt;-</span> aviation_co2 <span class="sc">%&gt;%</span> </span>
-<span id="cb52-6"><a href="extended-exercises-emissions-graphs.html#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&gt;=</span> <span class="dv">2017</span> <span class="sc">&amp;</span> STATE_NAME <span class="sc">==</span> <span class="st">&quot;FRANCE&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-7"><a href="extended-exercises-emissions-graphs.html#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">if_else</span>(MONTH <span class="sc">&lt;</span> <span class="dv">10</span>,</span>
-<span id="cb52-8"><a href="extended-exercises-emissions-graphs.html#cb52-8" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">str_c</span>(YEAR, <span class="st">&quot;  &quot;</span>, MONTH), </span>
-<span id="cb52-9"><a href="extended-exercises-emissions-graphs.html#cb52-9" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">str_c</span>(YEAR, <span class="st">&quot; &quot;</span>, MONTH))) <span class="co">#a pseudo-date</span></span>
-<span id="cb52-10"><a href="extended-exercises-emissions-graphs.html#cb52-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-11"><a href="extended-exercises-emissions-graphs.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co"># then the basic ggplot(data, aes(x,y)) + geometry...</span></span>
-<span id="cb52-12"><a href="extended-exercises-emissions-graphs.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(monthly_co2, <span class="fu">aes</span>(date, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>)) <span class="sc">+</span></span>
-<span id="cb52-13"><a href="extended-exercises-emissions-graphs.html#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb52-14"><a href="extended-exercises-emissions-graphs.html#cb52-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
-<span id="cb52-15"><a href="extended-exercises-emissions-graphs.html#cb52-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
-<span id="cb52-16"><a href="extended-exercises-emissions-graphs.html#cb52-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions of France&quot;</span>,</span>
-<span id="cb52-17"><a href="extended-exercises-emissions-graphs.html#cb52-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="sc">+</span></span>
-<span id="cb52-18"><a href="extended-exercises-emissions-graphs.html#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
-<p><img src="flights_in_R_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="extended-exercises-emissions-graphs.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go back to the excel file</span></span>
+<span id="cb50-2"><a href="extended-exercises-emissions-graphs.html#cb50-2" aria-hidden="true" tabindex="-1"></a>aviation_co2 <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, </span>
+<span id="cb50-3"><a href="extended-exercises-emissions-graphs.html#cb50-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sheet =</span> <span class="st">&quot;DATA&quot;</span>)</span>
+<span id="cb50-4"><a href="extended-exercises-emissions-graphs.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># just the data that we need</span></span>
+<span id="cb50-5"><a href="extended-exercises-emissions-graphs.html#cb50-5" aria-hidden="true" tabindex="-1"></a>monthly_co2 <span class="ot">&lt;-</span> aviation_co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb50-6"><a href="extended-exercises-emissions-graphs.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&gt;=</span> <span class="dv">2017</span> <span class="sc">&amp;</span> STATE_NAME <span class="sc">==</span> <span class="st">&quot;FRANCE&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-7"><a href="extended-exercises-emissions-graphs.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">if_else</span>(MONTH <span class="sc">&lt;</span> <span class="dv">10</span>,</span>
+<span id="cb50-8"><a href="extended-exercises-emissions-graphs.html#cb50-8" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">str_c</span>(YEAR, <span class="st">&quot;  &quot;</span>, MONTH), </span>
+<span id="cb50-9"><a href="extended-exercises-emissions-graphs.html#cb50-9" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">str_c</span>(YEAR, <span class="st">&quot; &quot;</span>, MONTH))) <span class="co">#a pseudo-date</span></span>
+<span id="cb50-10"><a href="extended-exercises-emissions-graphs.html#cb50-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-11"><a href="extended-exercises-emissions-graphs.html#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="co"># then the basic ggplot(data, aes(x,y)) + geometry...</span></span>
+<span id="cb50-12"><a href="extended-exercises-emissions-graphs.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(monthly_co2, <span class="fu">aes</span>(date, CO2_QTY_TONNES<span class="sc">/</span><span class="fl">1e6</span>)) <span class="sc">+</span></span>
+<span id="cb50-13"><a href="extended-exercises-emissions-graphs.html#cb50-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb50-14"><a href="extended-exercises-emissions-graphs.html#cb50-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb50-15"><a href="extended-exercises-emissions-graphs.html#cb50-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="sc">~</span>CO[<span class="dv">2</span>]<span class="sc">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb50-16"><a href="extended-exercises-emissions-graphs.html#cb50-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Aviation Emissions of France&quot;</span>,</span>
+<span id="cb50-17"><a href="extended-exercises-emissions-graphs.html#cb50-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-18"><a href="extended-exercises-emissions-graphs.html#cb50-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 
 </div>
 </div>
