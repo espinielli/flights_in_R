@@ -1,4 +1,4 @@
-tab:unnamed-chunk-87
+tab:unnamed-chunk-2
 howto
 before-you-start
 ways-to-use-the-material
@@ -68,6 +68,7 @@ extended-question
 country-data
 loadonemonthly
 loadmultiplemonthlies
+load-multiple-files
 exercises-4
 questions-7
 answers-7

@@ -1,17 +1,15 @@
 # Loops and SID data
 
-[Incomplete]
-
 In the next few chapters we move away from tweaking code for graphs and get more hands-on with manipulating data. With another software language, this might be the time to discuss loops. In a manner of speaking we will be looping, but in a very R way. R does have a 'for..next' syntax, but it's a little like the chips on the menu of an Indian restaurant: most of the time you're better off with something else.
 
-We'll cover loops in 4 ways: 2 explicit loops, the classic R `lapply` and the tidyverse `map`-`reduce` pairing; and 2 implicit loops, because half the time in R you hardly notice you're looping, vectors and `group_by` for looping within rows of a dataframe. `group_by` and its associated functions are a major toolset, so we will cover them in the next chapter, the other three in this.
+We'll cover loops in 4 ways: 2 explicit loops, the classic R `lapply` and the tidyverse `map`-`reduce` pairing; and 2 implicit loops, because half the time in R you hardly notice you're looping, vectors and `group_by` for looping within rows of a dataframe. `group_by` and its associated functions are a major toolset, so we will cover them in the next chapter, the other three in this one.
 
 Loops go hand-in-hand with functions, so this chapter also takes some first steps in defining our own.
 
 There's a wealth of flight data to download in the [STATFOR Interactive Dashboard](https://www.eurocontrol.int/dashboard/statfor-interactive-dashboard) or 'SID' to its friends. The Excel downloads look fiddly to process into something you might handle in R, but we'll see how to do this quite quickly with a few short loops.
 
 ```{r, echo=FALSE}
-knitr::kable(data.frame(syl=c("")),
+knitr::kable(data.frame(syl=c("`lapply`, `rep`, `function`, `pmin`, `pmax`, `is.list`, `unlist`, `read_xlsx`, `map`, `pmap`, `crossing`")),
              col.names = c("In this chapter, you'll be introduced to:"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
 ```
@@ -367,27 +365,33 @@ Code that keeps data (or metadata, like filenames) in datasets rather than in pa
 
 ### Load multiple files
 
-The third version is most interesting because we actually want to load data from multiple files. 
-
-For this book, there's an admin step first, which is to get them from the web onto your machine. We do this with a list and a function that loops.
+The third version is most interesting because we actually want to load data from multiple files.  For this book, there's an admin step first, which is to get them from the web onto your machine. We do this with a list and a function that does the looping for us.
 
 ```{r}
 file_segments <- c("LowCost", "TradSched", "BusAvn", "AllCargo")
-urls <- paste("https://github.com/david6marsh/flights_in_R/raw/main/data/SID_Monthly_",
+urls <- str_c("https://github.com/david6marsh/flights_in_R/raw/main/data/SID_Monthly_",
                 file_segments, 
                 ".xlsx")
-local_names <- paste("data/SID_Monthly_", file_segments, ".xlsx")
+local_names <- str_c("data/SID_Monthly_", file_segments, ".xlsx")
 download.file(urls, local_names, mode = "wb") 
+```
+In this particular case, we already know the file names. More often, we have downloaded a number of files, and know the file name format, but want to avoid typing in the names ourselves. The `dir` function does the job for us, and matches to a pattern. Best to check the number of files, or check the list by eye just to see that the pattern didn't find files that you don't want to process.
 
+We need something like the code for `extract_locs`, but automatic "recycling" does not work here. We will use `tidyr::crossing` for making what's sometimes called a Cartesian join of all combinations of file name and skip (with n_rows along for the ride).
 
-# download the file to the data folder, the 'mode' parameter is needed on Windows machines
-co2_url <- "https://github.com/david6marsh/flights_in_R/raw/main/data/CO2_emissions_by_state.xlsx"
-# if you want the original, which might have been updated, use this instead
-# co2_url <- "https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx"
-download.file(co2_url, "data/CO2_emissions.xlsx", mode = "wb")
-
+```{r}
+SID_files <- dir("data", pattern = "SID_Monthly", full.names = TRUE)
+# force all combinations of file and skip
+extract_locs <- data.frame(file = SID_files) %>% 
+  crossing(data.frame(skip = seq(9, 199, by = 19),
+                       n_rows = 14))
+# and load
+many_segment_monthlies <- extract_locs %>% 
+  pmap(extract_monthlies) %>% 
+  bind_rows()
 ```
 
+It might take a minute to load the files, but it didn't take much code.
 
 ### Exercises
 
@@ -399,11 +403,14 @@ download.file(co2_url, "data/CO2_emissions.xlsx", mode = "wb")
 4) Plot total flights with one line per airspace.
 5) How would you improve this graph? 
 6) Where is the drop in flights resulting from the COVID-19 lockdowns?
+7) Try a single `data.frame` without the `crossing`. Why does R complain?
+8) As for question 4, but facet by market segment.
 
 #### Answers
 
 1) It seems to work, but you get a list of answers. `Unlist` just puts everything into a single vector, all structure is lost. There are ways to save this (eg `bind_rows(monthlies)` is how to bind this list of results together row-wise), but even then, we lose track of which file the data have come from. this leads towards an approach that becomes increasingly like a construction from Heath-Robinson (or Panamarenko, if you prefer).
 ```{r}
+skips <- seq(9, 199, by = 19)
 monthlies <- lapply(skips,
                     function(x) readxl::read_xlsx("data/SID_Monthly_AllCargo.xlsx", 
                                       skip = x, n_max = 14, 
@@ -441,5 +448,13 @@ ggplot(all_monthlies_v3,
 
 5) There are rather too many colours. Perhaps split into large and smaller groups and facet. Or one facet per airspace. `ggplot` formats the month axis nicely: probably labelling this as "month" is unnecessary, so remove it. 
 6) Without the context of 2019, the drop in traffic is not evident. But in fact, this is the all-cargo market segment which was relatively unaffected by COVID-19, or at least did not see the deep declines in flights of other market segments.
-
+7) Because it's not obvious how to recycle vectors of length 4, 19 and 1 to get the same lengths.
+8) A minimum graph is something like this. Three further experiments: free up the y-axis, between the four facets; transform `T` into thousands (as we did for millions in previous examples); remove ECAC, as it is quite dominant.
+```{r}
+ggplot(many_segment_monthlies,
+       aes(month, T, colour = airspace)) + 
+  geom_line() +
+  # facet_wrap(~ segment, scales = "free_y") +
+  labs(y = "Total flights in month")
+```
 
