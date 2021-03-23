@@ -24,7 +24,7 @@
 <meta name="author" content="David Marsh" />
 
 
-<meta name="date" content="2021-03-18" />
+<meta name="date" content="2021-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="extended-exercises-emissions-graphs.html"/>
-<link rel="next" href="vectors-and-grouping-loops-of-a-sort.html"/>
+<link rel="next" href="loops-and-sid-data.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="firstLook.html"><a href="firstLook.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> emissions</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="firstLook.html"><a href="firstLook.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
-<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extracting-variables"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extractfield"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
 <li class="chapter" data-level="3.3" data-path="firstLook.html"><a href="firstLook.html#someValues"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
 <li class="chapter" data-level="3.4" data-path="firstLook.html"><a href="firstLook.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a>
 <ul>
@@ -214,13 +214,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="extended-exercises-emissions-graphs.html"><a href="extended-exercises-emissions-graphs.html#answers-4"><i class="fa fa-check"></i><b>6.3</b> Answers</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="7" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html"><i class="fa fa-check"></i><b>7</b> Vectors and grouping - Loops of a sort</a>
+<li class="chapter" data-level="7" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html"><i class="fa fa-check"></i><b>7</b> Loops and SID data</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#vectors"><i class="fa fa-check"></i><b>7.1</b> Vectors</a></li>
-<li class="chapter" data-level="7.2" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#exercises-2"><i class="fa fa-check"></i><b>7.2</b> Exercises</a>
+<li class="chapter" data-level="7.1" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#vectors-and-lists"><i class="fa fa-check"></i><b>7.1</b> Vectors and Lists</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#questions-5"><i class="fa fa-check"></i><b>7.2.1</b> Questions</a></li>
-<li class="chapter" data-level="7.2.2" data-path="vectors-and-grouping-loops-of-a-sort.html"><a href="vectors-and-grouping-loops-of-a-sort.html#answers-5"><i class="fa fa-check"></i><b>7.2.2</b> Answers</a></li>
+<li class="chapter" data-level="7.1.1" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#exercises-2"><i class="fa fa-check"></i><b>7.1.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#functions-and-loops"><i class="fa fa-check"></i><b>7.2</b> Functions and Loops</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#first-function-bi-directional-airport-pairs"><i class="fa fa-check"></i><b>7.2.1</b> First function: bi-directional airport pairs</a></li>
+<li class="chapter" data-level="7.2.2" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#looping-with-functions"><i class="fa fa-check"></i><b>7.2.2</b> Looping with functions</a></li>
+<li class="chapter" data-level="7.2.3" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#exercises-3"><i class="fa fa-check"></i><b>7.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#country-data"><i class="fa fa-check"></i><b>7.3</b> Country data</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#loadonemonthly"><i class="fa fa-check"></i><b>7.3.1</b> Load one country’s monthly data</a></li>
+<li class="chapter" data-level="7.3.2" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#loadmultiplemonthlies"><i class="fa fa-check"></i><b>7.3.2</b> Load monthly data for multiple countries</a></li>
+<li class="chapter" data-level="7.3.3" data-path="loops-and-sid-data.html"><a href="loops-and-sid-data.html#exercises-4"><i class="fa fa-check"></i><b>7.3.3</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="splitparse.html"><a href="splitparse.html"><i class="fa fa-check"></i><b>8</b> NOTAMS: Splitting and parsing strings</a>
@@ -230,14 +240,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
 <li class="chapter" data-level="8.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>8.1.2</b> Splitting a column at a regular expression</a></li>
 <li class="chapter" data-level="8.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>8.1.3</b> Splitting a column at an either-or</a></li>
-<li class="chapter" data-level="8.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-3"><i class="fa fa-check"></i><b>8.1.4</b> Exercises</a></li>
+<li class="chapter" data-level="8.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-5"><i class="fa fa-check"></i><b>8.1.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns</a>
 <ul>
 <li class="chapter" data-level="8.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>8.2.1</b> Splitting a field into a list</a></li>
 <li class="chapter" data-level="8.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>8.2.2</b> More realistic splitting</a></li>
 <li class="chapter" data-level="8.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>8.2.3</b> Manipulate fields in rows</a></li>
-<li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-4"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-6"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -270,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="extended-exercises-emissions-graphs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="vectors-and-grouping-loops-of-a-sort.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="loops-and-sid-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

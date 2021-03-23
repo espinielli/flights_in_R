@@ -7,7 +7,7 @@ This chapter uses the example of NOTAMs (notices to airmen) to explore R functio
 The parsing of NOTAMs here is _NOT_ for operational use. It's for statistical analysis, post operations. NOTAMs are very varied, and we will not handle all the possible ways in which the parsing might fail. We assume that failures can be picked up in later statistical analysis, or will just be outliers that can be ignored as 1 in millions of cases. This code is NOT A SUBSTITUTE FOR READING THE NOTAM BEFORE THE FLIGHT.
 
 ```{r, echo=FALSE}
-knitr::kable(data.frame(syl=c("`separate()`, regular expressions, list fields, `system.time()`, `identical()`, `str_match`, `str_split()`, `str_replace(_all)()`, `str_sub()`, `unnest_(wider/longer)()`, `map()`, `relocate`")),
+knitr::kable(data.frame(syl=c("`separate()`, regular expressions, list fields, `system.time()`, `identical()`, `str_match`, `str_split()`, `str_replace(_all)()`, `str_sub()`, `unnest_(wider/longer)()`, `map2()`, `relocate`")),
              col.names = c("In this chapter, you'll be introduced to:"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
 
@@ -182,7 +182,7 @@ We load a set of NOTAM texts from Github. These are based on real ones, but some
 
 When adding rows, as we will, we need an index that lets us identify all of the rows that go with one piece of text. We generate a simple integer `index` for this.
 
-The initial processing is to remove the opening and closing bracket from the whole NOTAM. This is just for sake of tidiness, though once we split the field the "()" are no longer a matched pair, so best to do it now. [How does the regular expression "^\\(|\\)$" achieve this?]
+The initial processing is to remove the opening and closing bracket from the whole NOTAM. This is just for sake of tidiness, though once we split the field the "()" are no longer a matched pair, so best to do it now. [How does the regular expression `^\\(|\\)$` achieve this?]
 
 NOTAMs are in sections, with headers "Q) ", "A) ", "B) " to "G) ". So, in a first attempt (which works in very simple cases only), we want to split where we find 'section' headers "Q) ", "A) " etc. But we don't want to throw these away, we want to split and keep the separator.
 

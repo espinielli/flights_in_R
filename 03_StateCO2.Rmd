@@ -102,7 +102,7 @@ The third way gives a window to explore every observation. Click on the dataset 
 
 ![](images/CO2inViewAndEnvironment.png)
 
-## Extracting variables
+## Extracting variables {#extractfield}
 
 To answer more questions about the data there are some more tools to summarise the values that it takes. We saw `summary()` works for numeric values, but what about discrete ones?
 
