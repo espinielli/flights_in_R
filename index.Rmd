@@ -51,7 +51,9 @@ But it is never going to replace the huge amount of excellent information, espec
 
 * Chapters \@ref(howto) and \@ref(start) should get you up and running in RStudio.
 * Chapters \@ref(firstLook) to 5 start with how to look at data, using a data viewer and with some initial graphs. If you're mostly using existing code that creates simple charts, written by someone else, then these chapters should help you find your way around, and start to adapt the code for your own needs.
-* Chapters ... (TBD)
+* Chapters \@ref(loopsfunctions) (and TBD) do more data loading and wrangling, covering the basics of loops and functions
+* more...TBD
+* Chapter \@ref(splitparse) covers pulling data out of strings (parsing) using 'regular expressions', with NOTAMs as the application.
 
 ## What's gone wrong?
 

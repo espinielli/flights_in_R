@@ -1,4 +1,4 @@
-# Loops and SID data
+# Loops, functions and SID data {#loopsfunctions}
 
 In the next few chapters we move away from tweaking code for graphs and get more hands-on with manipulating data. With another software language, this might be the time to discuss loops. In a manner of speaking we will be looping, but in a very R way. R does have a 'for..next' syntax, but it's a little like the chips on the menu of an Indian restaurant: most of the time you're better off with something else.
 
@@ -377,7 +377,7 @@ download.file(urls, local_names, mode = "wb")
 ```
 In this particular case, we already know the file names. More often, we have downloaded a number of files, and know the file name format, but want to avoid typing in the names ourselves. The `dir` function does the job for us, and matches to a pattern. Best to check the number of files, or check the list by eye just to see that the pattern didn't find files that you don't want to process.
 
-We need something like the code for `extract_locs`, but automatic "recycling" does not work here. We will use `tidyr::crossing` for making what's sometimes called a Cartesian join of all combinations of file name and skip (with n_rows along for the ride).
+We need something like the code for `extract_locs`, but automatic "recycling" does not work here. What we need is sometimes called a 'Cartesian' or a 'cross' join, where all combinations are generated. The latter is the clue to the function name. We will use `tidyr::crossing` to make all combinations of file name and skip (with n_rows along for the ride).
 
 ```{r}
 SID_files <- dir("data", pattern = "SID_Monthly", full.names = TRUE)
@@ -393,11 +393,13 @@ many_segment_monthlies <- extract_locs %>%
 
 It might take a minute to load the files, but it didn't take much code.
 
+There's a lot more that we can do with such data: tidying, summarising, adapting, plotting. But for that we need `group_by`, which is the main theme of the next chapter. In the meantime, save the file to `data/` rather than rely on your project to keep a track of it. (We covered `save` at the end of section \@ref(loadco2).)
+
 ### Exercises
 
 #### Questions
 
-1 Use `lapply` and an anonymous (temporary) function to loop over the `skips`. What happens if you `unlist` the result?
+1) Use `lapply` and an anonymous (temporary) function to loop over the `skips`. What happens if you `unlist` the result?
 2) Use `read_xlsx` to load the A-column from the file. Use seq to generate the row position of the airspace names (rather than the starts of the data). Hence extract the airspace names.
 3) Is the `monthlies` dataset tidy?
 4) Plot total flights with one line per airspace.
@@ -405,6 +407,10 @@ It might take a minute to load the files, but it didn't take much code.
 6) Where is the drop in flights resulting from the COVID-19 lockdowns?
 7) Try a single `data.frame` without the `crossing`. Why does R complain?
 8) As for question 4, but facet by market segment.
+10) From the SID, download a longer set of data, for multiple market segments. Adapt the code you have used to import this. Plot the data, for a quick visual check.
+11) Adapt `extract_monthlies` to allow the user to modify the column names. Advanced version: Use the `...` when doing this, but why might this be risky?
+12) What sanity checking of column names would be useful?
+13) Advanced: Make an alternative version of `combo_str_c` which uses `crossing` instead of `lapply`.
 
 #### Answers
 
@@ -454,7 +460,57 @@ ggplot(all_monthlies_v3,
 ggplot(many_segment_monthlies,
        aes(month, T, colour = airspace)) + 
   geom_line() +
-  # facet_wrap(~ segment, scales = "free_y") +
+  facet_wrap(~ segment) +
   labs(y = "Total flights in month")
 ```
+10) If you save the downloaded Excel files into the `data` directory then you'll need to name them so that you can tell them apart from the first batch. Easier might be to use a subdirectory of `data`. Otherwise, just adapt `skip` and `n_max`.
+11) We do the full monty and make all three parts adaptable. It's polite, to yourself and others, when adding parameters to an existing function, to make the default behaviour exactly as it was before. That way, any existing uses of the function will continue to work. List new parameters after the old ones, and supply default values to give the original behaviour.
+
+```{r}
+extract_monthlies <- function(file, skip, n_rows,
+                              col1 = c("A", "D", "I", "O", "T"),
+                              col2 = c("_last", "", "_growth"),
+                              sep = ""){
+  stopifnot(length(col1) == 5)
+  stopifnot(length(col2) == 3)
+  monthly_cols <- c("month", 
+                    combos_str_c(col1, col2, sep = sep))
+  meta_segment <- readxl::read_xlsx(file, range = "A2", 
+                                    col_names = "segment") 
+  meta_units <- readxl::read_xlsx(file, range = "A4", 
+                                  col_names = "units")
+  # need to create an Excel reference "An" where n is just before skip
+  meta_airspace <- readxl::read_xlsx(file, range = str_c("A", skip - 2), 
+                                     col_names = "airspace")
+  monthlies <- readxl::read_xlsx(file, skip = skip, n_max = n_rows, 
+                                 col_names = monthly_cols) 
+  # this is a quick way to return a dataframe reasonable column order
+  # the first 3 get recycled as usual, to the same length as monthlies
+  bind_cols(meta_airspace, meta_segment, meta_units, monthlies)
+}
+
+monthlies <- extract_monthlies("data/SID_Monthly_AllCargo.xlsx", skip = 9, n_rows = 14,
+                               col1 = c("Arr", "Dep", "Int", "Over", "Total"))
+```
+
+For the 'advanced' version, the clue is if you find yourself writing `sep = sep` to pass parameters on to another function. Here we replace both `sep = ""` and `sep = sep` with `...`. There is a risk with this that a user could then also pass the `collapse` parameter, which would have unfortunate consequences. So safer is not to use the `...` here.
+12) It's important that `col1` has 5 values, and `col2` has 3 values, otherwise the column naming will be scrambled. How do you get the number of values in a vector? With that, we also need the function `stopifnot` for checking parameters. Here we would add two lines, eg `stopifnot(length(col1) == 5)`, `stopifnot(length(col2) == 3)` at the start of the function. Try this. We use two lines because then the error reporting is more precise: it tells the user exactly which parameter is the wrong length.
+13) `crossing` replaces `lapply` for us, but it returns a dataframe, and `str_c` is not be happy with a tibble or dataframe, it wants a vector. In section \@ref(topStates) we saw `pull` for getting a vector out of a dataframe. With this, we can make it work. It's not clearly simpler than using `lapply`, but it's more self explanatory, because, rather than seeing `lapply` which could be any sort of loop and you need to read it to work out why the loop is there, you've got `crossing` written clearly.
+
+```{r}
+alt_combos_str_c <- function(s1, s2, ...){
+  # get all combinations, as a dataframe
+  cross <- crossing(s1, s2)
+  # paste the vectors from this 
+  str_c(cross %>% pull(1),
+        cross %>% pull(2),
+        ...)
+}
+
+alt_combos_str_c(c("A319", "A320", "A321"), c("ceo", "neo"), sep="")
+```
+
+Even if you didn't get this answer correct, there is a useful 'error pattern' here: where your code does not work first time because either (a) a function returns a type of data that you were not expecting or (b) a function is fussy about the type of data that you pass it as a parameter. 
+
+The functions of R are really powerful, and you do a lot by stringing them together. Sometimes, however, it feels like all the effort is in getting the data types aligned from one function to the next.
 
