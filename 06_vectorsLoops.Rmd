@@ -68,7 +68,7 @@ R has some more tricks up its sleeve to help with referring to elements. They ca
 ```{r}
 # putting brackets around the code prints the result as well as executing it
 (a <- c(a = 7, 3, b = 7, c = 800))
-(b <- list(pi = 3.14, pie = "apple", pier = "Bournemouth", piers = c("Weston", "Wigan")))
+(b <- list(p = 0.05, pi = 3.14, pie = "apple", pier = "Bournemouth", piers = c("Weston", "Wigan")))
 names(b)
 
 a[c("a", "b")]
@@ -283,7 +283,12 @@ An 'airspace' here is usually a country's airspace: think of extending the borde
  
 There are two little catches to the SID data. Firstly, the Excel export comes in a number of tables one after the other on a single worksheet. Secondly, the field names of each table are horrible, and use merged cells.
 
-We've extracted some data for the all-cargo market segment. As a first example, we extract a single table from within the Excel file. [Download some yourself and inspect the Excel file.]
+We've extracted some data for the all-cargo market segment. As a first example, we extract a single table from within the Excel file. [Download some yourself and inspect the Excel file.] For this book, as with the emissions data, we provide a snapshot on-line which you can download like this. You only need to do this once.
+
+```{r}
+url <- "https://github.com/david6marsh/flights_in_R/raw/main/data/SID_Monthly_AllCargo.xlsx"
+download.file(url, "data/SID_Monthly_AllCargo.xlsx", mode = "wb") 
+```
 
 ![The Excel download is in 'tables' like this.](images/SID_monthly_excel_snapshot.png)
 The column names are month, and three values for each of arrival, departure, (one airport in the airspace and one not), internal (both airports in), overflight (neither) and total. We use `combos_str_c` to generate some more useful column names.
@@ -463,6 +468,7 @@ ggplot(many_segment_monthlies,
   facet_wrap(~ segment) +
   labs(y = "Total flights in month")
 ```
+
 10) If you save the downloaded Excel files into the `data` directory then you'll need to name them so that you can tell them apart from the first batch. Easier might be to use a subdirectory of `data`. Otherwise, just adapt `skip` and `n_max`.
 11) We do the full monty and make all three parts adaptable. It's polite, to yourself and others, when adding parameters to an existing function, to make the default behaviour exactly as it was before. That way, any existing uses of the function will continue to work. List new parameters after the old ones, and supply default values to give the original behaviour.
 
@@ -494,6 +500,7 @@ monthlies <- extract_monthlies("data/SID_Monthly_AllCargo.xlsx", skip = 9, n_row
 ```
 
 For the 'advanced' version, the clue is if you find yourself writing `sep = sep` to pass parameters on to another function. Here we replace both `sep = ""` and `sep = sep` with `...`. There is a risk with this that a user could then also pass the `collapse` parameter, which would have unfortunate consequences. So safer is not to use the `...` here.
+
 12) It's important that `col1` has 5 values, and `col2` has 3 values, otherwise the column naming will be scrambled. How do you get the number of values in a vector? With that, we also need the function `stopifnot` for checking parameters. Here we would add two lines, eg `stopifnot(length(col1) == 5)`, `stopifnot(length(col2) == 3)` at the start of the function. Try this. We use two lines because then the error reporting is more precise: it tells the user exactly which parameter is the wrong length.
 13) `crossing` replaces `lapply` for us, but it returns a dataframe, and `str_c` is not be happy with a tibble or dataframe, it wants a vector. In section \@ref(topStates) we saw `pull` for getting a vector out of a dataframe. With this, we can make it work. It's not clearly simpler than using `lapply`, but it's more self explanatory, because, rather than seeing `lapply` which could be any sort of loop and you need to read it to work out why the loop is there, you've got `crossing` written clearly.
 

@@ -67,15 +67,15 @@ In this dataset we have:
 
 You'll notice a few names in there which aren't states, such as 'Canaries' which is counted separately from Spain. These measurements add up cleanly (this isn't always true in flights data), so you can get the full 'Spain' by adding the two. There are also some States with a '*' next to their names, which means there's a footnote elsewhere in the spreadsheet.
 
-We want to keep things simple, so we will use a little data wrangling to get rid of the month, then save the result as an R dataset, rather than an Excel file. These are some quite common patterns of wrangling.
+We want to keep things simple, so we will use a little data wrangling to aggregate to yearly totals for each country, then save the result as an R dataset, rather than an Excel file. These are some quite common step in data wrangling:
 
-* Drop some variables. Here, just `select` anything other than `STATE_CODE`.
+* Drop some variables. Here, just `select` everything _except_ than `STATE_CODE`. (Not is a very thin `!`, so easily overlooked.)^[In fact, this step is here just to illustrate the selection step. It's not needed, as we'll see in the data wrangling chapters, or you could test by removing it.]
 * Summarise. `group_by` the relevant variables, then summarise within those groups. Here we use the `summarise_at` variant of summarise, which allows us quickly to apply a function `sum` to multiple variables.
 * Drop some rows. There are few families and business unaffected by COVID-19. Aviation is of course no exception, and the data from 2020 are really an outlier for this reason. To keep things simple here, we omit 2020, using a `filter` that says 'keep only the values before 2020'. The `group_by` isn't _essential_ for the filter, but I think it's probably faster as written here, since the grouping process has already found all of the year 2020 values.
 
 Often you want to keep your groups, but here we don't need to, so we `ungroup` at the end. Then we save the data into the `data` subdirectory of the project.
 
-There will be more examples of this sort of data manipulation in Chapter \@ref(filter), with more explanation of what's happening. 
+There will be more examples of this sort of data manipulation in Chapter \@ref(filter), with more explanation of what's happening. And a lot more when we turn to data wrangling in chapters \@ref(loopsfunctions) and \@ref(groups).
 
 ```{r}
 annual_co2 <- aviation_co2 %>%

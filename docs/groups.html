@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <title>Chapter 7 Looping with groups | Analysing Flights with R - UNDER CONSTRUCTION</title>
   <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:title" content="Chapter 7 Looping with groups | Analysing Flights with R - UNDER CONSTRUCTION" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta name="twitter:title" content="Chapter 7 Looping with groups | Analysing Flights with R - UNDER CONSTRUCTION" />
   
   <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="splitparse.html"/>
-
+<link rel="prev" href="loopsfunctions.html"/>
+<link rel="next" href="splitparse.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -277,28 +277,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="groups" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Looping with groups</h1>
+<p>It feels like we have hardly started to investigate the lovely set of data from the SID. It would be natural to compare countries, to produce totals or min and max per country, to compare months, to give just three examples. This calls for a sort of looping: for each country or for each month, do x. In the <code>tidyverse</code> this is done with <code>group_by</code> and a host of supporting functions, as we’ll explore in this chapter.</p>
+<p>The patterns that we explore in this chapter are some of those that you’ll use most. Often, your main decision is whether you need to summarise (section <a href="groups.html#summarise">7.1</a>) or to change and add variables, <code>mutate</code> in <code>tidyverse</code>-speak (section <a href="groups.html#mutate">7.3</a>), or a bit of both.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">In this chapter, you’ll be introduced to:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>lapply</code>, <code>rep</code>, <code>function</code>, <code>pmin</code>, <code>pmax</code>, <code>is.list</code>, <code>unlist</code>, <code>read_xlsx</code>, <code>map</code>, <code>pmap</code>, <code>crossing</code></td>
+</tr>
+</tbody>
+</table>
+<div id="summarise" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Summarising</h2>
+<p>Summarising radically reduces the number of rows in your dataset. You will also lose variables in the process. We saw an example in section <a href="firstLook.html#loadco2">3.1</a>, where we summarised to get annual totals. For that monthly data, you can think of it row-wise, as “aggregate the rows so that I just have years,” or column-wise, as “get rid of the months.” These are essentially the same, and both are achieved with <code>summarise</code> and related functions.</p>
+</div>
+<div id="dates" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Dates</h2>
+</div>
+<div id="mutate" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Adding variables</h2>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="splitparse.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="loopsfunctions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="splitparse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
