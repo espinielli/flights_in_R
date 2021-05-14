@@ -329,6 +329,7 @@ That's as far as we need to go. The code generates some warnings of 'missing pie
  7) Use `str_match` to pull the A field directly from the NOTAM field in `notam_texts`. Try two approaches, one assuming that the string ends in "B)" and another based only on the likely content of the field. 
  8) Create a function that takes a dataframe like 'notam_texts' and returns the result of the whole process. What happens if you run it on the last NOTAM in the file and why? In words, how might you solve this?
  9) In words, how might you solve the 'missing pieces' warnings?
+ 10) Where would our code struggle if a NOTAM has repeated fields? (I've seen this occur: two different (!) versions of fields F and G)?
  
 #### Answers
 
@@ -351,7 +352,9 @@ ans <- notam_texts %>%
 ```
  
  8) (Essentially a cut-paste exercise, so result not provided here.) The final NOTAM has a missing "E)" header for the E field, so the splitting approach fails. Two possible solutions: filter to remove, if "E)" not found would perhaps be ok as one outlier amongst thousands; or detect and insert "E)" after C or D to allow the code to work properly.
- 9) Perhaps there's a 'quiet' option for the function (;-)). Otherwise, since the problem is whether or not there's text to say which NOTAM is being replaced, you could test for length and `separate` in two different ways: `if_else(header is long, separate with 3 column names, separate with 2 column names).
+ 9) Perhaps there's a 'quiet' option for the function ;-). Otherwise, since the problem is whether or not there's text to say which NOTAM is being replaced, you could test for length and `separate` in two different ways: `if_else(header is long, separate with 3 column names, separate with 2 column names)`.
+ 10) A hard one, but this leads `pivot_wider()` to create a list column rather than an ordinary one. A nice robust response, but possibly not what you want. In practice, I used the additional parameters `values_from = both, values_fn = gdata::first` to handle this and arbitrarily pick the first of the duplicate entries. This might not suit your need.
+ 
  
  
  
