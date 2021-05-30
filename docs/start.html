@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Getting started | Analysing Flights with R - UNDER CONSTRUCTION</title>
   <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Getting started | Analysing Flights with R - UNDER CONSTRUCTION" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David Marsh" />
 
 
-<meta name="date" content="2021-03-31" />
+<meta name="date" content="2021-05-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -116,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -229,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="loopsfunctions.html"><a href="loopsfunctions.html#loadonemonthly"><i class="fa fa-check"></i><b>6.3.1</b> Load one country’s monthly data</a></li>
 <li class="chapter" data-level="6.3.2" data-path="loopsfunctions.html"><a href="loopsfunctions.html#loadmultiplemonthlies"><i class="fa fa-check"></i><b>6.3.2</b> Load monthly data for multiple countries</a></li>
-<li class="chapter" data-level="6.3.3" data-path="loopsfunctions.html"><a href="loopsfunctions.html#load-multiple-files"><i class="fa fa-check"></i><b>6.3.3</b> Load multiple files</a></li>
+<li class="chapter" data-level="6.3.3" data-path="loopsfunctions.html"><a href="loopsfunctions.html#loadMultipleFiles"><i class="fa fa-check"></i><b>6.3.3</b> Load multiple files</a></li>
 <li class="chapter" data-level="6.3.4" data-path="loopsfunctions.html"><a href="loopsfunctions.html#exercises-4"><i class="fa fa-check"></i><b>6.3.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
@@ -255,6 +258,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>8.2.3</b> Manipulate fields in rows</a></li>
 <li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-6"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>9</b> Maps and geographic data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="maps.html"><a href="maps.html#spatialFeatures"><i class="fa fa-check"></i><b>9.1</b> Spatial features</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="maps.html"><a href="maps.html#map-exercises"><i class="fa fa-check"></i><b>9.1.1</b> Map Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="maps.html"><a href="maps.html#RnDArchive"><i class="fa fa-check"></i><b>9.2</b> Using the R&amp;D Data Archive</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="maps.html"><a href="maps.html#flight-summaries"><i class="fa fa-check"></i><b>9.2.1</b> Flight Summaries</a></li>
+<li class="chapter" data-level="9.2.2" data-path="maps.html"><a href="maps.html#airspaceData"><i class="fa fa-check"></i><b>9.2.2</b> Airspace structure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="maps.html"><a href="maps.html#flight-profiles"><i class="fa fa-check"></i><b>9.2.3</b> Flight profiles</a></li>
+<li class="chapter" data-level="9.2.4" data-path="maps.html"><a href="maps.html#exercises-7"><i class="fa fa-check"></i><b>9.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="maps.html"><a href="maps.html#mapRegions"><i class="fa fa-check"></i><b>9.3</b> Countries and regions</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="maps.html"><a href="maps.html#mapCountries"><i class="fa fa-check"></i><b>9.3.1</b> Countries</a></li>
+<li class="chapter" data-level="9.3.2" data-path="maps.html"><a href="maps.html#mapAirspace"><i class="fa fa-check"></i><b>9.3.2</b> Airspace</a></li>
+<li class="chapter" data-level="9.3.3" data-path="maps.html"><a href="maps.html#exercises-8"><i class="fa fa-check"></i><b>9.3.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="maps.html"><a href="maps.html#mapAirports"><i class="fa fa-check"></i><b>9.4</b> Airports</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="maps.html"><a href="maps.html#mapOverlapLabels"><i class="fa fa-check"></i><b>9.4.1</b> Overlapping labels on maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="maps.html"><a href="maps.html#mapRoutes"><i class="fa fa-check"></i><b>9.5</b> Routes</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="maps.html"><a href="maps.html#great-circle-routes"><i class="fa fa-check"></i><b>9.5.1</b> Great Circle Routes</a></li>
+<li class="chapter" data-level="9.5.2" data-path="maps.html"><a href="maps.html#fasterGeo"><i class="fa fa-check"></i><b>9.5.2</b> Need for Speed</a></li>
+<li class="chapter" data-level="9.5.3" data-path="maps.html"><a href="maps.html#trueRoutes"><i class="fa fa-check"></i><b>9.5.3</b> True Routes</a></li>
+<li class="chapter" data-level="9.5.4" data-path="maps.html"><a href="maps.html#exercises-9"><i class="fa fa-check"></i><b>9.5.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="maps.html"><a href="maps.html#mapDensity"><i class="fa fa-check"></i><b>9.6</b> Density of routes</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="maps.html"><a href="maps.html#exercises-10"><i class="fa fa-check"></i><b>9.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="maps.html"><a href="maps.html#what-has-gone-wrong"><i class="fa fa-check"></i><b>9.7</b> What has gone wrong?</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -377,17 +416,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Clicking on the package name takes you to the documentation. There’s a manual for all functions together, as a pdf, but it’s usually easier to use the help pane to get the same material, and perhaps copy examples from the end of each help entry. More importantly here there are links to <strong>vignettes</strong>, and often now to websites with more info. Vignettes are not little stickers, but essential how-to guides mixing text and code. Often this can provide a skeleton end-to-end structure showing how to use functions, and that you can copy and adapt to your own need.</p>
 <p>You can load a package by ticking the box in the packages pane, but normally it’s done in code, as in this example.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="start.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># lots of date-related functions.</span></span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     date, intersect, setdiff, union</code></pre>
 <p>Two packages can define a function with the same name. The CRAN repository of packages performs quality checks, but overlap between packages is not something CRAN controls. Think of CRAN as an excellent library rather than an ‘Académie française’ for R that controls which words are allowed into the language<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. When there is overlap in packages, both defining a function with the same name, say, then on loading the second one ‘masks’ the first (you should see this above). Sometimes, as an alternative to loading the full package, you might see in code a ‘two colon’ usage, such as <code>base::union</code>. This is very common inside packages (it’s recommended), and it’s a way to insist that the first package version of the function should be used.</p>
 <p>As well as function with the same name and different results, there are often many different functions that you could use to achieve the same result, eg <code>base::paste0()</code> and <code>stringr::str_c()</code> both concatenate strings.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="start.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># both concatenate two strings, inserting no separator between them</span></span>
-<span id="cb6-2"><a href="start.html#cb6-2" aria-hidden="true" tabindex="-1"></a>base<span class="sc">::</span><span class="fu">paste0</span>(<span class="st">&quot;On Ilkley Moo&quot;</span>, <span class="st">&quot;r.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="start.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># both concatenate two strings, inserting no separator between them</span></span>
+<span id="cb4-2"><a href="start.html#cb4-2" aria-hidden="true" tabindex="-1"></a>base<span class="sc">::</span><span class="fu">paste0</span>(<span class="st">&quot;On Ilkley Moo&quot;</span>, <span class="st">&quot;r.&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;On Ilkley Moor.&quot;</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="start.html#cb8-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_c</span>(<span class="st">&quot;On Ilkley Moo&quot;</span>, <span class="st">&quot;r.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="start.html#cb6-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_c</span>(<span class="st">&quot;On Ilkley Moo&quot;</span>, <span class="st">&quot;r.&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;On Ilkley Moor.&quot;</code></pre>
 <p>In this example, notice that the strings to be concatenated are written in quotes. It’s recommended to use double ", rather than single ‘. And while we’re on such conventions, the space after the comma in the parameter list is optional, but recommended for ease of reading. In fact you’ll see that when there are lots of parameters or long ones, we tend to move to a new line, also for ease of reading. Meanwhile, there should be no space between the function name and the’(’.</p>
 <p>There’s an art in R to doing the most with the minimum number of packages, since it takes time to find your way around the functions in a package. That’s like the satisfaction of making the recipe from things you already have in the cupboard.</p>
@@ -399,7 +433,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <a href="https://www.tidyverse.org">tidyverse</a> is our chosen dialect, in the sense that in most cases we’ll use the functions and data structures, and way of organising, that go with this collection of packages. There’s a lot of excellent documentation already available, so we will explain some basics here, and introduce other elements as we need them for flight data examples.</p>
 <p>The <em>tidy</em> in ‘tidyverse’ refers to a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy data structure</a>: a table with each variable in its own column and each observation on one row. While we often find flight data with years displayed across the table, and countries down the side, this is not ‘tidy.’</p>
 <table>
-<caption><span id="tab:unnamed-chunk-5">Table 2.1: </span>An untidy table.</caption>
+<caption><span id="tab:unnamed-chunk-2">Table 2.1: </span>An untidy table.</caption>
 <thead>
 <tr class="header">
 <th align="left">Country</th>
@@ -421,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <table>
-<caption><span id="tab:unnamed-chunk-5">Table 2.1: </span>A tidy table.</caption>
+<caption><span id="tab:unnamed-chunk-2">Table 2.1: </span>A tidy table.</caption>
 <thead>
 <tr class="header">
 <th align="left">Country</th>
@@ -460,29 +494,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>tidyr</code>: for tidying data, such as pivot-table like actions, or splitting columns.</li>
 </ul>
 <p>And there are packages which are on the outskirts of the ‘tidyverse’ which get announced when you first load. The full list (at the time of writing) is as follows.</p>
-<pre><code>##  [1] &quot;broom&quot;      &quot;cli&quot;        &quot;crayon&quot;     &quot;dbplyr&quot;     &quot;dplyr&quot;      &quot;forcats&quot;    &quot;ggplot2&quot;    &quot;haven&quot;     
-##  [9] &quot;hms&quot;        &quot;httr&quot;       &quot;jsonlite&quot;   &quot;lubridate&quot;  &quot;magrittr&quot;   &quot;modelr&quot;     &quot;pillar&quot;     &quot;purrr&quot;     
-## [17] &quot;readr&quot;      &quot;readxl&quot;     &quot;reprex&quot;     &quot;rlang&quot;      &quot;rstudioapi&quot; &quot;rvest&quot;      &quot;stringr&quot;    &quot;tibble&quot;    
-## [25] &quot;tidyr&quot;      &quot;xml2&quot;       &quot;tidyverse&quot;</code></pre>
+<pre><code>##  [1] &quot;broom&quot;         &quot;cli&quot;           &quot;crayon&quot;        &quot;dbplyr&quot;        &quot;dplyr&quot;         &quot;dtplyr&quot;        &quot;forcats&quot;       &quot;googledrive&quot;  
+##  [9] &quot;googlesheets4&quot; &quot;ggplot2&quot;       &quot;haven&quot;         &quot;hms&quot;           &quot;httr&quot;          &quot;jsonlite&quot;      &quot;lubridate&quot;     &quot;magrittr&quot;     
+## [17] &quot;modelr&quot;        &quot;pillar&quot;        &quot;purrr&quot;         &quot;readr&quot;         &quot;readxl&quot;        &quot;reprex&quot;        &quot;rlang&quot;         &quot;rstudioapi&quot;   
+## [25] &quot;rvest&quot;         &quot;stringr&quot;       &quot;tibble&quot;        &quot;tidyr&quot;         &quot;xml2&quot;          &quot;tidyverse&quot;</code></pre>
 <p>These include <code>lubridate</code> and <code>stringr</code> which we’ve already mentioned.</p>
 <p>We’ll see a lot more <code>tidyverse</code> usage in chapters TBD, when we get to grips with data wrangling. Just to whet your appetite, here we show two quick examples. Try the code out, but don’t worry if it’s a little cryptic at this stage, we will explain the parts in more detail later.</p>
 <p>Start with the untidy dataframe shown above. Use <code>pivot_longer</code> to make it tidy, all in one go selecting a number of columns (those that start with ‘Flights’) and extracting the ‘year’ from this, then pivoting to the tidy form.</p>
 <p>Then we show a pairing of <code>group_by</code> and <code>summarise</code> to produce some annual totals. This example doesn’t save its result but prints it immediately to the log.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="start.html#cb11-1" aria-hidden="true" tabindex="-1"></a>untidy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Country =</span> <span class="fu">c</span>(<span class="st">&quot;France&quot;</span>, <span class="st">&quot;Germany&quot;</span>), </span>
-<span id="cb11-2"><a href="start.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Flights2019 =</span> <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="fl">5.2</span>), </span>
-<span id="cb11-3"><a href="start.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Flights2020=</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">6.0</span>))</span>
-<span id="cb11-4"><a href="start.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># tidy the data</span></span>
-<span id="cb11-5"><a href="start.html#cb11-5" aria-hidden="true" tabindex="-1"></a>tidier <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(untidy, </span>
-<span id="cb11-6"><a href="start.html#cb11-6" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># pivot the two columns starting with &#39;Flights&#39;</span></span>
-<span id="cb11-7"><a href="start.html#cb11-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;Flights&quot;</span>),</span>
-<span id="cb11-8"><a href="start.html#cb11-8" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># put the column names in a column called &#39;year&#39;</span></span>
-<span id="cb11-9"><a href="start.html#cb11-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_to=</span> <span class="st">&quot;year&quot;</span>,</span>
-<span id="cb11-10"><a href="start.html#cb11-10" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># ignore the &#39;Flights&#39; bit of the name, and treat as integer</span></span>
-<span id="cb11-11"><a href="start.html#cb11-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_pattern =</span> <span class="st">&quot;Flights(.*)&quot;</span>,</span>
-<span id="cb11-12"><a href="start.html#cb11-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
-<span id="cb11-13"><a href="start.html#cb11-13" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># put the column values in a column called &#39;flights&#39;</span></span>
-<span id="cb11-14"><a href="start.html#cb11-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">&quot;flights&quot;</span>)</span>
-<span id="cb11-15"><a href="start.html#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tidier)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="start.html#cb9-1" aria-hidden="true" tabindex="-1"></a>untidy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Country =</span> <span class="fu">c</span>(<span class="st">&quot;France&quot;</span>, <span class="st">&quot;Germany&quot;</span>), </span>
+<span id="cb9-2"><a href="start.html#cb9-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Flights2019 =</span> <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="fl">5.2</span>), </span>
+<span id="cb9-3"><a href="start.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Flights2020=</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">6.0</span>))</span>
+<span id="cb9-4"><a href="start.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># tidy the data</span></span>
+<span id="cb9-5"><a href="start.html#cb9-5" aria-hidden="true" tabindex="-1"></a>tidier <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(untidy, </span>
+<span id="cb9-6"><a href="start.html#cb9-6" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># pivot the two columns starting with &#39;Flights&#39;</span></span>
+<span id="cb9-7"><a href="start.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;Flights&quot;</span>),</span>
+<span id="cb9-8"><a href="start.html#cb9-8" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># put the column names in a column called &#39;year&#39;</span></span>
+<span id="cb9-9"><a href="start.html#cb9-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_to=</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb9-10"><a href="start.html#cb9-10" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># ignore the &#39;Flights&#39; bit of the name, and treat as integer</span></span>
+<span id="cb9-11"><a href="start.html#cb9-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_pattern =</span> <span class="st">&quot;Flights(.*)&quot;</span>,</span>
+<span id="cb9-12"><a href="start.html#cb9-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">year =</span> as.integer),</span>
+<span id="cb9-13"><a href="start.html#cb9-13" aria-hidden="true" tabindex="-1"></a>                       <span class="co"># put the column values in a column called &#39;flights&#39;</span></span>
+<span id="cb9-14"><a href="start.html#cb9-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">&quot;flights&quot;</span>)</span>
+<span id="cb9-15"><a href="start.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tidier)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   Country  year flights
 ##   &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;
@@ -490,9 +524,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 France   2020     1.5
 ## 3 Germany  2019     5.2
 ## 4 Germany  2020     6</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="start.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using groups - just print the result</span></span>
-<span id="cb13-2"><a href="start.html#cb13-2" aria-hidden="true" tabindex="-1"></a>tidier <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="start.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_flights =</span> <span class="fu">sum</span>(flights))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="start.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using groups - just print the result</span></span>
+<span id="cb11-2"><a href="start.html#cb11-2" aria-hidden="true" tabindex="-1"></a>tidier <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="start.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_flights =</span> <span class="fu">sum</span>(flights))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##    year total_flights
 ##   &lt;int&gt;         &lt;dbl&gt;
@@ -583,6 +617,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Maps and geographic data | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Maps and geographic data | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Maps and geographic data | Analysing Flights with R - UNDER CONSTRUCTION" />
+  
+  <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+<meta name="author" content="David Marsh" />
+
+
+<meta name="date" content="2021-05-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="splitparse.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analysing Flights in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#before-you-start"><i class="fa fa-check"></i><b>1.1</b> Before you start</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ways-to-use-the-material"><i class="fa fa-check"></i><b>1.2</b> Ways to Use the Material</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i><b>1.3</b> Structure of the book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#whats-gone-wrong"><i class="fa fa-check"></i><b>1.4</b> What’s gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> Orientation in RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="start.html"><a href="start.html#first-project"><i class="fa fa-check"></i><b>2.2</b> First project</a></li>
+<li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
+<li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#twocolons"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
+<li class="chapter" data-level="2.6" data-path="start.html"><a href="start.html#whats-gone-wrong-1"><i class="fa fa-check"></i><b>2.6</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="2.7" data-path="start.html"><a href="start.html#test-yourself"><i class="fa fa-check"></i><b>2.7</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="start.html"><a href="start.html#questions"><i class="fa fa-check"></i><b>2.7.1</b> Questions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="start.html"><a href="start.html#answers"><i class="fa fa-check"></i><b>2.7.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="firstLook.html"><a href="firstLook.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> emissions</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="firstLook.html"><a href="firstLook.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extractfield"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.3" data-path="firstLook.html"><a href="firstLook.html#someValues"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
+<li class="chapter" data-level="3.4" data-path="firstLook.html"><a href="firstLook.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="firstLook.html"><a href="firstLook.html#first-draft"><i class="fa fa-check"></i><b>3.4.1</b> First draft</a></li>
+<li class="chapter" data-level="3.4.2" data-path="firstLook.html"><a href="firstLook.html#improve-the-titles"><i class="fa fa-check"></i><b>3.4.2</b> Improve the titles</a></li>
+<li class="chapter" data-level="3.4.3" data-path="firstLook.html"><a href="firstLook.html#statecluster"><i class="fa fa-check"></i><b>3.4.3</b> and with clustering by state</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="firstLook.html"><a href="firstLook.html#whats-gone-wrong-2"><i class="fa fa-check"></i><b>3.5</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="3.6" data-path="firstLook.html"><a href="firstLook.html#test-yourself-1"><i class="fa fa-check"></i><b>3.6</b> Test yourself</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="firstLook.html"><a href="firstLook.html#questions-1"><i class="fa fa-check"></i><b>3.6.1</b> Questions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="firstLook.html"><a href="firstLook.html#answers-1"><i class="fa fa-check"></i><b>3.6.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> Filtering a dataset and refining the CO<sub>2</sub> graph</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#sequences-of-functions"><i class="fa fa-check"></i><b>4.1</b> Sequences of functions</a></li>
+<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filtering-datasets-and-logical-tests"><i class="fa fa-check"></i><b>4.2</b> Filtering datasets and logical tests</a></li>
+<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#topStates"><i class="fa fa-check"></i><b>4.3</b> Selecting the busiest states</a></li>
+<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#co2-graph-for-the-top-states"><i class="fa fa-check"></i><b>4.4</b> CO<sub>2</sub> graph for the top states</a></li>
+<li class="chapter" data-level="4.5" data-path="filter.html"><a href="filter.html#labelco2"><i class="fa fa-check"></i><b>4.5</b> Labelling the CO<sub>2</sub> graph</a></li>
+<li class="chapter" data-level="4.6" data-path="filter.html"><a href="filter.html#what-does-the-graph-say-about-co2"><i class="fa fa-check"></i><b>4.6</b> What does the graph say about CO<sub>2</sub>?</a></li>
+<li class="chapter" data-level="4.7" data-path="filter.html"><a href="filter.html#whats-gone-wrong-3"><i class="fa fa-check"></i><b>4.7</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="4.8" data-path="filter.html"><a href="filter.html#exercises"><i class="fa fa-check"></i><b>4.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="filter.html"><a href="filter.html#questions-2"><i class="fa fa-check"></i><b>4.8.1</b> Questions</a></li>
+<li class="chapter" data-level="4.8.2" data-path="filter.html"><a href="filter.html#answers-2"><i class="fa fa-check"></i><b>4.8.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sortbars.html"><a href="sortbars.html"><i class="fa fa-check"></i><b>5</b> Sorting Bars, Saving Graphs, Facets</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="sortbars.html"><a href="sortbars.html#firstsortedbar"><i class="fa fa-check"></i><b>5.1</b> The simple sorted bar chart - more on CO<sub>2</sub></a></li>
+<li class="chapter" data-level="5.2" data-path="sortbars.html"><a href="sortbars.html#saving-a-plot"><i class="fa fa-check"></i><b>5.2</b> Saving a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="sortbars.html"><a href="sortbars.html#plotting-more-than-one-year"><i class="fa fa-check"></i><b>5.3</b> Plotting more than one year</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="sortbars.html"><a href="sortbars.html#factors"><i class="fa fa-check"></i><b>5.3.1</b> Staggered bars, and factors</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sortbars.html"><a href="sortbars.html#chart-facets-more-years-in-the-bar-chart"><i class="fa fa-check"></i><b>5.3.2</b> Chart facets, more years in the bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="sortbars.html"><a href="sortbars.html#whats-gone-wrong-4"><i class="fa fa-check"></i><b>5.4</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="5.5" data-path="sortbars.html"><a href="sortbars.html#exercises-1"><i class="fa fa-check"></i><b>5.5</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="sortbars.html"><a href="sortbars.html#questions-3"><i class="fa fa-check"></i><b>5.5.1</b> Questions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="sortbars.html"><a href="sortbars.html#answers-3"><i class="fa fa-check"></i><b>5.5.2</b> Answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="sortbars.html"><a href="sortbars.html#extended-exercises"><i class="fa fa-check"></i><b>5.6</b> Extended Exercises</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="sortbars.html"><a href="sortbars.html#questions-4"><i class="fa fa-check"></i><b>5.6.1</b> Questions</a></li>
+<li class="chapter" data-level="5.6.2" data-path="sortbars.html"><a href="sortbars.html#co2hints"><i class="fa fa-check"></i><b>5.6.2</b> Hints</a></li>
+<li class="chapter" data-level="5.6.3" data-path="sortbars.html"><a href="sortbars.html#answers-4"><i class="fa fa-check"></i><b>5.6.3</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="loopsfunctions.html"><a href="loopsfunctions.html"><i class="fa fa-check"></i><b>6</b> Loops, functions and SID data</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="loopsfunctions.html"><a href="loopsfunctions.html#vectors-and-lists"><i class="fa fa-check"></i><b>6.1</b> Vectors and Lists</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="loopsfunctions.html"><a href="loopsfunctions.html#exercises-2"><i class="fa fa-check"></i><b>6.1.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="loopsfunctions.html"><a href="loopsfunctions.html#functions-and-loops"><i class="fa fa-check"></i><b>6.2</b> Functions and Loops</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="loopsfunctions.html"><a href="loopsfunctions.html#first-function-bi-directional-airport-pairs"><i class="fa fa-check"></i><b>6.2.1</b> First function: bi-directional airport pairs</a></li>
+<li class="chapter" data-level="6.2.2" data-path="loopsfunctions.html"><a href="loopsfunctions.html#looping-with-functions"><i class="fa fa-check"></i><b>6.2.2</b> Looping with functions</a></li>
+<li class="chapter" data-level="6.2.3" data-path="loopsfunctions.html"><a href="loopsfunctions.html#exercises-3"><i class="fa fa-check"></i><b>6.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="loopsfunctions.html"><a href="loopsfunctions.html#country-data"><i class="fa fa-check"></i><b>6.3</b> Country data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="loopsfunctions.html"><a href="loopsfunctions.html#loadonemonthly"><i class="fa fa-check"></i><b>6.3.1</b> Load one country’s monthly data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="loopsfunctions.html"><a href="loopsfunctions.html#loadmultiplemonthlies"><i class="fa fa-check"></i><b>6.3.2</b> Load monthly data for multiple countries</a></li>
+<li class="chapter" data-level="6.3.3" data-path="loopsfunctions.html"><a href="loopsfunctions.html#loadMultipleFiles"><i class="fa fa-check"></i><b>6.3.3</b> Load multiple files</a></li>
+<li class="chapter" data-level="6.3.4" data-path="loopsfunctions.html"><a href="loopsfunctions.html#exercises-4"><i class="fa fa-check"></i><b>6.3.4</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="groups.html"><a href="groups.html"><i class="fa fa-check"></i><b>7</b> Looping with groups</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="groups.html"><a href="groups.html#summarise"><i class="fa fa-check"></i><b>7.1</b> Summarising</a></li>
+<li class="chapter" data-level="7.2" data-path="groups.html"><a href="groups.html#dates"><i class="fa fa-check"></i><b>7.2</b> Dates</a></li>
+<li class="chapter" data-level="7.3" data-path="groups.html"><a href="groups.html#mutate"><i class="fa fa-check"></i><b>7.3</b> Adding variables</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="splitparse.html"><a href="splitparse.html"><i class="fa fa-check"></i><b>8</b> NOTAMS: Splitting and parsing strings</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>8.1</b> Splitting a column into many</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="8.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>8.1.2</b> Splitting a column at a regular expression</a></li>
+<li class="chapter" data-level="8.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>8.1.3</b> Splitting a column at an either-or</a></li>
+<li class="chapter" data-level="8.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-5"><i class="fa fa-check"></i><b>8.1.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>8.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="8.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>8.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="8.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>8.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-6"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>9</b> Maps and geographic data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="maps.html"><a href="maps.html#spatialFeatures"><i class="fa fa-check"></i><b>9.1</b> Spatial features</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="maps.html"><a href="maps.html#map-exercises"><i class="fa fa-check"></i><b>9.1.1</b> Map Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="maps.html"><a href="maps.html#RnDArchive"><i class="fa fa-check"></i><b>9.2</b> Using the R&amp;D Data Archive</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="maps.html"><a href="maps.html#flight-summaries"><i class="fa fa-check"></i><b>9.2.1</b> Flight Summaries</a></li>
+<li class="chapter" data-level="9.2.2" data-path="maps.html"><a href="maps.html#airspaceData"><i class="fa fa-check"></i><b>9.2.2</b> Airspace structure</a></li>
+<li class="chapter" data-level="9.2.3" data-path="maps.html"><a href="maps.html#flight-profiles"><i class="fa fa-check"></i><b>9.2.3</b> Flight profiles</a></li>
+<li class="chapter" data-level="9.2.4" data-path="maps.html"><a href="maps.html#exercises-7"><i class="fa fa-check"></i><b>9.2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="maps.html"><a href="maps.html#mapRegions"><i class="fa fa-check"></i><b>9.3</b> Countries and regions</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="maps.html"><a href="maps.html#mapCountries"><i class="fa fa-check"></i><b>9.3.1</b> Countries</a></li>
+<li class="chapter" data-level="9.3.2" data-path="maps.html"><a href="maps.html#mapAirspace"><i class="fa fa-check"></i><b>9.3.2</b> Airspace</a></li>
+<li class="chapter" data-level="9.3.3" data-path="maps.html"><a href="maps.html#exercises-8"><i class="fa fa-check"></i><b>9.3.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="maps.html"><a href="maps.html#mapAirports"><i class="fa fa-check"></i><b>9.4</b> Airports</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="maps.html"><a href="maps.html#mapOverlapLabels"><i class="fa fa-check"></i><b>9.4.1</b> Overlapping labels on maps</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="maps.html"><a href="maps.html#mapRoutes"><i class="fa fa-check"></i><b>9.5</b> Routes</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="maps.html"><a href="maps.html#great-circle-routes"><i class="fa fa-check"></i><b>9.5.1</b> Great Circle Routes</a></li>
+<li class="chapter" data-level="9.5.2" data-path="maps.html"><a href="maps.html#fasterGeo"><i class="fa fa-check"></i><b>9.5.2</b> Need for Speed</a></li>
+<li class="chapter" data-level="9.5.3" data-path="maps.html"><a href="maps.html#trueRoutes"><i class="fa fa-check"></i><b>9.5.3</b> True Routes</a></li>
+<li class="chapter" data-level="9.5.4" data-path="maps.html"><a href="maps.html#exercises-9"><i class="fa fa-check"></i><b>9.5.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="maps.html"><a href="maps.html#mapDensity"><i class="fa fa-check"></i><b>9.6</b> Density of routes</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="maps.html"><a href="maps.html#exercises-10"><i class="fa fa-check"></i><b>9.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="maps.html"><a href="maps.html#what-has-gone-wrong"><i class="fa fa-check"></i><b>9.7</b> What has gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="maps" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Maps and geographic data</h1>
+<p>[This chapter has been written out of sequence so might refer to patterns that have not yet been covered in earlier chapters.]</p>
+<p>You don’t get far in visualising patterns of air traffic without a map, whether that’s a map of airports, of routes between airports, or of regions: countries or, more air-traffic-focused, blocks of airspace. In this chapter we’ll build a set of tools for such things.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">In this chapter, you’ll be introduced to:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">spatial features, <code>s2</code>, <code>rnaturalearthdata</code>, R&amp;D Data Archive, <code>geom_sf</code>, <code>%&lt;&gt;%</code>, <code>st_transform</code>, <code>CRS</code> and more.</td>
+</tr>
+</tbody>
+</table>
+<div id="spatialFeatures" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Spatial features</h2>
+<p>We choose to use <a href="https://r-spatial.github.io/sf/">‘spatial features’</a> package <code>sf</code> as the main source of geographic functions since, of the several options, it feels most like an extension to the <code>tidyverse</code>. <code>sf</code> gives us, amongst other things:</p>
+<ul>
+<li><code>sfc</code>: geographic columns for data tables and tibbles, to hold points, lines and polygons;</li>
+<li><code>sf</code>: spatial features objects, which are data tables and tibbles that have a designated default ‘geometry’ <code>sfc</code> column;</li>
+<li>functions which access libraries of geographic operations, such as for distances, intersections or unions;</li>
+<li>use of <code>geom_sf()</code> in a <code>ggplot</code> to plot one of these columns.</li>
+</ul>
+<p>We’ll shortly see an example, but a ‘typical’ <code>sf</code>-enriched dataframe might be have one row per flight and an <code>sfc</code> column which contains the route flown by the flight, in longitude-latitude but all folded up in a single cell per flight. There is lots of <a href="https://r-spatial.github.io/sf/">good documentation</a> for ‘spatial features’ and plenty of good questions on StackExchange to help you with problems. There’s even <a href="https://r-spatial.github.io/sf/#cheatsheet">a ‘cheatsheet’</a>. Here we focus on <em>using</em> <code>sf</code> with aviation data.</p>
+<p>That use of supporting libraries can create complexity, for example requiring installation of extra code, such as <code>GDAL</code> (you’ll see GDAL and other libraries mentioned when you attach sf in the next code chunk). We’ll mostly stick to the <code>s2</code> library, for a number of reasons:</p>
+<ul>
+<li>the code is available directly as the <code>s2</code> package, so installation problems should be few;</li>
+<li>we can quickly translate between <code>s2</code> and <code>sf</code>;</li>
+<li>and <code>s2</code> works directly on the sphere.</li>
+</ul>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="maps.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb164-2"><a href="maps.html#cb164-2" aria-hidden="true" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">sf_use_s2</span>(<span class="cn">TRUE</span>) </span>
+<span id="cb164-3"><a href="maps.html#cb164-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(s2) <span class="co"># we use a number of functions directly from s2</span></span>
+<span id="cb164-4"><a href="maps.html#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthdata) <span class="co"># for country maps</span></span></code></pre></div>
+<p>What does that mean ‘works directly on the sphere?’ The main difference between geographic data and the sorts of data that we’ve been plotting so far is that the two dimensions, longitude and latitude, are not points on a plane, but on a sphere. One approach to working with such data is to map all your data onto the plane by transforming with a ‘coordinate reference system’ (CRS), and then work on the plane, allowing for some of the distortion that is inevitable, eg straight lines might no longer be straight.</p>
+<p>With <code>s2</code> we work on the sphere itself, and transform only when we want to plot. I like the cleanliness of keeping CRS for plotting. There are some costs: in particular, the World isn’t actually spherical, so there are some errors in <a href="https://r-spatial.github.io/sf/articles/sf7.html#measures">distance and area calculations</a> for example. If your application is sensitive to distance errors of 0.5%, then other functions can be used.</p>
+<p>Switch <code>sf</code> to using <code>s2</code> with <code>sf_use_s2(TRUE)</code> whenever you attach <code>library(sf)</code>, as we did at the start of this chapter. Then <code>sf</code> will use <code>s2</code> versions of functions whenever it can without further intervention from you.</p>
+<p>What does <code>sf</code> give us? Here’s an example, using <code>rnaturalearthdata</code>, a package that handily provides country maps. After converting the map data to <code>sf</code> with <code>st_as_sf()</code>, we have one row of a dataframe (an <code>sf</code> object is still a <code>dataframe</code>) per country, and all the map polygons in a single column. We illustrate the use of <code>filter()</code> on text fields, in a manner that you’ve seen before, and then with a ‘logical’ function that tests for intersection between <code>geometry</code> which contains the map polygons, and our <code>Dublin_Bucharest</code> line.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="maps.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a line from Dublin to Athens</span></span>
+<span id="cb165-2"><a href="maps.html#cb165-2" aria-hidden="true" tabindex="-1"></a>Dublin_Bucharest <span class="ot">&lt;-</span> <span class="fu">st_linestring</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">6.27</span>, <span class="fl">53.42</span>, <span class="fl">26.1</span>, <span class="fl">44.57</span>), </span>
+<span id="cb165-3"><a href="maps.html#cb165-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb165-4"><a href="maps.html#cb165-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tell sf that it&#39;s in long-lat, EPSG4326 is a long-lat coordinate reference system</span></span>
+<span id="cb165-5"><a href="maps.html#cb165-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb165-6"><a href="maps.html#cb165-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-7"><a href="maps.html#cb165-7" aria-hidden="true" tabindex="-1"></a><span class="co"># a map demo - countries110 comes with lots of data such as population</span></span>
+<span id="cb165-8"><a href="maps.html#cb165-8" aria-hidden="true" tabindex="-1"></a>europe_countries <span class="ot">&lt;-</span> rnaturalearthdata<span class="sc">::</span>countries110 <span class="sc">%&gt;%</span> </span>
+<span id="cb165-9"><a href="maps.html#cb165-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> <span class="co"># convert to sf</span></span>
+<span id="cb165-10"><a href="maps.html#cb165-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># some of the polygons in the map cause issues so we zoom in</span></span>
+<span id="cb165-11"><a href="maps.html#cb165-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># using metadata in the &#39;rnaturalearthdata&#39; dataframe</span></span>
+<span id="cb165-12"><a href="maps.html#cb165-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(admin <span class="sc">!=</span> <span class="st">&quot;Russia&quot;</span> <span class="sc">&amp;</span> continent <span class="sc">==</span> <span class="st">&quot;Europe&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb165-13"><a href="maps.html#cb165-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># now do the intersection - working on the sphere</span></span>
+<span id="cb165-14"><a href="maps.html#cb165-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sparse = FALSE is required to get a full-length logical vector </span></span>
+<span id="cb165-15"><a href="maps.html#cb165-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    rather than a vector of row ids</span></span>
+<span id="cb165-16"><a href="maps.html#cb165-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># st_intersects  is a yes-no question</span></span>
+<span id="cb165-17"><a href="maps.html#cb165-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">st_intersects</span>(geometry, Dublin_Bucharest, <span class="at">sparse =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb165-18"><a href="maps.html#cb165-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># st_intersection asks for the intersection of the two</span></span>
+<span id="cb165-19"><a href="maps.html#cb165-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">segment =</span> <span class="fu">st_intersection</span>(Dublin_Bucharest, geometry))</span>
+<span id="cb165-20"><a href="maps.html#cb165-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-21"><a href="maps.html#cb165-21" aria-hidden="true" tabindex="-1"></a><span class="co"># simplest of plots treats long-lat like x-y</span></span>
+<span id="cb165-22"><a href="maps.html#cb165-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(europe_countries) <span class="sc">+</span></span>
+<span id="cb165-23"><a href="maps.html#cb165-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="dv">1000</span> <span class="sc">*</span> gdp_md_est<span class="sc">/</span>pop_est)) <span class="sc">+</span></span>
+<span id="cb165-24"><a href="maps.html#cb165-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> segment), <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb165-25"><a href="maps.html#cb165-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;GDP</span><span class="sc">\n</span><span class="st">Per Capita</span><span class="sc">\n</span><span class="st">($ 000)&quot;</span>,</span>
+<span id="cb165-26"><a href="maps.html#cb165-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Simplified map omits many islands.&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p>In this one example, we see two geographical functions for intersection, <code>st_intersects()</code> and <code>st_intersection()</code>, and we see a line defined by just two points (as it should be, speaking geometrically) but showing as a curve when plotted on a rectilinear longitude-latitude grid (ie one with horizontal latitude lines and vertical longitudes). This demonstrates the line being a ‘great circle’<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.</p>
+<p>We cover country maps in more detail in section <a href="maps.html#mapCountries">9.3.1</a>.</p>
+<div id="map-exercises" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Map Exercises</h3>
+<div id="questions-10" class="section level4" number="9.1.1.1">
+<h4><span class="header-section-number">9.1.1.1</span> Questions</h4>
+<ol style="list-style-type: decimal">
+<li>What does the map look like of those European countries <em>not</em> overflown?</li>
+<li>Which countries are within 100km of the route?</li>
+<li>Before converting to <code>sf</code>, what’s the structure of the data in <code>countries110</code>?</li>
+<li>Add the Dublin-Bucharest line directly, with <code>geom_sf(data = Dublin_Bucharest)</code>. What’s wrong and what do you think is the problem?</li>
+</ol>
+</div>
+<div id="answers-10" class="section level4" number="9.1.1.2">
+<h4><span class="header-section-number">9.1.1.2</span> Answers</h4>
+<ol style="list-style-type: decimal">
+<li>Wrap a <code>!( )</code> around the filter and see. Svalbard looks big in this plot, and the map opens up to show French Guiana.</li>
+<li>Three additional States. Checking through the <code>s2</code> package documentation, we need <code>s2_dwithin()</code> (not <code>s2_within</code>), so use <code>s2::s2_dwithin(Dublin_Bucharest, 100 * 1000)</code>, since distances are in metres.</li>
+<li>Run just the first line and we get a <code>SpatialPolygonsDataFrame</code> which is actually a data frame plus some other elements. It’s based on an alternative way of handling spatial data (<code>sp</code>), which we won’t be using here mostly because it feels less ‘tidyverse.’</li>
+<li>The line is shown by ggplot as a straight line on the plot, because <code>ggplot</code> joins points with straight lines. At present, <code>geom_sf()</code> doesn’t really understand great circles. Indeed, if you’re sharp-eyed you might see that the ‘great circle’ already shown is actually made up of straight segments in each country. We’ll see how to handle this later, but for the moment the lesson is: <code>sf</code> understands great circles, <code>ggplot</code> less so.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="RnDArchive" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Using the R&amp;D Data Archive</h2>
+<p>At this point, we’ll start using data from the <a href="https://www.eurocontrol.int/dashboard/rnd-data-archive">EUROCONTROL R&amp;D Data Archive</a> which, at the time of writing, provides fine-grained data on some 14 million European flights between 2015 and 2019, with more data added each quarter. With a business or academic email address you can ask for free access to this.</p>
+<div id="flight-summaries" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Flight Summaries</h3>
+<p>Rather than clog up your hard-disk with data, start by just downloading some flight summaries, say for March 2019. The image below shows a step in this process. Check and accept the terms and conditions and you’ll get your file.</p>
+<div class="figure">
+<img src="images/RDArchive_download.png" alt="" />
+<p class="caption">Downloading flight summary data for one quarter</p>
+</div>
+<p>Save the data in your project <code>/data</code> folder, then the following code will work. You can leave the file with its <code>.csv.gz</code> extension; R can handle this. (The terms &amp; conditions mean that the data cannot be bundled with this book.)</p>
+<p>The ‘Flights’ file contains one row per flight, and gives a range of data about that flight, including departure and destination airports (ADEP, ADES), planned and actual times, aircraft type, aircraft operator etc. <a href="https://www.eurocontrol.int/publication/rnd-data-archive-structure-and-sample">See the documentation ‘metadata’</a> for more details.</p>
+<p>The column names aren’t very R-friendly, though. So we use a function to read the file and rename the columns. It takes a little while to load nearly 800,000 flights.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="maps.html#cb166-1" aria-hidden="true" tabindex="-1"></a>get_flights <span class="ot">&lt;-</span> <span class="cf">function</span>(file_name){</span>
+<span id="cb166-2"><a href="maps.html#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># load Flights...csv.gz file downloaded from R&amp;D Data Archive</span></span>
+<span id="cb166-3"><a href="maps.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  readr<span class="sc">::</span><span class="fu">read_csv</span>(file_name, <span class="at">skip =</span> <span class="dv">1</span>, </span>
+<span id="cb166-4"><a href="maps.html#cb166-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;adep&quot;</span>, <span class="st">&quot;adep_lat&quot;</span>, <span class="st">&quot;adep_long&quot;</span>, </span>
+<span id="cb166-5"><a href="maps.html#cb166-5" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;ades&quot;</span>, <span class="st">&quot;ades_lat&quot;</span>, <span class="st">&quot;ades_long&quot;</span>, </span>
+<span id="cb166-6"><a href="maps.html#cb166-6" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;obt_filed&quot;</span>, <span class="st">&quot;arr_filed&quot;</span>, <span class="st">&quot;obt_actual&quot;</span>, <span class="st">&quot;arr_actual&quot;</span>,</span>
+<span id="cb166-7"><a href="maps.html#cb166-7" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;ac_type&quot;</span>, <span class="st">&quot;ao&quot;</span>, <span class="st">&quot;ac_reg&quot;</span>, </span>
+<span id="cb166-8"><a href="maps.html#cb166-8" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;flt_type&quot;</span>, <span class="st">&quot;segment&quot;</span>, <span class="st">&quot;rfl&quot;</span>, <span class="st">&quot;dist_act_nm&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-9"><a href="maps.html#cb166-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_at</span>(<span class="fu">vars</span>(<span class="st">&quot;obt_filed&quot;</span>, <span class="st">&quot;arr_filed&quot;</span>, <span class="st">&quot;obt_actual&quot;</span>, <span class="st">&quot;arr_actual&quot;</span>), </span>
+<span id="cb166-10"><a href="maps.html#cb166-10" aria-hidden="true" tabindex="-1"></a>              <span class="sc">~</span> <span class="fu">as.POSIXct</span>(., <span class="at">format =</span> <span class="st">&quot;%d-%m-%Y %H:%M:%S&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-11"><a href="maps.html#cb166-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">dist_act_km =</span> <span class="fl">1.852</span> <span class="sc">*</span> dist_act_nm) <span class="sc">%&gt;%</span> </span>
+<span id="cb166-12"><a href="maps.html#cb166-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>dist_act_nm)</span>
+<span id="cb166-13"><a href="maps.html#cb166-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb166-14"><a href="maps.html#cb166-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-15"><a href="maps.html#cb166-15" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">get_flights</span>(<span class="st">&quot;data/Flights_20190301_20190331.csv.gz&quot;</span>)</span></code></pre></div>
+<p>It’s good to do a visual check of numbers to see what we have. We take the day part of the filed off-blocks time (the time in the flight plan for push-back from the gate). We saw previously that this needs to be <code>floor_date</code> not <code>round_date</code> to get the start of the day. There are about 25,000 flights per day, although at this time of year Saturdays are significantly quieter.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="maps.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(flights,</span>
+<span id="cb167-2"><a href="maps.html#cb167-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(lubridate<span class="sc">::</span><span class="fu">floor_date</span>(obt_filed, <span class="st">&quot;day&quot;</span>),</span>
+<span id="cb167-3"><a href="maps.html#cb167-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> segment)) <span class="sc">+</span> </span>
+<span id="cb167-4"><a href="maps.html#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb167-5"><a href="maps.html#cb167-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Date (of filed off-blocks time)&quot;</span>, </span>
+<span id="cb167-6"><a href="maps.html#cb167-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Commercial Flights in Sample&quot;</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+</div>
+<div id="airspaceData" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Airspace structure</h3>
+<p>The structure of the airspace is continually refined to align with traffic needs. There are updates for each ‘AIRAC cycle’ which lasts 4 weeks. The R&amp;D Data Archive provides airspace data for each applicable AIRAC cycle, and the smallest file in each quarter’s data is <code>AIRAC_xxxx.csv.gz</code> which lists the AIRAC cycles and their dates during that month.</p>
+<p>The airspace structure is then given in terms of:</p>
+<ul>
+<li>the boundaries and vertical extent of each flight information region (FIR) structure (with a simplified structure outside Europe);</li>
+<li>the route network.</li>
+</ul>
+<p>In this section we load and inspect the FIR data. From the 201903 archive, download the <code>FIR_1904.csv.gz</code> file and put it in your <code>data</code> folder. We need to do a little work with the data.</p>
+<p>In the country data we saw briefly earlier, countries are described with ‘multipolygons,’ each polygon being a ring that joins up and the ‘multi’ bit because there can be islands or, occasionally, holes (Italy has 2 holes, for the Vatican and San Marino). FIRs are no different. Most are single polygons, one or two have holes, and some have been split in these data along the dateline. We have to identify the rings, which we do here by looking for repeated coordinates (which are the two ends <code>(n() &gt; 1)</code>), then finding the first end and flagging it with a <code>1</code>. A cumulative sum of these flags gives distinct ids to each ring.</p>
+<p>One respect in which FIRs are different from countries is that they have a vertical extent and can overlap if you ignore altitude. We treat combinations of <code>airspace_id, min_flight_level, max_flight_level</code> as determining an FIR which isn’t really true (an FIR can be thick in places and thin in others), but this will be enough for the moment.</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="maps.html#cb168-1" aria-hidden="true" tabindex="-1"></a>fir <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/FIR_1904.csv.gz&quot;</span>)</span>
+<span id="cb168-2"><a href="maps.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tidy the column names</span></span>
+<span id="cb168-3"><a href="maps.html#cb168-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this uses the &#39;and assign&#39; pipe %&lt;&gt;%, for brevity</span></span>
+<span id="cb168-4"><a href="maps.html#cb168-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fir) <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb168-5"><a href="maps.html#cb168-5" aria-hidden="true" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s&quot;</span>, <span class="st">&quot;_&quot;</span>) <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb168-6"><a href="maps.html#cb168-6" aria-hidden="true" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_to_lower</span>()</span>
+<span id="cb168-7"><a href="maps.html#cb168-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-8"><a href="maps.html#cb168-8" aria-hidden="true" tabindex="-1"></a>fir_poly <span class="ot">&lt;-</span> fir <span class="sc">%&gt;%</span> </span>
+<span id="cb168-9"><a href="maps.html#cb168-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(airspace_id, min_flight_level, max_flight_level, </span>
+<span id="cb168-10"><a href="maps.html#cb168-10" aria-hidden="true" tabindex="-1"></a>           longitude, latitude) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-11"><a href="maps.html#cb168-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ring_end =</span> (<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="co"># end points occur twice </span></span>
+<span id="cb168-12"><a href="maps.html#cb168-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>(longitude, latitude) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-13"><a href="maps.html#cb168-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ring_start =</span> <span class="fu">if_else</span>(ring_end <span class="sc">&amp;</span></span>
+<span id="cb168-14"><a href="maps.html#cb168-14" aria-hidden="true" tabindex="-1"></a>                                (<span class="fu">is.na</span>(<span class="fu">lag</span>(ring_end)) <span class="sc">|</span> <span class="fu">lag</span>(ring_end)), </span>
+<span id="cb168-15"><a href="maps.html#cb168-15" aria-hidden="true" tabindex="-1"></a>                              1L, 0L), </span>
+<span id="cb168-16"><a href="maps.html#cb168-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">ring_id =</span> <span class="fu">cumsum</span>(ring_start)) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-17"><a href="maps.html#cb168-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ring_end, <span class="sc">-</span>ring_start) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-18"><a href="maps.html#cb168-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># now make the polygon (with holes if that makes sense) </span></span>
+<span id="cb168-19"><a href="maps.html#cb168-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">geo =</span> s2<span class="sc">::</span><span class="fu">s2_make_polygon</span>(longitude, latitude, <span class="at">ring_id =</span> ring_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-20"><a href="maps.html#cb168-20" aria-hidden="true" tabindex="-1"></a>            sf<span class="sc">::</span><span class="fu">st_as_sfc</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-21"><a href="maps.html#cb168-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># turn into sf object</span></span>
+<span id="cb168-22"><a href="maps.html#cb168-22" aria-hidden="true" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_set_geometry</span>(<span class="st">&quot;geo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb168-23"><a href="maps.html#cb168-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<p>A quick map highlights a number of features of the data: we just have large regions in places distant from Europe, aggregates of actual FIRS; the ‘layers’ of superimposed FIRs are less transparent so mask the underlying countries more, eg Spain, though this isn’t a great way to show this; being Europe-oriented the data have been cut at 180º, to avoid wrapping problems (in fact the map is cut at 180° and the FIRs at 179°).</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="maps.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rnaturalearthdata<span class="sc">::</span>countries110 <span class="sc">%&gt;%</span> <span class="fu">st_as_sf</span>()) <span class="sc">+</span></span>
+<span id="cb169-2"><a href="maps.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">fill =</span> <span class="st">&quot;grey50&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb169-3"><a href="maps.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fir_poly, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>This isn’t very pretty. We’ll look at a better version in section <a href="maps.html#mapAirspace">9.3.2</a>.</p>
+</div>
+<div id="flight-profiles" class="section level3" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Flight profiles</h3>
+<p>The R&amp;D Data Archive provides both the route from the filed flight plan, and the route as flown, updated by radar. Each route is specified as longitude-latitude points, a flight level (roughly of 100 feet, so FL350 = 35,000 feet altitude), and a time.</p>
+<p>We will load and plot some profiles in section <a href="maps.html#trueRoutes">9.5.3</a>.</p>
+</div>
+<div id="exercises-7" class="section level3" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Exercises</h3>
+<div id="questions-11" class="section level4" number="9.2.4.1">
+<h4><span class="header-section-number">9.2.4.1</span> Questions</h4>
+<ol style="list-style-type: decimal">
+<li>Download a second flight file. How would you automatically load and merge all of the flight files that you’ve downloaded. (Hint: This is a simplified version of something you did with files from the STATFOR dashboard in section <a href="loopsfunctions.html#loadMultipleFiles">6.3.3</a>.</li>
+<li>Why did this involve switching from <code>pmap</code>?</li>
+</ol>
+</div>
+<div id="answers-11" class="section level4" number="9.2.4.2">
+<h4><span class="header-section-number">9.2.4.2</span> Answers</h4>
+<ol style="list-style-type: decimal">
+<li>This is it.</li>
+</ol>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="maps.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get file names, with path</span></span>
+<span id="cb170-2"><a href="maps.html#cb170-2" aria-hidden="true" tabindex="-1"></a>flight_files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="st">&quot;data&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;Flights_&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb170-3"><a href="maps.html#cb170-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-4"><a href="maps.html#cb170-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and load</span></span>
+<span id="cb170-5"><a href="maps.html#cb170-5" aria-hidden="true" tabindex="-1"></a>all_flights <span class="ot">&lt;-</span> flight_files <span class="sc">%&gt;%</span> </span>
+<span id="cb170-6"><a href="maps.html#cb170-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(get_flights) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-7"><a href="maps.html#cb170-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Because the ‘SID’ code in the earlier chapter is reading a number of columns from a dataframe it uses <code>pmap</code>. Here we just have a single vector of names, so only need <code>map</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="mapRegions" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Countries and regions</h2>
+<p>In this section, we introduce work patterns for plotting countries or regions. We stick to the over-arching pattern of: keep the data in longitude-latitude, then transform when plotting into a coordinate reference system (CRS) chosen to suit the map.</p>
+<div id="mapCountries" class="section level3" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Countries</h3>
+<p>We already saw a country map in section <a href="maps.html#spatialFeatures">9.1</a>. Let’s take a step back and approach some of the key elements of plotting countries at a more steady pace: filtering, plotting, transforming, cropping.</p>
+<p>It might be that you have a specific set of countries in mind. Then it’s natural to do this by filtering the dataframe as you would with a non-geographic dataframe. While you might filter by name, it’s more compact and often easier (due to alternative spellings of country names) to use the ISO code. The 1:110 million scale map in <code>countries110</code>, however, isn’t great when we zoom in to this detail (for example it misses out many islands), so we use a 1:50 million map <code>countries50</code>. An even finer-grained, 1:10 million map is available, but not through CRAN, in the package <code>rnaturalearthhires</code>, while other European maps are available for example from Eurostat.</p>
+<p>While we filter on the code <code>iso_a2</code> for the reasons discussed earlier, we use the <code>admin</code> field for the colour fill, since this creates a more informative legend, showing the administrative names.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="maps.html#cb171-1" aria-hidden="true" tabindex="-1"></a>iberia_iso2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ES&quot;</span>, <span class="st">&quot;PT&quot;</span>)</span>
+<span id="cb171-2"><a href="maps.html#cb171-2" aria-hidden="true" tabindex="-1"></a>iberia <span class="ot">&lt;-</span> rnaturalearthdata<span class="sc">::</span>countries50 <span class="sc">%&gt;%</span> </span>
+<span id="cb171-3"><a href="maps.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb171-4"><a href="maps.html#cb171-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(iso_a2 <span class="sc">%in%</span> iberia_iso2)</span>
+<span id="cb171-5"><a href="maps.html#cb171-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-6"><a href="maps.html#cb171-6" aria-hidden="true" tabindex="-1"></a><span class="co"># colour by country, make the borders thin.</span></span>
+<span id="cb171-7"><a href="maps.html#cb171-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iberia) <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> admin), <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb171-8"><a href="maps.html#cb171-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Country&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb171-9"><a href="maps.html#cb171-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p>There’s something a little ugly about this map - the shapes are distorted because we aren’t doing any sort of projection but just plotting longitude and latitude as if they were x-y coordinates. We could transform the data (the <code>sf</code> or the <code>geometry</code> column) to a new CRS, but because we’re working with <code>s2</code>, on the sphere in long-lat, it makes sense to keep our data in long-lat, and transform only for the purpose of plotting.</p>
+<p>The easiest way to do that is to add a <code>coord_sf(crs = xx)</code> to the plot, which ensures all of the layers (if we have more than one layer) are in the same CRS. For Europe maps, EPSG3035 is often recommended for statistical charts: it’s a Lambert Equal Area transformation set up for Europe. So here we just add <code>coord_sf(crs = 3035)</code>.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="maps.html#cb172-1" aria-hidden="true" tabindex="-1"></a>use_crs <span class="ot">&lt;-</span> <span class="dv">3035</span></span>
+<span id="cb172-2"><a href="maps.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use ggplot::last_plot() rather than repeat the code</span></span>
+<span id="cb172-3"><a href="maps.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb172-4"><a href="maps.html#cb172-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># apply the transform</span></span>
+<span id="cb172-5"><a href="maps.html#cb172-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> use_crs)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<p>What if we want a map without Canaries or Azores, but with Madeira, say? With some sets of maps, the parts of countries are separate so can be filtered by name. In the <code>rnaturalearth</code> dataframe they are not. We need to crop the map. Again, this is about the map, not the data, so rather than cropping the data, we basically need to set limits to the plot.</p>
+<p>The catch is that we need to do this in the units of the projection (EPSG3035) which, after the transformation, is metres. We probably want to crop in terms of degrees. So we create some points (in degrees) and transform them, too, to get the values in metres. Because of the projections, the window is a different width at top and bottom, in degrees: think in terms of what point should be in the bottom left corner, and what in the top right. Fiddly, but it works. We’ll shortly see how to crop automatically based on the data, but it’s useful to know the bottom-left/top-right rule.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="maps.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co">#set limits at long-lat (-20, 30) to (5, 45)</span></span>
+<span id="cb173-2"><a href="maps.html#cb173-2" aria-hidden="true" tabindex="-1"></a>lim_corners <span class="ot">&lt;-</span> <span class="fu">st_multipoint</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">5</span>, <span class="dv">45</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb173-3"><a href="maps.html#cb173-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> <span class="co">#create the points in long-lat</span></span>
+<span id="cb173-4"><a href="maps.html#cb173-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#then transform to the map CRS then pull out a </span></span>
+<span id="cb173-5"><a href="maps.html#cb173-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   matrix of values (with named columns X and Y)</span></span>
+<span id="cb173-6"><a href="maps.html#cb173-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(use_crs) <span class="sc">%&gt;%</span> </span>
+<span id="cb173-7"><a href="maps.html#cb173-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_coordinates</span>()</span>
+<span id="cb173-8"><a href="maps.html#cb173-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-9"><a href="maps.html#cb173-9" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb173-10"><a href="maps.html#cb173-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># apply the transform</span></span>
+<span id="cb173-11"><a href="maps.html#cb173-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;X&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;X&quot;</span>]), </span>
+<span id="cb173-12"><a href="maps.html#cb173-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;Y&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;Y&quot;</span>]),</span>
+<span id="cb173-13"><a href="maps.html#cb173-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">crs =</span> use_crs)</span></code></pre></div>
+<pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+</div>
+<div id="mapAirspace" class="section level3" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Airspace</h3>
+<p>In section <a href="maps.html#airspaceData">9.2.2</a> we made a quick check of the FIRs with a map. Here we make a tidier map.</p>
+<p>When plotting the whole World, the default map projection makes even worse distortions than we saw for Iberia. We would like to use a better representation of the area of countries, but need to handle the problem seen in the exercises in section <a href="maps.html#spatialFeatures">9.1</a>: that <code>ggplot</code> just draws straight lines. In the R&amp;D data, some of the FIRs distant from Europe are described with a minimum of points, such as a straight line from (179, 0) to (179, 90). We solve the problem by adding extra points at an arbitrary 1° interval using <code>st_segmentize()</code>.</p>
+<p>This example illustrates a strength of an <code>sf</code> dataframe. It can contain many <code>sfc</code> columns, but one is the designated geometry. We can then apply a function such as <code>st_segmentize</code> to the whole dataframe and it will pick out the geometry column to work with, where that’s appropriate.</p>
+<p>The Lambert (EPSG3035) projection also distorts on the whole-World scale. Instead, we choose an Atlantic-centred Robinson projection, creating it from a standardised text string using <code>sp::CRS</code>.</p>
+<p>XKCD suggests this <a href="https://xkcd.com/977/">reveals something of my age</a> and indeed, it’s a familiar projection from school atlases. This CRS is also available as <code>himach::crs_Atlantic</code>, if you have that package installed.</p>
+<p>And finally we colour code the upper flight level of the FIR - so the darker blue areas are lower FIRs.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="maps.html#cb175-1" aria-hidden="true" tabindex="-1"></a>crs_robinson <span class="ot">&lt;-</span> sp<span class="sc">::</span><span class="fu">CRS</span>(<span class="st">&quot;+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs +towgs84=0,0,0&quot;</span>)</span>
+<span id="cb175-2"><a href="maps.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rnaturalearthdata<span class="sc">::</span>countries110 <span class="sc">%&gt;%</span> </span>
+<span id="cb175-3"><a href="maps.html#cb175-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">st_as_sf</span>()) <span class="sc">+</span></span>
+<span id="cb175-4"><a href="maps.html#cb175-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">fill =</span> <span class="st">&quot;grey50&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb175-5"><a href="maps.html#cb175-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fir_poly <span class="sc">%&gt;%</span> </span>
+<span id="cb175-6"><a href="maps.html#cb175-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_segmentize</span>(units<span class="sc">::</span><span class="fu">set_units</span>(<span class="dv">1</span>, degree)), </span>
+<span id="cb175-7"><a href="maps.html#cb175-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">fill =</span> max_flight_level), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb175-8"><a href="maps.html#cb175-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Upper Flight Level of FIR&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-9"><a href="maps.html#cb175-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_robinson) <span class="sc">+</span></span>
+<span id="cb175-10"><a href="maps.html#cb175-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p>If we want to zoom in to Europe, which is where most of the flight data is, it is tempting to filter on the FIR airspace ID, though this harder than just picking those starting with ‘E,’ ‘L’ or ‘B,’ eg what about the Canary Islands, or Ukraine? It is probably best to avoid this approach unless you have a very specific list of countries to include.</p>
+<p>As in the previous section, instead we set the limits of the plot using the ‘bottom-left, top-right and transform’ method.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="maps.html#cb176-1" aria-hidden="true" tabindex="-1"></a>use_crs <span class="ot">&lt;-</span> crs_robinson</span>
+<span id="cb176-2"><a href="maps.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="co">#set limits at long-lat (-20, 30) to (50, 80)</span></span>
+<span id="cb176-3"><a href="maps.html#cb176-3" aria-hidden="true" tabindex="-1"></a>lim_corners <span class="ot">&lt;-</span> <span class="fu">st_multipoint</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">70</span>, <span class="dv">80</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb176-4"><a href="maps.html#cb176-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb176-5"><a href="maps.html#cb176-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#transform then pull out a matrix of values (with named columns X and Y)</span></span>
+<span id="cb176-6"><a href="maps.html#cb176-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(use_crs) <span class="sc">%&gt;%</span> </span>
+<span id="cb176-7"><a href="maps.html#cb176-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_coordinates</span>()</span>
+<span id="cb176-8"><a href="maps.html#cb176-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb176-9"><a href="maps.html#cb176-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rnaturalearthdata<span class="sc">::</span>countries50 <span class="sc">%&gt;%</span> </span>
+<span id="cb176-10"><a href="maps.html#cb176-10" aria-hidden="true" tabindex="-1"></a>         <span class="fu">st_as_sf</span>()) <span class="sc">+</span></span>
+<span id="cb176-11"><a href="maps.html#cb176-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">fill =</span> <span class="st">&quot;grey50&quot;</span>) <span class="sc">+</span> <span class="co"># background colour for the land</span></span>
+<span id="cb176-12"><a href="maps.html#cb176-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fir_poly <span class="sc">%&gt;%</span> </span>
+<span id="cb176-13"><a href="maps.html#cb176-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_segmentize</span>(units<span class="sc">::</span><span class="fu">set_units</span>(<span class="dv">1</span>, degree)), </span>
+<span id="cb176-14"><a href="maps.html#cb176-14" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">fill =</span> max_flight_level), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb176-15"><a href="maps.html#cb176-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Upper</span><span class="sc">\n</span><span class="st">Flight Level</span><span class="sc">\n</span><span class="st">of FIR&quot;</span>) <span class="sc">+</span></span>
+<span id="cb176-16"><a href="maps.html#cb176-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> use_crs, </span>
+<span id="cb176-17"><a href="maps.html#cb176-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;X&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;X&quot;</span>]), </span>
+<span id="cb176-18"><a href="maps.html#cb176-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;Y&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;Y&quot;</span>])) <span class="sc">+</span></span>
+<span id="cb176-19"><a href="maps.html#cb176-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p>As a plot of a 3D-layered structure this still misses something, but it’s not bad to get an idea of the airspace structure and where there are layers.</p>
+<p>What about labels? For this we just need to define the label text, which we do by extracting just the 4-letter FIR codes, excluding the “FIR” and “UIR.” Chapter <a href="splitparse.html#splitparse">8</a> has much more on patterns such as <code>"FIR|UIR"</code>. The <code>geom_sf_text</code> will be put at the centroid of the polygon by default. We’ll see how to deconflict labels on maps in section <a href="maps.html#mapOverlapLabels">9.4.1</a>.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="maps.html#cb177-1" aria-hidden="true" tabindex="-1"></a>fir_poly <span class="ot">&lt;-</span> fir_poly <span class="sc">%&gt;%</span> </span>
+<span id="cb177-2"><a href="maps.html#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">airspace =</span> stringr<span class="sc">::</span><span class="fu">str_remove</span>(airspace_id, <span class="st">&quot;(UIR|FIR)(S|N)?&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb177-3"><a href="maps.html#cb177-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(airspace) <span class="sc">%&gt;%</span> </span>
+<span id="cb177-4"><a href="maps.html#cb177-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">if_else</span>(max_flight_level <span class="sc">==</span> <span class="fu">max</span>(max_flight_level),</span>
+<span id="cb177-5"><a href="maps.html#cb177-5" aria-hidden="true" tabindex="-1"></a>                         airspace, <span class="st">&quot;&quot;</span>))</span>
+<span id="cb177-6"><a href="maps.html#cb177-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-7"><a href="maps.html#cb177-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fir_poly <span class="sc">%&gt;%</span> </span>
+<span id="cb177-8"><a href="maps.html#cb177-8" aria-hidden="true" tabindex="-1"></a>         <span class="fu">st_segmentize</span>(units<span class="sc">::</span><span class="fu">set_units</span>(<span class="dv">1</span>, degree))) <span class="sc">+</span></span>
+<span id="cb177-9"><a href="maps.html#cb177-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> rnaturalearthdata<span class="sc">::</span>countries50 <span class="sc">%&gt;%</span> </span>
+<span id="cb177-10"><a href="maps.html#cb177-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_as_sf</span>(),</span>
+<span id="cb177-11"><a href="maps.html#cb177-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">&quot;grey50&quot;</span>) <span class="sc">+</span> <span class="co"># background colour for the land</span></span>
+<span id="cb177-12"><a href="maps.html#cb177-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb177-13"><a href="maps.html#cb177-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb177-14"><a href="maps.html#cb177-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> use_crs, </span>
+<span id="cb177-15"><a href="maps.html#cb177-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;X&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;X&quot;</span>]), </span>
+<span id="cb177-16"><a href="maps.html#cb177-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;Y&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;Y&quot;</span>])) <span class="sc">+</span></span>
+<span id="cb177-17"><a href="maps.html#cb177-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+</div>
+<div id="exercises-8" class="section level3" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> Exercises</h3>
+<div id="questions-12" class="section level4" number="9.3.3.1">
+<h4><span class="header-section-number">9.3.3.1</span> Questions</h4>
+<ol style="list-style-type: decimal">
+<li>In the final map, adapt the code so that it will plot a slice at a particular flight level, and use an appropriate title.</li>
+<li>One messy part of the FIR map is GCCC, which has overlapping labels for GCCCUIRS and GCCCUIRN. How could we clean this up?</li>
+<li>In the two versions of the code for the FIR map, why do we swap where <code>fir_poly</code> and <code>countries50</code> are mentioned (<code>ggplot</code> and <code>geom_sf</code>)?</li>
+</ol>
+</div>
+<div id="answers-12" class="section level4" number="9.3.3.2">
+<h4><span class="header-section-number">9.3.3.2</span> Answers</h4>
+<ol style="list-style-type: decimal">
+<li>We can filter, and then use the original label. So one solution is as follows.</li>
+</ol>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="maps.html#cb178-1" aria-hidden="true" tabindex="-1"></a>at_fl <span class="ot">&lt;-</span> <span class="dv">350</span></span>
+<span id="cb178-2"><a href="maps.html#cb178-2" aria-hidden="true" tabindex="-1"></a>fir_slice <span class="ot">&lt;-</span> fir_poly <span class="sc">%&gt;%</span> </span>
+<span id="cb178-3"><a href="maps.html#cb178-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max of lower = min of upper, so we arbitrarily put the boundary in the lower</span></span>
+<span id="cb178-4"><a href="maps.html#cb178-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(min_flight_level <span class="sc">&lt;</span> at_fl <span class="sc">&amp;</span> at_fl <span class="sc">&lt;=</span> max_flight_level)</span>
+<span id="cb178-5"><a href="maps.html#cb178-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-6"><a href="maps.html#cb178-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fir_slice <span class="sc">%&gt;%</span> </span>
+<span id="cb178-7"><a href="maps.html#cb178-7" aria-hidden="true" tabindex="-1"></a>         <span class="fu">st_segmentize</span>(units<span class="sc">::</span><span class="fu">set_units</span>(<span class="dv">1</span>, degree))) <span class="sc">+</span></span>
+<span id="cb178-8"><a href="maps.html#cb178-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> rnaturalearthdata<span class="sc">::</span>countries50 <span class="sc">%&gt;%</span> </span>
+<span id="cb178-9"><a href="maps.html#cb178-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">st_as_sf</span>(),</span>
+<span id="cb178-10"><a href="maps.html#cb178-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">&quot;grey50&quot;</span>) <span class="sc">+</span> <span class="co"># background colour for the land</span></span>
+<span id="cb178-11"><a href="maps.html#cb178-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb178-12"><a href="maps.html#cb178-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> airspace_id), <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb178-13"><a href="maps.html#cb178-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb178-14"><a href="maps.html#cb178-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> stringr<span class="sc">::</span><span class="fu">str_c</span>(<span class="st">&quot;FIR/UIRs at flight level &quot;</span>, at_fl)) <span class="sc">+</span></span>
+<span id="cb178-15"><a href="maps.html#cb178-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> use_crs, </span>
+<span id="cb178-16"><a href="maps.html#cb178-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;X&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;X&quot;</span>]), </span>
+<span id="cb178-17"><a href="maps.html#cb178-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(lim_corners[<span class="dv">1</span>, <span class="st">&quot;Y&quot;</span>], lim_corners[<span class="dv">2</span>, <span class="st">&quot;Y&quot;</span>])) <span class="sc">+</span></span>
+<span id="cb178-18"><a href="maps.html#cb178-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>A pattern which allows for an optional “S” or “N” would be “(UIR|FIR)(S|N)?”</li>
+<li>In the first map it didn’t really matter, but the countries are the first layer so they were put first. In the second, we want the <code>fir_poly</code> to be the default data for the additional <code>geom_sf_text</code>, so it has to be the one inside the <code>ggplot</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="mapAirports" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Airports</h2>
+<p>In this section we look at plotting airports. Much of it is assembling techniques we’ve already seen: plotting points with <code>geom_point</code> in chapter <a href="firstLook.html#firstLook">3</a> and elsewhere; map layers from earlier in this chapter. New ideas will include: preferring to plot densities rather than simple counts; and how to de-conflict labels on maps.</p>
+<p>As a warm up, let’s plot the busiest airports for one market segment; use <code>unique(flights$segment)</code> to get a list of all that are available in the data. Still scope for something new: we see a quick way to convert two columns (longitude, latitude) into a spatial feature column, another use of <code>st_as_sf()</code>; and we work out the bounding box automatically, using <code>st_bbox()</code> and also <code>st_buffer()</code> so as not to have airports too close to the edge of the map.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="maps.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to avoid repeating ourselves with the background map</span></span>
+<span id="cb179-2"><a href="maps.html#cb179-2" aria-hidden="true" tabindex="-1"></a>geom_sf_bg <span class="ot">&lt;-</span> <span class="cf">function</span>( ..., <span class="at">m =</span> rnaturalearthdata<span class="sc">::</span>countries50,</span>
+<span id="cb179-3"><a href="maps.html#cb179-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">fill =</span> <span class="st">&quot;grey80&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) {</span>
+<span id="cb179-4"><a href="maps.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(..., <span class="at">data =</span> m <span class="sc">%&gt;%</span> st_as_sfc, </span>
+<span id="cb179-5"><a href="maps.html#cb179-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> fill, <span class="at">colour =</span> colour, <span class="at">size =</span> size)</span>
+<span id="cb179-6"><a href="maps.html#cb179-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb179-7"><a href="maps.html#cb179-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-8"><a href="maps.html#cb179-8" aria-hidden="true" tabindex="-1"></a><span class="co"># and to get bounding box for an sf, in plot coordinates</span></span>
+<span id="cb179-9"><a href="maps.html#cb179-9" aria-hidden="true" tabindex="-1"></a>get_bounds <span class="ot">&lt;-</span> <span class="cf">function</span>(sft, <span class="at">crs =</span> <span class="dv">3035</span>, <span class="at">margin_km =</span> <span class="dv">100</span>){</span>
+<span id="cb179-10"><a href="maps.html#cb179-10" aria-hidden="true" tabindex="-1"></a>  sft <span class="sc">%&gt;%</span> </span>
+<span id="cb179-11"><a href="maps.html#cb179-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(crs) <span class="sc">%&gt;%</span> <span class="co"># convert to metres (</span><span class="al">TBD</span><span class="co"> check if units are metres)</span></span>
+<span id="cb179-12"><a href="maps.html#cb179-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_buffer</span>(margin_km <span class="sc">*</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span>  <span class="co"># add the buffer</span></span>
+<span id="cb179-13"><a href="maps.html#cb179-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_bbox</span>() <span class="co"># get the bounding box for the selected airports</span></span>
+<span id="cb179-14"><a href="maps.html#cb179-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb179-15"><a href="maps.html#cb179-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-16"><a href="maps.html#cb179-16" aria-hidden="true" tabindex="-1"></a>crs_europe <span class="ot">&lt;-</span> <span class="dv">3035</span> <span class="co">#EPSG3035 is our good CRS for Europe maps</span></span>
+<span id="cb179-17"><a href="maps.html#cb179-17" aria-hidden="true" tabindex="-1"></a>busiest_n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb179-18"><a href="maps.html#cb179-18" aria-hidden="true" tabindex="-1"></a>show_segment <span class="ot">&lt;-</span> <span class="st">&quot;Business Aviation&quot;</span></span>
+<span id="cb179-19"><a href="maps.html#cb179-19" aria-hidden="true" tabindex="-1"></a>busy_ap <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb179-20"><a href="maps.html#cb179-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(segment <span class="sc">==</span> show_segment) <span class="sc">%&gt;%</span> </span>
+<span id="cb179-21"><a href="maps.html#cb179-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the data are one row per flight, so we need to count rows</span></span>
+<span id="cb179-22"><a href="maps.html#cb179-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep just 3 columns and sort largest to smallest</span></span>
+<span id="cb179-23"><a href="maps.html#cb179-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(adep, adep_lat, adep_long, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb179-24"><a href="maps.html#cb179-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>busiest_n) <span class="sc">%&gt;%</span> </span>
+<span id="cb179-25"><a href="maps.html#cb179-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to sf, noting that long and lat are in degrees (EPSG4326)</span></span>
+<span id="cb179-26"><a href="maps.html#cb179-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;adep_long&quot;</span>, <span class="st">&quot;adep_lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb179-27"><a href="maps.html#cb179-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-28"><a href="maps.html#cb179-28" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(busy_ap)</span>
+<span id="cb179-29"><a href="maps.html#cb179-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb179-30"><a href="maps.html#cb179-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(busy_ap) <span class="sc">+</span></span>
+<span id="cb179-31"><a href="maps.html#cb179-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span> <span class="co">#default background map</span></span>
+<span id="cb179-32"><a href="maps.html#cb179-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">size =</span> n), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb179-33"><a href="maps.html#cb179-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Number of</span><span class="sc">\n</span><span class="st">departures&quot;</span>,</span>
+<span id="cb179-34"><a href="maps.html#cb179-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> stringr<span class="sc">::</span><span class="fu">str_c</span>(show_segment, <span class="st">&quot; in March 2019.&quot;</span>),</span>
+<span id="cb179-35"><a href="maps.html#cb179-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> stringr<span class="sc">::</span><span class="fu">str_c</span>(<span class="st">&quot;Top &quot;</span>, busiest_n, <span class="st">&quot; airports are shown.&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb179-36"><a href="maps.html#cb179-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb179-37"><a href="maps.html#cb179-37" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb179-38"><a href="maps.html#cb179-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax)) <span class="sc">+</span></span>
+<span id="cb179-39"><a href="maps.html#cb179-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<div id="mapOverlapLabels" class="section level3" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Overlapping labels on maps</h3>
+<p>We could label the maps with the airport codes in the same way that we did with the FIRs [try this], but the labels are overlapping. What function did we use in chapter <a href="filter.html#filter">4</a> to solve this problem? [try this, too]</p>
+<p>The problem is that <code>ggrepel::geom_text_repel()</code> doesn’t immediately understand the geometry column in our <code>busy_ap</code> data. Happily, a little googling comes to our aid: there is a way to get <code>geom_text_repel</code> still to do the work for us and convert what we do have, a <code>geometry</code>, into the x and y that it needs. All it takes is to use the additional parameter <code>stat = "sf_coordinates"</code>.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="maps.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span> <span class="co"># assumes you didn&#39;t actually do the 2 little exercises in [ ]</span></span>
+<span id="cb180-2"><a href="maps.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry, <span class="at">label =</span> adep), </span>
+<span id="cb180-3"><a href="maps.html#cb180-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">stat =</span> <span class="st">&quot;sf_coordinates&quot;</span>,</span>
+<span id="cb180-4"><a href="maps.html#cb180-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">size =</span> <span class="fl">1.8</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+</div>
+</div>
+<div id="mapRoutes" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> Routes</h2>
+<p>The routes or aircraft are typically shown as either:</p>
+<ul>
+<li>a great circle joining the departure and destination airports;</li>
+<li>or a sequence of short line segments (which should be great circles) joining points along the actual route flown, where the points come from radar or other surveillance.</li>
+</ul>
+<p>In this section we will see examples of each of these.</p>
+<div id="great-circle-routes" class="section level3" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> Great Circle Routes</h3>
+<p>We saw in section <a href="maps.html#spatialFeatures">9.1</a> that <code>geom_sf</code> doesn’t give us great circles by default, but joins with a straight line. There are two ways to get around this: use a CRS in which great circles map to straight lines, and our go-to CRS, EPSG3035, for Europe more-or-less has this nice property, as does the Lambert Conformal Conic (such as EPSG9040 for Europe) that is often used for aeronautical maps; alternatively, add intermediate points before plotting.</p>
+<p>Which you choose depends on how important the routing is. A great-circle is often already ‘schematic’: just a way to link airports, rather than being too fussy about the intermediate points. But if you think the viewer will jump to conclusions about traffic density in the airspace, then best to use something more precise.</p>
+<p>In the first example, we pick low-cost routes, which are mostly short- or medium-haul because this keeps the map mostly in Europe and therefore with less distortion (though Cuba in this map looks like it’s been on a diet, not to mention being rotated to a confusing angle). We use the Lambert equal area projection, which we saved as <code>crs_europe</code> and take the simpler approach of plotting straight lines.</p>
+<p>We stick to the principle of keeping the data in longitude-latitude, then transform when plotting into a coordinate reference system (CRS). But there’s still some manipulation of the data to do: for each row (<code>rowwise()</code> is a particular sort of <code>group_by</code> that works row by row) create a line, make it suitable for use in a dataframe (<code>st_sfc</code>) and tell <code>sf</code> that the CRS is long-lat (<code>crs=4326</code>).</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="maps.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">380</span>) <span class="co"># to get a fixed, but random sample</span></span>
+<span id="cb181-2"><a href="maps.html#cb181-2" aria-hidden="true" tabindex="-1"></a>lcc_sample <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb181-3"><a href="maps.html#cb181-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># just short- or medium-haul lowcost</span></span>
+<span id="cb181-4"><a href="maps.html#cb181-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(segment <span class="sc">==</span> <span class="st">&quot;Lowcost&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-5"><a href="maps.html#cb181-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="co">#just pick a few for this example</span></span>
+<span id="cb181-6"><a href="maps.html#cb181-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="co"># we want to have one line per row of data</span></span>
+<span id="cb181-7"><a href="maps.html#cb181-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gc =</span> <span class="fu">st_linestring</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(adep_long, ades_long, adep_lat, ades_lat), <span class="at">ncol =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-8"><a href="maps.html#cb181-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb181-9"><a href="maps.html#cb181-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb181-10"><a href="maps.html#cb181-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="st">&quot;gc&quot;</span>) </span>
+<span id="cb181-11"><a href="maps.html#cb181-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-12"><a href="maps.html#cb181-12" aria-hidden="true" tabindex="-1"></a><span class="co">#bounds doesn&#39;t mind if the sf geometry is points, lines, ... </span></span>
+<span id="cb181-13"><a href="maps.html#cb181-13" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(lcc_sample) </span>
+<span id="cb181-14"><a href="maps.html#cb181-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lcc_sample) <span class="sc">+</span></span>
+<span id="cb181-15"><a href="maps.html#cb181-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span></span>
+<span id="cb181-16"><a href="maps.html#cb181-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="sc">+</span></span>
+<span id="cb181-17"><a href="maps.html#cb181-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Sample of Low Cost routes&quot;</span>) <span class="sc">+</span></span>
+<span id="cb181-18"><a href="maps.html#cb181-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb181-19"><a href="maps.html#cb181-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb181-20"><a href="maps.html#cb181-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax)) <span class="sc">+</span></span>
+<span id="cb181-21"><a href="maps.html#cb181-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p>In the second example, we use a sample of longer-haul routes and the Robinson CRS. Construction of the data is the same, apart from the <code>filter</code>. But we need to specify a non-default crs in our <code>bounds</code> function. The work of adding extra points to each line is done with the <code>st_segmentize</code>, which conveniently we can apply to the whole data frame (as mentioned, it picks out the geometry column automatically for segmentation). You can adapt the step of the segments in degrees or km, appropriate to your target map. More looks nicer, but it takes up space, and takes time to plot.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="maps.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">777</span>) <span class="co"># to get a fixed, but random sample</span></span>
+<span id="cb182-2"><a href="maps.html#cb182-2" aria-hidden="true" tabindex="-1"></a>long_sample <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb182-3"><a href="maps.html#cb182-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dist_act_km <span class="sc">&gt;</span> <span class="dv">4000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb182-4"><a href="maps.html#cb182-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="co">#just pick a few for this example</span></span>
+<span id="cb182-5"><a href="maps.html#cb182-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="co"># we want to have one line per row of data</span></span>
+<span id="cb182-6"><a href="maps.html#cb182-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gc =</span> <span class="fu">st_linestring</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(adep_long, ades_long, adep_lat, ades_lat),</span>
+<span id="cb182-7"><a href="maps.html#cb182-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">ncol =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb182-8"><a href="maps.html#cb182-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb182-9"><a href="maps.html#cb182-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb182-10"><a href="maps.html#cb182-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="st">&quot;gc&quot;</span>) </span>
+<span id="cb182-11"><a href="maps.html#cb182-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-12"><a href="maps.html#cb182-12" aria-hidden="true" tabindex="-1"></a><span class="co">#bounds doesn&#39;t mind if the sf geometry is points, lines, ... </span></span>
+<span id="cb182-13"><a href="maps.html#cb182-13" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(long_sample, </span>
+<span id="cb182-14"><a href="maps.html#cb182-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">crs =</span> crs_robinson) </span>
+<span id="cb182-15"><a href="maps.html#cb182-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb182-16"><a href="maps.html#cb182-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_segmentize</span>(units<span class="sc">::</span><span class="fu">set_units</span>(<span class="dv">1</span>, degree)) ) <span class="sc">+</span></span>
+<span id="cb182-17"><a href="maps.html#cb182-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span></span>
+<span id="cb182-18"><a href="maps.html#cb182-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="sc">+</span></span>
+<span id="cb182-19"><a href="maps.html#cb182-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Sample of long-haul routes&quot;</span>) <span class="sc">+</span></span>
+<span id="cb182-20"><a href="maps.html#cb182-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_robinson,</span>
+<span id="cb182-21"><a href="maps.html#cb182-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb182-22"><a href="maps.html#cb182-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax)) <span class="sc">+</span></span>
+<span id="cb182-23"><a href="maps.html#cb182-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+</div>
+<div id="fasterGeo" class="section level3" number="9.5.2">
+<h3><span class="header-section-number">9.5.2</span> Need for Speed</h3>
+<p>[This is an advanced section that uses quickly some packages that have not been introduced. But the gains in speed are considerable.]</p>
+<p>We’ve been using small samples of data so far. Any larger and there will be a noticeable delay in converting from long-lat to spatial features, unless you’re very lucky in your hardware. In this section we discuss two ways to speed things up: an easy one, and a fiddly one.</p>
+<p>The easy speed-up is to avoid geo-coding the same route twice: the same airport pair is likely to occur several times in a large dataset: there are 767 occurrences of Madrid-Barcelona (LEMD-LEBL) for example. If we’re only looking at great circle, then all of these routes are the same. Even with filtering and grouping for the statistics you’re calculating (by aircraft type, by market segment etc), there’s still going to be duplication, unless you really need the precise time (which is unlikely since it’s tricky to show on a map). So best to <code>group_by</code> the variables you need to keep (including <code>adep_long, ades_long, adep_lat, ades_lat</code>) and summarise (see section <a href="groups.html#summarise">7.1</a>), taking a flight count [what code would that use?]. Only then convert to <code>sf</code> with <code>st_linestring</code> and friends.</p>
+<p>The fiddly method is less obvious because it depends on developing a feel for what works quickly and what less quickly in R.</p>
+<p>To my mind, using <code>rowwise</code> feels like I’ve failed. I might not have written <code>for...next</code>, but in effect, I’ve fallen back onto a for-next loop over each row in turn. I’m left believing I’ve missed a neat <code>tidyverse</code> solution, even if I’m being unfair and there might not be a neater alternative. The <code>rowwise</code> we used earlier is an example where there <em>is</em> a more efficient way to code. This isn’t just linguistic prejudice against <code>for...next</code>. Calling a function, here <code>st_linestring</code>, takes time, so calling it for each of 800,000 rows one-by-one in the flight data is going to be time-consuming.</p>
+<p>There is an interesting discussion of the conversion to <a href="https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/">great circles here</a>. The solution is based on the <code>purrr</code> package that we saw in chapter <a href="loopsfunctions.html#loopsfunctions">6</a>. Instead of grouping (each row separately), it creates a list of lists - one list per row and that list contains the 4 longitude-latitude numbers. We saw <code>map</code> in chapter <a href="loopsfunctions.html#loopsfunctions">6</a> as an efficient way to operate on each element of a list.</p>
+<p>In this code chunk, we set up two parallel ways of coding the same thing. The <code>identical</code> test shows that the two results are the same. The <code>microbenchmark</code> shows, over 10 iterations of each, that the <code>purrr</code> approach is almost 15 times faster.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="maps.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span>
+<span id="cb183-2"><a href="maps.html#cb183-2" aria-hidden="true" tabindex="-1"></a>flts <span class="ot">&lt;-</span> <span class="fu">set.seed</span>(<span class="dv">777</span>) <span class="co"># to get a fixed, but random sample</span></span>
+<span id="cb183-3"><a href="maps.html#cb183-3" aria-hidden="true" tabindex="-1"></a>long_sample <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb183-4"><a href="maps.html#cb183-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dist_act_km <span class="sc">&gt;</span> <span class="dv">4000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb183-5"><a href="maps.html#cb183-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>) </span>
+<span id="cb183-6"><a href="maps.html#cb183-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-7"><a href="maps.html#cb183-7" aria-hidden="true" tabindex="-1"></a><span class="co"># adapted from Charlie Hadley https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/</span></span>
+<span id="cb183-8"><a href="maps.html#cb183-8" aria-hidden="true" tabindex="-1"></a><span class="co"># since his example was written, the {{ }} syntax has become available for referring to dataframe columns</span></span>
+<span id="cb183-9"><a href="maps.html#cb183-9" aria-hidden="true" tabindex="-1"></a><span class="co"># so we see {{ }} here in place of his `enquo()`</span></span>
+<span id="cb183-10"><a href="maps.html#cb183-10" aria-hidden="true" tabindex="-1"></a><span class="co"># this assumes df is not already an `sf` object, just a dataframe or tbl.</span></span>
+<span id="cb183-11"><a href="maps.html#cb183-11" aria-hidden="true" tabindex="-1"></a>longlat_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(df,</span>
+<span id="cb183-12"><a href="maps.html#cb183-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">start_long =</span> adep_long,</span>
+<span id="cb183-13"><a href="maps.html#cb183-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">start_lat =</span> adep_lat,</span>
+<span id="cb183-14"><a href="maps.html#cb183-14" aria-hidden="true" tabindex="-1"></a>                           <span class="at">end_long =</span> ades_long,</span>
+<span id="cb183-15"><a href="maps.html#cb183-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">end_lat =</span> ades_lat) {</span>
+<span id="cb183-16"><a href="maps.html#cb183-16" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb183-17"><a href="maps.html#cb183-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># {{ start_long }} selects the column referred to by the value of start_long (without quotes)</span></span>
+<span id="cb183-18"><a href="maps.html#cb183-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
+<span id="cb183-19"><a href="maps.html#cb183-19" aria-hidden="true" tabindex="-1"></a>      {{ start_long }},</span>
+<span id="cb183-20"><a href="maps.html#cb183-20" aria-hidden="true" tabindex="-1"></a>      {{ end_long }},</span>
+<span id="cb183-21"><a href="maps.html#cb183-21" aria-hidden="true" tabindex="-1"></a>      {{ start_lat }},</span>
+<span id="cb183-22"><a href="maps.html#cb183-22" aria-hidden="true" tabindex="-1"></a>      {{ end_lat }}</span>
+<span id="cb183-23"><a href="maps.html#cb183-23" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb183-24"><a href="maps.html#cb183-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># make a list of lists, each of 4 numbers</span></span>
+<span id="cb183-25"><a href="maps.html#cb183-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transpose</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb183-26"><a href="maps.html#cb183-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># turn each list into a matrix</span></span>
+<span id="cb183-27"><a href="maps.html#cb183-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">matrix</span>(<span class="fu">flatten_dbl</span>(.), <span class="at">nrow =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb183-28"><a href="maps.html#cb183-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># feed that into st_linestring</span></span>
+<span id="cb183-29"><a href="maps.html#cb183-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(st_linestring) <span class="sc">%&gt;%</span></span>
+<span id="cb183-30"><a href="maps.html#cb183-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb183-31"><a href="maps.html#cb183-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_sf</span>(<span class="at">geometry =</span> .)  <span class="sc">%&gt;%</span> </span>
+<span id="cb183-32"><a href="maps.html#cb183-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">gc =</span> geometry) <span class="sc">%&gt;%</span></span>
+<span id="cb183-33"><a href="maps.html#cb183-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_cols</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb183-34"><a href="maps.html#cb183-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(gc, <span class="at">.after =</span> {{ end_long }})</span>
+<span id="cb183-35"><a href="maps.html#cb183-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb183-36"><a href="maps.html#cb183-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-37"><a href="maps.html#cb183-37" aria-hidden="true" tabindex="-1"></a><span class="co"># compare the geography data that results - identical = TRUE</span></span>
+<span id="cb183-38"><a href="maps.html#cb183-38" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(</span>
+<span id="cb183-39"><a href="maps.html#cb183-39" aria-hidden="true" tabindex="-1"></a>  long_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb183-40"><a href="maps.html#cb183-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="co"># we want to have one line per row of data</span></span>
+<span id="cb183-41"><a href="maps.html#cb183-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">gc =</span> <span class="fu">st_linestring</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(adep_long, ades_long, adep_lat, ades_lat), </span>
+<span id="cb183-42"><a href="maps.html#cb183-42" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">ncol =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb183-43"><a href="maps.html#cb183-43" aria-hidden="true" tabindex="-1"></a>             <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb183-44"><a href="maps.html#cb183-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb183-45"><a href="maps.html#cb183-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(gc),</span>
+<span id="cb183-46"><a href="maps.html#cb183-46" aria-hidden="true" tabindex="-1"></a>  long_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb183-47"><a href="maps.html#cb183-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">longlat_to_sf</span>()<span class="sc">%&gt;%</span> </span>
+<span id="cb183-48"><a href="maps.html#cb183-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(gc)</span>
+<span id="cb183-49"><a href="maps.html#cb183-49" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="maps.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is it faster?</span></span>
+<span id="cb185-2"><a href="maps.html#cb185-2" aria-hidden="true" tabindex="-1"></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
+<span id="cb185-3"><a href="maps.html#cb185-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rowwise =</span> long_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb185-4"><a href="maps.html#cb185-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="co"># we want to have one line per row of data</span></span>
+<span id="cb185-5"><a href="maps.html#cb185-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">gc =</span> <span class="fu">st_linestring</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(adep_long, ades_long, adep_lat, ades_lat), </span>
+<span id="cb185-6"><a href="maps.html#cb185-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">ncol =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb185-7"><a href="maps.html#cb185-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb185-8"><a href="maps.html#cb185-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>(),</span>
+<span id="cb185-9"><a href="maps.html#cb185-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">purrr =</span> long_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb185-10"><a href="maps.html#cb185-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">longlat_to_sf</span>(),</span>
+<span id="cb185-11"><a href="maps.html#cb185-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="dv">10</span></span>
+<span id="cb185-12"><a href="maps.html#cb185-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Unit: milliseconds
+##     expr        min         lq      mean    median        uq       max neval
+##  rowwise 132.636045 134.249306 143.45414 138.55446 144.65408 166.64567    10
+##    purrr   9.095014   9.681585  11.01144  10.04835  10.89607  19.05577    10</code></pre>
+</div>
+<div id="trueRoutes" class="section level3" number="9.5.3">
+<h3><span class="header-section-number">9.5.3</span> True Routes</h3>
+<p>Now is the time to dip our toes into the route data from the R&amp;D Data Archive. The files are large, so handle with care, but download <code>Flight_Points_Actual_20190301_20190331.csv.gz</code> into your <code>/data</code> directory, as you did the other files. This one has some 26 million rows, so we’ll create a large sample to play with. In chapter [TBD] we’ll see how to handle these datasets faster using datatables.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="maps.html#cb187-1" aria-hidden="true" tabindex="-1"></a>ac <span class="ot">&lt;-</span> <span class="st">&quot;AT72&quot;</span> <span class="co"># an aircraft type</span></span>
+<span id="cb187-2"><a href="maps.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a sizeable sample</span></span>
+<span id="cb187-3"><a href="maps.html#cb187-3" aria-hidden="true" tabindex="-1"></a>ac_flts <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb187-4"><a href="maps.html#cb187-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ac_type <span class="sc">==</span> ac)</span>
+<span id="cb187-5"><a href="maps.html#cb187-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-6"><a href="maps.html#cb187-6" aria-hidden="true" tabindex="-1"></a><span class="co"># get the data</span></span>
+<span id="cb187-7"><a href="maps.html#cb187-7" aria-hidden="true" tabindex="-1"></a>routes <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/Flight_Points_Actual_20190301_20190331.csv.gz&quot;</span>, <span class="at">skip =</span> <span class="dv">1</span>,</span>
+<span id="cb187-8"><a href="maps.html#cb187-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;seq&quot;</span>, <span class="st">&quot;time&quot;</span>, <span class="st">&quot;level&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;long&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb187-9"><a href="maps.html#cb187-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.POSIXct</span>(time, <span class="at">format =</span> <span class="st">&quot;%d-%m-%Y %H:%M:%S&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>))</span>
+<span id="cb187-10"><a href="maps.html#cb187-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-11"><a href="maps.html#cb187-11" aria-hidden="true" tabindex="-1"></a>routes <span class="sc">%&lt;&gt;%</span> <span class="fu">filter</span>(id <span class="sc">%in%</span> ac_flts<span class="sc">$</span>id) <span class="co"># reduce to a sample</span></span>
+<span id="cb187-12"><a href="maps.html#cb187-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-13"><a href="maps.html#cb187-13" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(routes, <span class="at">file =</span> stringr<span class="sc">::</span><span class="fu">str_c</span>(<span class="st">&quot;data/Flight_Points_Actual_201903_&quot;</span>, ac, <span class="st">&quot;.rda&quot;</span>))</span></code></pre></div>
+<p>Let’s explore these data. Firstly by just plotting the points in the data and their flight level, we get a rapid picture of the airports from which these ATR turboprop aircraft operate.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="maps.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/Flight_Points_Actual_201903_AT72.rda&quot;</span>) <span class="co"># loads routes dataset</span></span>
+<span id="cb188-2"><a href="maps.html#cb188-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-3"><a href="maps.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="co"># convert in two steps</span></span>
+<span id="cb188-4"><a href="maps.html#cb188-4" aria-hidden="true" tabindex="-1"></a>route_pts <span class="ot">&lt;-</span> routes <span class="sc">%&gt;%</span> </span>
+<span id="cb188-5"><a href="maps.html#cb188-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb188-6"><a href="maps.html#cb188-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb188-7"><a href="maps.html#cb188-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-8"><a href="maps.html#cb188-8" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(route_pts) </span>
+<span id="cb188-9"><a href="maps.html#cb188-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(route_pts) <span class="sc">+</span></span>
+<span id="cb188-10"><a href="maps.html#cb188-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span></span>
+<span id="cb188-11"><a href="maps.html#cb188-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> level), <span class="at">size =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb188-12"><a href="maps.html#cb188-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb188-13"><a href="maps.html#cb188-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb188-14"><a href="maps.html#cb188-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax)) <span class="sc">+</span></span>
+<span id="cb188-15"><a href="maps.html#cb188-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb188-16"><a href="maps.html#cb188-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Actual routes flown by AT72&quot;</span>,</span>
+<span id="cb188-17"><a href="maps.html#cb188-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Flight level&quot;</span>,</span>
+<span id="cb188-18"><a href="maps.html#cb188-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb188-19"><a href="maps.html#cb188-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_b</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-90-1.png" width="672" />
+This map gives a feel for the frequency at which the actual route is reported. It also shows some slightly odd-looking routing over the Atlantic (where radar coverage can be lacking).</p>
+<p>For a more joined-up view, we need to convert the points into lines. The ‘normal’ approach to this is to <code>summarise</code> and then <code>st_cast</code>. But why does this work? Surely after <code>summarise</code> you only have group variables and variables created in the call (<code>time</code> and <code>level</code> in the example below)? Normally this is true. But the <code>geometry</code> column in an <code>sf</code> dataframe is ‘sticky,’ and trumps this normal behaviour: summarising an <code>sf</code> silently summarises the geometry column into something sensible. In this case we get a ‘multipoint’ which we can then cast into a ‘linestring.’</p>
+<p>So the overall sequence is: <code>st_as_sf</code> to get points, group, summarise, cast. There’s one small twist: <code>summarise</code> normally involves a <code>union</code> operation which (unusually for R) <em>changes the data order</em>. So to keep the points in order we need to tell <code>summarise</code> to skip the union step.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="maps.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/Flight_Points_Actual_201903_AT72.rda&quot;</span>)</span>
+<span id="cb189-2"><a href="maps.html#cb189-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-3"><a href="maps.html#cb189-3" aria-hidden="true" tabindex="-1"></a><span class="co"># convert in two steps</span></span>
+<span id="cb189-4"><a href="maps.html#cb189-4" aria-hidden="true" tabindex="-1"></a>geo_routes <span class="ot">&lt;-</span> routes <span class="sc">%&gt;%</span> </span>
+<span id="cb189-5"><a href="maps.html#cb189-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb189-6"><a href="maps.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#use a 4D point</span></span>
+<span id="cb189-7"><a href="maps.html#cb189-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb189-8"><a href="maps.html#cb189-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then &#39;summarise&#39; into a linestring</span></span>
+<span id="cb189-9"><a href="maps.html#cb189-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb189-10"><a href="maps.html#cb189-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">time =</span> <span class="fu">first</span>(time),</span>
+<span id="cb189-11"><a href="maps.html#cb189-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">level =</span> <span class="fu">max</span>(level), <span class="at">do_union =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb189-12"><a href="maps.html#cb189-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_cast</span>(<span class="st">&quot;LINESTRING&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb189-13"><a href="maps.html#cb189-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for this scale of map not really necessary, but segmentize anyway</span></span>
+<span id="cb189-14"><a href="maps.html#cb189-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">st_segmentize</span>(units<span class="sc">::</span><span class="fu">set_units</span>(<span class="fl">0.5</span>, degree))</span>
+<span id="cb189-15"><a href="maps.html#cb189-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-16"><a href="maps.html#cb189-16" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(geo_routes) </span>
+<span id="cb189-17"><a href="maps.html#cb189-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(geo_routes) <span class="sc">+</span></span>
+<span id="cb189-18"><a href="maps.html#cb189-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span></span>
+<span id="cb189-19"><a href="maps.html#cb189-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> level), <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb189-20"><a href="maps.html#cb189-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb189-21"><a href="maps.html#cb189-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb189-22"><a href="maps.html#cb189-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax)) <span class="sc">+</span></span>
+<span id="cb189-23"><a href="maps.html#cb189-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb189-24"><a href="maps.html#cb189-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Actual routes flown by AT72&quot;</span>,</span>
+<span id="cb189-25"><a href="maps.html#cb189-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Max</span><span class="sc">\n</span><span class="st">flight level&quot;</span>,</span>
+<span id="cb189-26"><a href="maps.html#cb189-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb189-27"><a href="maps.html#cb189-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_b</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+</div>
+<div id="exercises-9" class="section level3" number="9.5.4">
+<h3><span class="header-section-number">9.5.4</span> Exercises</h3>
+<div id="questions-13" class="section level4" number="9.5.4.1">
+<h4><span class="header-section-number">9.5.4.1</span> Questions</h4>
+<ol style="list-style-type: decimal">
+<li>Experiment with different colours, line thickness and transparency in the low-cost map.</li>
+<li>In the low-cost map, take a larger sample of flights up to 1500km, and count the flights per airport pair. Colour the lines by traffic. Once ready, drop the sample completely, to give full counts for the month. Beware, some longitude or latitude might be missing, and such airport pairs need to be dropped.</li>
+<li>Add labels for the top N (eg 20) airports in this extended low-cost map.</li>
+<li>In the long-haul route map, why do some of the routes leave the map?</li>
+<li>What’s the solution to this?</li>
+<li>When reducing routes to those for AT72 aircraft (start of section @(trueRoutes)), we used a <code>filter</code>. With a big dataset, finding efficient code can save a lot of time. Is <code>filter</code> quicker or slower than using an <code>inner_join</code>?</li>
+</ol>
+</div>
+<div id="answers-13" class="section level4" number="9.5.4.2">
+<h4><span class="header-section-number">9.5.4.2</span> Answers</h4>
+<ol style="list-style-type: decimal">
+<li>Using <code>colour</code>, <code>size</code> and <code>alpha</code> parameters.</li>
+<li>Something like this. We needed to drop airports with missing long-lat, using <code>drop_na</code>. It took a little work on the colouring, and line sizes to get something presentable. That includes sorting so that the busier routes get plotted last.</li>
+</ol>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="maps.html#cb190-1" aria-hidden="true" tabindex="-1"></a>lcc_counts <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb190-2"><a href="maps.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># just short- or medium-haul lowcost</span></span>
+<span id="cb190-3"><a href="maps.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(segment <span class="sc">==</span> <span class="st">&quot;Lowcost&quot;</span> <span class="sc">&amp;</span> dist_act_km <span class="sc">&lt;=</span> <span class="dv">1500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb190-4"><a href="maps.html#cb190-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> <span class="co"># can&#39;t plot if we don&#39;t know the lat long of an AP </span></span>
+<span id="cb190-5"><a href="maps.html#cb190-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># slice_sample(n = 1000) %&gt;% #just pick a few while debugging</span></span>
+<span id="cb190-6"><a href="maps.html#cb190-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count is a short-hand for group/summarise/ungroup</span></span>
+<span id="cb190-7"><a href="maps.html#cb190-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(adep, ades, adep_long, ades_long, adep_lat, ades_lat,</span>
+<span id="cb190-8"><a href="maps.html#cb190-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">&quot;flts&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb190-9"><a href="maps.html#cb190-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="co"># we want to have one line per row of data</span></span>
+<span id="cb190-10"><a href="maps.html#cb190-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gc =</span> <span class="fu">st_linestring</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(adep_long, ades_long, adep_lat, ades_lat), <span class="at">ncol =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb190-11"><a href="maps.html#cb190-11" aria-hidden="true" tabindex="-1"></a>           <span class="fu">st_sfc</span>(<span class="at">crs =</span> <span class="dv">4326</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb190-12"><a href="maps.html#cb190-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb190-13"><a href="maps.html#cb190-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(flts) <span class="sc">%&gt;%</span> </span>
+<span id="cb190-14"><a href="maps.html#cb190-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="st">&quot;gc&quot;</span>) </span>
+<span id="cb190-15"><a href="maps.html#cb190-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-16"><a href="maps.html#cb190-16" aria-hidden="true" tabindex="-1"></a><span class="co">#bounds doesn&#39;t mind if the sf geometry is points, lines, ... </span></span>
+<span id="cb190-17"><a href="maps.html#cb190-17" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(lcc_counts) </span>
+<span id="cb190-18"><a href="maps.html#cb190-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lcc_counts) <span class="sc">+</span></span>
+<span id="cb190-19"><a href="maps.html#cb190-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span></span>
+<span id="cb190-20"><a href="maps.html#cb190-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> flts), <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">size =</span> <span class="fl">0.2</span>)  <span class="sc">+</span></span>
+<span id="cb190-21"><a href="maps.html#cb190-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Low-cost routes&quot;</span>, </span>
+<span id="cb190-22"><a href="maps.html#cb190-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Flights</span><span class="sc">\n</span><span class="st">in the month&quot;</span>) <span class="sc">+</span></span>
+<span id="cb190-23"><a href="maps.html#cb190-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb190-24"><a href="maps.html#cb190-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb190-25"><a href="maps.html#cb190-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax)) <span class="sc">+</span></span>
+<span id="cb190-26"><a href="maps.html#cb190-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb190-27"><a href="maps.html#cb190-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_b</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>See the extended exercises in chapter <a href="sortbars.html#sortbars">5</a> for an example of selecting top <code>n</code> and plotting deconflicted labels.</li>
+<li>We’re applying <code>bounds</code> to the data before segmenting. It seems to be a limitation of the <code>st_bbox</code> and <code>s2_bounds_rect</code> that they give the bounds of the vertices of lines (ie the points), not the line itself.</li>
+<li>An easy answer, though it increases the size of the dataset, is to move the <code>segmentize</code> to the end of the data preparation pipe. [Check that this works.]</li>
+<li>You need something like this. Be patient with it. Looks like <code>join</code> takes 50%-100% longer, so we made the right choice.</li>
+</ol>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="maps.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the data again </span></span>
+<span id="cb191-2"><a href="maps.html#cb191-2" aria-hidden="true" tabindex="-1"></a>routes <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/Flight_Points_Actual_20190301_20190331.csv.gz&quot;</span>, <span class="at">skip =</span> <span class="dv">1</span>,</span>
+<span id="cb191-3"><a href="maps.html#cb191-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;seq&quot;</span>, <span class="st">&quot;time&quot;</span>, <span class="st">&quot;level&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;long&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb191-4"><a href="maps.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.POSIXct</span>(time, <span class="at">format =</span> <span class="st">&quot;%d-%m-%Y %H:%M:%S&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>))</span></code></pre></div>
+<pre><code>## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## cols(
+##   id = col_double(),
+##   seq = col_double(),
+##   time = col_character(),
+##   level = col_double(),
+##   lat = col_double(),
+##   long = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="maps.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">microbenchmark</span>(</span>
+<span id="cb193-2"><a href="maps.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">use_in =</span> routes  <span class="sc">%&gt;%</span>  </span>
+<span id="cb193-3"><a href="maps.html#cb193-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(id <span class="sc">%in%</span> ac_flts<span class="sc">$</span>id),</span>
+<span id="cb193-4"><a href="maps.html#cb193-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">use_join =</span> routes  <span class="sc">%&gt;%</span>  </span>
+<span id="cb193-5"><a href="maps.html#cb193-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(ac_flts <span class="sc">%&gt;%</span> <span class="fu">select</span>(id), <span class="at">by =</span> <span class="st">&quot;id&quot;</span>),</span>
+<span id="cb193-6"><a href="maps.html#cb193-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="dv">10</span></span>
+<span id="cb193-7"><a href="maps.html#cb193-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Unit: milliseconds
+##      expr       min        lq     mean    median       uq      max neval
+##    use_in  717.6797  841.5343 1008.916  900.9642 1239.808 1543.809    10
+##  use_join 1195.8461 1375.2411 1650.739 1531.3404 1928.363 2468.502    10</code></pre>
+</div>
+</div>
+</div>
+<div id="mapDensity" class="section level2" number="9.6">
+<h2><span class="header-section-number">9.6</span> Density of routes</h2>
+<p>We can get an approximate map of traffic density by picking points along the great circle routes (<code>st_segmentize</code>) at distances of, say, 75km and then counting (making a heatmap, with <code>geom_hex</code> from <code>ggplot2</code>) with a hex grid of the same size. It’s not exact, since some routes might be counted twice in one hex (if they enter and leave through a vertex, say, rather than along the side). But it’s relatively quick to do.</p>
+<p>Compared to previous maps, the main differences are that we convert the lines into points with <code>st_cast('MULTIPOINT')</code>. This doesn’t add points, it just extracts the vertices of the lines. And we break the rule and transform our data to the target CRS. From the result we extract the coordinates of every point, since this is the sort of data that <code>geom_hex</code> works with. I didn’t find a way to get <code>geom_hex</code> to understand <code>sf</code> data directly, so we break the rule to work in ‘plot coordinates’ (which are x-y in metres when we use <code>crs_europe</code>).</p>
+<p>We use both the <code>summarise</code> and the <code>purrr</code> method to speed up the calculation (see section <a href="maps.html#fasterGeo">9.5.2</a>), which on this machine is then acceptably quick for a 100,000 flight sample. If there’s a way to pass a count of flights to <code>geom_hex</code>, I haven’t found it, so we use <code>uncount</code> to reverse the <code>count</code> step.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="maps.html#cb195-1" aria-hidden="true" tabindex="-1"></a>sample_km <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb195-2"><a href="maps.html#cb195-2" aria-hidden="true" tabindex="-1"></a>flts <span class="ot">&lt;-</span> <span class="fu">set.seed</span>(<span class="dv">777</span>) <span class="co"># to get a fixed, but random sample</span></span>
+<span id="cb195-3"><a href="maps.html#cb195-3" aria-hidden="true" tabindex="-1"></a>short_points <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb195-4"><a href="maps.html#cb195-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dist_act_km <span class="sc">&lt;=</span> <span class="dv">1500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-5"><a href="maps.html#cb195-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb195-6"><a href="maps.html#cb195-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100000</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb195-7"><a href="maps.html#cb195-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(adep, ades, adep_long, ades_long, adep_lat, ades_lat,</span>
+<span id="cb195-8"><a href="maps.html#cb195-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">&quot;flts&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-9"><a href="maps.html#cb195-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">longlat_to_sf</span>() <span class="sc">%&gt;%</span>  <span class="co">#using our faster conversion function</span></span>
+<span id="cb195-10"><a href="maps.html#cb195-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_segmentize</span>(units<span class="sc">::</span><span class="fu">set_units</span>(sample_km, km)) </span>
+<span id="cb195-11"><a href="maps.html#cb195-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-12"><a href="maps.html#cb195-12" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(short_points) <span class="co"># quicker to get bounds now!</span></span>
+<span id="cb195-13"><a href="maps.html#cb195-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-14"><a href="maps.html#cb195-14" aria-hidden="true" tabindex="-1"></a>short_points <span class="ot">&lt;-</span> short_points <span class="sc">%&gt;%</span> </span>
+<span id="cb195-15"><a href="maps.html#cb195-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_cast</span>(<span class="st">&#39;MULTIPOINT&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-16"><a href="maps.html#cb195-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-17"><a href="maps.html#cb195-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">uncount</span>(flts) <span class="co">#duplicate by number of flights</span></span>
+<span id="cb195-18"><a href="maps.html#cb195-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-19"><a href="maps.html#cb195-19" aria-hidden="true" tabindex="-1"></a>just_pts <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(short_points)[ , <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb195-20"><a href="maps.html#cb195-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()  </span>
+<span id="cb195-21"><a href="maps.html#cb195-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-22"><a href="maps.html#cb195-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(just_pts) <span class="sc">+</span></span>
+<span id="cb195-23"><a href="maps.html#cb195-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span> </span>
+<span id="cb195-24"><a href="maps.html#cb195-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex</span>(<span class="fu">aes</span>(X, Y), <span class="at">alpha =</span> <span class="fl">0.7</span>, </span>
+<span id="cb195-25"><a href="maps.html#cb195-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">binwidth =</span> sample_km <span class="sc">*</span> <span class="dv">1000</span>) <span class="sc">+</span></span>
+<span id="cb195-26"><a href="maps.html#cb195-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb195-27"><a href="maps.html#cb195-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb195-28"><a href="maps.html#cb195-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax))<span class="sc">+</span></span>
+<span id="cb195-29"><a href="maps.html#cb195-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb195-30"><a href="maps.html#cb195-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Flights</span><span class="sc">\n</span><span class="st">in month&quot;</span>,</span>
+<span id="cb195-31"><a href="maps.html#cb195-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb195-32"><a href="maps.html#cb195-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p>To get a more precise density calculation we need to calculate explicitly which routes intersect which hexes. So we need some hexes. There’s a promising package <code>dggridR</code> for doing this, but it’s not available on CRAN at the time of writing, so we use a more fiddly approach that involves some functions in the <code>sp</code> package that we’ve more-or-less avoided using explicitly so far. The steps are:</p>
+<ol style="list-style-type: decimal">
+<li>Use the bounding box as the area in which we want hexes. Transform into planar coordinates and convert to a Spatial object</li>
+<li>Sample points on a hexagonal grid.</li>
+<li>Convert from points to hexagons.</li>
+<li>Flip back to <code>sf</code> and then count the intersections. <code>st_intersects</code> lists the ids of hexes intersected, so we can just count. We intersect routes with hexes rather than the reverse because then we can just duplicate hex-ids (for each flight) rather than duplicating routes and doing more intersections.</li>
+</ol>
+<p>This method is likely to struggle with global maps (because of wrapping problems), so better to focus on a single continent. It generates a couple of warnings (‘discarded datum,’ ‘comment ignored’) which can be ignored (they’re not shown in the book).</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="maps.html#cb196-1" aria-hidden="true" tabindex="-1"></a>flts <span class="ot">&lt;-</span> <span class="fu">set.seed</span>(<span class="dv">777</span>) <span class="co"># to get a fixed, but random sample</span></span>
+<span id="cb196-2"><a href="maps.html#cb196-2" aria-hidden="true" tabindex="-1"></a>n_hex <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co"># this gives similar number to the &#39;geom_hex&#39; version.</span></span>
+<span id="cb196-3"><a href="maps.html#cb196-3" aria-hidden="true" tabindex="-1"></a>short_routes <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb196-4"><a href="maps.html#cb196-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dist_act_km <span class="sc">&lt;=</span> <span class="dv">1500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-5"><a href="maps.html#cb196-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb196-6"><a href="maps.html#cb196-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb196-7"><a href="maps.html#cb196-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(adep, ades, adep_long, ades_long, adep_lat, ades_lat,</span>
+<span id="cb196-8"><a href="maps.html#cb196-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">&quot;flts&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-9"><a href="maps.html#cb196-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">longlat_to_sf</span>() <span class="co">#using our faster conversion function</span></span>
+<span id="cb196-10"><a href="maps.html#cb196-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># no segmentation</span></span>
+<span id="cb196-11"><a href="maps.html#cb196-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb196-12"><a href="maps.html#cb196-12" aria-hidden="true" tabindex="-1"></a>hex <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(short_routes) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-13"><a href="maps.html#cb196-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sfc</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb196-14"><a href="maps.html#cb196-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-15"><a href="maps.html#cb196-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_Spatial</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb196-16"><a href="maps.html#cb196-16" aria-hidden="true" tabindex="-1"></a>  sp<span class="sc">::</span><span class="fu">spsample</span>(<span class="at">n=</span>n_hex, <span class="at">type =</span> <span class="st">&quot;hexagonal&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-17"><a href="maps.html#cb196-17" aria-hidden="true" tabindex="-1"></a>  sp<span class="sc">::</span><span class="fu">HexPoints2SpatialPolygons</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb196-18"><a href="maps.html#cb196-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb196-19"><a href="maps.html#cb196-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-20"><a href="maps.html#cb196-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">#optional: check areas are all equal</span></span>
+<span id="cb196-21"><a href="maps.html#cb196-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate(area = st_area(geometry)) %&gt;% </span></span>
+<span id="cb196-22"><a href="maps.html#cb196-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>() <span class="co"># add id to each row, for later joining</span></span>
+<span id="cb196-23"><a href="maps.html#cb196-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># but not for looping over - oh no!</span></span>
+<span id="cb196-24"><a href="maps.html#cb196-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-25"><a href="maps.html#cb196-25" aria-hidden="true" tabindex="-1"></a>hex_counts <span class="ot">&lt;-</span> short_routes <span class="sc">%&gt;%</span></span>
+<span id="cb196-26"><a href="maps.html#cb196-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-27"><a href="maps.html#cb196-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_intersects</span>(hex) <span class="sc">%&gt;%</span></span>
+<span id="cb196-28"><a href="maps.html#cb196-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># duplicate the hex ids, depending on the number of flights</span></span>
+<span id="cb196-29"><a href="maps.html#cb196-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map2</span>(short_routes<span class="sc">$</span>flts, rep) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-30"><a href="maps.html#cb196-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flatten_int</span>() <span class="sc">%&gt;%</span> <span class="co">#then collapse everything into a single vector</span></span>
+<span id="cb196-31"><a href="maps.html#cb196-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb196-32"><a href="maps.html#cb196-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(value, <span class="at">name =</span> <span class="st">&quot;flts&quot;</span>) <span class="co">#value is default name in as_tibble</span></span>
+<span id="cb196-33"><a href="maps.html#cb196-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-34"><a href="maps.html#cb196-34" aria-hidden="true" tabindex="-1"></a><span class="co"># add in the counts to the hexes</span></span>
+<span id="cb196-35"><a href="maps.html#cb196-35" aria-hidden="true" tabindex="-1"></a>hex <span class="ot">&lt;-</span> hex <span class="sc">%&gt;%</span>  </span>
+<span id="cb196-36"><a href="maps.html#cb196-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(hex_counts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rowid&quot;</span> <span class="ot">=</span> <span class="st">&quot;value&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb196-37"><a href="maps.html#cb196-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co"># hexes with no traffic</span></span>
+<span id="cb196-38"><a href="maps.html#cb196-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-39"><a href="maps.html#cb196-39" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(short_routes)</span>
+<span id="cb196-40"><a href="maps.html#cb196-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hex) <span class="sc">+</span> </span>
+<span id="cb196-41"><a href="maps.html#cb196-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span> </span>
+<span id="cb196-42"><a href="maps.html#cb196-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> flts), <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
+<span id="cb196-43"><a href="maps.html#cb196-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb196-44"><a href="maps.html#cb196-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb196-45"><a href="maps.html#cb196-45" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax))<span class="sc">+</span></span>
+<span id="cb196-46"><a href="maps.html#cb196-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb196-47"><a href="maps.html#cb196-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&quot;Flights</span><span class="sc">\n</span><span class="st">in month&quot;</span>,</span>
+<span id="cb196-48"><a href="maps.html#cb196-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb196-49"><a href="maps.html#cb196-49" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Density is based on great-circle routing.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb196-50"><a href="maps.html#cb196-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>Comparing the two version, the former has slightly smaller hexes (it’s difficult to align the numbers precisely since one is defined by diameter and the other by number), but higher flight counts. This emphasises the reality of the overcounting risk: it would be better to drop the numbers from the scale, or use the second method!</p>
+<p>If you extend to different samples, the process might fail, most likely because the hexes are spreading too wide. The solution is to crop more closely [adapt <code>get_bounds</code>, or the output from it to solve that] or use a hex-on-the-sphere approach such as in <code>dggridR</code> (<a href="https://github.com/r-barnes/dggridR/" class="uri">https://github.com/r-barnes/dggridR/</a>).</p>
+<div id="exercises-10" class="section level3" number="9.6.1">
+<h3><span class="header-section-number">9.6.1</span> Exercises</h3>
+<div id="questions-14" class="section level4" number="9.6.1.1">
+<h4><span class="header-section-number">9.6.1.1</span> Questions</h4>
+<ol style="list-style-type: decimal">
+<li>Plot a density map of the AT72 routes, using the accurate intersection method.</li>
+<li>AT72 are used in passenger, charter and all-cargo markets. Plot a density plot for each of these in separate facets. The facets are easy, but counting by <code>segment</code> as a group variable is quite tricky. If you want to try a simpler question: which four locations see most AT72 use on scheduled services?</li>
+</ol>
+</div>
+<div id="answers-14" class="section level4" number="9.6.1.2">
+<h4><span class="header-section-number">9.6.1.2</span> Answers</h4>
+<ol style="list-style-type: decimal">
+<li>Assuming that geo_routes is still in your environment, there are minor changes. Mostly because we don’t need to count the flights, we assume that each route is unique. This is a much clearer picture of where the flights are most common.</li>
+</ol>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="maps.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assume you still have geo_routes in your environment</span></span>
+<span id="cb197-2"><a href="maps.html#cb197-2" aria-hidden="true" tabindex="-1"></a>n_hex <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb197-3"><a href="maps.html#cb197-3" aria-hidden="true" tabindex="-1"></a>hex <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(geo_routes) <span class="sc">%&gt;%</span> <span class="co"># just this line changes</span></span>
+<span id="cb197-4"><a href="maps.html#cb197-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sfc</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb197-5"><a href="maps.html#cb197-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb197-6"><a href="maps.html#cb197-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_Spatial</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb197-7"><a href="maps.html#cb197-7" aria-hidden="true" tabindex="-1"></a>  sp<span class="sc">::</span><span class="fu">spsample</span>(<span class="at">n=</span>n_hex, <span class="at">type =</span> <span class="st">&quot;hexagonal&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb197-8"><a href="maps.html#cb197-8" aria-hidden="true" tabindex="-1"></a>  sp<span class="sc">::</span><span class="fu">HexPoints2SpatialPolygons</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb197-9"><a href="maps.html#cb197-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb197-10"><a href="maps.html#cb197-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb197-11"><a href="maps.html#cb197-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>() </span>
+<span id="cb197-12"><a href="maps.html#cb197-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-13"><a href="maps.html#cb197-13" aria-hidden="true" tabindex="-1"></a>hex_counts <span class="ot">&lt;-</span> geo_routes <span class="sc">%&gt;%</span></span>
+<span id="cb197-14"><a href="maps.html#cb197-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb197-15"><a href="maps.html#cb197-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_intersects</span>(hex) <span class="sc">%&gt;%</span></span>
+<span id="cb197-16"><a href="maps.html#cb197-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># duplicate the hex ids, depending on the number of flights</span></span>
+<span id="cb197-17"><a href="maps.html#cb197-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flatten_int</span>() <span class="sc">%&gt;%</span> <span class="co">#then collapse everything into a single vector</span></span>
+<span id="cb197-18"><a href="maps.html#cb197-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb197-19"><a href="maps.html#cb197-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(value, <span class="at">name =</span> <span class="st">&quot;flts&quot;</span>) <span class="co">#value is default name in as_tibble</span></span>
+<span id="cb197-20"><a href="maps.html#cb197-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-21"><a href="maps.html#cb197-21" aria-hidden="true" tabindex="-1"></a><span class="co"># add in the counts to the hexes</span></span>
+<span id="cb197-22"><a href="maps.html#cb197-22" aria-hidden="true" tabindex="-1"></a>hex <span class="ot">&lt;-</span> hex <span class="sc">%&gt;%</span>  </span>
+<span id="cb197-23"><a href="maps.html#cb197-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(hex_counts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rowid&quot;</span> <span class="ot">=</span> <span class="st">&quot;value&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb197-24"><a href="maps.html#cb197-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co"># hexes with no traffic</span></span>
+<span id="cb197-25"><a href="maps.html#cb197-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-26"><a href="maps.html#cb197-26" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(geo_routes)</span>
+<span id="cb197-27"><a href="maps.html#cb197-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hex <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">n</span>(), <span class="at">replace =</span> <span class="cn">TRUE</span>))) <span class="sc">+</span> </span>
+<span id="cb197-28"><a href="maps.html#cb197-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span> </span>
+<span id="cb197-29"><a href="maps.html#cb197-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> flts), <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
+<span id="cb197-30"><a href="maps.html#cb197-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb197-31"><a href="maps.html#cb197-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb197-32"><a href="maps.html#cb197-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax))<span class="sc">+</span></span>
+<span id="cb197-33"><a href="maps.html#cb197-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb197-34"><a href="maps.html#cb197-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;ATR72 routes&quot;</span>,</span>
+<span id="cb197-35"><a href="maps.html#cb197-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Flights</span><span class="sc">\n</span><span class="st">in month&quot;</span>,</span>
+<span id="cb197-36"><a href="maps.html#cb197-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb197-37"><a href="maps.html#cb197-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Density is based on actual routing.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb197-38"><a href="maps.html#cb197-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>This is a difficult one. We add the segments back into geo_routes, and pull out that column stand-alone. We hang on to <code>st_intersects</code> which is quick and is a sort of list so we use it as a tibble column. Then bind on the segments column, which gives our groups. At this point, we want one list or vector of hex-ids per segment so use <code>summarise</code> to collapse into a vector wrapped in a list so that it can also be a list column. And that can simply be <code>unnest</code>ed, ready for counting. I’m happy to believe you might find an easier way to do this.</li>
+</ol>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="maps.html#cb198-1" aria-hidden="true" tabindex="-1"></a>markets <span class="ot">&lt;-</span> geo_routes <span class="sc">%&gt;%</span> </span>
+<span id="cb198-2"><a href="maps.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># let&#39;s keep all segments for now</span></span>
+<span id="cb198-3"><a href="maps.html#cb198-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ac_flts <span class="sc">%&gt;%</span> <span class="fu">select</span>(id, segment)) <span class="sc">%&gt;%</span> </span>
+<span id="cb198-4"><a href="maps.html#cb198-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(segment)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;id&quot;</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="maps.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the hexes can be the same as in Qn 1</span></span>
+<span id="cb200-2"><a href="maps.html#cb200-2" aria-hidden="true" tabindex="-1"></a>n_hex <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb200-3"><a href="maps.html#cb200-3" aria-hidden="true" tabindex="-1"></a>hex <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(geo_routes) <span class="sc">%&gt;%</span> <span class="co"># just this line changes</span></span>
+<span id="cb200-4"><a href="maps.html#cb200-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sfc</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb200-5"><a href="maps.html#cb200-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-6"><a href="maps.html#cb200-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_Spatial</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb200-7"><a href="maps.html#cb200-7" aria-hidden="true" tabindex="-1"></a>  sp<span class="sc">::</span><span class="fu">spsample</span>(<span class="at">n=</span>n_hex, <span class="at">type =</span> <span class="st">&quot;hexagonal&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-8"><a href="maps.html#cb200-8" aria-hidden="true" tabindex="-1"></a>  sp<span class="sc">::</span><span class="fu">HexPoints2SpatialPolygons</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb200-9"><a href="maps.html#cb200-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb200-10"><a href="maps.html#cb200-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-11"><a href="maps.html#cb200-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>() </span>
+<span id="cb200-12"><a href="maps.html#cb200-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-13"><a href="maps.html#cb200-13" aria-hidden="true" tabindex="-1"></a>hex_counts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb200-14"><a href="maps.html#cb200-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">hex_id =</span> <span class="fu">st_intersects</span>(geo_routes <span class="sc">%&gt;%</span> </span>
+<span id="cb200-15"><a href="maps.html#cb200-15" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">st_transform</span>(<span class="at">crs =</span> crs_europe), </span>
+<span id="cb200-16"><a href="maps.html#cb200-16" aria-hidden="true" tabindex="-1"></a>                         hex),</span>
+<span id="cb200-17"><a href="maps.html#cb200-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">market =</span> markets) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-18"><a href="maps.html#cb200-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(market) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-19"><a href="maps.html#cb200-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">hex_id =</span> <span class="fu">list</span>(<span class="fu">flatten_int</span>(hex_id))) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-20"><a href="maps.html#cb200-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(hex_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-21"><a href="maps.html#cb200-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(market, hex_id, <span class="at">name =</span> <span class="st">&quot;flts&quot;</span>)</span>
+<span id="cb200-22"><a href="maps.html#cb200-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-23"><a href="maps.html#cb200-23" aria-hidden="true" tabindex="-1"></a><span class="co"># add in the counts to the hexes</span></span>
+<span id="cb200-24"><a href="maps.html#cb200-24" aria-hidden="true" tabindex="-1"></a>hex_m <span class="ot">&lt;-</span> hex <span class="sc">%&gt;%</span>  </span>
+<span id="cb200-25"><a href="maps.html#cb200-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(hex_counts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rowid&quot;</span> <span class="ot">=</span> <span class="st">&quot;hex_id&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-26"><a href="maps.html#cb200-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co"># hexes with no traffic</span></span>
+<span id="cb200-27"><a href="maps.html#cb200-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-28"><a href="maps.html#cb200-28" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">get_bounds</span>(geo_routes)</span>
+<span id="cb200-29"><a href="maps.html#cb200-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hex_m) <span class="sc">+</span> </span>
+<span id="cb200-30"><a href="maps.html#cb200-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_bg</span>() <span class="sc">+</span> </span>
+<span id="cb200-31"><a href="maps.html#cb200-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> flts), <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
+<span id="cb200-32"><a href="maps.html#cb200-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>market) <span class="sc">+</span></span>
+<span id="cb200-33"><a href="maps.html#cb200-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> crs_europe,</span>
+<span id="cb200-34"><a href="maps.html#cb200-34" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>xmin, bounds<span class="sc">$</span>xmax),</span>
+<span id="cb200-35"><a href="maps.html#cb200-35" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(bounds<span class="sc">$</span>ymin, bounds<span class="sc">$</span>ymax))<span class="sc">+</span></span>
+<span id="cb200-36"><a href="maps.html#cb200-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb200-37"><a href="maps.html#cb200-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;ATR72 routes&quot;</span>,</span>
+<span id="cb200-38"><a href="maps.html#cb200-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Flights</span><span class="sc">\n</span><span class="st">in month&quot;</span>,</span>
+<span id="cb200-39"><a href="maps.html#cb200-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb200-40"><a href="maps.html#cb200-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Density is based on actual routing.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb200-41"><a href="maps.html#cb200-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) </span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="what-has-gone-wrong" class="section level2" number="9.7">
+<h2><span class="header-section-number">9.7</span> What has gone wrong?</h2>
+<p>With maps it seems that there are just so many things to get wrong.</p>
+<ol style="list-style-type: decimal">
+<li>Map issues, especially polygons that seem to have crossings in them; errors like <code>Loop 96 is not valid: Edge 743 crosses edge 998</code>. This <em>could</em> be that there is a problem in the map, but it can also be an awkward interaction between the map and a CRS especially at the ‘dateline’ (the ‘far’ edge of the map). There isn’t a single solution to this, but filtering out chunks of the map that you don’t need can work. In other cases, simplifying the map might help (<code>st_simplify</code>), in still others adding points can help(<code>st_segmentize</code>).</li>
+<li>Empty maps, or maps with large empty areas. A map of Europe squeezed into the top right corner can mean that you’ve added a ggplot layer that is in long-lat to one that has been projected and is in metres (so that the long-lat get plotted somewhere near 0 long, 0 lat). You might also have a map that is being strict about including French Guiana and other overseas territories. In the first case, see the <code>coord_sf()</code> discussion earlier in this chapter. In the latter case, you’ll need to set bounds for the map (see the later part of section <a href="maps.html#mapCountries">9.3.1</a>).</li>
+<li>In World maps, unexpected near-horizontal lines is a sign of cropping and dateline troubles. My usual solution is to use <code>himach::st_window</code>, which is basically a replacement for the <code>st_transform</code> that we’ve seen here that first cropps to the final view window. It’s designed for use with the <code>crs_Atlantic</code> and <code>crs_Pacific</code> CRSs that come with the <code>himach</code> package. There are other functions for handling the ‘dateline,’ but I haven’t found an easier way to handle all types of geometry (line, polygon etc) so reliably.</li>
+</ol>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="maps.html#cb201-1" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> rnaturalearthdata<span class="sc">::</span>coastline110 <span class="sc">%&gt;%</span> </span>
+<span id="cb201-2"><a href="maps.html#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb201-3"><a href="maps.html#cb201-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-4"><a href="maps.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a Pacific view creates problems along Greenwich meridian</span></span>
+<span id="cb201-5"><a href="maps.html#cb201-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(map) <span class="sc">+</span></span>
+<span id="cb201-6"><a href="maps.html#cb201-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb201-7"><a href="maps.html#cb201-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;A map with wrapping problems at the &#39;far side&#39;.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb201-8"><a href="maps.html#cb201-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> himach<span class="sc">::</span>crs_Pacific)</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="maps.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_window </span></span>
+<span id="cb202-2"><a href="maps.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(map <span class="sc">%&gt;%</span> himach<span class="sc">::</span><span class="fu">st_window</span>(himach<span class="sc">::</span>crs_Pacific))<span class="sc">+</span></span>
+<span id="cb202-3"><a href="maps.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Wrapping problems solved.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb202-4"><a href="maps.html#cb202-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div>
+<p><img src="flights_in_R_files/figure-html/unnamed-chunk-98-2.png" width="672" /></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p>Strictly speaking, when we say ‘great circle’ in this book we really mean ‘segment of a great circle,’ or ‘along a great circle’<a href="maps.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="splitparse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["flights_in_R.pdf", "flights_in_R.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"theme": "sepia"
+});
+});
+</script>
+
+</body>
+
+</html>

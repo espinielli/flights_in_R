@@ -368,7 +368,7 @@ identical(all_monthlies_v1, all_monthlies_v3)
 ```
 Code that keeps data (or metadata, like filenames) in datasets rather than in parameter lists, is an advantage: it will be easier to extend to other files (as we will see TBD); and it means that you can also save it and hence keep a record. None of the solutions is 'wrong', but the third one is the one I prefer.
 
-### Load multiple files
+### Load multiple files {#loadMultipleFiles}
 
 The third version is most interesting because we actually want to load data from multiple files.  For this book, there's an admin step first, which is to get them from the web onto your machine. We do this with a list and a function that does the looping for us.
 

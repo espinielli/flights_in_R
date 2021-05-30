@@ -356,6 +356,9 @@ ans <- notam_texts %>%
  10) A hard one, but this leads `pivot_wider()` to create a list column rather than an ordinary one. A nice robust response, but possibly not what you want. In practice, I used the additional parameters `values_from = both, values_fn = gdata::first` to handle this and arbitrarily pick the first of the duplicate entries. This might not suit your need.
  
  
- 
+```{r echo=FALSE}
+rm(list = ls())
+```
+
  
  

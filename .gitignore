@@ -5,6 +5,9 @@
 flights_in_R.log
 scratchpad.R
 /data/annual_co2.rda
+/data/FIR_1904.csv.gz
+/data/Flights_20190301_20190331.csv.gz
+/data/Flight_Points_Actual_20190301_20190331.csv.gz
 
 /_bookdown_files
 /images
