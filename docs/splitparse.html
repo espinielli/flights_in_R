@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <title>Chapter 9 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION</title>
   <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:title" content="Chapter 9 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta name="twitter:title" content="Chapter 9 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION" />
   
   <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="David Marsh" />
 
 
-<meta name="date" content="2021-05-29" />
+<meta name="date" content="2021-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="groups.html"/>
-<link rel="next" href="maps.html"/>
+<link rel="prev" href="maps.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -242,58 +242,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="groups.html"><a href="groups.html#dates"><i class="fa fa-check"></i><b>7.2</b> Dates</a></li>
 <li class="chapter" data-level="7.3" data-path="groups.html"><a href="groups.html#mutate"><i class="fa fa-check"></i><b>7.3</b> Adding variables</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="splitparse.html"><a href="splitparse.html"><i class="fa fa-check"></i><b>8</b> NOTAMS: Splitting and parsing strings</a>
+<li class="chapter" data-level="8" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>8</b> Maps and geographic data</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>8.1</b> Splitting a column into many</a>
+<li class="chapter" data-level="8.1" data-path="maps.html"><a href="maps.html#spatialFeatures"><i class="fa fa-check"></i><b>8.1</b> Spatial features</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>8.1.1</b> Splitting a column at a character</a></li>
-<li class="chapter" data-level="8.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>8.1.2</b> Splitting a column at a regular expression</a></li>
-<li class="chapter" data-level="8.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>8.1.3</b> Splitting a column at an either-or</a></li>
-<li class="chapter" data-level="8.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-5"><i class="fa fa-check"></i><b>8.1.4</b> Exercises</a></li>
+<li class="chapter" data-level="8.1.1" data-path="maps.html"><a href="maps.html#map-exercises"><i class="fa fa-check"></i><b>8.1.1</b> Map Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>8.2</b> List columns</a>
+<li class="chapter" data-level="8.2" data-path="maps.html"><a href="maps.html#RnDArchive"><i class="fa fa-check"></i><b>8.2</b> Using the R&amp;D Data Archive</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>8.2.1</b> Splitting a field into a list</a></li>
-<li class="chapter" data-level="8.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>8.2.2</b> More realistic splitting</a></li>
-<li class="chapter" data-level="8.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>8.2.3</b> Manipulate fields in rows</a></li>
-<li class="chapter" data-level="8.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-6"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="8.2.1" data-path="maps.html"><a href="maps.html#flight-summaries"><i class="fa fa-check"></i><b>8.2.1</b> Flight Summaries</a></li>
+<li class="chapter" data-level="8.2.2" data-path="maps.html"><a href="maps.html#airspaceData"><i class="fa fa-check"></i><b>8.2.2</b> Airspace structure</a></li>
+<li class="chapter" data-level="8.2.3" data-path="maps.html"><a href="maps.html#flight-profiles"><i class="fa fa-check"></i><b>8.2.3</b> Flight profiles</a></li>
+<li class="chapter" data-level="8.2.4" data-path="maps.html"><a href="maps.html#exercises-5"><i class="fa fa-check"></i><b>8.2.4</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>9</b> Maps and geographic data</a>
+<li class="chapter" data-level="8.3" data-path="maps.html"><a href="maps.html#mapRegions"><i class="fa fa-check"></i><b>8.3</b> Countries and regions</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="maps.html"><a href="maps.html#spatialFeatures"><i class="fa fa-check"></i><b>9.1</b> Spatial features</a>
-<ul>
-<li class="chapter" data-level="9.1.1" data-path="maps.html"><a href="maps.html#map-exercises"><i class="fa fa-check"></i><b>9.1.1</b> Map Exercises</a></li>
+<li class="chapter" data-level="8.3.1" data-path="maps.html"><a href="maps.html#mapCountries"><i class="fa fa-check"></i><b>8.3.1</b> Countries</a></li>
+<li class="chapter" data-level="8.3.2" data-path="maps.html"><a href="maps.html#mapAirspace"><i class="fa fa-check"></i><b>8.3.2</b> Airspace</a></li>
+<li class="chapter" data-level="8.3.3" data-path="maps.html"><a href="maps.html#exercises-6"><i class="fa fa-check"></i><b>8.3.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="maps.html"><a href="maps.html#RnDArchive"><i class="fa fa-check"></i><b>9.2</b> Using the R&amp;D Data Archive</a>
+<li class="chapter" data-level="8.4" data-path="maps.html"><a href="maps.html#mapAirports"><i class="fa fa-check"></i><b>8.4</b> Airports</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="maps.html"><a href="maps.html#flight-summaries"><i class="fa fa-check"></i><b>9.2.1</b> Flight Summaries</a></li>
-<li class="chapter" data-level="9.2.2" data-path="maps.html"><a href="maps.html#airspaceData"><i class="fa fa-check"></i><b>9.2.2</b> Airspace structure</a></li>
-<li class="chapter" data-level="9.2.3" data-path="maps.html"><a href="maps.html#flight-profiles"><i class="fa fa-check"></i><b>9.2.3</b> Flight profiles</a></li>
-<li class="chapter" data-level="9.2.4" data-path="maps.html"><a href="maps.html#exercises-7"><i class="fa fa-check"></i><b>9.2.4</b> Exercises</a></li>
+<li class="chapter" data-level="8.4.1" data-path="maps.html"><a href="maps.html#mapOverlapLabels"><i class="fa fa-check"></i><b>8.4.1</b> Overlapping labels on maps</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="maps.html"><a href="maps.html#mapRegions"><i class="fa fa-check"></i><b>9.3</b> Countries and regions</a>
+<li class="chapter" data-level="8.5" data-path="maps.html"><a href="maps.html#mapRoutes"><i class="fa fa-check"></i><b>8.5</b> Routes</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="maps.html"><a href="maps.html#mapCountries"><i class="fa fa-check"></i><b>9.3.1</b> Countries</a></li>
-<li class="chapter" data-level="9.3.2" data-path="maps.html"><a href="maps.html#mapAirspace"><i class="fa fa-check"></i><b>9.3.2</b> Airspace</a></li>
-<li class="chapter" data-level="9.3.3" data-path="maps.html"><a href="maps.html#exercises-8"><i class="fa fa-check"></i><b>9.3.3</b> Exercises</a></li>
+<li class="chapter" data-level="8.5.1" data-path="maps.html"><a href="maps.html#great-circle-routes"><i class="fa fa-check"></i><b>8.5.1</b> Great Circle Routes</a></li>
+<li class="chapter" data-level="8.5.2" data-path="maps.html"><a href="maps.html#fasterGeo"><i class="fa fa-check"></i><b>8.5.2</b> Need for Speed</a></li>
+<li class="chapter" data-level="8.5.3" data-path="maps.html"><a href="maps.html#trueRoutes"><i class="fa fa-check"></i><b>8.5.3</b> True Routes</a></li>
+<li class="chapter" data-level="8.5.4" data-path="maps.html"><a href="maps.html#exercises-7"><i class="fa fa-check"></i><b>8.5.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="maps.html"><a href="maps.html#mapAirports"><i class="fa fa-check"></i><b>9.4</b> Airports</a>
+<li class="chapter" data-level="8.6" data-path="maps.html"><a href="maps.html#mapDensity"><i class="fa fa-check"></i><b>8.6</b> Density of routes</a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="maps.html"><a href="maps.html#mapOverlapLabels"><i class="fa fa-check"></i><b>9.4.1</b> Overlapping labels on maps</a></li>
+<li class="chapter" data-level="8.6.1" data-path="maps.html"><a href="maps.html#exercises-8"><i class="fa fa-check"></i><b>8.6.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="maps.html"><a href="maps.html#mapRoutes"><i class="fa fa-check"></i><b>9.5</b> Routes</a>
+<li class="chapter" data-level="8.7" data-path="maps.html"><a href="maps.html#what-has-gone-wrong"><i class="fa fa-check"></i><b>8.7</b> What has gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="splitparse.html"><a href="splitparse.html"><i class="fa fa-check"></i><b>9</b> NOTAMS: Splitting and parsing strings</a>
 <ul>
-<li class="chapter" data-level="9.5.1" data-path="maps.html"><a href="maps.html#great-circle-routes"><i class="fa fa-check"></i><b>9.5.1</b> Great Circle Routes</a></li>
-<li class="chapter" data-level="9.5.2" data-path="maps.html"><a href="maps.html#fasterGeo"><i class="fa fa-check"></i><b>9.5.2</b> Need for Speed</a></li>
-<li class="chapter" data-level="9.5.3" data-path="maps.html"><a href="maps.html#trueRoutes"><i class="fa fa-check"></i><b>9.5.3</b> True Routes</a></li>
-<li class="chapter" data-level="9.5.4" data-path="maps.html"><a href="maps.html#exercises-9"><i class="fa fa-check"></i><b>9.5.4</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="9.6" data-path="maps.html"><a href="maps.html#mapDensity"><i class="fa fa-check"></i><b>9.6</b> Density of routes</a>
+<li class="chapter" data-level="9.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>9.1</b> Splitting a column into many</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="maps.html"><a href="maps.html#exercises-10"><i class="fa fa-check"></i><b>9.6.1</b> Exercises</a></li>
+<li class="chapter" data-level="9.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>9.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="9.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>9.1.2</b> Splitting a column at a regular expression</a></li>
+<li class="chapter" data-level="9.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>9.1.3</b> Splitting a column at an either-or</a></li>
+<li class="chapter" data-level="9.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-9"><i class="fa fa-check"></i><b>9.1.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="maps.html"><a href="maps.html#what-has-gone-wrong"><i class="fa fa-check"></i><b>9.7</b> What has gone wrong?</a></li>
+<li class="chapter" data-level="9.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>9.2</b> List columns</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>9.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="9.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>9.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="9.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>9.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="9.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-10"><i class="fa fa-check"></i><b>9.2.4</b> Exercises</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -316,8 +316,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="splitparse" class="section level1" number="8">
-<h1><span class="header-section-number">Chapter 8</span> NOTAMS: Splitting and parsing strings</h1>
+<div id="splitparse" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> NOTAMS: Splitting and parsing strings</h1>
 <p>NOTE: This chapter has been written out of sequence, so jumps some steps and may feel a bit of a leap from the (current) previous chapter. Need to add in between chapters on: dates, mutate-across, lapply, named list (extracting from) TBD.</p>
 <p>This chapter uses the example of NOTAMs (notices to airmen) to explore R functions for turning text into more useable data, by splitting and parsing.</p>
 <p>The parsing of NOTAMs here is <em>NOT</em> for operational use. It’s for statistical analysis, post operations. NOTAMs are very varied, and we will not handle all the possible ways in which the parsing might fail. We assume that failures can be picked up in later statistical analysis, or will just be outliers that can be ignored as 1 in millions of cases. This code is NOT A SUBSTITUTE FOR READING THE NOTAM BEFORE THE FLIGHT.</p>
@@ -338,23 +338,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>The sections are ordered <em>not</em> in the order you’d have to work, starting with a full NOTAM text, but in a rough order of simple to more complex. We assume throughout that you have not just a single string, but a dataframe of strings for processing. This is because we want to illustrate this way of working: ‘vectorised’ in the R jargon.</p>
 <p>You could write a function that takes a single string and parses it. Then call it many times and stack the results together with <code>rbind</code> or <code>bind_rows</code>. But we’re planning to run this millions of times, so that’s millions of function calls. So instead we write in a way that works on the whole dataset at once, and leaves the tidyverse to do that in the most efficient way. (There’s an illustration of the time penalty later in the chapter.)</p>
-<div id="splitting-a-column-into-many" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> Splitting a column into many</h2>
+<div id="splitting-a-column-into-many" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Splitting a column into many</h2>
 <p>Within the tidyverse <code>tidyr</code> provides some useful tools for parsing text. In this chapter we see a simpler and a more complex use of <code>tidyr::separate</code>.</p>
-<div id="splitatcharacter" class="section level3" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> Splitting a column at a character</h3>
+<div id="splitatcharacter" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Splitting a column at a character</h3>
 <p>In the simplest case, a string is to be separated at a single separator character. In field Q of the NOTAM this is “/.” We just need to tell <code>separate</code> what the new columns are called, as in the following code.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="splitparse.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb141-2"><a href="splitparse.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a couple of examples, in a dataframe</span></span>
-<span id="cb141-3"><a href="splitparse.html#cb141-3" aria-hidden="true" tabindex="-1"></a>q_fields <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">q =</span> <span class="fu">c</span>(<span class="st">&quot;GLRB/QPLXX/IV/NBO/E /000/999/0620N01206W483&quot;</span>, <span class="st">&quot;LYBA/QKKKK/K /K  /K /000/999/4234N02102E999&quot;</span>) )</span>
-<span id="cb141-4"><a href="splitparse.html#cb141-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-5"><a href="splitparse.html#cb141-5" aria-hidden="true" tabindex="-1"></a>q_parsed <span class="ot">&lt;-</span> q_fields <span class="sc">%&gt;%</span> </span>
-<span id="cb141-6"><a href="splitparse.html#cb141-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
-<span id="cb141-7"><a href="splitparse.html#cb141-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
-<span id="cb141-8"><a href="splitparse.html#cb141-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>)</span>
-<span id="cb141-9"><a href="splitparse.html#cb141-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-10"><a href="splitparse.html#cb141-10" aria-hidden="true" tabindex="-1"></a><span class="co">#pretty view for the book</span></span>
-<span id="cb141-11"><a href="splitparse.html#cb141-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(q_parsed)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="splitparse.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb190-2"><a href="splitparse.html#cb190-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a couple of examples, in a dataframe</span></span>
+<span id="cb190-3"><a href="splitparse.html#cb190-3" aria-hidden="true" tabindex="-1"></a>q_fields <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">q =</span> <span class="fu">c</span>(<span class="st">&quot;GLRB/QPLXX/IV/NBO/E /000/999/0620N01206W483&quot;</span>, <span class="st">&quot;LYBA/QKKKK/K /K  /K /000/999/4234N02102E999&quot;</span>) )</span>
+<span id="cb190-4"><a href="splitparse.html#cb190-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-5"><a href="splitparse.html#cb190-5" aria-hidden="true" tabindex="-1"></a>q_parsed <span class="ot">&lt;-</span> q_fields <span class="sc">%&gt;%</span> </span>
+<span id="cb190-6"><a href="splitparse.html#cb190-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
+<span id="cb190-7"><a href="splitparse.html#cb190-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb190-8"><a href="splitparse.html#cb190-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>)</span>
+<span id="cb190-9"><a href="splitparse.html#cb190-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-10"><a href="splitparse.html#cb190-10" aria-hidden="true" tabindex="-1"></a><span class="co">#pretty view for the book</span></span>
+<span id="cb190-11"><a href="splitparse.html#cb190-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(q_parsed)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -395,85 +395,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will assume that all the q-fields are properly formed, of these 8 fields. A more robust piece of code would check this is true. This is for analysis, not operations - you’re getting the message I think.</p>
 <p>Inspecting the raw strings (always essential!) shows that there are some blank spaces. So in our result we have some fields with trailing spaces. We could use <code>stringr::str_trim</code> on the results to get rid of trailing spaces, and indeed, that would probably be a good idea anyway. But we can use this to illustrate the next level in use of <code>separate</code>, which we do in the next section.</p>
 </div>
-<div id="splitting-a-column-at-a-regular-expression" class="section level3" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> Splitting a column at a regular expression</h3>
+<div id="splitting-a-column-at-a-regular-expression" class="section level3" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Splitting a column at a regular expression</h3>
 <p>The <code>sep=</code> is a ‘regular expression.’ Entire books have been written about regular expressions, so my advice would be to find a page you like, or download a cheatsheet of which there are many. <a href="https://rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf">This is the one I use, being R-focused.</a></p>
 <p>A regular expression is a search or matching pattern. We want to split the q-field at not just <code>\</code> but any number of spaces followed by a <code>\</code>. That will remove the trailing spaces, because they’ll be treated as part of the separator.</p>
 <p>Our string has some ‘newlines’ in it <code>\n</code> as well as spaces, and in other applications perhaps tabs are used. So we use a <code>\\s</code> code, rather than just a space character " ". <code>\\s</code> stands for all of these types of ‘space,’ and some others [check in the cheatsheet].</p>
 <p>In regular expression terms this is <code>\\s*/</code>, which you can read as zero-or-more spaces followed by a back slash.</p>
 <p>We can show that this gives the same result as using trim.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="splitparse.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what you&#39;d get using trim</span></span>
-<span id="cb142-2"><a href="splitparse.html#cb142-2" aria-hidden="true" tabindex="-1"></a>q_parsed_trim <span class="ot">&lt;-</span> q_fields <span class="sc">%&gt;%</span> </span>
-<span id="cb142-3"><a href="splitparse.html#cb142-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
-<span id="cb142-4"><a href="splitparse.html#cb142-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
-<span id="cb142-5"><a href="splitparse.html#cb142-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb142-6"><a href="splitparse.html#cb142-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fns =</span> str_trim))</span>
-<span id="cb142-7"><a href="splitparse.html#cb142-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-8"><a href="splitparse.html#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="co">#what you get with the search pattern</span></span>
-<span id="cb142-9"><a href="splitparse.html#cb142-9" aria-hidden="true" tabindex="-1"></a>q_parsed_regex <span class="ot">&lt;-</span> q_fields <span class="sc">%&gt;%</span> </span>
-<span id="cb142-10"><a href="splitparse.html#cb142-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
-<span id="cb142-11"><a href="splitparse.html#cb142-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
-<span id="cb142-12"><a href="splitparse.html#cb142-12" aria-hidden="true" tabindex="-1"></a>           <span class="co"># separate on any number of spaces followed by a backslash</span></span>
-<span id="cb142-13"><a href="splitparse.html#cb142-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*/&quot;</span>)</span>
-<span id="cb142-14"><a href="splitparse.html#cb142-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-15"><a href="splitparse.html#cb142-15" aria-hidden="true" tabindex="-1"></a><span class="co"># are they the same?</span></span>
-<span id="cb142-16"><a href="splitparse.html#cb142-16" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(q_parsed_trim, q_parsed_regex)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="splitparse.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="co"># what you&#39;d get using trim</span></span>
+<span id="cb191-2"><a href="splitparse.html#cb191-2" aria-hidden="true" tabindex="-1"></a>q_parsed_trim <span class="ot">&lt;-</span> q_fields <span class="sc">%&gt;%</span> </span>
+<span id="cb191-3"><a href="splitparse.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
+<span id="cb191-4"><a href="splitparse.html#cb191-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb191-5"><a href="splitparse.html#cb191-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb191-6"><a href="splitparse.html#cb191-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fns =</span> str_trim))</span>
+<span id="cb191-7"><a href="splitparse.html#cb191-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-8"><a href="splitparse.html#cb191-8" aria-hidden="true" tabindex="-1"></a><span class="co">#what you get with the search pattern</span></span>
+<span id="cb191-9"><a href="splitparse.html#cb191-9" aria-hidden="true" tabindex="-1"></a>q_parsed_regex <span class="ot">&lt;-</span> q_fields <span class="sc">%&gt;%</span> </span>
+<span id="cb191-10"><a href="splitparse.html#cb191-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
+<span id="cb191-11"><a href="splitparse.html#cb191-11" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb191-12"><a href="splitparse.html#cb191-12" aria-hidden="true" tabindex="-1"></a>           <span class="co"># separate on any number of spaces followed by a backslash</span></span>
+<span id="cb191-13"><a href="splitparse.html#cb191-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*/&quot;</span>)</span>
+<span id="cb191-14"><a href="splitparse.html#cb191-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-15"><a href="splitparse.html#cb191-15" aria-hidden="true" tabindex="-1"></a><span class="co"># are they the same?</span></span>
+<span id="cb191-16"><a href="splitparse.html#cb191-16" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(q_parsed_trim, q_parsed_regex)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>They are identical. Which do you prefer? The second involves one less line of code, but you might feel the need to add a comment, as I’ve done here, because the code is more obscure. So it’s the same number of lines to read.</p>
 <p>That’s a qualitative judgement. If you wanted to run this thousands of times, maybe you would run timing tests. Something like this.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="splitparse.html#cb144-1" aria-hidden="true" tabindex="-1"></a>q_many <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">q =</span> <span class="fu">rep</span>(q_fields<span class="sc">$</span>q, <span class="dv">100000</span>))</span>
-<span id="cb144-2"><a href="splitparse.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb144-3"><a href="splitparse.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="co"># what you&#39;d get using trim</span></span>
-<span id="cb144-4"><a href="splitparse.html#cb144-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
-<span id="cb144-5"><a href="splitparse.html#cb144-5" aria-hidden="true" tabindex="-1"></a>q_parsed_trim <span class="ot">&lt;-</span> q_many <span class="sc">%&gt;%</span> </span>
-<span id="cb144-6"><a href="splitparse.html#cb144-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
-<span id="cb144-7"><a href="splitparse.html#cb144-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
-<span id="cb144-8"><a href="splitparse.html#cb144-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb144-9"><a href="splitparse.html#cb144-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fns =</span> str_trim))</span>
-<span id="cb144-10"><a href="splitparse.html#cb144-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="splitparse.html#cb193-1" aria-hidden="true" tabindex="-1"></a>q_many <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">q =</span> <span class="fu">rep</span>(q_fields<span class="sc">$</span>q, <span class="dv">100000</span>))</span>
+<span id="cb193-2"><a href="splitparse.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb193-3"><a href="splitparse.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="co"># what you&#39;d get using trim</span></span>
+<span id="cb193-4"><a href="splitparse.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb193-5"><a href="splitparse.html#cb193-5" aria-hidden="true" tabindex="-1"></a>q_parsed_trim <span class="ot">&lt;-</span> q_many <span class="sc">%&gt;%</span> </span>
+<span id="cb193-6"><a href="splitparse.html#cb193-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
+<span id="cb193-7"><a href="splitparse.html#cb193-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb193-8"><a href="splitparse.html#cb193-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb193-9"><a href="splitparse.html#cb193-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fns =</span> str_trim))</span>
+<span id="cb193-10"><a href="splitparse.html#cb193-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   3.002   0.626   3.645</code></pre>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="splitparse.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co">#what you get with the search pattern</span></span>
-<span id="cb146-2"><a href="splitparse.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
-<span id="cb146-3"><a href="splitparse.html#cb146-3" aria-hidden="true" tabindex="-1"></a>q_parsed_regex <span class="ot">&lt;-</span> q_many <span class="sc">%&gt;%</span> </span>
-<span id="cb146-4"><a href="splitparse.html#cb146-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
-<span id="cb146-5"><a href="splitparse.html#cb146-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
-<span id="cb146-6"><a href="splitparse.html#cb146-6" aria-hidden="true" tabindex="-1"></a>           <span class="co"># separate on any number of spaces followed by a backslash</span></span>
-<span id="cb146-7"><a href="splitparse.html#cb146-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*/&quot;</span>)</span>
-<span id="cb146-8"><a href="splitparse.html#cb146-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+##   3.194   0.471   3.669</code></pre>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="splitparse.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="co">#what you get with the search pattern</span></span>
+<span id="cb195-2"><a href="splitparse.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb195-3"><a href="splitparse.html#cb195-3" aria-hidden="true" tabindex="-1"></a>q_parsed_regex <span class="ot">&lt;-</span> q_many <span class="sc">%&gt;%</span> </span>
+<span id="cb195-4"><a href="splitparse.html#cb195-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(q,</span>
+<span id="cb195-5"><a href="splitparse.html#cb195-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb195-6"><a href="splitparse.html#cb195-6" aria-hidden="true" tabindex="-1"></a>           <span class="co"># separate on any number of spaces followed by a backslash</span></span>
+<span id="cb195-7"><a href="splitparse.html#cb195-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*/&quot;</span>)</span>
+<span id="cb195-8"><a href="splitparse.html#cb195-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.928   0.437   3.368</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="splitparse.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># and for fun, what does calling the function many times look like?</span></span>
-<span id="cb148-2"><a href="splitparse.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="co"># just do 1/100th of the rows</span></span>
-<span id="cb148-3"><a href="splitparse.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
-<span id="cb148-4"><a href="splitparse.html#cb148-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">lapply</span>(q_many<span class="sc">$</span>q[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>], <span class="cf">function</span>(x) <span class="fu">data.frame</span>(<span class="at">q=</span>x) <span class="sc">%&gt;%</span> <span class="fu">separate</span>(q,</span>
-<span id="cb148-5"><a href="splitparse.html#cb148-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
-<span id="cb148-6"><a href="splitparse.html#cb148-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*/&quot;</span>))</span>
-<span id="cb148-7"><a href="splitparse.html#cb148-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+##   2.956   0.221   3.191</code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="splitparse.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="co"># and for fun, what does calling the function many times look like?</span></span>
+<span id="cb197-2"><a href="splitparse.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="co"># just do 1/100th of the rows</span></span>
+<span id="cb197-3"><a href="splitparse.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb197-4"><a href="splitparse.html#cb197-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">lapply</span>(q_many<span class="sc">$</span>q[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>], <span class="cf">function</span>(x) <span class="fu">data.frame</span>(<span class="at">q=</span>x) <span class="sc">%&gt;%</span> <span class="fu">separate</span>(q,</span>
+<span id="cb197-5"><a href="splitparse.html#cb197-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb197-6"><a href="splitparse.html#cb197-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*/&quot;</span>))</span>
+<span id="cb197-7"><a href="splitparse.html#cb197-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.041   0.010   1.051</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="splitparse.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># are they the same?</span></span>
-<span id="cb150-2"><a href="splitparse.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(q_parsed_trim, q_parsed_regex)</span></code></pre></div>
+##   1.225   0.012   1.240</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="splitparse.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co"># are they the same?</span></span>
+<span id="cb199-2"><a href="splitparse.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(q_parsed_trim, q_parsed_regex)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>On my machine, the first takes about 40% longer in elapsed time, and twice the system time. So having fewer lines of code <em>is</em> more efficient in this case. In a light-heared way, we also show a timing test for calling the function each time. Yes, the code that isn’t carefully designed for speed, but for a dataset 100 times smaller already takes longer than either of the other two. Letting R do its vectorised thing is indeed better!</p>
 </div>
-<div id="splitting-a-column-at-an-either-or" class="section level3" number="8.1.3">
-<h3><span class="header-section-number">8.1.3</span> Splitting a column at an either-or</h3>
+<div id="splitting-a-column-at-an-either-or" class="section level3" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> Splitting a column at an either-or</h3>
 <p>Taking this one step further, we can also work on the NOTAM header. This has NOTAM in it, which isn’t that useful information, so we can ditch in, but it has this in the form ‘NOTAMC,’ ‘NOTAMR,’ ‘NOTAMN’ depending on whether this is cancelling, replacing or a new NOTAM, respectively. The structure of the field varies between these cases.</p>
 <p>As always, there are several ways to approach this. We could first remove the ‘NOTAM’ then split at spaces. But that’s two steps. So instead, we split at either ’ NOTAM’ or ’ ’ , in one go. In regular expressions, either or is given by <code>|</code>, just as in R syntax for ‘or.’ And to be on the safe side, we use the more general code for a ‘space,’ though a new line is unlikely in this position.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="splitparse.html#cb152-1" aria-hidden="true" tabindex="-1"></a>header_fields <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">header =</span> <span class="fu">c</span>(</span>
-<span id="cb152-2"><a href="splitparse.html#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;A0001/13 NOTAMN &quot;</span>,</span>
-<span id="cb152-3"><a href="splitparse.html#cb152-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;A0001/13 NOTAMR A0032/12&quot;</span>,</span>
-<span id="cb152-4"><a href="splitparse.html#cb152-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;W0809/13 NOTAMC W0808/13&quot;</span></span>
-<span id="cb152-5"><a href="splitparse.html#cb152-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb152-6"><a href="splitparse.html#cb152-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-7"><a href="splitparse.html#cb152-7" aria-hidden="true" tabindex="-1"></a>header_parsed <span class="ot">&lt;-</span> header_fields <span class="sc">%&gt;%</span> </span>
-<span id="cb152-8"><a href="splitparse.html#cb152-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(header,</span>
-<span id="cb152-9"><a href="splitparse.html#cb152-9" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">&quot;notam&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;replaces&quot;</span>),</span>
-<span id="cb152-10"><a href="splitparse.html#cb152-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">sNOTAM|</span><span class="sc">\\</span><span class="st">s&quot;</span>)</span>
-<span id="cb152-11"><a href="splitparse.html#cb152-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-12"><a href="splitparse.html#cb152-12" aria-hidden="true" tabindex="-1"></a><span class="co">#pretty view for the book</span></span>
-<span id="cb152-13"><a href="splitparse.html#cb152-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(header_parsed)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="splitparse.html#cb201-1" aria-hidden="true" tabindex="-1"></a>header_fields <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">header =</span> <span class="fu">c</span>(</span>
+<span id="cb201-2"><a href="splitparse.html#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;A0001/13 NOTAMN &quot;</span>,</span>
+<span id="cb201-3"><a href="splitparse.html#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;A0001/13 NOTAMR A0032/12&quot;</span>,</span>
+<span id="cb201-4"><a href="splitparse.html#cb201-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;W0809/13 NOTAMC W0808/13&quot;</span></span>
+<span id="cb201-5"><a href="splitparse.html#cb201-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb201-6"><a href="splitparse.html#cb201-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-7"><a href="splitparse.html#cb201-7" aria-hidden="true" tabindex="-1"></a>header_parsed <span class="ot">&lt;-</span> header_fields <span class="sc">%&gt;%</span> </span>
+<span id="cb201-8"><a href="splitparse.html#cb201-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(header,</span>
+<span id="cb201-9"><a href="splitparse.html#cb201-9" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">&quot;notam&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;replaces&quot;</span>),</span>
+<span id="cb201-10"><a href="splitparse.html#cb201-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">sNOTAM|</span><span class="sc">\\</span><span class="st">s&quot;</span>)</span>
+<span id="cb201-11"><a href="splitparse.html#cb201-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-12"><a href="splitparse.html#cb201-12" aria-hidden="true" tabindex="-1"></a><span class="co">#pretty view for the book</span></span>
+<span id="cb201-13"><a href="splitparse.html#cb201-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(header_parsed)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -503,18 +503,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This works neatly, partly because there’s a trailing space at the end of the first one. [In the code, delete the space and re-run. What happens? How does the <code>header-parsed</code> dataframe change?]</p>
 <p>In bulk use, you could either live with the <code>Expected 3 pieces....</code> errors, or add an extra space. Probably this is a sign that we should look for a better way to split, but this will always be tricky when the number of parts varies from one to the next, as it does here.</p>
 </div>
-<div id="exercises-5" class="section level3" number="8.1.4">
-<h3><span class="header-section-number">8.1.4</span> Exercises</h3>
-<div id="questions-8" class="section level4" number="8.1.4.1">
-<h4><span class="header-section-number">8.1.4.1</span> Questions</h4>
+<div id="exercises-9" class="section level3" number="9.1.4">
+<h3><span class="header-section-number">9.1.4</span> Exercises</h3>
+<div id="questions-13" class="section level4" number="9.1.4.1">
+<h4><span class="header-section-number">9.1.4.1</span> Questions</h4>
 <ol style="list-style-type: decimal">
 <li>If <code>\\s</code> matches a space, what matches everything that is not a space?</li>
 <li>How did the <code>header_parsed</code> dataframe change when you removed the space?</li>
 <li>Look up the format of q_parsed$geo on the internet. Split it into 3 parts of <em>fixed length</em>, not based on a separator, but appropriately to the meaning.</li>
 </ol>
 </div>
-<div id="answers-8" class="section level4" number="8.1.4.2">
-<h4><span class="header-section-number">8.1.4.2</span> Answers</h4>
+<div id="answers-13" class="section level4" number="9.1.4.2">
+<h4><span class="header-section-number">9.1.4.2</span> Answers</h4>
 <ol style="list-style-type: decimal">
 <li><code>\\S</code>, from the cheat sheet. There’s also a more complex version of the same thing <code>[^[:space]]</code>.</li>
 <li>One value changed from empty string, "", to <code>NA</code>.</li>
@@ -523,8 +523,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<div id="listcolumns" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> List columns</h2>
+<div id="listcolumns" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> List columns</h2>
 <p>In the last section we saw various ways to split one column into several. Here we use another approach. Conceptually, it’s harder, but it keep the parts ‘similar’ for longer, so we can modify them further <em>en masse</em> rather than one column at a time. As usual this is not the only way this could be done, but it’s a good example of the use of list columns.</p>
 <p>List columns? Up to now, you might have been thinking of tidy datasets like a table in a spreadsheet. Not a bad analogy, but R has more tricks up its sleeve. One particularly powerful one is that any column can contain, not just single values, but lists. There’s a whole package in <code>tidyverse</code> called <code>purrr</code> (yes, 3 ’r’s) to help handle such things.</p>
 <p>List columns are great for modelling. You can have rows with just 3 cells, say, one a country name, the next the whole historic time series, the next the forecast. Extremely compact. The application here is simpler.</p>
@@ -536,28 +536,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Pivot to generate 1 row per text, again, and multiple columns.</li>
 </ol>
 <p>Why might this be easier than approaches using <code>separate</code>? Because we want to manipulate what would be the column names after <code>separate</code>, it’s easier to do if these are instead text fields.</p>
-<div id="splitting-a-field-into-a-list" class="section level3" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Splitting a field into a list</h3>
+<div id="splitting-a-field-into-a-list" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Splitting a field into a list</h3>
 <p>We load a set of NOTAM texts from Github. These are based on real ones, but some have been manipulated to create parsing challenges that have been seen in larger sets. The problems are in the later ones, so we will use short samples to begin with: <em>start with a small <code>slice</code></em> is a good principle to follow anyway. (see TBD handling large datasets) Sites like <a href="https://www.ead.eurocontrol.int/cms-eadbasic/opencms/en/login/ead-basic/">Eurocontrol’s EAD Basic</a> provide views onto ready-parsed NOTAM data. So this chapter is relevant either (a) to learn string manipulation with regular expressions or (b) if you happen to receive bulk data for analysis, or both.</p>
 <p>When adding rows, as we will, we need an index that lets us identify all of the rows that go with one piece of text. We generate a simple integer <code>index</code> for this.</p>
 <p>The initial processing is to remove the opening and closing bracket from the whole NOTAM. This is just for sake of tidiness, though once we split the field the “()” are no longer a matched pair, so best to do it now. [How does the regular expression <code>^\\(|\\)$</code> achieve this?]</p>
 <p>NOTAMs are in sections, with headers “Q),” “A),” “B)” to “G).” So, in a first attempt (which works in very simple cases only), we want to split where we find ‘section’ headers “Q),” “A)” etc. But we don’t want to throw these away, we want to split and keep the separator.</p>
 <p>The regular expression is <code>\\s+[QABCDEFG]\\)\\s</code> to match any of the allowable headers in a NOTAM. You’ve seen most of these parts, the only new one is <code>[QABCDEFG]</code>, which says any one of these characters (case-sensitive). The extra bit is <code>(?=   )</code> which says: and leave behind the value corresponding to the part after the <code>=</code>, after splitting on its position. We choose to forget any leading spaces, so the <code>\\s+</code> is before this bracketed term.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="splitparse.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the NOTAM texts and add an ID</span></span>
-<span id="cb153-2"><a href="splitparse.html#cb153-2" aria-hidden="true" tabindex="-1"></a>notam_url <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/david6marsh/flights_in_R/raw/main/data/NOTAMSample.csv&quot;</span></span>
-<span id="cb153-3"><a href="splitparse.html#cb153-3" aria-hidden="true" tabindex="-1"></a>notam_texts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(notam_url) <span class="sc">%&gt;%</span> </span>
-<span id="cb153-4"><a href="splitparse.html#cb153-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>())</span>
-<span id="cb153-5"><a href="splitparse.html#cb153-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb153-6"><a href="splitparse.html#cb153-6" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notam_texts <span class="sc">%&gt;%</span> </span>
-<span id="cb153-7"><a href="splitparse.html#cb153-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span>   <span class="co">#just a few to start with</span></span>
-<span id="cb153-8"><a href="splitparse.html#cb153-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb153-9"><a href="splitparse.html#cb153-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># remove start and end brackets</span></span>
-<span id="cb153-10"><a href="splitparse.html#cb153-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">full =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(NOTAM, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)$&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
-<span id="cb153-11"><a href="splitparse.html#cb153-11" aria-hidden="true" tabindex="-1"></a>     <span class="co"># split out the phrases based on Q) A) etc</span></span>
-<span id="cb153-12"><a href="splitparse.html#cb153-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">phrases =</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(full, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s+(?=[QABCDEFG]</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s)&quot;</span>))</span>
-<span id="cb153-13"><a href="splitparse.html#cb153-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb153-14"><a href="splitparse.html#cb153-14" aria-hidden="true" tabindex="-1"></a><span class="co"># quick look at one list.</span></span>
-<span id="cb153-15"><a href="splitparse.html#cb153-15" aria-hidden="true" tabindex="-1"></a>notams<span class="sc">$</span>phrases[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="splitparse.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the NOTAM texts and add an ID</span></span>
+<span id="cb202-2"><a href="splitparse.html#cb202-2" aria-hidden="true" tabindex="-1"></a>notam_url <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/david6marsh/flights_in_R/raw/main/data/NOTAMSample.csv&quot;</span></span>
+<span id="cb202-3"><a href="splitparse.html#cb202-3" aria-hidden="true" tabindex="-1"></a>notam_texts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(notam_url) <span class="sc">%&gt;%</span> </span>
+<span id="cb202-4"><a href="splitparse.html#cb202-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>())</span>
+<span id="cb202-5"><a href="splitparse.html#cb202-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-6"><a href="splitparse.html#cb202-6" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notam_texts <span class="sc">%&gt;%</span> </span>
+<span id="cb202-7"><a href="splitparse.html#cb202-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span>   <span class="co">#just a few to start with</span></span>
+<span id="cb202-8"><a href="splitparse.html#cb202-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb202-9"><a href="splitparse.html#cb202-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># remove start and end brackets</span></span>
+<span id="cb202-10"><a href="splitparse.html#cb202-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">full =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(NOTAM, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)$&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb202-11"><a href="splitparse.html#cb202-11" aria-hidden="true" tabindex="-1"></a>     <span class="co"># split out the phrases based on Q) A) etc</span></span>
+<span id="cb202-12"><a href="splitparse.html#cb202-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">phrases =</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(full, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s+(?=[QABCDEFG]</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s)&quot;</span>))</span>
+<span id="cb202-13"><a href="splitparse.html#cb202-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-14"><a href="splitparse.html#cb202-14" aria-hidden="true" tabindex="-1"></a><span class="co"># quick look at one list.</span></span>
+<span id="cb202-15"><a href="splitparse.html#cb202-15" aria-hidden="true" tabindex="-1"></a>notams<span class="sc">$</span>phrases[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;A0011/10 NOTAMN&quot;                                &quot;Q) PAZA/QMRXX/IV/NBO/A /000/999/6034N15115W005&quot;
 ## [3] &quot;A) PAEN&quot;                                        &quot;B) 1001011230&quot;                                 
@@ -569,8 +569,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>The dataframe has 2 observations. So <code>phrases</code> is shown as a “List of 2.” It has to be the same length as the number of rows in the dataframe. Each element in <code>phrases</code> is also a list, so it’s a list of lists, but each element can be of any length. [Check by inspection, or run <code>lapply(notams$phrases, length)</code>.]</p>
 </div>
-<div id="more-realistic-splitting" class="section level3" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> More realistic splitting</h3>
+<div id="more-realistic-splitting" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> More realistic splitting</h3>
 <p>In real NOTAMs, “A)” can be a header as we saw above, but it can also be a bullet for a bulleted list within field “E).” After trying a number of approaches to parsing this, I’ve opted here to split the NOTAM into 2 parts at the first “E)” and handle them separately. In fact it allows me to illustrate some more features of list fields. If there were only one “E)” we could just use <code>separate</code> to do this. <em>But</em> “E)” can also appear as a bullet, so we take a multi-step approach:</p>
 <ul>
 <li>split at “E)” using <code>str_split</code> because we can insist on only have 2 parts, ie splitting at the first occurrence;</li>
@@ -578,16 +578,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>then <code>unnest_wider</code>, ie into columns.</li>
 </ul>
 <p>If this isn’t an obvious approach, don’t worry, because it wasn’t obvious to me either. It took trial and error, and a bit of googling to find this combination. The error was finding the hard way that <code>unnest_wider</code> won’t let you provide names for the new columns (as we saw above that <code>separate</code> does), it insists on finding them in the data. [You can see the ‘errors’ by commenting out the line with <code>map</code> in it.] The googling was how to provide names for <code>unnest_wider</code>. As usual, someone has already struggled with this, and an answer was out there.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="splitparse.html#cb155-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notam_texts <span class="sc">%&gt;%</span> </span>
-<span id="cb155-2"><a href="splitparse.html#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">%&gt;%</span>   <span class="co">#all but the last one</span></span>
-<span id="cb155-3"><a href="splitparse.html#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb155-4"><a href="splitparse.html#cb155-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># remove start and end brackets</span></span>
-<span id="cb155-5"><a href="splitparse.html#cb155-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">full =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(NOTAM, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)$&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
-<span id="cb155-6"><a href="splitparse.html#cb155-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># split into two parts</span></span>
-<span id="cb155-7"><a href="splitparse.html#cb155-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">split_at_E =</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(full, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s(?=E</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s)&quot;</span>, <span class="at">n=</span><span class="dv">2</span>),</span>
-<span id="cb155-8"><a href="splitparse.html#cb155-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">split_at_E =</span> <span class="fu">map</span>(split_at_E, setNames, <span class="fu">c</span>(<span class="st">&quot;part1&quot;</span>, <span class="st">&quot;part2&quot;</span>))</span>
-<span id="cb155-9"><a href="splitparse.html#cb155-9" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span></span>
-<span id="cb155-10"><a href="splitparse.html#cb155-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">unnest_wider</span>(split_at_E) </span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="splitparse.html#cb204-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notam_texts <span class="sc">%&gt;%</span> </span>
+<span id="cb204-2"><a href="splitparse.html#cb204-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">%&gt;%</span>   <span class="co">#all but the last one</span></span>
+<span id="cb204-3"><a href="splitparse.html#cb204-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb204-4"><a href="splitparse.html#cb204-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># remove start and end brackets</span></span>
+<span id="cb204-5"><a href="splitparse.html#cb204-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">full =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(NOTAM, <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)$&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb204-6"><a href="splitparse.html#cb204-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># split into two parts</span></span>
+<span id="cb204-7"><a href="splitparse.html#cb204-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">split_at_E =</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(full, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s(?=E</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s)&quot;</span>, <span class="at">n=</span><span class="dv">2</span>),</span>
+<span id="cb204-8"><a href="splitparse.html#cb204-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">split_at_E =</span> <span class="fu">map</span>(split_at_E, setNames, <span class="fu">c</span>(<span class="st">&quot;part1&quot;</span>, <span class="st">&quot;part2&quot;</span>))</span>
+<span id="cb204-9"><a href="splitparse.html#cb204-9" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span></span>
+<span id="cb204-10"><a href="splitparse.html#cb204-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">unnest_wider</span>(split_at_E) </span></code></pre></div>
 <p>We can now split out the fields from the first part as in our first attempt, splitting at <code>\\s+(?=[QABCD]\\)\\s)</code>. The second part is still tricky, because “F)” and “G)” can be fields or bullets in a bulleted list. The two fields are rare, and describe the vertical extent of the NOTAM. We find the ‘real’ fields by looking for something that resembles a vertical extent. Inspection of many cases shows we have values such as:</p>
 <ul>
 <li>1200FT AMSL (above mean sea level), or that could be in metres ‘M’ or above ground level (AGL) or surface SFC. There might or might not be a space between. [What would the regular expression look like?]</li>
@@ -596,66 +596,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Put all of these together and we get an expression like <code>ffg</code> in the next code chunk; we could have found slightly different expressions for F and G, but this single one works for both, so it’s good enough for us here. Use the cheatsheet for terms that may be new (eg <code>\\d</code>). It can be easier to read if you look for () pairs, starting with ones close together, and for the <code>|</code> symbol. [Which expression allows for a possible but not necessary space? Find each the listed items above, separated by <code>|</code>.]</p>
 <p>Having split, and generated two list fields, we need to recombine them. Normally you’d join list with <code>c()</code>, eg <code>c(list(1), list(7,5))</code>. Here we do that too, but within the mutate function have to write it in a longer form, using <code>map2</code> (TBD - explain reasons?). Then, finally, we get to step (2) of our pattern (remember that?) and un-nest into rows.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="splitparse.html#cb156-1" aria-hidden="true" tabindex="-1"></a>ffg <span class="ot">&lt;-</span> <span class="st">&quot;(?=[FG]</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s*((</span><span class="sc">\\</span><span class="st">s*</span><span class="sc">\\</span><span class="st">d+(FT|M)</span><span class="sc">\\</span><span class="st">s*(AGL|AMSL|SFC))|(FL</span><span class="sc">\\</span><span class="st">d+)|SFC|GND|UNL))&quot;</span></span>
-<span id="cb156-2"><a href="splitparse.html#cb156-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-3"><a href="splitparse.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="co"># before the unnest, how many rows do we have</span></span>
-<span id="cb156-4"><a href="splitparse.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(notams)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="splitparse.html#cb205-1" aria-hidden="true" tabindex="-1"></a>ffg <span class="ot">&lt;-</span> <span class="st">&quot;(?=[FG]</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s*((</span><span class="sc">\\</span><span class="st">s*</span><span class="sc">\\</span><span class="st">d+(FT|M)</span><span class="sc">\\</span><span class="st">s*(AGL|AMSL|SFC))|(FL</span><span class="sc">\\</span><span class="st">d+)|SFC|GND|UNL))&quot;</span></span>
+<span id="cb205-2"><a href="splitparse.html#cb205-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-3"><a href="splitparse.html#cb205-3" aria-hidden="true" tabindex="-1"></a><span class="co"># before the unnest, how many rows do we have</span></span>
+<span id="cb205-4"><a href="splitparse.html#cb205-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(notams)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="splitparse.html#cb158-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notams <span class="sc">%&gt;%</span> </span>
-<span id="cb158-2"><a href="splitparse.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="co">#split these - note force the first to be a list column</span></span>
-<span id="cb158-3"><a href="splitparse.html#cb158-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">part1 =</span> <span class="fu">str_split</span>(part1, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s+(?=[QABCD]</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s)&quot;</span>),</span>
-<span id="cb158-4"><a href="splitparse.html#cb158-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">part2 =</span> <span class="fu">str_split</span>(part2, ffg),</span>
-<span id="cb158-5"><a href="splitparse.html#cb158-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">both =</span> purrr<span class="sc">::</span><span class="fu">map2</span>(part1, part2, c)) <span class="sc">%&gt;%</span></span>
-<span id="cb158-6"><a href="splitparse.html#cb158-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(part1, part2)) <span class="sc">%&gt;%</span></span>
-<span id="cb158-7"><a href="splitparse.html#cb158-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">unnest_longer</span>(both)</span>
-<span id="cb158-8"><a href="splitparse.html#cb158-8" aria-hidden="true" tabindex="-1"></a><span class="co"># show that we&#39;ve added quite a few rows</span></span>
-<span id="cb158-9"><a href="splitparse.html#cb158-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(notams)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="splitparse.html#cb207-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notams <span class="sc">%&gt;%</span> </span>
+<span id="cb207-2"><a href="splitparse.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="co">#split these - note force the first to be a list column</span></span>
+<span id="cb207-3"><a href="splitparse.html#cb207-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">part1 =</span> <span class="fu">str_split</span>(part1, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s+(?=[QABCD]</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s)&quot;</span>),</span>
+<span id="cb207-4"><a href="splitparse.html#cb207-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">part2 =</span> <span class="fu">str_split</span>(part2, ffg),</span>
+<span id="cb207-5"><a href="splitparse.html#cb207-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">both =</span> purrr<span class="sc">::</span><span class="fu">map2</span>(part1, part2, c)) <span class="sc">%&gt;%</span></span>
+<span id="cb207-6"><a href="splitparse.html#cb207-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(part1, part2)) <span class="sc">%&gt;%</span></span>
+<span id="cb207-7"><a href="splitparse.html#cb207-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">unnest_longer</span>(both)</span>
+<span id="cb207-8"><a href="splitparse.html#cb207-8" aria-hidden="true" tabindex="-1"></a><span class="co"># show that we&#39;ve added quite a few rows</span></span>
+<span id="cb207-9"><a href="splitparse.html#cb207-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(notams)</span></code></pre></div>
 <pre><code>## [1] 45</code></pre>
 <p>[Check visually that in NOTAM 4, the fields F and G have been pulled out but that in NOTAM 6 bullets F and G are left within field E.]</p>
 <p>If we had used <code>separate</code> in place of <code>str_split</code> then we would generate missing fields <code>NA</code>, and potentially (if there were a D field but no C, say) map data into the wrong field. [Exercise - try with separate]</p>
 </div>
-<div id="manipulate-fields-in-rows" class="section level3" number="8.2.3">
-<h3><span class="header-section-number">8.2.3</span> Manipulate fields in rows</h3>
+<div id="manipulate-fields-in-rows" class="section level3" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Manipulate fields in rows</h3>
 <p>Step 3 is to generate what will become the column names. After all those regular expressions, we’ll stick to some basic extraction of parts of strings for this. We want the first element to be called header. So we use groups as we saw earlier (TBD), and <code>row_number</code> to get the first item.</p>
 <p>Then converting to columns is done with <code>pivot_wider</code>. [Why not <code>unnest</code>? Because we not dealing with list columns now, but ‘ordinary’ ones.] The order in which this happens is not quite perfect, so we <code>relocate</code> it, even if it will make no difference to the analysis, it will help us when scrolling back and forth in the data viewer.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="splitparse.html#cb160-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notams <span class="sc">%&gt;%</span> </span>
-<span id="cb160-2"><a href="splitparse.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(index) <span class="sc">%&gt;%</span></span>
-<span id="cb160-3"><a href="splitparse.html#cb160-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sort out the names</span></span>
-<span id="cb160-4"><a href="splitparse.html#cb160-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">if_else</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;header&quot;</span>, <span class="fu">str_sub</span>(both, <span class="dv">1</span>, <span class="dv">1</span>)),</span>
-<span id="cb160-5"><a href="splitparse.html#cb160-5" aria-hidden="true" tabindex="-1"></a>         <span class="co"># having taken field id, remove the id from the text</span></span>
-<span id="cb160-6"><a href="splitparse.html#cb160-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">both =</span> <span class="fu">if_else</span>(id <span class="sc">==</span> <span class="st">&quot;header&quot;</span>, both,</span>
-<span id="cb160-7"><a href="splitparse.html#cb160-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">str_sub</span>(both, <span class="dv">4</span>, <span class="fu">nchar</span>(both)))) <span class="sc">%&gt;%</span></span>
-<span id="cb160-8"><a href="splitparse.html#cb160-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then convert to columns</span></span>
-<span id="cb160-9"><a href="splitparse.html#cb160-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> id, <span class="at">values_from =</span> both, <span class="at">names_prefix =</span> <span class="st">&quot;field_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb160-10"><a href="splitparse.html#cb160-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb160-11"><a href="splitparse.html#cb160-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># no longer need this index and NOTAM is a near-duplicate of full</span></span>
-<span id="cb160-12"><a href="splitparse.html#cb160-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(index, NOTAM)) <span class="sc">%&gt;%</span> </span>
-<span id="cb160-13"><a href="splitparse.html#cb160-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># put D in its place</span></span>
-<span id="cb160-14"><a href="splitparse.html#cb160-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(field_D, <span class="at">.before =</span> field_E)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="splitparse.html#cb209-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notams <span class="sc">%&gt;%</span> </span>
+<span id="cb209-2"><a href="splitparse.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(index) <span class="sc">%&gt;%</span></span>
+<span id="cb209-3"><a href="splitparse.html#cb209-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sort out the names</span></span>
+<span id="cb209-4"><a href="splitparse.html#cb209-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">if_else</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;header&quot;</span>, <span class="fu">str_sub</span>(both, <span class="dv">1</span>, <span class="dv">1</span>)),</span>
+<span id="cb209-5"><a href="splitparse.html#cb209-5" aria-hidden="true" tabindex="-1"></a>         <span class="co"># having taken field id, remove the id from the text</span></span>
+<span id="cb209-6"><a href="splitparse.html#cb209-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">both =</span> <span class="fu">if_else</span>(id <span class="sc">==</span> <span class="st">&quot;header&quot;</span>, both,</span>
+<span id="cb209-7"><a href="splitparse.html#cb209-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">str_sub</span>(both, <span class="dv">4</span>, <span class="fu">nchar</span>(both)))) <span class="sc">%&gt;%</span></span>
+<span id="cb209-8"><a href="splitparse.html#cb209-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then convert to columns</span></span>
+<span id="cb209-9"><a href="splitparse.html#cb209-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> id, <span class="at">values_from =</span> both, <span class="at">names_prefix =</span> <span class="st">&quot;field_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb209-10"><a href="splitparse.html#cb209-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb209-11"><a href="splitparse.html#cb209-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># no longer need this index and NOTAM is a near-duplicate of full</span></span>
+<span id="cb209-12"><a href="splitparse.html#cb209-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(index, NOTAM)) <span class="sc">%&gt;%</span> </span>
+<span id="cb209-13"><a href="splitparse.html#cb209-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># put D in its place</span></span>
+<span id="cb209-14"><a href="splitparse.html#cb209-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(field_D, <span class="at">.before =</span> field_E)</span></code></pre></div>
 <p>That’s steps 3 and 4 done; we’ve finished extracting the fields from the raw text.</p>
-<p>We can move on to parsing the fields, to pull out information from then. In fact, we already did this in section <a href="splitparse.html#splitatcharacter">8.1.1</a>. You could also convert text to dates. Pulling forward the code from those earlier sections we get something like this.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="splitparse.html#cb161-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notams <span class="sc">%&gt;%</span> </span>
-<span id="cb161-2"><a href="splitparse.html#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb161-3"><a href="splitparse.html#cb161-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">from_date =</span> <span class="fu">as.POSIXct</span>(field_B, <span class="at">format =</span> <span class="st">&quot;%y%m%d%H%M&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>),</span>
-<span id="cb161-4"><a href="splitparse.html#cb161-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#for C we will get errors but that&#39;s OK</span></span>
-<span id="cb161-5"><a href="splitparse.html#cb161-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">to_date =</span> <span class="fu">as.POSIXct</span>(field_C, <span class="at">format =</span> <span class="st">&quot;%y%m%d%H%M&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb161-6"><a href="splitparse.html#cb161-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># split some fields</span></span>
-<span id="cb161-7"><a href="splitparse.html#cb161-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this warns on generating NAs, which is what we want</span></span>
-<span id="cb161-8"><a href="splitparse.html#cb161-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(field_header, <span class="fu">c</span>(<span class="st">&quot;notam&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;replaces&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;( NOTAM| )&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb161-9"><a href="splitparse.html#cb161-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(field_Q,</span>
-<span id="cb161-10"><a href="splitparse.html#cb161-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
-<span id="cb161-11"><a href="splitparse.html#cb161-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb161-12"><a href="splitparse.html#cb161-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># put them in a helpful order</span></span>
-<span id="cb161-13"><a href="splitparse.html#cb161-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(from_date, <span class="at">.after =</span> field_B) <span class="sc">%&gt;%</span></span>
-<span id="cb161-14"><a href="splitparse.html#cb161-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(to_date, <span class="at">.after =</span> field_C) <span class="sc">%&gt;%</span></span>
-<span id="cb161-15"><a href="splitparse.html#cb161-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(full, <span class="at">.after =</span> <span class="fu">last_col</span>())</span></code></pre></div>
+<p>We can move on to parsing the fields, to pull out information from then. In fact, we already did this in section <a href="splitparse.html#splitatcharacter">9.1.1</a>. You could also convert text to dates. Pulling forward the code from those earlier sections we get something like this.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="splitparse.html#cb210-1" aria-hidden="true" tabindex="-1"></a>notams <span class="ot">&lt;-</span> notams <span class="sc">%&gt;%</span> </span>
+<span id="cb210-2"><a href="splitparse.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb210-3"><a href="splitparse.html#cb210-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">from_date =</span> <span class="fu">as.POSIXct</span>(field_B, <span class="at">format =</span> <span class="st">&quot;%y%m%d%H%M&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>),</span>
+<span id="cb210-4"><a href="splitparse.html#cb210-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#for C we will get errors but that&#39;s OK</span></span>
+<span id="cb210-5"><a href="splitparse.html#cb210-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">to_date =</span> <span class="fu">as.POSIXct</span>(field_C, <span class="at">format =</span> <span class="st">&quot;%y%m%d%H%M&quot;</span>, <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb210-6"><a href="splitparse.html#cb210-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># split some fields</span></span>
+<span id="cb210-7"><a href="splitparse.html#cb210-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this warns on generating NAs, which is what we want</span></span>
+<span id="cb210-8"><a href="splitparse.html#cb210-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(field_header, <span class="fu">c</span>(<span class="st">&quot;notam&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;replaces&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;( NOTAM| )&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb210-9"><a href="splitparse.html#cb210-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(field_Q,</span>
+<span id="cb210-10"><a href="splitparse.html#cb210-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb210-11"><a href="splitparse.html#cb210-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb210-12"><a href="splitparse.html#cb210-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># put them in a helpful order</span></span>
+<span id="cb210-13"><a href="splitparse.html#cb210-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(from_date, <span class="at">.after =</span> field_B) <span class="sc">%&gt;%</span></span>
+<span id="cb210-14"><a href="splitparse.html#cb210-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(to_date, <span class="at">.after =</span> field_C) <span class="sc">%&gt;%</span></span>
+<span id="cb210-15"><a href="splitparse.html#cb210-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(full, <span class="at">.after =</span> <span class="fu">last_col</span>())</span></code></pre></div>
 <pre><code>## Warning: Expected 3 pieces. Missing pieces filled with `NA` in 5 rows [1, 4, 5, 6, 7].</code></pre>
 <p>That’s as far as we need to go. The code generates some warnings of ‘missing pieces,’ but otherwise works on these examples. The exercises explore a bit further, including how this ‘basic’ set of code might fail for some NOTAMs.</p>
 </div>
-<div id="exercises-6" class="section level3" number="8.2.4">
-<h3><span class="header-section-number">8.2.4</span> Exercises</h3>
-<div id="questions-9" class="section level4" number="8.2.4.1">
-<h4><span class="header-section-number">8.2.4.1</span> Questions</h4>
+<div id="exercises-10" class="section level3" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Exercises</h3>
+<div id="questions-14" class="section level4" number="9.2.4.1">
+<h4><span class="header-section-number">9.2.4.1</span> Questions</h4>
 <ol style="list-style-type: decimal">
 <li>How does the regular expression <code>^\\(|\\)$</code> achieve what we need?</li>
 <li>What would <code>str_replace</code> have done differently to <code>str_replace_all</code>?</li>
@@ -669,8 +669,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Where would our code struggle if a NOTAM has repeated fields? (I’ve seen this occur: two different (!) versions of fields F and G)?</li>
 </ol>
 </div>
-<div id="answers-9" class="section level4" number="8.2.4.2">
-<h4><span class="header-section-number">8.2.4.2</span> Answers</h4>
+<div id="answers-14" class="section level4" number="9.2.4.2">
+<h4><span class="header-section-number">9.2.4.2</span> Answers</h4>
 <ol style="list-style-type: decimal">
 <li>The cheat sheet will tell you: <code>^</code> matches at the start of the string, <code>$</code> at the end. <code>(</code> and <code>)</code> are reserved tokens in regular expressions, so you need to ‘escape’ them to use them as literal characters. <code>|</code> we saw earlier, means ‘or.’</li>
 <li>It just changes the first occurrence. Compare <code>str_replace(q_fields$q, "/", "-$-")</code> and <code>str_replace_all(q_fields$q, "/", "-$-")</code>.</li>
@@ -680,12 +680,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>With that example, you can use <code>z$named$a["y"]</code>, for example.</li>
 <li>Amongst many possible solutions, these work. How would you select A if it contains multiple 3 or 4 letter strings separated by spaces?</li>
 </ol>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="splitparse.html#cb163-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> notam_texts <span class="sc">%&gt;%</span> </span>
-<span id="cb163-2"><a href="splitparse.html#cb163-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="fu">str_match</span>(NOTAM, <span class="st">&quot;A</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s+[^(B</span><span class="sc">\\</span><span class="st">))]+&quot;</span>),</span>
-<span id="cb163-3"><a href="splitparse.html#cb163-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">v2 =</span> <span class="fu">str_match</span>(NOTAM, <span class="st">&quot;A</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s+[[:upper:]]{4}&quot;</span>),</span>
-<span id="cb163-4"><a href="splitparse.html#cb163-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># multiply one field, for testing </span></span>
-<span id="cb163-5"><a href="splitparse.html#cb163-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">notam_plus =</span> <span class="fu">str_replace</span>(NOTAM, <span class="st">&quot;RPXX&quot;</span>, <span class="st">&quot;RPXX EGLL&quot;</span>),</span>
-<span id="cb163-6"><a href="splitparse.html#cb163-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">vMult =</span> <span class="fu">str_match</span>(notam_plus, <span class="st">&quot;A</span><span class="sc">\\</span><span class="st">)(</span><span class="sc">\\</span><span class="st">s+[[:upper:]]{4})+&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="splitparse.html#cb212-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> notam_texts <span class="sc">%&gt;%</span> </span>
+<span id="cb212-2"><a href="splitparse.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="fu">str_match</span>(NOTAM, <span class="st">&quot;A</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s+[^(B</span><span class="sc">\\</span><span class="st">))]+&quot;</span>),</span>
+<span id="cb212-3"><a href="splitparse.html#cb212-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">v2 =</span> <span class="fu">str_match</span>(NOTAM, <span class="st">&quot;A</span><span class="sc">\\</span><span class="st">)</span><span class="sc">\\</span><span class="st">s+[[:upper:]]{4}&quot;</span>),</span>
+<span id="cb212-4"><a href="splitparse.html#cb212-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># multiply one field, for testing </span></span>
+<span id="cb212-5"><a href="splitparse.html#cb212-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">notam_plus =</span> <span class="fu">str_replace</span>(NOTAM, <span class="st">&quot;RPXX&quot;</span>, <span class="st">&quot;RPXX EGLL&quot;</span>),</span>
+<span id="cb212-6"><a href="splitparse.html#cb212-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">vMult =</span> <span class="fu">str_match</span>(notam_plus, <span class="st">&quot;A</span><span class="sc">\\</span><span class="st">)(</span><span class="sc">\\</span><span class="st">s+[[:upper:]]{4})+&quot;</span>))</span></code></pre></div>
 <ol start="8" style="list-style-type: decimal">
 <li>(Essentially a cut-paste exercise, so result not provided here.) The final NOTAM has a missing “E)” header for the E field, so the splitting approach fails. Two possible solutions: filter to remove, if “E)” not found would perhaps be ok as one outlier amongst thousands; or detect and insert “E)” after C or D to allow the code to work properly.</li>
 <li>Perhaps there’s a ‘quiet’ option for the function ;-). Otherwise, since the problem is whether or not there’s text to say which NOTAM is being replaced, you could test for length and <code>separate</code> in two different ways: <code>if_else(header is long, separate with 3 column names, separate with 2 column names)</code>.</li>
@@ -701,8 +701,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="groups.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="maps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="maps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
