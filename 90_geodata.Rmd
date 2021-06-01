@@ -8,7 +8,7 @@ You don't get far in visualising patterns of air traffic without a map, whether 
 rm(list = ls()) # start with clean sheet
 knitr::kable(data.frame(syl=c("spatial features, `s2`, `rnaturalearthdata`, R&D Data Archive, `geom_sf`, `%<>%`, `st_transform`, `CRS` and more.")),
              col.names = c("In this chapter, you'll be introduced to:"))
-library(magrittr)
+suppressPackageStartupMessages(library(magrittr))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
 ```
 
