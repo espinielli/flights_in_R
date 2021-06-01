@@ -93,7 +93,7 @@ Does the `$` method work for vectors? [Try `a$c`] It's no coincidence that we us
 
 For the first 5 there are several answers that work. The ones here are relatively compact.
 
-1) `seq(2, 14, by = 4)` (or `c(2, 6, 10, 14)` is hardly any longer)
+1) `seq(2, 14, by = 4)`, or `c(2, 6, 10, 14)` but feels a bit manual, or `4 * 1:4 - 2` if you're into cryptic code (hiding both the start and the end in a bit of maths)
 2) `rep(1:2, 4)`
 3) `str_c(LETTERS[1:5], 1:5)`
 4) `1/1:5`
