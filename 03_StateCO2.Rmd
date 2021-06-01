@@ -92,7 +92,7 @@ save(annual_co2, file = "data/annual_co2.rda")
  
 There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the first line, with name on, to see a summary. You get much the same thing in the console by typing `str(annual_co2)` where `str` is for 'structure'. You should see something like this.
 
-![](images/CO2inEnvironment.png)
+![](/images/CO2inEnvironment.png)
 
 We can see that there are three numeric variables (`num`) and two character variables (`chr`). All five variables have the same number of observations (`r nrow(annual_co2)`). In a tibble or dataframe the columns are always the same length.
 
@@ -100,7 +100,7 @@ The second way to explore the structure, because this is a tibble, is just to ty
 
 The third way gives a window to explore every observation. Click on the dataset name next to the blue arrow or type `View(annual_co2)` in the console (sorry about the upper case 'V', R is like that) and you get a tabular data explorer, which allows you to sort and filter. You should see something like this. [Try out the sorting and filtering in the view window. Filter to show only the Netherlands, and sort by total flights.]
 
-![](images/CO2inViewAndEnvironment.png)
+![](/images/CO2inViewAndEnvironment.png)
 
 ## Extracting variables {#extractfield}
 
