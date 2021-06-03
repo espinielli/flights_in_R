@@ -259,11 +259,11 @@
 <p>They are identical. Which do you prefer? The second involves one less line of code, but you might feel the need to add a comment, as I’ve done here, because the code is more obscure. So it’s the same number of lines to read.</p>
 <p>That’s a qualitative judgement. If you wanted to run this thousands of times, maybe you would run timing tests. Something like this.</p>
 <pre><code>##    user  system elapsed 
-##    3.89    0.23    4.12</code></pre>
+##    3.85    0.19    4.04</code></pre>
 <pre><code>##    user  system elapsed 
-##   3.639   0.181   3.827</code></pre>
+##   3.631   0.161   3.802</code></pre>
 <pre><code>##    user  system elapsed 
-##   1.139   0.048   1.187</code></pre>
+##    1.15    0.04    1.19</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>On my machine, the first takes about 40% longer in elapsed time, and twice the system time. So having fewer lines of code <em>is</em> more efficient in this case. In a light-heared way, we also show a timing test for calling the function each time. Yes, the code that isn’t carefully designed for speed, but for a dataset 100 times smaller already takes longer than either of the other two. Letting R do its vectorised thing is indeed better!</p>
 </div>

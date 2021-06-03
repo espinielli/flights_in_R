@@ -59,17 +59,17 @@ That's a qualitative judgement. If you wanted to run this thousands of times, ma
 
 ```
 ##    user  system elapsed 
-##    3.89    0.23    4.12
+##    3.85    0.19    4.04
 ```
 
 ```
 ##    user  system elapsed 
-##   3.639   0.181   3.827
+##   3.631   0.161   3.802
 ```
 
 ```
 ##    user  system elapsed 
-##   1.139   0.048   1.187
+##    1.15    0.04    1.19
 ```
 
 ```
