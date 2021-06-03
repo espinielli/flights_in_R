@@ -2,11 +2,10 @@
 new_session: yes
 
 book_filename: "flights_in_R"
-output_dir: "docs"
+output_dir: "_book"
 delete_merged_file: true
 
 before_chapter_script: "_common.R"
-
 
 rmd_files: [
   "index.Rmd",
@@ -16,7 +15,7 @@ rmd_files: [
   "05_sortedBars.Rmd",
   # "06_vectorsLoops.Rmd",
   "07_groupby.Rmd",
-  "90_geodata.Rmd",
+  # "90_geodata.Rmd",
   "91_NOTAMs.Rmd",
   "99-references.Rmd"
 ]

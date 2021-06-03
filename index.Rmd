@@ -4,11 +4,14 @@ author: "David Marsh"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography:
+- book.bib
+- packages.bib
 biblio-style: apalike
 link-citations: yes
 geometry: margin=3cm
-description: "This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -"
+description: This is a training and reference manual for Eurocontrol staff, on how
+  to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -
 ---
 
 # How to use this book {#howto}
