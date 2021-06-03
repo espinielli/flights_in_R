@@ -20,6 +20,15 @@ For that reason we use a different syntax, the 'pipe' operator `%>%` introduced 
 With a new line after each `%>%` and appropriate indenting (RStudio helps with that), you get code that looks like this. This says, fill `a` with what you get from dataset `b` after applying function `fun1`, then function `fun2`.
 
 
+```r
+# which is clearer
+# with a pipe?
+a <- b %>% 
+  fun1(p1) %>% 
+  fun2(p2, p3)
+# or without?
+a <- fun2(fun1(b, p1), p2, p3)
+```
 
 The pipe syntax works because `fun1` actually has a parameter list that _starts_ with the dataset to which it should be applied `fun1(data, p1,...)`. So `b %>% fun1(p1)` is just another way of writing `fun1(b, p1)`. Or, the other way around, you can use `%>%` whenever you have a function whose first parameter is the dataset to be operated on. It turns out that this is true for very many of them, and the tidyverse is designed that way. [Does the code to summarise by year that you saw in section \@ref(loadco2) make more sense now that you know about `%>%`?]
 
@@ -35,6 +44,11 @@ There are three parts to this: the logic, the test functions and what's being te
 
 In this example, we don't push the result into a dataset (no `a <- `), so it gets printed out directly.
 
+
+```r
+annual_co2 %>% 
+  filter(YEAR == 2018 & STATE_NAME %in% c("CZECHIA", "ALBANIA"))
+```
 
 ```
 ## # A tibble: 2 x 4
@@ -58,6 +72,12 @@ In the previous chapter we selected the first-named states with `head()`. Now we
 The code is like this. A final novelty is that we use `pull()` which, as its help-file says, does the same as `$` (learned in the last chapter) but looks nicer in pipes. [Where can you look at `top_states` to check that there are 8 values?]
 
 
+```r
+top_states <- annual_co2 %>%
+  filter(YEAR == 2019) %>%     # top in year 2019
+  slice_max(TF, n = 8) %>%  # top 8 
+  pull(STATE_NAME) 
+```
 
 `slice_max()` is a good example of how R changes with time. New versions of packages introduce minor or major changes. Sometimes a function is `superseded` (left to rot), other times it may be `deprecated` (you have some time to switch to a new version before it's removed). The function `top_n`, which you might see lying around in legacy code, has been superseded by `slice_max()`. [Check out the documentation of `top_n` for some of the reasons.] 
 
@@ -68,6 +88,21 @@ These changes mean that just updating to the latest version of the package is no
 With `top_states` in place we can easily plot the data for the busiest states. 
 
 We update the title, and add a footnote (`caption`) to explain what's going on. We could have created a new dataset, eg `top_co2 <- annual_co2 %>% filter(STATE_NAME %in% top_states)`, and then used this in the `ggplot`. But we only plan to use this filter once, so to avoid cluttering the environment with datasets, we filter 'on the fly', within the `ggplot` statement. In this case, this is a matter of personal preference. If the datasets were a lot larger, and we intended analysing and transforming just the top states in further graphs, the decision might be different.
+
+
+```r
+ggplot(annual_co2 %>% 
+         filter(STATE_NAME %in% top_states), 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+           colour = YEAR, group = STATE_NAME)) +
+  geom_point() + 
+  geom_path() +
+  labs(x = "Departing Flights (millions)", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       colour = "Year",
+       title = "Emissions for the busiest 8 states",
+       caption = "Source: EUROCONTROL. 'Busiest' means most flights in 2019.")
+```
 
 <img src="04_FilteredCO2_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" />
 
@@ -85,6 +120,25 @@ This time, we amend the `annual_co2` dataset itself, because we want to be able 
 
 The `geom_text()` _inherits_ all of the aesthetics from the `ggplot` function, so it already knows where to find x and y coordinates, and what colour to use. We still need to tell `geom_text()` where to find the labels. This is also an aesthetic.
 
+
+```r
+annual_co2 <- annual_co2 %>% 
+  mutate(state_label = if_else(YEAR == 2019, STATE_NAME, ""))
+
+ggplot(annual_co2 %>% 
+         filter(STATE_NAME %in% top_states), 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+           colour = YEAR, group = STATE_NAME)) +
+  geom_point() + 
+  geom_path() +
+  geom_text(aes(label = state_label)) +
+  labs(x = "Departing Flights (millions)", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       colour = "Year",
+       title = "Emissions for the busiest 8 states",
+       caption = "Source: EUROCONTROL. 'Busiest' means most flights in 2019.")
+```
+
 <img src="04_FilteredCO2_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
 
 This is close, but not quite good enough. The text is centred on the 2019 point, and this creates some ugly overlaps. There are lots of options in `geom_text()` to adjust the position, and you'll find lots of examples on the web. So we could spend time adjusting the positions. But this is a first example of the rule: 'surely someone has already come across this problem?'.
@@ -94,6 +148,26 @@ Someone has indeed spent time to come up with good ways to deconflict and positi
 The defaults for this function work pretty well in this particular case. But there are a couple of things I'd like to fix: the block capitals and the year legend. Title case would be nicer, so we convert the `STATE_NAME` using the `stringr` package function `str_to_title()`. `stringr` is already loaded as part of the tidyverse, and since most of its functions begin 'str_' it's quite easy to start searching in the help pane for the right one [Try this.]. In this case `state_label` already exists and we overwrite it.
 
 The other thing to improve is the year scale, which shows with meaningless decimals. We use a quick-ish fix, rather than the tidiest-possible solution. Scales, whether the axes or colours, are controlled by `ggplot` functions starting `scales_` in this case `scales_colour_steps()` gets us a scale that shows the individual years. This is a 'dirty' solution in the sense that, if the data for 2020 get included, you might need to tweak the code; but then, we've hard-coded 2019 in a number of places, so this is dirty elsewhere. We'll see cleaner options later (for example in section \@ref(factors)).
+
+
+```r
+annual_co2 <- annual_co2 %>% 
+  mutate(state_label = if_else(YEAR == 2019, str_to_title(STATE_NAME), ""))
+
+ggplot(annual_co2 %>% 
+         filter(STATE_NAME %in% top_states), 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+           colour = YEAR, group = STATE_NAME)) +
+  geom_point() + 
+  geom_path() +
+  ggrepel::geom_text_repel(aes(label = state_label)) +
+  scale_colour_steps(n.breaks = 8, show.limits = TRUE) +
+  labs(x = "Departing Flights (millions)", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       colour = "Year",
+       title = "Emissions for the busiest 8 states",
+       caption = "Source: EUROCONTROL. 'Busiest' means most flights in 2019.")
+```
 
 <img src="04_FilteredCO2_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
 
@@ -129,8 +203,46 @@ Watch that case! We are using the function `filter()`, not the function `Filter(
 2) `geom_text()` inherits all aesthetics from the opening `ggplot(..., aes(...))`, which can be supplemented or over-written by its own `aes()`. In fact you could put the `label=` into the first `aes()`.
 3) `geom_text(aes(label = state_label), nudge_y = 2)`. If you put the `nudge_y` inside the `aes()` you get an error ('Ignoring unknown aesthetics: nudge_y') because it's not something that can vary with the values of a variable ("not an aesthetic").
 4) `geom_text_repel` uses call-out lines when it can't get the text close. You could experiment with making these a less confusing colour. You might also drop the 'millions'.
+
+```r
+small_states <- annual_co2 %>% 
+  filter(YEAR == 2019) %>%     #  in year 2019
+  slice_min(TF, n = 8) %>%  # smallest 8 
+  pull(STATE_NAME)
+
+ggplot(annual_co2 %>% 
+         filter(STATE_NAME %in% small_states), 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+           colour = YEAR, group = STATE_NAME)) +
+  geom_point() + 
+  geom_path() +
+  ggrepel::geom_text_repel(aes(label = state_label)) +
+  scale_colour_steps(n.breaks = 8, show.limits = TRUE) +
+  labs(x = "Departing Flights (millions)", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       colour = "Year",
+       title = "Emissions for the least-busy states",
+       caption = "Source: EUROCONTROL. 'Busiest' means most flights in 2019.")
+```
+
 <img src="04_FilteredCO2_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
 
 4) A pedant might say this shouldn't be a line chart, but here's one possibility. We'll see a different version of this in section (TBD)
+
+
+```r
+ggplot(annual_co2 %>% 
+         filter(STATE_NAME %in% top_states), 
+       aes(YEAR, CO2_QTY_TONNES/TF, 
+           colour = STATE_NAME)) +
+  geom_path() + # I decided the points looked too heavy
+  ggrepel::geom_text_repel(aes(label = state_label)) +
+  theme(legend.position = "none") +  # turn off legend
+  scale_x_continuous(breaks = 2010:2019, minor_breaks = NULL) + # control the breaks
+  labs(x = "Year", 
+       y = bquote(~CO[2]~" (tonnes per flight)"),
+       title = "Emissions for the busiest 8 states",
+       caption = "Source: EUROCONTROL. 'Busiest' means most flights in 2019.")
+```
 
 <img src="04_FilteredCO2_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />

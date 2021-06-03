@@ -24,6 +24,22 @@ Within the tidyverse `tidyr` provides some useful tools for parsing text. In thi
 In the simplest case, a string is to be separated at a single separator character. In field Q of the NOTAM this is "/". We just need to tell `separate` what the new columns are called, as in the following code.
 
 
+```r
+library(tidyverse)
+# a couple of examples, in a dataframe
+q_fields <- data.frame(q = c("GLRB/QPLXX/IV/NBO/E /000/999/0620N01206W483", "LYBA/QKKKK/K /K  /K /000/999/4234N02102E999") )
+
+q_parsed <- q_fields %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+            sep = "/")
+
+#pretty view for the book
+knitr::kable(q_parsed)
+```
+
+
+
 |FIR  |qgroup |IV |NBO |AEW |FL_lo |FL_hi |geo            |
 |:----|:------|:--|:---|:---|:-----|:-----|:--------------|
 |GLRB |QPLXX  |IV |NBO |E   |000   |999   |0620N01206W483 |
@@ -48,6 +64,25 @@ In regular expression terms this is `\\s*/`, which you can read as zero-or-more 
 We can show that this gives the same result as using trim. 
 
 
+```r
+# what you'd get using trim
+q_parsed_trim <- q_fields %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+            sep = "/") %>% 
+  mutate(across(.fns = str_trim))
+
+#what you get with the search pattern
+q_parsed_regex <- q_fields %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+           # separate on any number of spaces followed by a backslash
+            sep = "\\s*/")
+
+# are they the same?
+identical(q_parsed_trim, q_parsed_regex)
+```
+
 ```
 ## [1] TRUE
 ```
@@ -57,19 +92,58 @@ They are identical. Which do you prefer? The second involves one less line of co
 That's a qualitative judgement. If you wanted to run this thousands of times, maybe you would run timing tests. Something like this.
 
 
-```
-##    user  system elapsed 
-##    3.85    0.19    4.04
+```r
+q_many <- data.frame(q = rep(q_fields$q, 100000))
+  
+# what you'd get using trim
+system.time(
+q_parsed_trim <- q_many %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+            sep = "/") %>% 
+  mutate(across(.fns = str_trim))
+)
 ```
 
 ```
 ##    user  system elapsed 
-##   3.631   0.161   3.802
+##    4.16    3.00    7.17
+```
+
+```r
+#what you get with the search pattern
+system.time(
+q_parsed_regex <- q_many %>% 
+  separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+           # separate on any number of spaces followed by a backslash
+            sep = "\\s*/")
+)
 ```
 
 ```
 ##    user  system elapsed 
-##    1.15    0.04    1.19
+##   3.760   0.231   3.994
+```
+
+```r
+# and for fun, what does calling the function many times look like?
+# just do 1/100th of the rows
+system.time(
+z <- lapply(q_many$q[1:1000], function(x) data.frame(q=x) %>% separate(q,
+            c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+           sep = "\\s*/"))
+)
+```
+
+```
+##    user  system elapsed 
+##   1.225   0.074   1.301
+```
+
+```r
+# are they the same?
+identical(q_parsed_trim, q_parsed_regex)
 ```
 
 ```
@@ -83,6 +157,24 @@ On my machine, the first takes about 40% longer in elapsed time, and twice the s
 Taking this one step further, we can also work on the NOTAM header. This has NOTAM in it, which isn't that useful information, so we can ditch in, but it has this in the form 'NOTAMC', 'NOTAMR', 'NOTAMN' depending on whether this is cancelling, replacing or a new NOTAM, respectively. The structure of the field varies between these cases.
 
 As always, there are several ways to approach this. We could first remove the 'NOTAM' then split at spaces. But that's two steps. So instead, we split at either ' NOTAM' or ' ' , in one go. In regular expressions, either or is given by `|`, just as in R syntax for 'or'. And to be on the safe side, we use the more general code for a 'space', though a new line is unlikely in this position.
+
+
+```r
+header_fields <- data.frame(header = c(
+  "A0001/13 NOTAMN ",
+  "A0001/13 NOTAMR A0032/12",
+  "W0809/13 NOTAMC W0808/13"
+))
+
+header_parsed <- header_fields %>% 
+  separate(header,
+           c("notam", "type", "replaces"),
+           sep = "\\sNOTAM|\\s")
+
+#pretty view for the book
+knitr::kable(header_parsed)
+```
+
 
 
 |notam    |type |replaces |
@@ -139,6 +231,24 @@ NOTAMs are in sections, with headers "Q) ", "A) ", "B) " to "G) ". So, in a firs
 The regular expression is `\\s+[QABCDEFG]\\)\\s` to match any of the allowable headers in a NOTAM. You've seen most of these parts, the only new one is `[QABCDEFG]`, which says any one of these characters (case-sensitive). The extra bit is `(?=   )` which says: and leave behind the value corresponding to the part after the `=`, after splitting on its position. We choose to forget any leading spaces, so the `\\s+` is before this bracketed term.
 
 
+```r
+# get the NOTAM texts and add an ID
+notam_url <- "https://github.com/david6marsh/flights_in_R/raw/main/data/NOTAMSample.csv"
+notam_texts <- read.csv(notam_url) %>% 
+  mutate(index = row_number())
+
+notams <- notam_texts %>% 
+  slice(1:2) %>%   #just a few to start with
+  mutate(
+     # remove start and end brackets
+     full = stringr::str_replace_all(NOTAM, "^\\(|\\)$", ""),
+     # split out the phrases based on Q) A) etc
+     phrases = stringr::str_split(full, "\\s+(?=[QABCDEFG]\\)\\s)"))
+
+# quick look at one list.
+notams$phrases[1]
+```
+
 ```
 ## [[1]]
 ## [1] "A0011/10 NOTAMN"                               
@@ -166,6 +276,18 @@ In real NOTAMs, "A)" can be a header as we saw above, but it can also be a bulle
 If this isn't an obvious approach, don't worry, because it wasn't obvious to me either. It took trial and error, and a bit of googling to find this combination. The error was finding the hard way that `unnest_wider` won't let you provide names for the new columns (as we saw above that `separate` does), it insists on finding them in the data. [You can see the 'errors' by commenting out the line with `map` in it.] The googling was how to provide names for `unnest_wider`. As usual, someone has already struggled with this, and an answer was out there.
 
 
+```r
+notams <- notam_texts %>% 
+  slice(1:7) %>%   #all but the last one
+  mutate(
+     # remove start and end brackets
+     full = stringr::str_replace_all(NOTAM, "^\\(|\\)$", ""),
+         # split into two parts
+         split_at_E = stringr::str_split(full, "\\s(?=E\\)\\s)", n=2),
+         split_at_E = map(split_at_E, setNames, c("part1", "part2"))
+      ) %>%
+      unnest_wider(split_at_E) 
+```
 
 We can now split out the fields from the first part as in our first attempt, splitting at `\\s+(?=[QABCD]\\)\\s)`. The second part is still tricky, because "F)" and "G)" can be fields or bullets in a bulleted list. The two fields are rare, and describe the vertical extent of the NOTAM. We find the 'real' fields by looking for something that resembles a vertical extent. Inspection of many cases shows we have values such as:
 
@@ -178,8 +300,27 @@ Put all of these together and we get an expression like `ffg` in the next code c
 Having split, and generated two list fields, we need to recombine them. Normally you'd join list with `c()`, eg `c(list(1), list(7,5))`. Here we do that too, but within the mutate function have to write it in a longer form, using `map2` (TBD - explain reasons?). Then, finally, we get to step (2) of our pattern (remember that?) and un-nest into rows. 
 
 
+```r
+ffg <- "(?=[FG]\\)\\s*((\\s*\\d+(FT|M)\\s*(AGL|AMSL|SFC))|(FL\\d+)|SFC|GND|UNL))"
+
+# before the unnest, how many rows do we have
+nrow(notams)
+```
+
 ```
 ## [1] 7
+```
+
+```r
+notams <- notams %>% 
+#split these - note force the first to be a list column
+      mutate(part1 = str_split(part1, "\\s+(?=[QABCD]\\)\\s)"),
+             part2 = str_split(part2, ffg),
+             both = purrr::map2(part1, part2, c)) %>%
+      select(!c(part1, part2)) %>%
+      unnest_longer(both)
+# show that we've added quite a few rows
+nrow(notams)
 ```
 
 ```
@@ -197,12 +338,45 @@ Step 3 is to generate what will become the column names. After all those regular
 Then converting to columns is done with `pivot_wider`. [Why not `unnest`? Because we not dealing with list columns now, but 'ordinary' ones.] The order in which this happens is not quite perfect, so we `relocate` it, even if it will make no difference to the analysis, it will help us when scrolling back and forth in the data viewer.
 
 
+```r
+notams <- notams %>% 
+  group_by(index) %>%
+  # sort out the names
+  mutate(id = if_else(row_number()==1, "header", str_sub(both, 1, 1)),
+         # having taken field id, remove the id from the text
+         both = if_else(id == "header", both,
+                        str_sub(both, 4, nchar(both)))) %>%
+  # then convert to columns
+  pivot_wider(names_from = id, values_from = both, names_prefix = "field_") %>%
+  ungroup() %>%
+  # no longer need this index and NOTAM is a near-duplicate of full
+  select(!c(index, NOTAM)) %>% 
+  # put D in its place
+  relocate(field_D, .before = field_E)
+```
 
 That's steps 3 and 4 done; we've finished extracting the fields from the raw text.
 
 We can move on to parsing the fields, to pull out information from then. In fact, we already did this in section \@ref(splitatcharacter). You could also convert text to dates. Pulling forward the code from those earlier sections we get something like this.
 
 
+```r
+notams <- notams %>% 
+  mutate(
+    from_date = as.POSIXct(field_B, format = "%y%m%d%H%M", tz = "UTC"),
+    #for C we will get errors but that's OK
+    to_date = as.POSIXct(field_C, format = "%y%m%d%H%M", tz = "UTC")) %>%
+  # split some fields
+  # this warns on generating NAs, which is what we want
+  separate(field_header, c("notam", "type", "replaces"), sep = "( NOTAM| )") %>%
+  separate(field_Q,
+           c("FIR", "qgroup", "IV", "NBO", "AEW", "FL_lo", "FL_hi", "geo"),
+           sep = "/") %>%
+  # put them in a helpful order
+  relocate(from_date, .after = field_B) %>%
+  relocate(to_date, .after = field_C) %>%
+  relocate(full, .after = last_col())
+```
 
 That's as far as we need to go. The code generates some warnings of 'missing pieces', but otherwise works on these examples. The exercises explore a bit further, including how this 'basic' set of code might fail for some NOTAMs.
 
@@ -232,6 +406,14 @@ That's as far as we need to go. The code generates some warnings of 'missing pie
  7) Amongst many possible solutions, these work. How would you select A if it contains multiple 3 or 4 letter strings separated by spaces?
  
 
+```r
+ans <- notam_texts %>% 
+  mutate(v1 = str_match(NOTAM, "A\\)\\s+[^(B\\))]+"),
+         v2 = str_match(NOTAM, "A\\)\\s+[[:upper:]]{4}"),
+        # multiply one field, for testing 
+        notam_plus = str_replace(NOTAM, "RPXX", "RPXX EGLL"),
+         vMult = str_match(notam_plus, "A\\)(\\s+[[:upper:]]{4})+"))
+```
  
  8) (Essentially a cut-paste exercise, so result not provided here.) The final NOTAM has a missing "E)" header for the E field, so the splitting approach fails. Two possible solutions: filter to remove, if "E)" not found would perhaps be ok as one outlier amongst thousands; or detect and insert "E)" after C or D to allow the code to work properly.
  9) Perhaps there's a 'quiet' option for the function ;-). Otherwise, since the problem is whether or not there's text to say which NOTAM is being replaced, you could test for length and `separate` in two different ways: `if_else(header is long, separate with 3 column names, separate with 2 column names)`.

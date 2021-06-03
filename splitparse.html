@@ -55,6 +55,70 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -208,6 +272,17 @@
 <div id="splitatcharacter" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Splitting a column at a character</h3>
 <p>In the simplest case, a string is to be separated at a single separator character. In field Q of the NOTAM this is “/”. We just need to tell <code>separate</code> what the new columns are called, as in the following code.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="splitparse.html#cb50-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb50-2"><a href="splitparse.html#cb50-2"></a><span class="co"># a couple of examples, in a dataframe</span></span>
+<span id="cb50-3"><a href="splitparse.html#cb50-3"></a>q_fields &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">q =</span> <span class="kw">c</span>(<span class="st">&quot;GLRB/QPLXX/IV/NBO/E /000/999/0620N01206W483&quot;</span>, <span class="st">&quot;LYBA/QKKKK/K /K  /K /000/999/4234N02102E999&quot;</span>) )</span>
+<span id="cb50-4"><a href="splitparse.html#cb50-4"></a></span>
+<span id="cb50-5"><a href="splitparse.html#cb50-5"></a>q_parsed &lt;-<span class="st"> </span>q_fields <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb50-6"><a href="splitparse.html#cb50-6"></a><span class="st">  </span><span class="kw">separate</span>(q,</span>
+<span id="cb50-7"><a href="splitparse.html#cb50-7"></a>            <span class="kw">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb50-8"><a href="splitparse.html#cb50-8"></a>            <span class="dt">sep =</span> <span class="st">&quot;/&quot;</span>)</span>
+<span id="cb50-9"><a href="splitparse.html#cb50-9"></a></span>
+<span id="cb50-10"><a href="splitparse.html#cb50-10"></a><span class="co">#pretty view for the book</span></span>
+<span id="cb50-11"><a href="splitparse.html#cb50-11"></a>knitr<span class="op">::</span><span class="kw">kable</span>(q_parsed)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -255,15 +330,58 @@
 <p>Our string has some ‘newlines’ in it <code>\n</code> as well as spaces, and in other applications perhaps tabs are used. So we use a <code>\\s</code> code, rather than just a space character " ". <code>\\s</code> stands for all of these types of ‘space’, and some others [check in the cheatsheet].</p>
 <p>In regular expression terms this is <code>\\s*/</code>, which you can read as zero-or-more spaces followed by a back slash.</p>
 <p>We can show that this gives the same result as using trim.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="splitparse.html#cb51-1"></a><span class="co"># what you&#39;d get using trim</span></span>
+<span id="cb51-2"><a href="splitparse.html#cb51-2"></a>q_parsed_trim &lt;-<span class="st"> </span>q_fields <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb51-3"><a href="splitparse.html#cb51-3"></a><span class="st">  </span><span class="kw">separate</span>(q,</span>
+<span id="cb51-4"><a href="splitparse.html#cb51-4"></a>            <span class="kw">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb51-5"><a href="splitparse.html#cb51-5"></a>            <span class="dt">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb51-6"><a href="splitparse.html#cb51-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.fns =</span> str_trim))</span>
+<span id="cb51-7"><a href="splitparse.html#cb51-7"></a></span>
+<span id="cb51-8"><a href="splitparse.html#cb51-8"></a><span class="co">#what you get with the search pattern</span></span>
+<span id="cb51-9"><a href="splitparse.html#cb51-9"></a>q_parsed_regex &lt;-<span class="st"> </span>q_fields <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb51-10"><a href="splitparse.html#cb51-10"></a><span class="st">  </span><span class="kw">separate</span>(q,</span>
+<span id="cb51-11"><a href="splitparse.html#cb51-11"></a>            <span class="kw">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb51-12"><a href="splitparse.html#cb51-12"></a>           <span class="co"># separate on any number of spaces followed by a backslash</span></span>
+<span id="cb51-13"><a href="splitparse.html#cb51-13"></a>            <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s*/&quot;</span>)</span>
+<span id="cb51-14"><a href="splitparse.html#cb51-14"></a></span>
+<span id="cb51-15"><a href="splitparse.html#cb51-15"></a><span class="co"># are they the same?</span></span>
+<span id="cb51-16"><a href="splitparse.html#cb51-16"></a><span class="kw">identical</span>(q_parsed_trim, q_parsed_regex)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>They are identical. Which do you prefer? The second involves one less line of code, but you might feel the need to add a comment, as I’ve done here, because the code is more obscure. So it’s the same number of lines to read.</p>
 <p>That’s a qualitative judgement. If you wanted to run this thousands of times, maybe you would run timing tests. Something like this.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="splitparse.html#cb53-1"></a>q_many &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">q =</span> <span class="kw">rep</span>(q_fields<span class="op">$</span>q, <span class="dv">100000</span>))</span>
+<span id="cb53-2"><a href="splitparse.html#cb53-2"></a>  </span>
+<span id="cb53-3"><a href="splitparse.html#cb53-3"></a><span class="co"># what you&#39;d get using trim</span></span>
+<span id="cb53-4"><a href="splitparse.html#cb53-4"></a><span class="kw">system.time</span>(</span>
+<span id="cb53-5"><a href="splitparse.html#cb53-5"></a>q_parsed_trim &lt;-<span class="st"> </span>q_many <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb53-6"><a href="splitparse.html#cb53-6"></a><span class="st">  </span><span class="kw">separate</span>(q,</span>
+<span id="cb53-7"><a href="splitparse.html#cb53-7"></a>            <span class="kw">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb53-8"><a href="splitparse.html#cb53-8"></a>            <span class="dt">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb53-9"><a href="splitparse.html#cb53-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.fns =</span> str_trim))</span>
+<span id="cb53-10"><a href="splitparse.html#cb53-10"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    3.85    0.19    4.04</code></pre>
+##    4.16    3.00    7.17</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="splitparse.html#cb55-1"></a><span class="co">#what you get with the search pattern</span></span>
+<span id="cb55-2"><a href="splitparse.html#cb55-2"></a><span class="kw">system.time</span>(</span>
+<span id="cb55-3"><a href="splitparse.html#cb55-3"></a>q_parsed_regex &lt;-<span class="st"> </span>q_many <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb55-4"><a href="splitparse.html#cb55-4"></a><span class="st">  </span><span class="kw">separate</span>(q,</span>
+<span id="cb55-5"><a href="splitparse.html#cb55-5"></a>            <span class="kw">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb55-6"><a href="splitparse.html#cb55-6"></a>           <span class="co"># separate on any number of spaces followed by a backslash</span></span>
+<span id="cb55-7"><a href="splitparse.html#cb55-7"></a>            <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s*/&quot;</span>)</span>
+<span id="cb55-8"><a href="splitparse.html#cb55-8"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   3.631   0.161   3.802</code></pre>
+##   3.760   0.231   3.994</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="splitparse.html#cb57-1"></a><span class="co"># and for fun, what does calling the function many times look like?</span></span>
+<span id="cb57-2"><a href="splitparse.html#cb57-2"></a><span class="co"># just do 1/100th of the rows</span></span>
+<span id="cb57-3"><a href="splitparse.html#cb57-3"></a><span class="kw">system.time</span>(</span>
+<span id="cb57-4"><a href="splitparse.html#cb57-4"></a>z &lt;-<span class="st"> </span><span class="kw">lapply</span>(q_many<span class="op">$</span>q[<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>], <span class="cf">function</span>(x) <span class="kw">data.frame</span>(<span class="dt">q=</span>x) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(q,</span>
+<span id="cb57-5"><a href="splitparse.html#cb57-5"></a>            <span class="kw">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb57-6"><a href="splitparse.html#cb57-6"></a>           <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s*/&quot;</span>))</span>
+<span id="cb57-7"><a href="splitparse.html#cb57-7"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    1.15    0.04    1.19</code></pre>
+##   1.225   0.074   1.301</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="splitparse.html#cb59-1"></a><span class="co"># are they the same?</span></span>
+<span id="cb59-2"><a href="splitparse.html#cb59-2"></a><span class="kw">identical</span>(q_parsed_trim, q_parsed_regex)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>On my machine, the first takes about 40% longer in elapsed time, and twice the system time. So having fewer lines of code <em>is</em> more efficient in this case. In a light-heared way, we also show a timing test for calling the function each time. Yes, the code that isn’t carefully designed for speed, but for a dataset 100 times smaller already takes longer than either of the other two. Letting R do its vectorised thing is indeed better!</p>
 </div>
@@ -271,6 +389,19 @@
 <h3><span class="header-section-number">7.1.3</span> Splitting a column at an either-or</h3>
 <p>Taking this one step further, we can also work on the NOTAM header. This has NOTAM in it, which isn’t that useful information, so we can ditch in, but it has this in the form ‘NOTAMC’, ‘NOTAMR’, ‘NOTAMN’ depending on whether this is cancelling, replacing or a new NOTAM, respectively. The structure of the field varies between these cases.</p>
 <p>As always, there are several ways to approach this. We could first remove the ‘NOTAM’ then split at spaces. But that’s two steps. So instead, we split at either ’ NOTAM’ or ’ ’ , in one go. In regular expressions, either or is given by <code>|</code>, just as in R syntax for ‘or’. And to be on the safe side, we use the more general code for a ‘space’, though a new line is unlikely in this position.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="splitparse.html#cb61-1"></a>header_fields &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">header =</span> <span class="kw">c</span>(</span>
+<span id="cb61-2"><a href="splitparse.html#cb61-2"></a>  <span class="st">&quot;A0001/13 NOTAMN &quot;</span>,</span>
+<span id="cb61-3"><a href="splitparse.html#cb61-3"></a>  <span class="st">&quot;A0001/13 NOTAMR A0032/12&quot;</span>,</span>
+<span id="cb61-4"><a href="splitparse.html#cb61-4"></a>  <span class="st">&quot;W0809/13 NOTAMC W0808/13&quot;</span></span>
+<span id="cb61-5"><a href="splitparse.html#cb61-5"></a>))</span>
+<span id="cb61-6"><a href="splitparse.html#cb61-6"></a></span>
+<span id="cb61-7"><a href="splitparse.html#cb61-7"></a>header_parsed &lt;-<span class="st"> </span>header_fields <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb61-8"><a href="splitparse.html#cb61-8"></a><span class="st">  </span><span class="kw">separate</span>(header,</span>
+<span id="cb61-9"><a href="splitparse.html#cb61-9"></a>           <span class="kw">c</span>(<span class="st">&quot;notam&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;replaces&quot;</span>),</span>
+<span id="cb61-10"><a href="splitparse.html#cb61-10"></a>           <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">sNOTAM|</span><span class="ch">\\</span><span class="st">s&quot;</span>)</span>
+<span id="cb61-11"><a href="splitparse.html#cb61-11"></a></span>
+<span id="cb61-12"><a href="splitparse.html#cb61-12"></a><span class="co">#pretty view for the book</span></span>
+<span id="cb61-13"><a href="splitparse.html#cb61-13"></a>knitr<span class="op">::</span><span class="kw">kable</span>(header_parsed)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -340,6 +471,21 @@
 <p>The initial processing is to remove the opening and closing bracket from the whole NOTAM. This is just for sake of tidiness, though once we split the field the “()” are no longer a matched pair, so best to do it now. [How does the regular expression <code>^\\(|\\)$</code> achieve this?]</p>
 <p>NOTAMs are in sections, with headers “Q)”, “A)”, “B)” to “G)”. So, in a first attempt (which works in very simple cases only), we want to split where we find ‘section’ headers “Q)”, “A)” etc. But we don’t want to throw these away, we want to split and keep the separator.</p>
 <p>The regular expression is <code>\\s+[QABCDEFG]\\)\\s</code> to match any of the allowable headers in a NOTAM. You’ve seen most of these parts, the only new one is <code>[QABCDEFG]</code>, which says any one of these characters (case-sensitive). The extra bit is <code>(?=   )</code> which says: and leave behind the value corresponding to the part after the <code>=</code>, after splitting on its position. We choose to forget any leading spaces, so the <code>\\s+</code> is before this bracketed term.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="splitparse.html#cb62-1"></a><span class="co"># get the NOTAM texts and add an ID</span></span>
+<span id="cb62-2"><a href="splitparse.html#cb62-2"></a>notam_url &lt;-<span class="st"> &quot;https://github.com/david6marsh/flights_in_R/raw/main/data/NOTAMSample.csv&quot;</span></span>
+<span id="cb62-3"><a href="splitparse.html#cb62-3"></a>notam_texts &lt;-<span class="st"> </span><span class="kw">read.csv</span>(notam_url) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb62-4"><a href="splitparse.html#cb62-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">index =</span> <span class="kw">row_number</span>())</span>
+<span id="cb62-5"><a href="splitparse.html#cb62-5"></a></span>
+<span id="cb62-6"><a href="splitparse.html#cb62-6"></a>notams &lt;-<span class="st"> </span>notam_texts <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb62-7"><a href="splitparse.html#cb62-7"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co">#just a few to start with</span></span>
+<span id="cb62-8"><a href="splitparse.html#cb62-8"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb62-9"><a href="splitparse.html#cb62-9"></a>     <span class="co"># remove start and end brackets</span></span>
+<span id="cb62-10"><a href="splitparse.html#cb62-10"></a>     <span class="dt">full =</span> stringr<span class="op">::</span><span class="kw">str_replace_all</span>(NOTAM, <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">(|</span><span class="ch">\\</span><span class="st">)$&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb62-11"><a href="splitparse.html#cb62-11"></a>     <span class="co"># split out the phrases based on Q) A) etc</span></span>
+<span id="cb62-12"><a href="splitparse.html#cb62-12"></a>     <span class="dt">phrases =</span> stringr<span class="op">::</span><span class="kw">str_split</span>(full, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s+(?=[QABCDEFG]</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s)&quot;</span>))</span>
+<span id="cb62-13"><a href="splitparse.html#cb62-13"></a></span>
+<span id="cb62-14"><a href="splitparse.html#cb62-14"></a><span class="co"># quick look at one list.</span></span>
+<span id="cb62-15"><a href="splitparse.html#cb62-15"></a>notams<span class="op">$</span>phrases[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;A0011/10 NOTAMN&quot;                               
 ## [2] &quot;Q) PAZA/QMRXX/IV/NBO/A /000/999/6034N15115W005&quot;
@@ -363,6 +509,16 @@
 <li>then <code>unnest_wider</code>, ie into columns.</li>
 </ul>
 <p>If this isn’t an obvious approach, don’t worry, because it wasn’t obvious to me either. It took trial and error, and a bit of googling to find this combination. The error was finding the hard way that <code>unnest_wider</code> won’t let you provide names for the new columns (as we saw above that <code>separate</code> does), it insists on finding them in the data. [You can see the ‘errors’ by commenting out the line with <code>map</code> in it.] The googling was how to provide names for <code>unnest_wider</code>. As usual, someone has already struggled with this, and an answer was out there.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="splitparse.html#cb64-1"></a>notams &lt;-<span class="st"> </span>notam_texts <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb64-2"><a href="splitparse.html#cb64-2"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co">#all but the last one</span></span>
+<span id="cb64-3"><a href="splitparse.html#cb64-3"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb64-4"><a href="splitparse.html#cb64-4"></a>     <span class="co"># remove start and end brackets</span></span>
+<span id="cb64-5"><a href="splitparse.html#cb64-5"></a>     <span class="dt">full =</span> stringr<span class="op">::</span><span class="kw">str_replace_all</span>(NOTAM, <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">(|</span><span class="ch">\\</span><span class="st">)$&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb64-6"><a href="splitparse.html#cb64-6"></a>         <span class="co"># split into two parts</span></span>
+<span id="cb64-7"><a href="splitparse.html#cb64-7"></a>         <span class="dt">split_at_E =</span> stringr<span class="op">::</span><span class="kw">str_split</span>(full, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s(?=E</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s)&quot;</span>, <span class="dt">n=</span><span class="dv">2</span>),</span>
+<span id="cb64-8"><a href="splitparse.html#cb64-8"></a>         <span class="dt">split_at_E =</span> <span class="kw">map</span>(split_at_E, setNames, <span class="kw">c</span>(<span class="st">&quot;part1&quot;</span>, <span class="st">&quot;part2&quot;</span>))</span>
+<span id="cb64-9"><a href="splitparse.html#cb64-9"></a>      ) <span class="op">%&gt;%</span></span>
+<span id="cb64-10"><a href="splitparse.html#cb64-10"></a><span class="st">      </span><span class="kw">unnest_wider</span>(split_at_E) </span></code></pre></div>
 <p>We can now split out the fields from the first part as in our first attempt, splitting at <code>\\s+(?=[QABCD]\\)\\s)</code>. The second part is still tricky, because “F)” and “G)” can be fields or bullets in a bulleted list. The two fields are rare, and describe the vertical extent of the NOTAM. We find the ‘real’ fields by looking for something that resembles a vertical extent. Inspection of many cases shows we have values such as:</p>
 <ul>
 <li>1200FT AMSL (above mean sea level), or that could be in metres ‘M’ or above ground level (AGL) or surface SFC. There might or might not be a space between. [What would the regular expression look like?]</li>
@@ -371,7 +527,20 @@
 </ul>
 <p>Put all of these together and we get an expression like <code>ffg</code> in the next code chunk; we could have found slightly different expressions for F and G, but this single one works for both, so it’s good enough for us here. Use the cheatsheet for terms that may be new (eg <code>\\d</code>). It can be easier to read if you look for () pairs, starting with ones close together, and for the <code>|</code> symbol. [Which expression allows for a possible but not necessary space? Find each the listed items above, separated by <code>|</code>.]</p>
 <p>Having split, and generated two list fields, we need to recombine them. Normally you’d join list with <code>c()</code>, eg <code>c(list(1), list(7,5))</code>. Here we do that too, but within the mutate function have to write it in a longer form, using <code>map2</code> (TBD - explain reasons?). Then, finally, we get to step (2) of our pattern (remember that?) and un-nest into rows.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="splitparse.html#cb65-1"></a>ffg &lt;-<span class="st"> &quot;(?=[FG]</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s*((</span><span class="ch">\\</span><span class="st">s*</span><span class="ch">\\</span><span class="st">d+(FT|M)</span><span class="ch">\\</span><span class="st">s*(AGL|AMSL|SFC))|(FL</span><span class="ch">\\</span><span class="st">d+)|SFC|GND|UNL))&quot;</span></span>
+<span id="cb65-2"><a href="splitparse.html#cb65-2"></a></span>
+<span id="cb65-3"><a href="splitparse.html#cb65-3"></a><span class="co"># before the unnest, how many rows do we have</span></span>
+<span id="cb65-4"><a href="splitparse.html#cb65-4"></a><span class="kw">nrow</span>(notams)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="splitparse.html#cb67-1"></a>notams &lt;-<span class="st"> </span>notams <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb67-2"><a href="splitparse.html#cb67-2"></a><span class="co">#split these - note force the first to be a list column</span></span>
+<span id="cb67-3"><a href="splitparse.html#cb67-3"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">part1 =</span> <span class="kw">str_split</span>(part1, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s+(?=[QABCD]</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s)&quot;</span>),</span>
+<span id="cb67-4"><a href="splitparse.html#cb67-4"></a>             <span class="dt">part2 =</span> <span class="kw">str_split</span>(part2, ffg),</span>
+<span id="cb67-5"><a href="splitparse.html#cb67-5"></a>             <span class="dt">both =</span> purrr<span class="op">::</span><span class="kw">map2</span>(part1, part2, c)) <span class="op">%&gt;%</span></span>
+<span id="cb67-6"><a href="splitparse.html#cb67-6"></a><span class="st">      </span><span class="kw">select</span>(<span class="op">!</span><span class="kw">c</span>(part1, part2)) <span class="op">%&gt;%</span></span>
+<span id="cb67-7"><a href="splitparse.html#cb67-7"></a><span class="st">      </span><span class="kw">unnest_longer</span>(both)</span>
+<span id="cb67-8"><a href="splitparse.html#cb67-8"></a><span class="co"># show that we&#39;ve added quite a few rows</span></span>
+<span id="cb67-9"><a href="splitparse.html#cb67-9"></a><span class="kw">nrow</span>(notams)</span></code></pre></div>
 <pre><code>## [1] 45</code></pre>
 <p>[Check visually that in NOTAM 4, the fields F and G have been pulled out but that in NOTAM 6 bullets F and G are left within field E.]</p>
 <p>If we had used <code>separate</code> in place of <code>str_split</code> then we would generate missing fields <code>NA</code>, and potentially (if there were a D field but no C, say) map data into the wrong field. [Exercise - try with separate]</p>
@@ -380,8 +549,37 @@
 <h3><span class="header-section-number">7.2.3</span> Manipulate fields in rows</h3>
 <p>Step 3 is to generate what will become the column names. After all those regular expressions, we’ll stick to some basic extraction of parts of strings for this. We want the first element to be called header. So we use groups as we saw earlier (TBD), and <code>row_number</code> to get the first item.</p>
 <p>Then converting to columns is done with <code>pivot_wider</code>. [Why not <code>unnest</code>? Because we not dealing with list columns now, but ‘ordinary’ ones.] The order in which this happens is not quite perfect, so we <code>relocate</code> it, even if it will make no difference to the analysis, it will help us when scrolling back and forth in the data viewer.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="splitparse.html#cb69-1"></a>notams &lt;-<span class="st"> </span>notams <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-2"><a href="splitparse.html#cb69-2"></a><span class="st">  </span><span class="kw">group_by</span>(index) <span class="op">%&gt;%</span></span>
+<span id="cb69-3"><a href="splitparse.html#cb69-3"></a><span class="st">  </span><span class="co"># sort out the names</span></span>
+<span id="cb69-4"><a href="splitparse.html#cb69-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">if_else</span>(<span class="kw">row_number</span>()<span class="op">==</span><span class="dv">1</span>, <span class="st">&quot;header&quot;</span>, <span class="kw">str_sub</span>(both, <span class="dv">1</span>, <span class="dv">1</span>)),</span>
+<span id="cb69-5"><a href="splitparse.html#cb69-5"></a>         <span class="co"># having taken field id, remove the id from the text</span></span>
+<span id="cb69-6"><a href="splitparse.html#cb69-6"></a>         <span class="dt">both =</span> <span class="kw">if_else</span>(id <span class="op">==</span><span class="st"> &quot;header&quot;</span>, both,</span>
+<span id="cb69-7"><a href="splitparse.html#cb69-7"></a>                        <span class="kw">str_sub</span>(both, <span class="dv">4</span>, <span class="kw">nchar</span>(both)))) <span class="op">%&gt;%</span></span>
+<span id="cb69-8"><a href="splitparse.html#cb69-8"></a><span class="st">  </span><span class="co"># then convert to columns</span></span>
+<span id="cb69-9"><a href="splitparse.html#cb69-9"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> id, <span class="dt">values_from =</span> both, <span class="dt">names_prefix =</span> <span class="st">&quot;field_&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb69-10"><a href="splitparse.html#cb69-10"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb69-11"><a href="splitparse.html#cb69-11"></a><span class="st">  </span><span class="co"># no longer need this index and NOTAM is a near-duplicate of full</span></span>
+<span id="cb69-12"><a href="splitparse.html#cb69-12"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">!</span><span class="kw">c</span>(index, NOTAM)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb69-13"><a href="splitparse.html#cb69-13"></a><span class="st">  </span><span class="co"># put D in its place</span></span>
+<span id="cb69-14"><a href="splitparse.html#cb69-14"></a><span class="st">  </span><span class="kw">relocate</span>(field_D, <span class="dt">.before =</span> field_E)</span></code></pre></div>
 <p>That’s steps 3 and 4 done; we’ve finished extracting the fields from the raw text.</p>
 <p>We can move on to parsing the fields, to pull out information from then. In fact, we already did this in section <a href="splitparse.html#splitatcharacter">7.1.1</a>. You could also convert text to dates. Pulling forward the code from those earlier sections we get something like this.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="splitparse.html#cb70-1"></a>notams &lt;-<span class="st"> </span>notams <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb70-2"><a href="splitparse.html#cb70-2"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb70-3"><a href="splitparse.html#cb70-3"></a>    <span class="dt">from_date =</span> <span class="kw">as.POSIXct</span>(field_B, <span class="dt">format =</span> <span class="st">&quot;%y%m%d%H%M&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>),</span>
+<span id="cb70-4"><a href="splitparse.html#cb70-4"></a>    <span class="co">#for C we will get errors but that&#39;s OK</span></span>
+<span id="cb70-5"><a href="splitparse.html#cb70-5"></a>    <span class="dt">to_date =</span> <span class="kw">as.POSIXct</span>(field_C, <span class="dt">format =</span> <span class="st">&quot;%y%m%d%H%M&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb70-6"><a href="splitparse.html#cb70-6"></a><span class="st">  </span><span class="co"># split some fields</span></span>
+<span id="cb70-7"><a href="splitparse.html#cb70-7"></a><span class="st">  </span><span class="co"># this warns on generating NAs, which is what we want</span></span>
+<span id="cb70-8"><a href="splitparse.html#cb70-8"></a><span class="st">  </span><span class="kw">separate</span>(field_header, <span class="kw">c</span>(<span class="st">&quot;notam&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;replaces&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;( NOTAM| )&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb70-9"><a href="splitparse.html#cb70-9"></a><span class="st">  </span><span class="kw">separate</span>(field_Q,</span>
+<span id="cb70-10"><a href="splitparse.html#cb70-10"></a>           <span class="kw">c</span>(<span class="st">&quot;FIR&quot;</span>, <span class="st">&quot;qgroup&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;NBO&quot;</span>, <span class="st">&quot;AEW&quot;</span>, <span class="st">&quot;FL_lo&quot;</span>, <span class="st">&quot;FL_hi&quot;</span>, <span class="st">&quot;geo&quot;</span>),</span>
+<span id="cb70-11"><a href="splitparse.html#cb70-11"></a>           <span class="dt">sep =</span> <span class="st">&quot;/&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb70-12"><a href="splitparse.html#cb70-12"></a><span class="st">  </span><span class="co"># put them in a helpful order</span></span>
+<span id="cb70-13"><a href="splitparse.html#cb70-13"></a><span class="st">  </span><span class="kw">relocate</span>(from_date, <span class="dt">.after =</span> field_B) <span class="op">%&gt;%</span></span>
+<span id="cb70-14"><a href="splitparse.html#cb70-14"></a><span class="st">  </span><span class="kw">relocate</span>(to_date, <span class="dt">.after =</span> field_C) <span class="op">%&gt;%</span></span>
+<span id="cb70-15"><a href="splitparse.html#cb70-15"></a><span class="st">  </span><span class="kw">relocate</span>(full, <span class="dt">.after =</span> <span class="kw">last_col</span>())</span></code></pre></div>
 <p>That’s as far as we need to go. The code generates some warnings of ‘missing pieces’, but otherwise works on these examples. The exercises explore a bit further, including how this ‘basic’ set of code might fail for some NOTAMs.</p>
 </div>
 <div id="exercises-3" class="section level3">
@@ -404,16 +602,24 @@
 <div id="answers-6" class="section level4">
 <h4><span class="header-section-number">7.2.4.2</span> Answers</h4>
 <ol style="list-style-type: decimal">
-<li><p>The cheat sheet will tell you: <code>^</code> matches at the start of the string, <code>$</code> at the end. <code>(</code> and <code>)</code> are reserved tokens in regular expressions, so you need to ‘escape’ them to use them as literal characters. <code>|</code> we saw earlier, means ‘or’.</p></li>
-<li><p>It just changes the first occurrence. Compare <code>str_replace(q_fields$q, "/", "-$-")</code> and <code>str_replace_all(q_fields$q, "/", "-$-")</code>.</p></li>
-<li><p>The usual R behaviour is to cycle through the values. So it alternates, using the first for the odd rows (ie the first one) and the second for the even rows. So the first loses the starting ( and the second loses just the ending ).</p></li>
-<li><p>The first closing bracket is preceded by <code>\\</code> so it is treated as a literal character, not part of the code. By elimination, then, it has to be the second one.</p></li>
-<li><p>For example <code>z &lt;- data.frame(id = 1:2)   z$named &lt;- list(a=c(x=1, y=2), b=c(z=4))</code></p></li>
-<li><p>With that example, you can use <code>z$named$a["y"]</code>, for example.</p></li>
-<li><p>Amongst many possible solutions, these work. How would you select A if it contains multiple 3 or 4 letter strings separated by spaces?</p></li>
-<li><p>(Essentially a cut-paste exercise, so result not provided here.) The final NOTAM has a missing “E)” header for the E field, so the splitting approach fails. Two possible solutions: filter to remove, if “E)” not found would perhaps be ok as one outlier amongst thousands; or detect and insert “E)” after C or D to allow the code to work properly.</p></li>
-<li><p>Perhaps there’s a ‘quiet’ option for the function ;-). Otherwise, since the problem is whether or not there’s text to say which NOTAM is being replaced, you could test for length and <code>separate</code> in two different ways: <code>if_else(header is long, separate with 3 column names, separate with 2 column names)</code>.</p></li>
-<li><p>A hard one, but this leads <code>pivot_wider()</code> to create a list column rather than an ordinary one. A nice robust response, but possibly not what you want. In practice, I used the additional parameters <code>values_from = both, values_fn = gdata::first</code> to handle this and arbitrarily pick the first of the duplicate entries. This might not suit your need.</p></li>
+<li>The cheat sheet will tell you: <code>^</code> matches at the start of the string, <code>$</code> at the end. <code>(</code> and <code>)</code> are reserved tokens in regular expressions, so you need to ‘escape’ them to use them as literal characters. <code>|</code> we saw earlier, means ‘or’.</li>
+<li>It just changes the first occurrence. Compare <code>str_replace(q_fields$q, "/", "-$-")</code> and <code>str_replace_all(q_fields$q, "/", "-$-")</code>.</li>
+<li>The usual R behaviour is to cycle through the values. So it alternates, using the first for the odd rows (ie the first one) and the second for the even rows. So the first loses the starting ( and the second loses just the ending ).</li>
+<li>The first closing bracket is preceded by <code>\\</code> so it is treated as a literal character, not part of the code. By elimination, then, it has to be the second one.</li>
+<li>For example <code>z &lt;- data.frame(id = 1:2)   z$named &lt;- list(a=c(x=1, y=2), b=c(z=4))</code></li>
+<li>With that example, you can use <code>z$named$a["y"]</code>, for example.</li>
+<li>Amongst many possible solutions, these work. How would you select A if it contains multiple 3 or 4 letter strings separated by spaces?</li>
+</ol>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="splitparse.html#cb71-1"></a>ans &lt;-<span class="st"> </span>notam_texts <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb71-2"><a href="splitparse.html#cb71-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">v1 =</span> <span class="kw">str_match</span>(NOTAM, <span class="st">&quot;A</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s+[^(B</span><span class="ch">\\</span><span class="st">))]+&quot;</span>),</span>
+<span id="cb71-3"><a href="splitparse.html#cb71-3"></a>         <span class="dt">v2 =</span> <span class="kw">str_match</span>(NOTAM, <span class="st">&quot;A</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s+[[:upper:]]{4}&quot;</span>),</span>
+<span id="cb71-4"><a href="splitparse.html#cb71-4"></a>        <span class="co"># multiply one field, for testing </span></span>
+<span id="cb71-5"><a href="splitparse.html#cb71-5"></a>        <span class="dt">notam_plus =</span> <span class="kw">str_replace</span>(NOTAM, <span class="st">&quot;RPXX&quot;</span>, <span class="st">&quot;RPXX EGLL&quot;</span>),</span>
+<span id="cb71-6"><a href="splitparse.html#cb71-6"></a>         <span class="dt">vMult =</span> <span class="kw">str_match</span>(notam_plus, <span class="st">&quot;A</span><span class="ch">\\</span><span class="st">)(</span><span class="ch">\\</span><span class="st">s+[[:upper:]]{4})+&quot;</span>))</span></code></pre></div>
+<ol start="8" style="list-style-type: decimal">
+<li>(Essentially a cut-paste exercise, so result not provided here.) The final NOTAM has a missing “E)” header for the E field, so the splitting approach fails. Two possible solutions: filter to remove, if “E)” not found would perhaps be ok as one outlier amongst thousands; or detect and insert “E)” after C or D to allow the code to work properly.</li>
+<li>Perhaps there’s a ‘quiet’ option for the function ;-). Otherwise, since the problem is whether or not there’s text to say which NOTAM is being replaced, you could test for length and <code>separate</code> in two different ways: <code>if_else(header is long, separate with 3 column names, separate with 2 column names)</code>.</li>
+<li>A hard one, but this leads <code>pivot_wider()</code> to create a list column rather than an ordinary one. A nice robust response, but possibly not what you want. In practice, I used the additional parameters <code>values_from = both, values_fn = gdata::first</code> to handle this and arbitrarily pick the first of the duplicate entries. This might not suit your need.</li>
 </ol>
 
 </div>

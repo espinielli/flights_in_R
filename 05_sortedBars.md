@@ -15,6 +15,20 @@ For the simplest bar charts, there is a quick way to get the order you want. In 
 
 The final novelty in this graph is `coord_flip()`. Forty-something State names is a lot of text to cram onto the horizontal axis. So we flip the axes. You'll need to decide if this trick works where you want to use the graph. We'll see other ways to separate the labels on the axes in (TBD).
 
+
+```r
+ggplot(annual_co2 %>% 
+         filter(YEAR == 2019), 
+       aes(reorder(state_label, CO2_QTY_TONNES),
+           CO2_QTY_TONNES/1e6)) +
+  geom_col() +
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions in 2019",
+       caption = "Source: EUROCONTROL.") +
+  coord_flip()
+```
+
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" />
 
 If you were to google 'ggplot ordered bar chart', you might find references to 'factors'. That becomes necessary, in place of `reorder`, when the charts are more complicated. We'll look at that in section \@ref(factors).
@@ -30,6 +44,9 @@ We prefer to use `ggsave()` to save the most-recent plot, and at the same time s
 Finally, we use the `graphs` folder we created for the project. Square seems about right for this graph (the width includes the axis text); and having one of the dimensions around 15cm also seems to produce png that are good enough for reports and slides without being too big a file.
 
 
+```r
+ggsave("graphs/FirstSortedBars.png", width = 15, height = 15, units = "cm")
+```
 
 ## Plotting more than one year
 
@@ -56,11 +73,57 @@ Factors in R were originally a way to save space with character variables in a d
 
 For this example, we'll convert `YEAR` on the fly, with an `as.factor` in the `aes()` call.
 
+
+```r
+annual_co2 <- annual_co2 %>% 
+  mutate(STATE_NAME = str_to_title(STATE_NAME))
+
+ggplot(annual_co2 %>% 
+         filter(YEAR %in% c(2010, 2019)), 
+       aes(reorder(STATE_NAME, CO2_QTY_TONNES),
+           CO2_QTY_TONNES/1e6,
+           fill = as.factor(YEAR))) +  # make discrete
+  geom_col(position = "dodge") +
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions in 2019",
+       caption = "Source: EUROCONTROL.",
+       fill = "Year") + # nicer label for legend
+  coord_flip()
+```
+
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" />
 
 Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019 bars are actually in order. We've asked `reorder` to do too much. It seems to have sorted by the total of the 2 years, which is a reasonable thing to do in the circumstances. But I think that's hard for the user of the graph to interpret, and I'd like the ordering to be by 2019. 
 
 We can do this ordering with factors. First define a vector that is in the order we want, using `arrange()` to sort it. The `desc()` reverses the order. Then define a factor version of the state names, and insist that it's in this fixed order. `factor()` is like `as.factor()` which we used in the previous chunk of code, but allows these extra parameters.
+
+
+```r
+# get the state names in the specific order that we want
+state_order <- annual_co2 %>% 
+  filter(YEAR == 2019) %>%     # in year 2019
+  arrange(desc(CO2_QTY_TONNES)) %>%  # descending order
+  pull(STATE_NAME) 
+
+# create an ordered factor with this
+annual_co2 <- annual_co2 %>% 
+  mutate(ordered_states = factor(STATE_NAME, 
+                                 levels = state_order, ordered = TRUE))
+
+ggplot(annual_co2 %>% 
+         filter(YEAR %in% c(2010, 2019)), 
+       aes(ordered_states,
+           CO2_QTY_TONNES/1e6,
+           fill = as.factor(YEAR))) +  # make discrete
+  geom_col(position = "dodge") +
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions",
+       caption = "Ordering by 2019 emissions. Source: EUROCONTROL.",
+       fill = "Year") + # nicer label for legend
+  coord_flip()
+```
 
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
 
@@ -70,6 +133,21 @@ If you want the reader to compare things, a good rule of thumb is to make sure t
 
 `ggplot` provides a simple way to split charts into 'facets', which can sometimes be a way to show variation across a dimension with just a few values (2 or 3 years, say), while aligning the axes in a sensible way. There's a bit of a twist in the notation: you can't just mention a variable name (as you can in `aes()`), you need either to say `vars(YEAR)` or use a 'formula' notation starting with a tilde `~`, which involves less typing so that's what I've done here. The `_wrap` would allow wrapping onto multiple rows, but I just want one row here.
 
+
+```r
+ggplot(annual_co2 %>% 
+         filter(YEAR %in% c(2010, 2015, 2019)), 
+       aes(ordered_states,
+           CO2_QTY_TONNES/1e6)) +  
+  geom_col() +
+  facet_wrap(~YEAR, nrow = 1) + 
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions",
+       caption = "Source: EUROCONTROL.") + 
+  coord_flip()
+```
+
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
 
 `facet_wrap` has given all the x- and y-axes the same matching scale, and not bothered to repeat the y-axis labels. So it's compact. The graph is not bad for comparing relative sizes of the larger States in a given year, and for seeing how the ranking changes. But it's not that easy to compare amounts between years.
@@ -77,6 +155,27 @@ If you want the reader to compare things, a good rule of thumb is to make sure t
 However, we can use facets to split in a different way, if we arbitrarily put the States into two groups. Remember that `[ ]` is a way to select elements of the vector, in this case the first 19. We could equally have used `head(state_order, 19)`, but the `[1:19]` is a model that is used more often. 
 
 We turn off the scale-matching (`scales = "free"`), so really it's two separate graphs, but with one piece of code. 
+
+
+```r
+annual_co2 <- annual_co2 %>% 
+  mutate(size = if_else(ordered_states %in% state_order[1:19], 
+                        "Larger Emitters", "Smaller Emitters"))
+
+ggplot(annual_co2 %>% 
+         filter(YEAR %in% c(2010, 2015, 2019)), 
+       aes(ordered_states,
+           CO2_QTY_TONNES/1e6,
+           fill = as.factor(YEAR))) +  
+  geom_col(position = "dodge") +
+  facet_wrap(~size, nrow = 1, scales = "free") + 
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions",
+       caption = "Source: EUROCONTROL.",
+       fill = "Year") + # nicer label for legend
+  coord_flip()
+```
 
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
 
@@ -141,11 +240,68 @@ Notice that we have two `colour` aesthetics: the default one which is by `YEAR` 
 
 The other catch is that, because the colour of the text is constant, it appears outside the `aes()`, not inside.
 
+
+```r
+# load the dataset
+load("data/annual_co2.rda")
+
+top_states <- annual_co2 %>%
+  filter(YEAR == 2019) %>%     # top in year 2019
+  slice_max(TF, n = 8) %>%  # top 8 
+  pull(STATE_NAME) 
+
+annual_co2 <- annual_co2 %>% 
+  mutate(state_label = if_else(YEAR == 2015, str_to_title(STATE_NAME), ""))
+
+ggplot(annual_co2 %>% 
+         filter(STATE_NAME %in% top_states), 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+           colour = YEAR, group = STATE_NAME)) +
+  geom_point() + 
+  geom_path() +
+  ggrepel::geom_text_repel(aes(label = state_label), colour = "black") +
+  scale_colour_steps(n.breaks = 8, show.limits = TRUE) +
+  labs(x = "Departing Flights (millions)", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       colour = "Year",
+       title = "Emissions for the busiest 8 states",
+       caption = "Source: EUROCONTROL. 'Busiest' means most flights in 2019.")
+```
+
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
 
 
 2) This is an exercise in logic in the `filter`. Did you remember to update the title, footnotes and the legend title?
 
+
+
+```r
+# load the dataset
+load("data/annual_co2.rda")
+
+selected_states <- annual_co2 %>%
+  filter(YEAR == 2010 & TF > 10000) %>%     # more than 10k flights
+  slice_min(TF, n = 6) %>%  # bottom 6 
+  pull(STATE_NAME) 
+
+annual_co2 <- annual_co2 %>% 
+  mutate(state_label = if_else(YEAR == 2015, str_to_title(STATE_NAME), ""))
+
+ggplot(annual_co2 %>% 
+         filter(STATE_NAME %in% selected_states), 
+       aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+           colour = YEAR, group = STATE_NAME)) +
+  geom_point(aes(shape = STATE_NAME)) + 
+  geom_path() +
+  ggrepel::geom_text_repel(aes(label = state_label), colour = "black") +
+  scale_colour_steps(n.breaks = 8, show.limits = TRUE) +
+  labs(x = "Departing Flights (millions)", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       colour = "Year",
+       shape = "State",
+       title = "Emissions for the least-busy 6 states",
+       caption = "Source: EUROCONTROL. 'Least-busy' means fewest flights in 2010, but more than 10k flights.")
+```
 
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
 
@@ -154,6 +310,28 @@ The other catch is that, because the colour of the text is constant, it appears 
 You could load from Excel and immediately filter. I do it in two steps, because then I can check the correct field names for the `filter` and `mutate` using the environment pane.
 
 This is an exercise in building up quite complex statements from simple functions. Formatting with line breaks should help a lot.
+
+
+```r
+# go back to the excel file
+aviation_co2 <- readxl::read_excel("data/CO2_emissions.xlsx", 
+                                  sheet = "DATA")
+# just the data that we need
+monthly_co2 <- aviation_co2 %>% 
+  filter(YEAR >= 2017 & STATE_NAME == "FRANCE") %>% 
+  mutate(date = if_else(MONTH < 10,
+                        str_c(YEAR, "  ", MONTH), 
+                        str_c(YEAR, " ", MONTH))) #a pseudo-date
+
+# then the basic ggplot(data, aes(x,y)) + geometry...
+ggplot(monthly_co2, aes(date, CO2_QTY_TONNES/1e6)) +
+  geom_col() +
+  labs(x = "", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       title = "Aviation Emissions of France",
+       caption = "Source: EUROCONTROL.") +
+  coord_flip()
+```
 
 <img src="05_sortedBars_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" />
 

@@ -55,6 +55,70 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -203,6 +267,16 @@
 <p>A classic visualisation is the bar chart, sorted from longest to shortest. With <code>ggplot</code> there are a couple of ways to get a bar chart. If you want <code>ggplot</code> to count the rows for you, use <code>geom_bar</code>. Here we already have values for the length of the bar, so we use <code>geom_col</code> instead (for ‘column’ chart).</p>
 <p>For the simplest bar charts, there is a quick way to get the order you want. In place of <code>state_label</code> for the x-axis, you give <code>reorder(state_label, CO2_QTY_TONNES)</code>, the second being the variable to sort by. If you find the bars a bit top-heavy, put a <code>-</code> in front of <code>CO2_QTY_...</code> to reverse the order.</p>
 <p>The final novelty in this graph is <code>coord_flip()</code>. Forty-something State names is a lot of text to cram onto the horizontal axis. So we flip the axes. You’ll need to decide if this trick works where you want to use the graph. We’ll see other ways to separate the labels on the axes in (TBD).</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sortbars.html#cb41-1"></a><span class="kw">ggplot</span>(annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb41-2"><a href="sortbars.html#cb41-2"></a><span class="st">         </span><span class="kw">filter</span>(YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2019</span>), </span>
+<span id="cb41-3"><a href="sortbars.html#cb41-3"></a>       <span class="kw">aes</span>(<span class="kw">reorder</span>(state_label, CO2_QTY_TONNES),</span>
+<span id="cb41-4"><a href="sortbars.html#cb41-4"></a>           CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>)) <span class="op">+</span></span>
+<span id="cb41-5"><a href="sortbars.html#cb41-5"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb41-6"><a href="sortbars.html#cb41-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb41-7"><a href="sortbars.html#cb41-7"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb41-8"><a href="sortbars.html#cb41-8"></a>       <span class="dt">title =</span> <span class="st">&quot;Aviation Emissions in 2019&quot;</span>,</span>
+<span id="cb41-9"><a href="sortbars.html#cb41-9"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="op">+</span></span>
+<span id="cb41-10"><a href="sortbars.html#cb41-10"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>If you were to google ‘ggplot ordered bar chart’, you might find references to ‘factors’. That becomes necessary, in place of <code>reorder</code>, when the charts are more complicated. We’ll look at that in section <a href="sortbars.html#factors">5.3.1</a>.</p>
 </div>
@@ -212,6 +286,7 @@
 <p>The proportions on your screen will depend on a number of things including the space you have allowed for the ‘Plots’ window. Now, the plots window has an export button which you could use. It allows for re-sizing, but that means you have to do the same manual intervention each time.</p>
 <p>We prefer to use <code>ggsave()</code> to save the most-recent plot, and at the same time set the aspect ratio. Usually it’s worth doing this before working too much on the font sizes, since you don’t really know if there’s a problem until you’ve seen the png.</p>
 <p>Finally, we use the <code>graphs</code> folder we created for the project. Square seems about right for this graph (the width includes the axis text); and having one of the dimensions around 15cm also seems to produce png that are good enough for reports and slides without being too big a file.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sortbars.html#cb42-1"></a><span class="kw">ggsave</span>(<span class="st">&quot;graphs/FirstSortedBars.png&quot;</span>, <span class="dt">width =</span> <span class="dv">15</span>, <span class="dt">height =</span> <span class="dv">15</span>, <span class="dt">units =</span> <span class="st">&quot;cm&quot;</span>)</span></code></pre></div>
 </div>
 <div id="plotting-more-than-one-year" class="section level2">
 <h2><span class="header-section-number">5.3</span> Plotting more than one year</h2>
@@ -231,19 +306,85 @@
 <p>We could convert to a string with <code>as.character</code>, but we need to start using factors, so let’s do that here.</p>
 <p>Factors in R were originally a way to save space with character variables in a dataset. In <code>annual_co2</code> for example, rather than store ‘ALBANIA’ 10 times, for each row, a factor would give <code>ALBANIA</code> a numeric code and store that. The character strings become the levels. [Try <code>z &lt;- as.factor(annual_co2$STATE_NAME)</code> and see what is said for z in the environment pane. <code>rm(z)</code> to tidy up, if you wish.]</p>
 <p>For this example, we’ll convert <code>YEAR</code> on the fly, with an <code>as.factor</code> in the <code>aes()</code> call.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sortbars.html#cb43-1"></a>annual_co2 &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb43-2"><a href="sortbars.html#cb43-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">STATE_NAME =</span> <span class="kw">str_to_title</span>(STATE_NAME))</span>
+<span id="cb43-3"><a href="sortbars.html#cb43-3"></a></span>
+<span id="cb43-4"><a href="sortbars.html#cb43-4"></a><span class="kw">ggplot</span>(annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb43-5"><a href="sortbars.html#cb43-5"></a><span class="st">         </span><span class="kw">filter</span>(YEAR <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2010</span>, <span class="dv">2019</span>)), </span>
+<span id="cb43-6"><a href="sortbars.html#cb43-6"></a>       <span class="kw">aes</span>(<span class="kw">reorder</span>(STATE_NAME, CO2_QTY_TONNES),</span>
+<span id="cb43-7"><a href="sortbars.html#cb43-7"></a>           CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>,</span>
+<span id="cb43-8"><a href="sortbars.html#cb43-8"></a>           <span class="dt">fill =</span> <span class="kw">as.factor</span>(YEAR))) <span class="op">+</span><span class="st">  </span><span class="co"># make discrete</span></span>
+<span id="cb43-9"><a href="sortbars.html#cb43-9"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb43-10"><a href="sortbars.html#cb43-10"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb43-11"><a href="sortbars.html#cb43-11"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb43-12"><a href="sortbars.html#cb43-12"></a>       <span class="dt">title =</span> <span class="st">&quot;Aviation Emissions in 2019&quot;</span>,</span>
+<span id="cb43-13"><a href="sortbars.html#cb43-13"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>,</span>
+<span id="cb43-14"><a href="sortbars.html#cb43-14"></a>       <span class="dt">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># nicer label for legend</span></span>
+<span id="cb43-15"><a href="sortbars.html#cb43-15"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019 bars are actually in order. We’ve asked <code>reorder</code> to do too much. It seems to have sorted by the total of the 2 years, which is a reasonable thing to do in the circumstances. But I think that’s hard for the user of the graph to interpret, and I’d like the ordering to be by 2019.</p>
 <p>We can do this ordering with factors. First define a vector that is in the order we want, using <code>arrange()</code> to sort it. The <code>desc()</code> reverses the order. Then define a factor version of the state names, and insist that it’s in this fixed order. <code>factor()</code> is like <code>as.factor()</code> which we used in the previous chunk of code, but allows these extra parameters.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sortbars.html#cb44-1"></a><span class="co"># get the state names in the specific order that we want</span></span>
+<span id="cb44-2"><a href="sortbars.html#cb44-2"></a>state_order &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb44-3"><a href="sortbars.html#cb44-3"></a><span class="st">  </span><span class="kw">filter</span>(YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2019</span>) <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># in year 2019</span></span>
+<span id="cb44-4"><a href="sortbars.html#cb44-4"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(CO2_QTY_TONNES)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># descending order</span></span>
+<span id="cb44-5"><a href="sortbars.html#cb44-5"></a><span class="st">  </span><span class="kw">pull</span>(STATE_NAME) </span>
+<span id="cb44-6"><a href="sortbars.html#cb44-6"></a></span>
+<span id="cb44-7"><a href="sortbars.html#cb44-7"></a><span class="co"># create an ordered factor with this</span></span>
+<span id="cb44-8"><a href="sortbars.html#cb44-8"></a>annual_co2 &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb44-9"><a href="sortbars.html#cb44-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ordered_states =</span> <span class="kw">factor</span>(STATE_NAME, </span>
+<span id="cb44-10"><a href="sortbars.html#cb44-10"></a>                                 <span class="dt">levels =</span> state_order, <span class="dt">ordered =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb44-11"><a href="sortbars.html#cb44-11"></a></span>
+<span id="cb44-12"><a href="sortbars.html#cb44-12"></a><span class="kw">ggplot</span>(annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb44-13"><a href="sortbars.html#cb44-13"></a><span class="st">         </span><span class="kw">filter</span>(YEAR <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2010</span>, <span class="dv">2019</span>)), </span>
+<span id="cb44-14"><a href="sortbars.html#cb44-14"></a>       <span class="kw">aes</span>(ordered_states,</span>
+<span id="cb44-15"><a href="sortbars.html#cb44-15"></a>           CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>,</span>
+<span id="cb44-16"><a href="sortbars.html#cb44-16"></a>           <span class="dt">fill =</span> <span class="kw">as.factor</span>(YEAR))) <span class="op">+</span><span class="st">  </span><span class="co"># make discrete</span></span>
+<span id="cb44-17"><a href="sortbars.html#cb44-17"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb44-18"><a href="sortbars.html#cb44-18"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb44-19"><a href="sortbars.html#cb44-19"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb44-20"><a href="sortbars.html#cb44-20"></a>       <span class="dt">title =</span> <span class="st">&quot;Aviation Emissions&quot;</span>,</span>
+<span id="cb44-21"><a href="sortbars.html#cb44-21"></a>       <span class="dt">caption =</span> <span class="st">&quot;Ordering by 2019 emissions. Source: EUROCONTROL.&quot;</span>,</span>
+<span id="cb44-22"><a href="sortbars.html#cb44-22"></a>       <span class="dt">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># nicer label for legend</span></span>
+<span id="cb44-23"><a href="sortbars.html#cb44-23"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="chart-facets-more-years-in-the-bar-chart" class="section level3">
 <h3><span class="header-section-number">5.3.2</span> Chart facets, more years in the bar chart</h3>
 <p>If you want the reader to compare things, a good rule of thumb is to make sure these things are all in the same graph. We’ve achieved this for comparisons between years and between countries. However, this is a bit of a squeeze, vertically, while there’s lots of empty space. Plus, it doesn’t look like this method would easily cope with a third year, say.</p>
 <p><code>ggplot</code> provides a simple way to split charts into ‘facets’, which can sometimes be a way to show variation across a dimension with just a few values (2 or 3 years, say), while aligning the axes in a sensible way. There’s a bit of a twist in the notation: you can’t just mention a variable name (as you can in <code>aes()</code>), you need either to say <code>vars(YEAR)</code> or use a ‘formula’ notation starting with a tilde <code>~</code>, which involves less typing so that’s what I’ve done here. The <code>_wrap</code> would allow wrapping onto multiple rows, but I just want one row here.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sortbars.html#cb45-1"></a><span class="kw">ggplot</span>(annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb45-2"><a href="sortbars.html#cb45-2"></a><span class="st">         </span><span class="kw">filter</span>(YEAR <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2019</span>)), </span>
+<span id="cb45-3"><a href="sortbars.html#cb45-3"></a>       <span class="kw">aes</span>(ordered_states,</span>
+<span id="cb45-4"><a href="sortbars.html#cb45-4"></a>           CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>)) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb45-5"><a href="sortbars.html#cb45-5"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb45-6"><a href="sortbars.html#cb45-6"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>YEAR, <span class="dt">nrow =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb45-7"><a href="sortbars.html#cb45-7"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb45-8"><a href="sortbars.html#cb45-8"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb45-9"><a href="sortbars.html#cb45-9"></a>       <span class="dt">title =</span> <span class="st">&quot;Aviation Emissions&quot;</span>,</span>
+<span id="cb45-10"><a href="sortbars.html#cb45-10"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb45-11"><a href="sortbars.html#cb45-11"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><code>facet_wrap</code> has given all the x- and y-axes the same matching scale, and not bothered to repeat the y-axis labels. So it’s compact. The graph is not bad for comparing relative sizes of the larger States in a given year, and for seeing how the ranking changes. But it’s not that easy to compare amounts between years.</p>
 <p>However, we can use facets to split in a different way, if we arbitrarily put the States into two groups. Remember that <code>[ ]</code> is a way to select elements of the vector, in this case the first 19. We could equally have used <code>head(state_order, 19)</code>, but the <code>[1:19]</code> is a model that is used more often.</p>
 <p>We turn off the scale-matching (<code>scales = "free"</code>), so really it’s two separate graphs, but with one piece of code.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="sortbars.html#cb46-1"></a>annual_co2 &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb46-2"><a href="sortbars.html#cb46-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">size =</span> <span class="kw">if_else</span>(ordered_states <span class="op">%in%</span><span class="st"> </span>state_order[<span class="dv">1</span><span class="op">:</span><span class="dv">19</span>], </span>
+<span id="cb46-3"><a href="sortbars.html#cb46-3"></a>                        <span class="st">&quot;Larger Emitters&quot;</span>, <span class="st">&quot;Smaller Emitters&quot;</span>))</span>
+<span id="cb46-4"><a href="sortbars.html#cb46-4"></a></span>
+<span id="cb46-5"><a href="sortbars.html#cb46-5"></a><span class="kw">ggplot</span>(annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb46-6"><a href="sortbars.html#cb46-6"></a><span class="st">         </span><span class="kw">filter</span>(YEAR <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2019</span>)), </span>
+<span id="cb46-7"><a href="sortbars.html#cb46-7"></a>       <span class="kw">aes</span>(ordered_states,</span>
+<span id="cb46-8"><a href="sortbars.html#cb46-8"></a>           CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>,</span>
+<span id="cb46-9"><a href="sortbars.html#cb46-9"></a>           <span class="dt">fill =</span> <span class="kw">as.factor</span>(YEAR))) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb46-10"><a href="sortbars.html#cb46-10"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb46-11"><a href="sortbars.html#cb46-11"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>size, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-12"><a href="sortbars.html#cb46-12"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb46-13"><a href="sortbars.html#cb46-13"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb46-14"><a href="sortbars.html#cb46-14"></a>       <span class="dt">title =</span> <span class="st">&quot;Aviation Emissions&quot;</span>,</span>
+<span id="cb46-15"><a href="sortbars.html#cb46-15"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>,</span>
+<span id="cb46-16"><a href="sortbars.html#cb46-16"></a>       <span class="dt">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># nicer label for legend</span></span>
+<span id="cb46-17"><a href="sortbars.html#cb46-17"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>This certainly allows better comparisons of some of the mid-range emitters, and between years. Assuming you’re not after comparison of of Luxembourg and Finland, perhaps this is fit for purpose.</p>
 <p>There are many different distributions in flight data that have this long tail challenge: with most of the flights in a few airports, or a few countries, or by a few aircraft types. It’s easy enough to switch to a logarithmic scale, but that’s then often hard to read. Facets like this are a reasonable alternative, and adaptable. The results are a little distorted by the length of some of the names, for which a crude solution is in question (2) below.</p>
@@ -309,15 +450,82 @@ In the end, it’s an ugly chart but let’s not worry too much about that.</li>
 </ol>
 <p>Notice that we have two <code>colour</code> aesthetics: the default one which is by <code>YEAR</code> and one specifically for the <code>geom_text_repel</code>.</p>
 <p>The other catch is that, because the colour of the text is constant, it appears outside the <code>aes()</code>, not inside.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sortbars.html#cb47-1"></a><span class="co"># load the dataset</span></span>
+<span id="cb47-2"><a href="sortbars.html#cb47-2"></a><span class="kw">load</span>(<span class="st">&quot;data/annual_co2.rda&quot;</span>)</span>
+<span id="cb47-3"><a href="sortbars.html#cb47-3"></a></span>
+<span id="cb47-4"><a href="sortbars.html#cb47-4"></a>top_states &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span></span>
+<span id="cb47-5"><a href="sortbars.html#cb47-5"></a><span class="st">  </span><span class="kw">filter</span>(YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2019</span>) <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># top in year 2019</span></span>
+<span id="cb47-6"><a href="sortbars.html#cb47-6"></a><span class="st">  </span><span class="kw">slice_max</span>(TF, <span class="dt">n =</span> <span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># top 8 </span></span>
+<span id="cb47-7"><a href="sortbars.html#cb47-7"></a><span class="st">  </span><span class="kw">pull</span>(STATE_NAME) </span>
+<span id="cb47-8"><a href="sortbars.html#cb47-8"></a></span>
+<span id="cb47-9"><a href="sortbars.html#cb47-9"></a>annual_co2 &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb47-10"><a href="sortbars.html#cb47-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">state_label =</span> <span class="kw">if_else</span>(YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, <span class="kw">str_to_title</span>(STATE_NAME), <span class="st">&quot;&quot;</span>))</span>
+<span id="cb47-11"><a href="sortbars.html#cb47-11"></a></span>
+<span id="cb47-12"><a href="sortbars.html#cb47-12"></a><span class="kw">ggplot</span>(annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb47-13"><a href="sortbars.html#cb47-13"></a><span class="st">         </span><span class="kw">filter</span>(STATE_NAME <span class="op">%in%</span><span class="st"> </span>top_states), </span>
+<span id="cb47-14"><a href="sortbars.html#cb47-14"></a>       <span class="kw">aes</span>(TF<span class="op">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>, </span>
+<span id="cb47-15"><a href="sortbars.html#cb47-15"></a>           <span class="dt">colour =</span> YEAR, <span class="dt">group =</span> STATE_NAME)) <span class="op">+</span></span>
+<span id="cb47-16"><a href="sortbars.html#cb47-16"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb47-17"><a href="sortbars.html#cb47-17"></a><span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span></span>
+<span id="cb47-18"><a href="sortbars.html#cb47-18"></a><span class="st">  </span>ggrepel<span class="op">::</span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">label =</span> state_label), <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb47-19"><a href="sortbars.html#cb47-19"></a><span class="st">  </span><span class="kw">scale_colour_steps</span>(<span class="dt">n.breaks =</span> <span class="dv">8</span>, <span class="dt">show.limits =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
+<span id="cb47-20"><a href="sortbars.html#cb47-20"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb47-21"><a href="sortbars.html#cb47-21"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb47-22"><a href="sortbars.html#cb47-22"></a>       <span class="dt">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb47-23"><a href="sortbars.html#cb47-23"></a>       <span class="dt">title =</span> <span class="st">&quot;Emissions for the busiest 8 states&quot;</span>,</span>
+<span id="cb47-24"><a href="sortbars.html#cb47-24"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Busiest&#39; means most flights in 2019.&quot;</span>)</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>This is an exercise in logic in the <code>filter</code>. Did you remember to update the title, footnotes and the legend title?</li>
 </ol>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="sortbars.html#cb48-1"></a><span class="co"># load the dataset</span></span>
+<span id="cb48-2"><a href="sortbars.html#cb48-2"></a><span class="kw">load</span>(<span class="st">&quot;data/annual_co2.rda&quot;</span>)</span>
+<span id="cb48-3"><a href="sortbars.html#cb48-3"></a></span>
+<span id="cb48-4"><a href="sortbars.html#cb48-4"></a>selected_states &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span></span>
+<span id="cb48-5"><a href="sortbars.html#cb48-5"></a><span class="st">  </span><span class="kw">filter</span>(YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2010</span> <span class="op">&amp;</span><span class="st"> </span>TF <span class="op">&gt;</span><span class="st"> </span><span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># more than 10k flights</span></span>
+<span id="cb48-6"><a href="sortbars.html#cb48-6"></a><span class="st">  </span><span class="kw">slice_min</span>(TF, <span class="dt">n =</span> <span class="dv">6</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># bottom 6 </span></span>
+<span id="cb48-7"><a href="sortbars.html#cb48-7"></a><span class="st">  </span><span class="kw">pull</span>(STATE_NAME) </span>
+<span id="cb48-8"><a href="sortbars.html#cb48-8"></a></span>
+<span id="cb48-9"><a href="sortbars.html#cb48-9"></a>annual_co2 &lt;-<span class="st"> </span>annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb48-10"><a href="sortbars.html#cb48-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">state_label =</span> <span class="kw">if_else</span>(YEAR <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, <span class="kw">str_to_title</span>(STATE_NAME), <span class="st">&quot;&quot;</span>))</span>
+<span id="cb48-11"><a href="sortbars.html#cb48-11"></a></span>
+<span id="cb48-12"><a href="sortbars.html#cb48-12"></a><span class="kw">ggplot</span>(annual_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb48-13"><a href="sortbars.html#cb48-13"></a><span class="st">         </span><span class="kw">filter</span>(STATE_NAME <span class="op">%in%</span><span class="st"> </span>selected_states), </span>
+<span id="cb48-14"><a href="sortbars.html#cb48-14"></a>       <span class="kw">aes</span>(TF<span class="op">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>, </span>
+<span id="cb48-15"><a href="sortbars.html#cb48-15"></a>           <span class="dt">colour =</span> YEAR, <span class="dt">group =</span> STATE_NAME)) <span class="op">+</span></span>
+<span id="cb48-16"><a href="sortbars.html#cb48-16"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> STATE_NAME)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-17"><a href="sortbars.html#cb48-17"></a><span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span></span>
+<span id="cb48-18"><a href="sortbars.html#cb48-18"></a><span class="st">  </span>ggrepel<span class="op">::</span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">label =</span> state_label), <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb48-19"><a href="sortbars.html#cb48-19"></a><span class="st">  </span><span class="kw">scale_colour_steps</span>(<span class="dt">n.breaks =</span> <span class="dv">8</span>, <span class="dt">show.limits =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
+<span id="cb48-20"><a href="sortbars.html#cb48-20"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb48-21"><a href="sortbars.html#cb48-21"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb48-22"><a href="sortbars.html#cb48-22"></a>       <span class="dt">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb48-23"><a href="sortbars.html#cb48-23"></a>       <span class="dt">shape =</span> <span class="st">&quot;State&quot;</span>,</span>
+<span id="cb48-24"><a href="sortbars.html#cb48-24"></a>       <span class="dt">title =</span> <span class="st">&quot;Emissions for the least-busy 6 states&quot;</span>,</span>
+<span id="cb48-25"><a href="sortbars.html#cb48-25"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: EUROCONTROL. &#39;Least-busy&#39; means fewest flights in 2010, but more than 10k flights.&quot;</span>)</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>You could load from Excel and immediately filter. I do it in two steps, because then I can check the correct field names for the <code>filter</code> and <code>mutate</code> using the environment pane.</li>
 </ol>
 <p>This is an exercise in building up quite complex statements from simple functions. Formatting with line breaks should help a lot.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sortbars.html#cb49-1"></a><span class="co"># go back to the excel file</span></span>
+<span id="cb49-2"><a href="sortbars.html#cb49-2"></a>aviation_co2 &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, </span>
+<span id="cb49-3"><a href="sortbars.html#cb49-3"></a>                                  <span class="dt">sheet =</span> <span class="st">&quot;DATA&quot;</span>)</span>
+<span id="cb49-4"><a href="sortbars.html#cb49-4"></a><span class="co"># just the data that we need</span></span>
+<span id="cb49-5"><a href="sortbars.html#cb49-5"></a>monthly_co2 &lt;-<span class="st"> </span>aviation_co2 <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb49-6"><a href="sortbars.html#cb49-6"></a><span class="st">  </span><span class="kw">filter</span>(YEAR <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2017</span> <span class="op">&amp;</span><span class="st"> </span>STATE_NAME <span class="op">==</span><span class="st"> &quot;FRANCE&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb49-7"><a href="sortbars.html#cb49-7"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">if_else</span>(MONTH <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>,</span>
+<span id="cb49-8"><a href="sortbars.html#cb49-8"></a>                        <span class="kw">str_c</span>(YEAR, <span class="st">&quot;  &quot;</span>, MONTH), </span>
+<span id="cb49-9"><a href="sortbars.html#cb49-9"></a>                        <span class="kw">str_c</span>(YEAR, <span class="st">&quot; &quot;</span>, MONTH))) <span class="co">#a pseudo-date</span></span>
+<span id="cb49-10"><a href="sortbars.html#cb49-10"></a></span>
+<span id="cb49-11"><a href="sortbars.html#cb49-11"></a><span class="co"># then the basic ggplot(data, aes(x,y)) + geometry...</span></span>
+<span id="cb49-12"><a href="sortbars.html#cb49-12"></a><span class="kw">ggplot</span>(monthly_co2, <span class="kw">aes</span>(date, CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>)) <span class="op">+</span></span>
+<span id="cb49-13"><a href="sortbars.html#cb49-13"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb49-14"><a href="sortbars.html#cb49-14"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb49-15"><a href="sortbars.html#cb49-15"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb49-16"><a href="sortbars.html#cb49-16"></a>       <span class="dt">title =</span> <span class="st">&quot;Aviation Emissions of France&quot;</span>,</span>
+<span id="cb49-17"><a href="sortbars.html#cb49-17"></a>       <span class="dt">caption =</span> <span class="st">&quot;Source: EUROCONTROL.&quot;</span>) <span class="op">+</span></span>
+<span id="cb49-18"><a href="sortbars.html#cb49-18"></a><span class="st">  </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="05_sortedBars_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>

@@ -18,6 +18,9 @@ Re-open your `justlearning` project (File:Recent Projects, or 'justLearning.Rpro
 Although the project re-opens your datasets and scripts, it starts in a new R session. That means that you have to re-load the package(s) that you need, as in this code. So you might find it easier to have this at the start of your 'chapter3' script.
 
 
+```r
+library(tidyverse) 
+```
 
 
 ## Looking at data: CO~2~ Data {#loadco2}
@@ -25,6 +28,18 @@ Although the project re-opens your datasets and scripts, it starts in a new R se
 We use public data on national CO~2~ emissions from aviation available on the [EUROCONTROL/AIU website](https://ansperformance.eu/data/). We choose this, apart from the interest in the data themselves, because it's a small set so quick to download, and it's already tidy (each variable in one column). To isolate this book from changes in the original file, we use a version that we've saved to github.
 
 
+```r
+# download the file to the data folder, the 'mode' parameter is needed on Windows machines
+co2_url <- "https://github.com/david6marsh/flights_in_R/raw/main/data/CO2_emissions_by_state.xlsx"
+# if you want the original, which might have been updated, use this instead
+# co2_url <- "https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx"
+download.file(co2_url, "data/CO2_emissions.xlsx", mode = "wb")
+
+  
+# load from the DATA worksheet - case sensitive!
+aviation_co2 <- readxl::read_excel("data/CO2_emissions.xlsx", 
+                                  sheet = "DATA") 
+```
 
 We've already seen the `function(parameter)` way to call a function in the `cos(pi/3)` example. Now we have `something <- function(parameter, parameter)`. This is a peculiarity of R that you just need to get used to. Think of it as saying: create `something` in the environment (without saying what it is just yet), then fill it (`<-`) with the results of the `function()`. While you might occasionally have used a function in Excel, for example, in R basically everything you do is call functions.
 
@@ -36,6 +51,10 @@ International conventions mean that CO~2~ emissions are measured from flights de
 
 One tool in the 'explore your data' toolbox is `summary`.
 
+
+```r
+summary(aviation_co2)
+```
 
 ```
 ##       YEAR          MONTH        STATE_NAME         STATE_CODE       
@@ -77,11 +96,21 @@ Often you want to keep your groups, but here we don't need to, so we `ungroup` a
 There will be more examples of this sort of data manipulation in Chapter \@ref(filter), with more explanation of what's happening. And a lot more when we turn to data wrangling in chapters \@ref(loopsfunctions) and \@ref(groups).
 
 
+```r
+annual_co2 <- aviation_co2 %>%
+  select(!STATE_CODE) %>% 
+  group_by(YEAR, STATE_NAME) %>%
+  summarise_at(vars(CO2_QTY_TONNES, TF), sum) %>%
+  filter(YEAR < 2020) %>% 
+  ungroup()
+
+save(annual_co2, file = "data/annual_co2.rda")
+```
 
  
 There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the first line, with name on, to see a summary. You get much the same thing in the console by typing `str(annual_co2)` where `str` is for 'structure'. You should see something like this.
 
-![](/images/CO2inEnvironment.png)
+![](images/CO2inEnvironment.png)
 
 We can see that there are three numeric variables (`num`) and two character variables (`chr`). All five variables have the same number of observations (437). In a tibble or dataframe the columns are always the same length.
 
@@ -89,7 +118,7 @@ The second way to explore the structure, because this is a tibble, is just to ty
 
 The third way gives a window to explore every observation. Click on the dataset name next to the blue arrow or type `View(annual_co2)` in the console (sorry about the upper case 'V', R is like that) and you get a tabular data explorer, which allows you to sort and filter. You should see something like this. [Try out the sorting and filtering in the view window. Filter to show only the Netherlands, and sort by total flights.]
 
-![](/images/CO2inViewAndEnvironment.png)
+![](images/CO2inViewAndEnvironment.png)
 
 ## Extracting variables {#extractfield}
 
@@ -98,6 +127,12 @@ To answer more questions about the data there are some more tools to summarise t
 There are several ways to pull one variable out of your data. We'll use the `$` notation, partly because there's a reminder of this in the environment tab. [Where is this 'reminder'?]
 
 
+```r
+# pull out all values in the column
+state_vbl <- annual_co2$STATE_NAME
+
+states <- unique(state_vbl)
+```
 
 Look in the environment pane, `state_vbl` is listed under 'Values'. It's a (column) vector, one of the simple data types in R which is why it's listed under 'Values' and not under 'Data'. 'Data' is for more complex data structures, such as dataframes and tibbles. You've just pulled a column out of `annual_co2` so not surprising that it has the same number of rows as `annual_co2`. And the first values are all ALBANIA, or were when this book was compiled.
 
@@ -116,6 +151,10 @@ We've just seen how to pull a variable out of a tibble, as a vector. How do we e
 The `states` are quite a lot to show in the console. Sometimes you just need to see a quick sample, eg to check if they're in title case, or if they're codes or names. `head()` is useful for showing you the first few (6 by default).
 
 
+```r
+head(states)
+```
+
 ```
 ## [1] "ALBANIA"                "ARMENIA"                "AUSTRIA"               
 ## [4] "BELGIUM"                "BOSNIA AND HERZEGOVINA" "BULGARIA"
@@ -124,16 +163,32 @@ The `states` are quite a lot to show in the console. Sometimes you just need to 
 If you want to pull out a single value, or a few of them, again there are multiple ways to do this, but the simplest is this. We show here two ways to select with a vector of numbers: creating a consecutive sequence of numbers (`1:3`); and creating a vector with an arbitrary selection (`c(1, 5, 10)`).
 
 
+```r
+states[1]
+```
+
 ```
 ## [1] "ALBANIA"
+```
+
+```r
+states[3]
 ```
 
 ```
 ## [1] "AUSTRIA"
 ```
 
+```r
+states[1:3]
+```
+
 ```
 ## [1] "ALBANIA" "ARMENIA" "AUSTRIA"
+```
+
+```r
+states[c(1, 5, 10)]
 ```
 
 ```
@@ -156,7 +211,14 @@ In the simplest code we have:
 * `aes`: gives the x and y first, and here also says choose colour based on year;
 * `geom_point`: says to plot points with these data, ie a scatter plot.
 
-<img src="03_StateCO2_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
+
+```r
+ggplot(annual_co2, 
+       aes(TF, CO2_QTY_TONNES, colour = YEAR)) +
+  geom_point() 
+```
+
+<img src="03_StateCO2_files/figure-html/first-scatter-1.png" width="672" style="display: block; margin: auto;" />
 
 Even this simple example illustrates that:
 
@@ -173,7 +235,17 @@ Let's at least label the axes so that someone else can see quickly what has been
 
 The label on the legend is meaningful, but to avoid the block capitals we can change that too within the `labs()` statement. It's a 'colour' legend (that's what is in the `aes` call), so you need to refer to 'colour' in the `labs()`. 
 
-<img src="03_StateCO2_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
+
+```r
+ggplot(annual_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, colour = YEAR)) +
+  geom_point() + 
+  labs(x = "Departing Flights (millions)", 
+       y = "CO2 (million tonnes)",
+       colour = "Year",
+       title = "Emissions per state")
+```
+
+<img src="03_StateCO2_files/figure-html/scatter-plot-improved-titles-1.png" width="672" style="display: block; margin: auto;" />
 
 ### and with clustering by state {#statecluster}
 
@@ -185,7 +257,19 @@ We need both to add a line, which follows the pattern of `geom_point`, and group
 
 Out of a sense of neatness, we also add a subscript to CO~2~. The code `bquote(~CO[2]~" (million tonnes)")` took some googling and is cryptic, but it works!
 
-<img src="03_StateCO2_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
+
+```r
+ggplot(annual_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, 
+                         colour = YEAR, group = STATE_NAME)) +
+  geom_point() + 
+  geom_path() +
+  labs(x = "Departing Flights (millions)", 
+       y = bquote(~CO[2]~" (million tonnes)"),
+       colour = "Year",
+       title = "Emissions per state")
+```
+
+<img src="03_StateCO2_files/figure-html/scatterplot-with-clustering-1.png" width="672" style="display: block; margin: auto;" />
 
 The graph isn't ready for a presentation yet, but a story is already emerging. The lines do a pretty good job of grouping the years for each state together. We see a graph with 6 busy states, 3 of which are fairly linear, so a relatively fixed CO~2~/flight. Three others are more variable from year to year. 
 

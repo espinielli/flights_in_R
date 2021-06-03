@@ -57,6 +57,11 @@ The project will open without a code panel (which would have been top left), bec
 In this book we'll assume that projects always keep data in the `data` directory, and save graphs to the `graphs` directory. You can create these quickly in your new project by copying the code from here (quick-copy icon appears top right in the code block when you move the mouse over it) and pasting it into the console (and press 'enter').
 
 
+```r
+# good to have these in every project
+dir.create("data")
+dir.create("graphs")
+```
 If for some reason the directories already exist, don't worry, you'll just get a warning. The line beginning with '#' is a comment which is ignored.
 
 You can also create these directories manually using 'New Folder' in the files tab (ctrl-5), but then make sure both folder names are in lower case! You could even use your operating system file explorer - these are just ordinary directories ('folders'), there's nothing R-special about them.
@@ -74,6 +79,13 @@ It's good practice to comment as you go along, using `#`. At the top of your new
 Type this code into your new 'chapter2' script, either manually or copy paste. 
 
 
+```r
+3 + 4
+# I know pi
+pi
+1:50
+cos(pi/3) # angle is in radians
+```
 
 Unlike in the console, in a script file code doesn't get executed as you type. You have to run it. Usually you're either:
 
@@ -109,14 +121,26 @@ Clicking on the package name takes you to the documentation. There's a manual fo
 You can load a package by ticking the box in the packages pane, but normally it's done in code, as in this example.
 
 
+```r
+library(lubridate) # lots of date-related functions.
+```
 
 Two packages can define a function with the same name. The CRAN repository of packages performs quality checks, but overlap between packages is not something CRAN controls. Think of CRAN as an excellent library rather than an 'Académie française' for R  that controls which words are allowed into the language^[Actually, CRAN does enforce some quality control but that's more about how packages work than what packages there might be, with which functions.]. When there is overlap in packages, both defining a function with the same name, say, then on loading the second one 'masks' the first (you should see this above). Sometimes, as an alternative to loading the full package, you might see in code a 'two colon' usage, such as `base::union`. This is very common inside packages (it's recommended), and it's a way to insist that the first package version of the function should be used. 
 
 As well as function with the same name and different results, there are often many different functions that you could use to achieve the same result, eg `base::paste0()` and `stringr::str_c()` both concatenate strings.
 
 
+```r
+# both concatenate two strings, inserting no separator between them
+base::paste0("On Ilkley Moo", "r.")
+```
+
 ```
 ## [1] "On Ilkley Moor."
+```
+
+```r
+stringr::str_c("On Ilkley Moo", "r.")
 ```
 
 ```
@@ -187,6 +211,24 @@ Start with the untidy dataframe shown above. Use `pivot_longer` to make it tidy,
 Then we show a pairing of `group_by` and `summarise` to produce some annual totals. This example doesn't save its result but prints it immediately to the log.
 
 
+```r
+untidy <- data.frame(Country = c("France", "Germany"), 
+                     Flights2019 = c(1.3, 5.2), 
+                     Flights2020= c(1.5, 6.0))
+# tidy the data
+tidier <- pivot_longer(untidy, 
+                       # pivot the two columns starting with 'Flights'
+                       cols = starts_with("Flights"),
+                       # put the column names in a column called 'year'
+                       names_to= "year",
+                       # ignore the 'Flights' bit of the name, and treat as integer
+                       names_pattern = "Flights(.*)",
+                       names_transform = list(year = as.integer),
+                       # put the column values in a column called 'flights'
+                       values_to = "flights")
+print(tidier)
+```
+
 ```
 ## # A tibble: 4 x 3
 ##   Country  year flights
@@ -195,6 +237,12 @@ Then we show a pairing of `group_by` and `summarise` to produce some annual tota
 ## 2 France   2020     1.5
 ## 3 Germany  2019     5.2
 ## 4 Germany  2020     6
+```
+
+```r
+# using groups - just print the result
+tidier %>% group_by(year) %>% 
+  summarise(total_flights = sum(flights))
 ```
 
 ```

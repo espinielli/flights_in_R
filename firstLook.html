@@ -55,6 +55,70 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -206,14 +270,26 @@
 </table>
 <p>Re-open your <code>justlearning</code> project (<a href="File:Recent" class="uri">File:Recent</a> Projects, or ‘justLearning.Rproj’). Create a new script file (<a href="File:New" class="uri">File:New</a> <a href="File:R" class="uri">File:R</a> script), to copy and paste the examples into, and save it as ‘chapter3’.</p>
 <p>Although the project re-opens your datasets and scripts, it starts in a new R session. That means that you have to re-load the package(s) that you need, as in this code. So you might find it easier to have this at the start of your ‘chapter3’ script.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="firstLook.html#cb13-1"></a><span class="kw">library</span>(tidyverse) </span></code></pre></div>
 <div id="loadco2" class="section level2">
 <h2><span class="header-section-number">3.1</span> Looking at data: CO<sub>2</sub> Data</h2>
 <p>We use public data on national CO<sub>2</sub> emissions from aviation available on the <a href="https://ansperformance.eu/data/">EUROCONTROL/AIU website</a>. We choose this, apart from the interest in the data themselves, because it’s a small set so quick to download, and it’s already tidy (each variable in one column). To isolate this book from changes in the original file, we use a version that we’ve saved to github.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="firstLook.html#cb14-1"></a><span class="co"># download the file to the data folder, the &#39;mode&#39; parameter is needed on Windows machines</span></span>
+<span id="cb14-2"><a href="firstLook.html#cb14-2"></a>co2_url &lt;-<span class="st"> &quot;https://github.com/david6marsh/flights_in_R/raw/main/data/CO2_emissions_by_state.xlsx&quot;</span></span>
+<span id="cb14-3"><a href="firstLook.html#cb14-3"></a><span class="co"># if you want the original, which might have been updated, use this instead</span></span>
+<span id="cb14-4"><a href="firstLook.html#cb14-4"></a><span class="co"># co2_url &lt;- &quot;https://ansperformance.eu/download/xls/CO2_emissions_by_state.xlsx&quot;</span></span>
+<span id="cb14-5"><a href="firstLook.html#cb14-5"></a><span class="kw">download.file</span>(co2_url, <span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb14-6"><a href="firstLook.html#cb14-6"></a></span>
+<span id="cb14-7"><a href="firstLook.html#cb14-7"></a>  </span>
+<span id="cb14-8"><a href="firstLook.html#cb14-8"></a><span class="co"># load from the DATA worksheet - case sensitive!</span></span>
+<span id="cb14-9"><a href="firstLook.html#cb14-9"></a>aviation_co2 &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;data/CO2_emissions.xlsx&quot;</span>, </span>
+<span id="cb14-10"><a href="firstLook.html#cb14-10"></a>                                  <span class="dt">sheet =</span> <span class="st">&quot;DATA&quot;</span>) </span></code></pre></div>
 <p>We’ve already seen the <code>function(parameter)</code> way to call a function in the <code>cos(pi/3)</code> example. Now we have <code>something &lt;- function(parameter, parameter)</code>. This is a peculiarity of R that you just need to get used to. Think of it as saying: create <code>something</code> in the environment (without saying what it is just yet), then fill it (<code>&lt;-</code>) with the results of the <code>function()</code>. While you might occasionally have used a function in Excel, for example, in R basically everything you do is call functions.</p>
 <p>Now that the Excel data are downloaded, in your R script comment out the line <code>download.files(...</code>, because we don’t need to keep downloading if you happen to re-run the code. Comment means putting a <code>#</code> in front of it. Pressing shift-ctrl-C (shift-cmd-C on a Mac) does the same, and also works over many lines at once.</p>
 <p>Notice that R doesn’t mind if a function is split over several lines. If there were frequent updates, maybe you would repeatedly download (so not comment out). See (TBD) for an example. [See the Excel, now in your project <code>data</code> folder, for disclaimer and details.]</p>
 <p>International conventions mean that CO<sub>2</sub> emissions are measured from flights departing airports in a state. <code>read_xlsx</code> automatically selects the first row as variable names.</p>
 <p>One tool in the ‘explore your data’ toolbox is <code>summary</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="firstLook.html#cb15-1"></a><span class="kw">summary</span>(aviation_co2)</span></code></pre></div>
 <pre><code>##       YEAR          MONTH        STATE_NAME         STATE_CODE       
 ##  Min.   :2010   Min.   : 1.00   Length:5694        Length:5694       
 ##  1st Qu.:2012   1st Qu.: 3.25   Class :character   Class :character  
@@ -246,17 +322,29 @@
 </ul>
 <p>Often you want to keep your groups, but here we don’t need to, so we <code>ungroup</code> at the end. Then we save the data into the <code>data</code> subdirectory of the project.</p>
 <p>There will be more examples of this sort of data manipulation in Chapter <a href="filter.html#filter">4</a>, with more explanation of what’s happening. And a lot more when we turn to data wrangling in chapters <a href="#loopsfunctions"><strong>??</strong></a> and <a href="groups.html#groups">6</a>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="firstLook.html#cb17-1"></a>annual_co2 &lt;-<span class="st"> </span>aviation_co2 <span class="op">%&gt;%</span></span>
+<span id="cb17-2"><a href="firstLook.html#cb17-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">!</span>STATE_CODE) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb17-3"><a href="firstLook.html#cb17-3"></a><span class="st">  </span><span class="kw">group_by</span>(YEAR, STATE_NAME) <span class="op">%&gt;%</span></span>
+<span id="cb17-4"><a href="firstLook.html#cb17-4"></a><span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">vars</span>(CO2_QTY_TONNES, TF), sum) <span class="op">%&gt;%</span></span>
+<span id="cb17-5"><a href="firstLook.html#cb17-5"></a><span class="st">  </span><span class="kw">filter</span>(YEAR <span class="op">&lt;</span><span class="st"> </span><span class="dv">2020</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb17-6"><a href="firstLook.html#cb17-6"></a><span class="st">  </span><span class="kw">ungroup</span>()</span>
+<span id="cb17-7"><a href="firstLook.html#cb17-7"></a></span>
+<span id="cb17-8"><a href="firstLook.html#cb17-8"></a><span class="kw">save</span>(annual_co2, <span class="dt">file =</span> <span class="st">&quot;data/annual_co2.rda&quot;</span>)</span></code></pre></div>
 <p>There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the first line, with name on, to see a summary. You get much the same thing in the console by typing <code>str(annual_co2)</code> where <code>str</code> is for ‘structure’. You should see something like this.</p>
-<p><img src="/images/CO2inEnvironment.png" /></p>
+<p><img src="images/CO2inEnvironment.png" /></p>
 <p>We can see that there are three numeric variables (<code>num</code>) and two character variables (<code>chr</code>). All five variables have the same number of observations (437). In a tibble or dataframe the columns are always the same length.</p>
 <p>The second way to explore the structure, because this is a tibble, is just to type its name in the console. [Try it] This is useful but just bear in mind that for some data structures, this might fill up your console with a lot of output. Save it for when you’re sure you’ve a tibble. You can check by typing <code>class(my_thing)</code> into the console to see if <code>my_thing</code> is a tibble (shown as <code>tbl</code>).</p>
 <p>The third way gives a window to explore every observation. Click on the dataset name next to the blue arrow or type <code>View(annual_co2)</code> in the console (sorry about the upper case ‘V’, R is like that) and you get a tabular data explorer, which allows you to sort and filter. You should see something like this. [Try out the sorting and filtering in the view window. Filter to show only the Netherlands, and sort by total flights.]</p>
-<p><img src="/images/CO2inViewAndEnvironment.png" /></p>
+<p><img src="images/CO2inViewAndEnvironment.png" /></p>
 </div>
 <div id="extractfield" class="section level2">
 <h2><span class="header-section-number">3.2</span> Extracting variables</h2>
 <p>To answer more questions about the data there are some more tools to summarise the values that it takes. We saw <code>summary()</code> works for numeric values, but what about discrete ones?</p>
 <p>There are several ways to pull one variable out of your data. We’ll use the <code>$</code> notation, partly because there’s a reminder of this in the environment tab. [Where is this ‘reminder’?]</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="firstLook.html#cb18-1"></a><span class="co"># pull out all values in the column</span></span>
+<span id="cb18-2"><a href="firstLook.html#cb18-2"></a>state_vbl &lt;-<span class="st"> </span>annual_co2<span class="op">$</span>STATE_NAME</span>
+<span id="cb18-3"><a href="firstLook.html#cb18-3"></a></span>
+<span id="cb18-4"><a href="firstLook.html#cb18-4"></a>states &lt;-<span class="st"> </span><span class="kw">unique</span>(state_vbl)</span></code></pre></div>
 <p>Look in the environment pane, <code>state_vbl</code> is listed under ‘Values’. It’s a (column) vector, one of the simple data types in R which is why it’s listed under ‘Values’ and not under ‘Data’. ‘Data’ is for more complex data structures, such as dataframes and tibbles. You’ve just pulled a column out of <code>annual_co2</code> so not surprising that it has the same number of rows as <code>annual_co2</code>. And the first values are all ALBANIA, or were when this book was compiled.</p>
 <p>Really we want to know how many different states there are, and which ones. <code>unique</code> does what it says, and we’ve saved these as <code>states</code>; a variable name which to me implies ‘unique states’. You can tell how many there are from the environment pane, or you could use <code>length(states)</code>. [How many are there?]</p>
 <p>To inspect all of these values you can just type <code>states</code> into the console, a good way to check the spelling of some, perhaps. [Try this. Is it ‘Canaries’ or ‘Canarias’?]</p>
@@ -267,12 +355,17 @@
 <h2><span class="header-section-number">3.3</span> Extracting a few values</h2>
 <p>We’ve just seen how to pull a variable out of a tibble, as a vector. How do we extract one or more values out of the vector that we created?</p>
 <p>The <code>states</code> are quite a lot to show in the console. Sometimes you just need to see a quick sample, eg to check if they’re in title case, or if they’re codes or names. <code>head()</code> is useful for showing you the first few (6 by default).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="firstLook.html#cb19-1"></a><span class="kw">head</span>(states)</span></code></pre></div>
 <pre><code>## [1] &quot;ALBANIA&quot;                &quot;ARMENIA&quot;                &quot;AUSTRIA&quot;               
 ## [4] &quot;BELGIUM&quot;                &quot;BOSNIA AND HERZEGOVINA&quot; &quot;BULGARIA&quot;</code></pre>
 <p>If you want to pull out a single value, or a few of them, again there are multiple ways to do this, but the simplest is this. We show here two ways to select with a vector of numbers: creating a consecutive sequence of numbers (<code>1:3</code>); and creating a vector with an arbitrary selection (<code>c(1, 5, 10)</code>).</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="firstLook.html#cb21-1"></a>states[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;ALBANIA&quot;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="firstLook.html#cb23-1"></a>states[<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;AUSTRIA&quot;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="firstLook.html#cb25-1"></a>states[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;ALBANIA&quot; &quot;ARMENIA&quot; &quot;AUSTRIA&quot;</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="firstLook.html#cb27-1"></a>states[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;ALBANIA&quot;                &quot;BOSNIA AND HERZEGOVINA&quot; &quot;CZECHIA&quot;</code></pre>
 <p>We’ll deal with subsetting the whole dataset, rather than just a vector extracted from it, in the next chapter.</p>
 </div>
@@ -288,7 +381,10 @@
 <li><code>aes</code>: gives the x and y first, and here also says choose colour based on year;</li>
 <li><code>geom_point</code>: says to plot points with these data, ie a scatter plot.</li>
 </ul>
-<p><img src="03_StateCO2_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="firstLook.html#cb29-1"></a><span class="kw">ggplot</span>(annual_co2, </span>
+<span id="cb29-2"><a href="firstLook.html#cb29-2"></a>       <span class="kw">aes</span>(TF, CO2_QTY_TONNES, <span class="dt">colour =</span> YEAR)) <span class="op">+</span></span>
+<span id="cb29-3"><a href="firstLook.html#cb29-3"></a><span class="st">  </span><span class="kw">geom_point</span>() </span></code></pre></div>
+<p><img src="03_StateCO2_files/figure-html/first-scatter-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Even this simple example illustrates that:</p>
 <ul>
 <li>a parameter to a function (here <code>ggplot</code>) can be another function call (here <code>aes()</code>);</li>
@@ -301,7 +397,13 @@
 <h3><span class="header-section-number">3.4.2</span> Improve the titles</h3>
 <p>Let’s at least label the axes so that someone else can see quickly what has been plotted. We can transform variables on the fly (using the rule that a parameter can be a function call, here to the function <code>/</code>), so let’s convert both axes to millions (<code>1e6</code> means 1*10^6, so millions with less risk of getting the number of 0s wrong).</p>
 <p>The label on the legend is meaningful, but to avoid the block capitals we can change that too within the <code>labs()</code> statement. It’s a ‘colour’ legend (that’s what is in the <code>aes</code> call), so you need to refer to ‘colour’ in the <code>labs()</code>.</p>
-<p><img src="03_StateCO2_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="firstLook.html#cb30-1"></a><span class="kw">ggplot</span>(annual_co2, <span class="kw">aes</span>(TF<span class="op">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>, <span class="dt">colour =</span> YEAR)) <span class="op">+</span></span>
+<span id="cb30-2"><a href="firstLook.html#cb30-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-3"><a href="firstLook.html#cb30-3"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb30-4"><a href="firstLook.html#cb30-4"></a>       <span class="dt">y =</span> <span class="st">&quot;CO2 (million tonnes)&quot;</span>,</span>
+<span id="cb30-5"><a href="firstLook.html#cb30-5"></a>       <span class="dt">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb30-6"><a href="firstLook.html#cb30-6"></a>       <span class="dt">title =</span> <span class="st">&quot;Emissions per state&quot;</span>)</span></code></pre></div>
+<p><img src="03_StateCO2_files/figure-html/scatter-plot-improved-titles-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="statecluster" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> and with clustering by state</h3>
@@ -309,7 +411,15 @@
 <p>There are too many countries to give each its own shape (we’ll see shapes used more effectively in section TBD), but we can easily add a line to join the points for each state. [Working from <code>geom_point</code>, how do you think you would add a line?]</p>
 <p>We need both to add a line, which follows the pattern of <code>geom_point</code>, and group by state. That’s done in the same way that we coloured by year, in the aesthetics. There are several ways to plot a line. The most obvious one, having seen <code>geom_point</code> previously, is <code>geom_line</code>. However, this joins the points in x-axis order. We want data order, so that’s <code>geom_path</code>.</p>
 <p>Out of a sense of neatness, we also add a subscript to CO<sub>2</sub>. The code <code>bquote(~CO[2]~" (million tonnes)")</code> took some googling and is cryptic, but it works!</p>
-<p><img src="03_StateCO2_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="firstLook.html#cb31-1"></a><span class="kw">ggplot</span>(annual_co2, <span class="kw">aes</span>(TF<span class="op">/</span><span class="fl">1e6</span>, CO2_QTY_TONNES<span class="op">/</span><span class="fl">1e6</span>, </span>
+<span id="cb31-2"><a href="firstLook.html#cb31-2"></a>                         <span class="dt">colour =</span> YEAR, <span class="dt">group =</span> STATE_NAME)) <span class="op">+</span></span>
+<span id="cb31-3"><a href="firstLook.html#cb31-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb31-4"><a href="firstLook.html#cb31-4"></a><span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span></span>
+<span id="cb31-5"><a href="firstLook.html#cb31-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Departing Flights (millions)&quot;</span>, </span>
+<span id="cb31-6"><a href="firstLook.html#cb31-6"></a>       <span class="dt">y =</span> <span class="kw">bquote</span>(<span class="op">~</span>CO[<span class="dv">2</span>]<span class="op">~</span><span class="st">&quot; (million tonnes)&quot;</span>),</span>
+<span id="cb31-7"><a href="firstLook.html#cb31-7"></a>       <span class="dt">colour =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb31-8"><a href="firstLook.html#cb31-8"></a>       <span class="dt">title =</span> <span class="st">&quot;Emissions per state&quot;</span>)</span></code></pre></div>
+<p><img src="03_StateCO2_files/figure-html/scatterplot-with-clustering-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The graph isn’t ready for a presentation yet, but a story is already emerging. The lines do a pretty good job of grouping the years for each state together. We see a graph with 6 busy states, 3 of which are fairly linear, so a relatively fixed CO<sub>2</sub>/flight. Three others are more variable from year to year.</p>
 <p>Then there are two states, with flights in the 0.25-0.5 million flights range and that diverge from the main trend line, respectively higher and lower. The remaining, smaller states rather overlap in this graph.</p>
 <p>We’ll find out how to pick out and label states in the next chapter.</p>
