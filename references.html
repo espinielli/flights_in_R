@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>References | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="References | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="References | Analysing Flights with R - UNDER CONSTRUCTION" />
+  
+  <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+<meta name="author" content="David Marsh" />
+
+
+<meta name="date" content="2021-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="splitparse.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analysing Flights in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#before-you-start"><i class="fa fa-check"></i><b>1.1</b> Before you start</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ways-to-use-the-material"><i class="fa fa-check"></i><b>1.2</b> Ways to Use the Material</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i><b>1.3</b> Structure of the book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#whats-gone-wrong"><i class="fa fa-check"></i><b>1.4</b> What’s gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Getting started</a><ul>
+<li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> Orientation in RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="start.html"><a href="start.html#first-project"><i class="fa fa-check"></i><b>2.2</b> First project</a></li>
+<li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
+<li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#twocolons"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
+<li class="chapter" data-level="2.6" data-path="start.html"><a href="start.html#whats-gone-wrong-1"><i class="fa fa-check"></i><b>2.6</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="2.7" data-path="start.html"><a href="start.html#test-yourself"><i class="fa fa-check"></i><b>2.7</b> Test yourself</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="start.html"><a href="start.html#questions"><i class="fa fa-check"></i><b>2.7.1</b> Questions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="start.html"><a href="start.html#answers"><i class="fa fa-check"></i><b>2.7.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="firstLook.html"><a href="firstLook.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> emissions</a><ul>
+<li class="chapter" data-level="3.1" data-path="firstLook.html"><a href="firstLook.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extractfield"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.3" data-path="firstLook.html"><a href="firstLook.html#someValues"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
+<li class="chapter" data-level="3.4" data-path="firstLook.html"><a href="firstLook.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="firstLook.html"><a href="firstLook.html#first-draft"><i class="fa fa-check"></i><b>3.4.1</b> First draft</a></li>
+<li class="chapter" data-level="3.4.2" data-path="firstLook.html"><a href="firstLook.html#improve-the-titles"><i class="fa fa-check"></i><b>3.4.2</b> Improve the titles</a></li>
+<li class="chapter" data-level="3.4.3" data-path="firstLook.html"><a href="firstLook.html#statecluster"><i class="fa fa-check"></i><b>3.4.3</b> and with clustering by state</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="firstLook.html"><a href="firstLook.html#whats-gone-wrong-2"><i class="fa fa-check"></i><b>3.5</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="3.6" data-path="firstLook.html"><a href="firstLook.html#test-yourself-1"><i class="fa fa-check"></i><b>3.6</b> Test yourself</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="firstLook.html"><a href="firstLook.html#questions-1"><i class="fa fa-check"></i><b>3.6.1</b> Questions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="firstLook.html"><a href="firstLook.html#answers-1"><i class="fa fa-check"></i><b>3.6.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> Filtering a dataset and refining the CO<sub>2</sub> graph</a><ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#sequences-of-functions"><i class="fa fa-check"></i><b>4.1</b> Sequences of functions</a></li>
+<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filtering-datasets-and-logical-tests"><i class="fa fa-check"></i><b>4.2</b> Filtering datasets and logical tests</a></li>
+<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#topStates"><i class="fa fa-check"></i><b>4.3</b> Selecting the busiest states</a></li>
+<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#co2-graph-for-the-top-states"><i class="fa fa-check"></i><b>4.4</b> CO<sub>2</sub> graph for the top states</a></li>
+<li class="chapter" data-level="4.5" data-path="filter.html"><a href="filter.html#labelco2"><i class="fa fa-check"></i><b>4.5</b> Labelling the CO<sub>2</sub> graph</a></li>
+<li class="chapter" data-level="4.6" data-path="filter.html"><a href="filter.html#what-does-the-graph-say-about-co2"><i class="fa fa-check"></i><b>4.6</b> What does the graph say about CO<sub>2</sub>?</a></li>
+<li class="chapter" data-level="4.7" data-path="filter.html"><a href="filter.html#whats-gone-wrong-3"><i class="fa fa-check"></i><b>4.7</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="4.8" data-path="filter.html"><a href="filter.html#exercises"><i class="fa fa-check"></i><b>4.8</b> Exercises</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="filter.html"><a href="filter.html#questions-2"><i class="fa fa-check"></i><b>4.8.1</b> Questions</a></li>
+<li class="chapter" data-level="4.8.2" data-path="filter.html"><a href="filter.html#answers-2"><i class="fa fa-check"></i><b>4.8.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sortbars.html"><a href="sortbars.html"><i class="fa fa-check"></i><b>5</b> Sorting Bars, Saving Graphs, Facets</a><ul>
+<li class="chapter" data-level="5.1" data-path="sortbars.html"><a href="sortbars.html#firstsortedbar"><i class="fa fa-check"></i><b>5.1</b> The simple sorted bar chart - more on CO<sub>2</sub></a></li>
+<li class="chapter" data-level="5.2" data-path="sortbars.html"><a href="sortbars.html#saving-a-plot"><i class="fa fa-check"></i><b>5.2</b> Saving a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="sortbars.html"><a href="sortbars.html#plotting-more-than-one-year"><i class="fa fa-check"></i><b>5.3</b> Plotting more than one year</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="sortbars.html"><a href="sortbars.html#factors"><i class="fa fa-check"></i><b>5.3.1</b> Staggered bars, and factors</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sortbars.html"><a href="sortbars.html#chart-facets-more-years-in-the-bar-chart"><i class="fa fa-check"></i><b>5.3.2</b> Chart facets, more years in the bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="sortbars.html"><a href="sortbars.html#whats-gone-wrong-4"><i class="fa fa-check"></i><b>5.4</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="5.5" data-path="sortbars.html"><a href="sortbars.html#exercises-1"><i class="fa fa-check"></i><b>5.5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="sortbars.html"><a href="sortbars.html#questions-3"><i class="fa fa-check"></i><b>5.5.1</b> Questions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="sortbars.html"><a href="sortbars.html#answers-3"><i class="fa fa-check"></i><b>5.5.2</b> Answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="sortbars.html"><a href="sortbars.html#extended-exercises"><i class="fa fa-check"></i><b>5.6</b> Extended Exercises</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="sortbars.html"><a href="sortbars.html#questions-4"><i class="fa fa-check"></i><b>5.6.1</b> Questions</a></li>
+<li class="chapter" data-level="5.6.2" data-path="sortbars.html"><a href="sortbars.html#co2hints"><i class="fa fa-check"></i><b>5.6.2</b> Hints</a></li>
+<li class="chapter" data-level="5.6.3" data-path="sortbars.html"><a href="sortbars.html#answers-4"><i class="fa fa-check"></i><b>5.6.3</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="groups.html"><a href="groups.html"><i class="fa fa-check"></i><b>6</b> Looping with groups</a><ul>
+<li class="chapter" data-level="6.1" data-path="groups.html"><a href="groups.html#summarise"><i class="fa fa-check"></i><b>6.1</b> Summarising</a></li>
+<li class="chapter" data-level="6.2" data-path="groups.html"><a href="groups.html#dates"><i class="fa fa-check"></i><b>6.2</b> Dates</a></li>
+<li class="chapter" data-level="6.3" data-path="groups.html"><a href="groups.html#mutate"><i class="fa fa-check"></i><b>6.3</b> Adding variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="splitparse.html"><a href="splitparse.html"><i class="fa fa-check"></i><b>7</b> NOTAMS: Splitting and parsing strings</a><ul>
+<li class="chapter" data-level="7.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>7.1</b> Splitting a column into many</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>7.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="7.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>7.1.2</b> Splitting a column at a regular expression</a></li>
+<li class="chapter" data-level="7.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>7.1.3</b> Splitting a column at an either-or</a></li>
+<li class="chapter" data-level="7.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-2"><i class="fa fa-check"></i><b>7.1.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>7.2</b> List columns</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>7.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="7.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>7.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="7.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>7.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="7.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-3"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="splitparse.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["flights_in_R.pdf", "flights_in_R.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"theme": "sepia"
+});
+});
+</script>
+
+</body>
+
+</html>

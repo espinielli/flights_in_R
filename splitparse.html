@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 NOTAMS: Splitting and parsing strings | Analysing Flights with R - UNDER CONSTRUCTION" />
+  
+  <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+<meta name="author" content="David Marsh" />
+
+
+<meta name="date" content="2021-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="groups.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analysing Flights in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#before-you-start"><i class="fa fa-check"></i><b>1.1</b> Before you start</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ways-to-use-the-material"><i class="fa fa-check"></i><b>1.2</b> Ways to Use the Material</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i><b>1.3</b> Structure of the book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#whats-gone-wrong"><i class="fa fa-check"></i><b>1.4</b> What’s gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Getting started</a><ul>
+<li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> Orientation in RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="start.html"><a href="start.html#first-project"><i class="fa fa-check"></i><b>2.2</b> First project</a></li>
+<li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
+<li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#twocolons"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
+<li class="chapter" data-level="2.6" data-path="start.html"><a href="start.html#whats-gone-wrong-1"><i class="fa fa-check"></i><b>2.6</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="2.7" data-path="start.html"><a href="start.html#test-yourself"><i class="fa fa-check"></i><b>2.7</b> Test yourself</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="start.html"><a href="start.html#questions"><i class="fa fa-check"></i><b>2.7.1</b> Questions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="start.html"><a href="start.html#answers"><i class="fa fa-check"></i><b>2.7.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="firstLook.html"><a href="firstLook.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> emissions</a><ul>
+<li class="chapter" data-level="3.1" data-path="firstLook.html"><a href="firstLook.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extractfield"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.3" data-path="firstLook.html"><a href="firstLook.html#someValues"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
+<li class="chapter" data-level="3.4" data-path="firstLook.html"><a href="firstLook.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="firstLook.html"><a href="firstLook.html#first-draft"><i class="fa fa-check"></i><b>3.4.1</b> First draft</a></li>
+<li class="chapter" data-level="3.4.2" data-path="firstLook.html"><a href="firstLook.html#improve-the-titles"><i class="fa fa-check"></i><b>3.4.2</b> Improve the titles</a></li>
+<li class="chapter" data-level="3.4.3" data-path="firstLook.html"><a href="firstLook.html#statecluster"><i class="fa fa-check"></i><b>3.4.3</b> and with clustering by state</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="firstLook.html"><a href="firstLook.html#whats-gone-wrong-2"><i class="fa fa-check"></i><b>3.5</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="3.6" data-path="firstLook.html"><a href="firstLook.html#test-yourself-1"><i class="fa fa-check"></i><b>3.6</b> Test yourself</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="firstLook.html"><a href="firstLook.html#questions-1"><i class="fa fa-check"></i><b>3.6.1</b> Questions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="firstLook.html"><a href="firstLook.html#answers-1"><i class="fa fa-check"></i><b>3.6.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> Filtering a dataset and refining the CO<sub>2</sub> graph</a><ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#sequences-of-functions"><i class="fa fa-check"></i><b>4.1</b> Sequences of functions</a></li>
+<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filtering-datasets-and-logical-tests"><i class="fa fa-check"></i><b>4.2</b> Filtering datasets and logical tests</a></li>
+<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#topStates"><i class="fa fa-check"></i><b>4.3</b> Selecting the busiest states</a></li>
+<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#co2-graph-for-the-top-states"><i class="fa fa-check"></i><b>4.4</b> CO<sub>2</sub> graph for the top states</a></li>
+<li class="chapter" data-level="4.5" data-path="filter.html"><a href="filter.html#labelco2"><i class="fa fa-check"></i><b>4.5</b> Labelling the CO<sub>2</sub> graph</a></li>
+<li class="chapter" data-level="4.6" data-path="filter.html"><a href="filter.html#what-does-the-graph-say-about-co2"><i class="fa fa-check"></i><b>4.6</b> What does the graph say about CO<sub>2</sub>?</a></li>
+<li class="chapter" data-level="4.7" data-path="filter.html"><a href="filter.html#whats-gone-wrong-3"><i class="fa fa-check"></i><b>4.7</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="4.8" data-path="filter.html"><a href="filter.html#exercises"><i class="fa fa-check"></i><b>4.8</b> Exercises</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="filter.html"><a href="filter.html#questions-2"><i class="fa fa-check"></i><b>4.8.1</b> Questions</a></li>
+<li class="chapter" data-level="4.8.2" data-path="filter.html"><a href="filter.html#answers-2"><i class="fa fa-check"></i><b>4.8.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sortbars.html"><a href="sortbars.html"><i class="fa fa-check"></i><b>5</b> Sorting Bars, Saving Graphs, Facets</a><ul>
+<li class="chapter" data-level="5.1" data-path="sortbars.html"><a href="sortbars.html#firstsortedbar"><i class="fa fa-check"></i><b>5.1</b> The simple sorted bar chart - more on CO<sub>2</sub></a></li>
+<li class="chapter" data-level="5.2" data-path="sortbars.html"><a href="sortbars.html#saving-a-plot"><i class="fa fa-check"></i><b>5.2</b> Saving a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="sortbars.html"><a href="sortbars.html#plotting-more-than-one-year"><i class="fa fa-check"></i><b>5.3</b> Plotting more than one year</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="sortbars.html"><a href="sortbars.html#factors"><i class="fa fa-check"></i><b>5.3.1</b> Staggered bars, and factors</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sortbars.html"><a href="sortbars.html#chart-facets-more-years-in-the-bar-chart"><i class="fa fa-check"></i><b>5.3.2</b> Chart facets, more years in the bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="sortbars.html"><a href="sortbars.html#whats-gone-wrong-4"><i class="fa fa-check"></i><b>5.4</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="5.5" data-path="sortbars.html"><a href="sortbars.html#exercises-1"><i class="fa fa-check"></i><b>5.5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="sortbars.html"><a href="sortbars.html#questions-3"><i class="fa fa-check"></i><b>5.5.1</b> Questions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="sortbars.html"><a href="sortbars.html#answers-3"><i class="fa fa-check"></i><b>5.5.2</b> Answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="sortbars.html"><a href="sortbars.html#extended-exercises"><i class="fa fa-check"></i><b>5.6</b> Extended Exercises</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="sortbars.html"><a href="sortbars.html#questions-4"><i class="fa fa-check"></i><b>5.6.1</b> Questions</a></li>
+<li class="chapter" data-level="5.6.2" data-path="sortbars.html"><a href="sortbars.html#co2hints"><i class="fa fa-check"></i><b>5.6.2</b> Hints</a></li>
+<li class="chapter" data-level="5.6.3" data-path="sortbars.html"><a href="sortbars.html#answers-4"><i class="fa fa-check"></i><b>5.6.3</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="groups.html"><a href="groups.html"><i class="fa fa-check"></i><b>6</b> Looping with groups</a><ul>
+<li class="chapter" data-level="6.1" data-path="groups.html"><a href="groups.html#summarise"><i class="fa fa-check"></i><b>6.1</b> Summarising</a></li>
+<li class="chapter" data-level="6.2" data-path="groups.html"><a href="groups.html#dates"><i class="fa fa-check"></i><b>6.2</b> Dates</a></li>
+<li class="chapter" data-level="6.3" data-path="groups.html"><a href="groups.html#mutate"><i class="fa fa-check"></i><b>6.3</b> Adding variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="splitparse.html"><a href="splitparse.html"><i class="fa fa-check"></i><b>7</b> NOTAMS: Splitting and parsing strings</a><ul>
+<li class="chapter" data-level="7.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>7.1</b> Splitting a column into many</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>7.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="7.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>7.1.2</b> Splitting a column at a regular expression</a></li>
+<li class="chapter" data-level="7.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>7.1.3</b> Splitting a column at an either-or</a></li>
+<li class="chapter" data-level="7.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-2"><i class="fa fa-check"></i><b>7.1.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>7.2</b> List columns</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>7.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="7.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>7.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="7.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>7.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="7.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-3"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="splitparse" class="section level1">
+<h1><span class="header-section-number">7</span> NOTAMS: Splitting and parsing strings</h1>
+<p>NOTE: This chapter has been written out of sequence, so jumps some steps and may feel a bit of a leap from the (current) previous chapter. Need to add in between chapters on: dates, mutate-across, lapply, named list (extracting from) TBD.</p>
+<p>This chapter uses the example of NOTAMs (notices to airmen) to explore R functions for turning text into more useable data, by splitting and parsing.</p>
+<p>The parsing of NOTAMs here is <em>NOT</em> for operational use. It’s for statistical analysis, post operations. NOTAMs are very varied, and we will not handle all the possible ways in which the parsing might fail. We assume that failures can be picked up in later statistical analysis, or will just be outliers that can be ignored as 1 in millions of cases. This code is NOT A SUBSTITUTE FOR READING THE NOTAM BEFORE THE FLIGHT.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">In this chapter, you’ll be introduced to:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>separate()</code>, regular expressions, list fields, <code>system.time()</code>, <code>identical()</code>, <code>str_match</code>, <code>str_split()</code>, <code>str_replace(_all)()</code>, <code>str_sub()</code>, <code>unnest_(wider/longer)()</code>, <code>map2()</code>, <code>relocate</code></td>
+</tr>
+</tbody>
+</table>
+<p>The sections are ordered <em>not</em> in the order you’d have to work, starting with a full NOTAM text, but in a rough order of simple to more complex. We assume throughout that you have not just a single string, but a dataframe of strings for processing. This is because we want to illustrate this way of working: ‘vectorised’ in the R jargon.</p>
+<p>You could write a function that takes a single string and parses it. Then call it many times and stack the results together with <code>rbind</code> or <code>bind_rows</code>. But we’re planning to run this millions of times, so that’s millions of function calls. So instead we write in a way that works on the whole dataset at once, and leaves the tidyverse to do that in the most efficient way. (There’s an illustration of the time penalty later in the chapter.)</p>
+<div id="splitting-a-column-into-many" class="section level2">
+<h2><span class="header-section-number">7.1</span> Splitting a column into many</h2>
+<p>Within the tidyverse <code>tidyr</code> provides some useful tools for parsing text. In this chapter we see a simpler and a more complex use of <code>tidyr::separate</code>.</p>
+<div id="splitatcharacter" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Splitting a column at a character</h3>
+<p>In the simplest case, a string is to be separated at a single separator character. In field Q of the NOTAM this is “/”. We just need to tell <code>separate</code> what the new columns are called, as in the following code.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">FIR</th>
+<th align="left">qgroup</th>
+<th align="left">IV</th>
+<th align="left">NBO</th>
+<th align="left">AEW</th>
+<th align="left">FL_lo</th>
+<th align="left">FL_hi</th>
+<th align="left">geo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GLRB</td>
+<td align="left">QPLXX</td>
+<td align="left">IV</td>
+<td align="left">NBO</td>
+<td align="left">E</td>
+<td align="left">000</td>
+<td align="left">999</td>
+<td align="left">0620N01206W483</td>
+</tr>
+<tr class="even">
+<td align="left">LYBA</td>
+<td align="left">QKKKK</td>
+<td align="left">K</td>
+<td align="left">K</td>
+<td align="left">K</td>
+<td align="left">000</td>
+<td align="left">999</td>
+<td align="left">4234N02102E999</td>
+</tr>
+</tbody>
+</table>
+<p>There are some fields here which could be parsed further (<code>qgroup</code> and <code>geo</code>), but we leave that. I suspect that the ‘K’ is a missing value, which we could translate into an R <code>NA</code> value, but we don’t go that far here.</p>
+<p>We will assume that all the q-fields are properly formed, of these 8 fields. A more robust piece of code would check this is true. This is for analysis, not operations - you’re getting the message I think.</p>
+<p>Inspecting the raw strings (always essential!) shows that there are some blank spaces. So in our result we have some fields with trailing spaces. We could use <code>stringr::str_trim</code> on the results to get rid of trailing spaces, and indeed, that would probably be a good idea anyway. But we can use this to illustrate the next level in use of <code>separate</code>, which we do in the next section.</p>
+</div>
+<div id="splitting-a-column-at-a-regular-expression" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Splitting a column at a regular expression</h3>
+<p>The <code>sep=</code> is a ‘regular expression’. Entire books have been written about regular expressions, so my advice would be to find a page you like, or download a cheatsheet of which there are many. <a href="https://rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf">This is the one I use, being R-focused.</a></p>
+<p>A regular expression is a search or matching pattern. We want to split the q-field at not just <code>\</code> but any number of spaces followed by a <code>\</code>. That will remove the trailing spaces, because they’ll be treated as part of the separator.</p>
+<p>Our string has some ‘newlines’ in it <code>\n</code> as well as spaces, and in other applications perhaps tabs are used. So we use a <code>\\s</code> code, rather than just a space character " ". <code>\\s</code> stands for all of these types of ‘space’, and some others [check in the cheatsheet].</p>
+<p>In regular expression terms this is <code>\\s*/</code>, which you can read as zero-or-more spaces followed by a back slash.</p>
+<p>We can show that this gives the same result as using trim.</p>
+<pre><code>## [1] TRUE</code></pre>
+<p>They are identical. Which do you prefer? The second involves one less line of code, but you might feel the need to add a comment, as I’ve done here, because the code is more obscure. So it’s the same number of lines to read.</p>
+<p>That’s a qualitative judgement. If you wanted to run this thousands of times, maybe you would run timing tests. Something like this.</p>
+<pre><code>##    user  system elapsed 
+##    3.89    0.23    4.12</code></pre>
+<pre><code>##    user  system elapsed 
+##   3.639   0.181   3.827</code></pre>
+<pre><code>##    user  system elapsed 
+##   1.139   0.048   1.187</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>On my machine, the first takes about 40% longer in elapsed time, and twice the system time. So having fewer lines of code <em>is</em> more efficient in this case. In a light-heared way, we also show a timing test for calling the function each time. Yes, the code that isn’t carefully designed for speed, but for a dataset 100 times smaller already takes longer than either of the other two. Letting R do its vectorised thing is indeed better!</p>
+</div>
+<div id="splitting-a-column-at-an-either-or" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> Splitting a column at an either-or</h3>
+<p>Taking this one step further, we can also work on the NOTAM header. This has NOTAM in it, which isn’t that useful information, so we can ditch in, but it has this in the form ‘NOTAMC’, ‘NOTAMR’, ‘NOTAMN’ depending on whether this is cancelling, replacing or a new NOTAM, respectively. The structure of the field varies between these cases.</p>
+<p>As always, there are several ways to approach this. We could first remove the ‘NOTAM’ then split at spaces. But that’s two steps. So instead, we split at either ’ NOTAM’ or ’ ’ , in one go. In regular expressions, either or is given by <code>|</code>, just as in R syntax for ‘or’. And to be on the safe side, we use the more general code for a ‘space’, though a new line is unlikely in this position.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">notam</th>
+<th align="left">type</th>
+<th align="left">replaces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A0001/13</td>
+<td align="left">N</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">A0001/13</td>
+<td align="left">R</td>
+<td align="left">A0032/12</td>
+</tr>
+<tr class="odd">
+<td align="left">W0809/13</td>
+<td align="left">C</td>
+<td align="left">W0808/13</td>
+</tr>
+</tbody>
+</table>
+<p>This works neatly, partly because there’s a trailing space at the end of the first one. [In the code, delete the space and re-run. What happens? How does the <code>header-parsed</code> dataframe change?]</p>
+<p>In bulk use, you could either live with the <code>Expected 3 pieces....</code> errors, or add an extra space. Probably this is a sign that we should look for a better way to split, but this will always be tricky when the number of parts varies from one to the next, as it does here.</p>
+</div>
+<div id="exercises-2" class="section level3">
+<h3><span class="header-section-number">7.1.4</span> Exercises</h3>
+<div id="questions-5" class="section level4">
+<h4><span class="header-section-number">7.1.4.1</span> Questions</h4>
+<ol style="list-style-type: decimal">
+<li>If <code>\\s</code> matches a space, what matches everything that is not a space?</li>
+<li>How did the <code>header_parsed</code> dataframe change when you removed the space?</li>
+<li>Look up the format of q_parsed$geo on the internet. Split it into 3 parts of <em>fixed length</em>, not based on a separator, but appropriately to the meaning.</li>
+</ol>
+</div>
+<div id="answers-5" class="section level4">
+<h4><span class="header-section-number">7.1.4.2</span> Answers</h4>
+<ol style="list-style-type: decimal">
+<li><code>\\S</code>, from the cheat sheet. There’s also a more complex version of the same thing <code>[^[:space]]</code>.</li>
+<li>One value changed from empty string, "", to <code>NA</code>.</li>
+<li>The help file explains that sep can also be positions. Try <code>separate(geo, c("Lat","Long","Radius"), c(5, 11))</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="listcolumns" class="section level2">
+<h2><span class="header-section-number">7.2</span> List columns</h2>
+<p>In the last section we saw various ways to split one column into several. Here we use another approach. Conceptually, it’s harder, but it keep the parts ‘similar’ for longer, so we can modify them further <em>en masse</em> rather than one column at a time. As usual this is not the only way this could be done, but it’s a good example of the use of list columns.</p>
+<p>List columns? Up to now, you might have been thinking of tidy datasets like a table in a spreadsheet. Not a bad analogy, but R has more tricks up its sleeve. One particularly powerful one is that any column can contain, not just single values, but lists. There’s a whole package in <code>tidyverse</code> called <code>purrr</code> (yes, 3 ’r’s) to help handle such things.</p>
+<p>List columns are great for modelling. You can have rows with just 3 cells, say, one a country name, the next the whole historic time series, the next the forecast. Extremely compact. The application here is simpler.</p>
+<p>The pattern we’ll introduce here has 4 steps:</p>
+<ol style="list-style-type: decimal">
+<li>Split a complex text column into a list (one column)</li>
+<li>Flip that list to generate extra rows in the dataset</li>
+<li>Manipulate those rows, in groups</li>
+<li>Pivot to generate 1 row per text, again, and multiple columns.</li>
+</ol>
+<p>Why might this be easier than approaches using <code>separate</code>? Because we want to manipulate what would be the column names after <code>separate</code>, it’s easier to do if these are instead text fields.</p>
+<div id="splitting-a-field-into-a-list" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Splitting a field into a list</h3>
+<p>We load a set of NOTAM texts from Github. These are based on real ones, but some have been manipulated to create parsing challenges that have been seen in larger sets. The problems are in the later ones, so we will use short samples to begin with: <em>start with a small <code>slice</code></em> is a good principle to follow anyway. (see TBD handling large datasets) Sites like <a href="https://www.ead.eurocontrol.int/cms-eadbasic/opencms/en/login/ead-basic/">Eurocontrol’s EAD Basic</a> provide views onto ready-parsed NOTAM data. So this chapter is relevant either (a) to learn string manipulation with regular expressions or (b) if you happen to receive bulk data for analysis, or both.</p>
+<p>When adding rows, as we will, we need an index that lets us identify all of the rows that go with one piece of text. We generate a simple integer <code>index</code> for this.</p>
+<p>The initial processing is to remove the opening and closing bracket from the whole NOTAM. This is just for sake of tidiness, though once we split the field the “()” are no longer a matched pair, so best to do it now. [How does the regular expression <code>^\\(|\\)$</code> achieve this?]</p>
+<p>NOTAMs are in sections, with headers “Q)”, “A)”, “B)” to “G)”. So, in a first attempt (which works in very simple cases only), we want to split where we find ‘section’ headers “Q)”, “A)” etc. But we don’t want to throw these away, we want to split and keep the separator.</p>
+<p>The regular expression is <code>\\s+[QABCDEFG]\\)\\s</code> to match any of the allowable headers in a NOTAM. You’ve seen most of these parts, the only new one is <code>[QABCDEFG]</code>, which says any one of these characters (case-sensitive). The extra bit is <code>(?=   )</code> which says: and leave behind the value corresponding to the part after the <code>=</code>, after splitting on its position. We choose to forget any leading spaces, so the <code>\\s+</code> is before this bracketed term.</p>
+<pre><code>## [[1]]
+## [1] &quot;A0011/10 NOTAMN&quot;                               
+## [2] &quot;Q) PAZA/QMRXX/IV/NBO/A /000/999/6034N15115W005&quot;
+## [3] &quot;A) PAEN&quot;                                       
+## [4] &quot;B) 1001011230&quot;                                 
+## [5] &quot;C) 1001031230 EST&quot;                             
+## [6] &quot;E) RWY 01L/19R PATCHY THIN ICE SANDED&quot;</code></pre>
+<p>That’s what a single list element looks like when you print it to the log. Have a look in the Environment pane to see what a list column looks like.</p>
+<div class="figure">
+<img src="images/ListColumnInEnvironment.png" alt="" />
+<p class="caption">It should like this, depending on how wide your window is!</p>
+</div>
+<p>The dataframe has 2 observations. So <code>phrases</code> is shown as a “List of 2”. It has to be the same length as the number of rows in the dataframe. Each element in <code>phrases</code> is also a list, so it’s a list of lists, but each element can be of any length. [Check by inspection, or run <code>lapply(notams$phrases, length)</code>.]</p>
+</div>
+<div id="more-realistic-splitting" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> More realistic splitting</h3>
+<p>In real NOTAMs, “A)” can be a header as we saw above, but it can also be a bullet for a bulleted list within field “E)”. After trying a number of approaches to parsing this, I’ve opted here to split the NOTAM into 2 parts at the first “E)” and handle them separately. In fact it allows me to illustrate some more features of list fields. If there were only one “E)” we could just use <code>separate</code> to do this. <em>But</em> “E)” can also appear as a bullet, so we take a multi-step approach:</p>
+<ul>
+<li>split at “E)” using <code>str_split</code> because we can insist on only have 2 parts, ie splitting at the first occurrence;</li>
+<li>add names to the resulting list column, using <code>setNames</code>;</li>
+<li>then <code>unnest_wider</code>, ie into columns.</li>
+</ul>
+<p>If this isn’t an obvious approach, don’t worry, because it wasn’t obvious to me either. It took trial and error, and a bit of googling to find this combination. The error was finding the hard way that <code>unnest_wider</code> won’t let you provide names for the new columns (as we saw above that <code>separate</code> does), it insists on finding them in the data. [You can see the ‘errors’ by commenting out the line with <code>map</code> in it.] The googling was how to provide names for <code>unnest_wider</code>. As usual, someone has already struggled with this, and an answer was out there.</p>
+<p>We can now split out the fields from the first part as in our first attempt, splitting at <code>\\s+(?=[QABCD]\\)\\s)</code>. The second part is still tricky, because “F)” and “G)” can be fields or bullets in a bulleted list. The two fields are rare, and describe the vertical extent of the NOTAM. We find the ‘real’ fields by looking for something that resembles a vertical extent. Inspection of many cases shows we have values such as:</p>
+<ul>
+<li>1200FT AMSL (above mean sea level), or that could be in metres ‘M’ or above ground level (AGL) or surface SFC. There might or might not be a space between. [What would the regular expression look like?]</li>
+<li>FL310 (flight level)</li>
+<li>or just SFC or GND (ground) for the bottom (field F) or UNL (unlimited) in either field.</li>
+</ul>
+<p>Put all of these together and we get an expression like <code>ffg</code> in the next code chunk; we could have found slightly different expressions for F and G, but this single one works for both, so it’s good enough for us here. Use the cheatsheet for terms that may be new (eg <code>\\d</code>). It can be easier to read if you look for () pairs, starting with ones close together, and for the <code>|</code> symbol. [Which expression allows for a possible but not necessary space? Find each the listed items above, separated by <code>|</code>.]</p>
+<p>Having split, and generated two list fields, we need to recombine them. Normally you’d join list with <code>c()</code>, eg <code>c(list(1), list(7,5))</code>. Here we do that too, but within the mutate function have to write it in a longer form, using <code>map2</code> (TBD - explain reasons?). Then, finally, we get to step (2) of our pattern (remember that?) and un-nest into rows.</p>
+<pre><code>## [1] 7</code></pre>
+<pre><code>## [1] 45</code></pre>
+<p>[Check visually that in NOTAM 4, the fields F and G have been pulled out but that in NOTAM 6 bullets F and G are left within field E.]</p>
+<p>If we had used <code>separate</code> in place of <code>str_split</code> then we would generate missing fields <code>NA</code>, and potentially (if there were a D field but no C, say) map data into the wrong field. [Exercise - try with separate]</p>
+</div>
+<div id="manipulate-fields-in-rows" class="section level3">
+<h3><span class="header-section-number">7.2.3</span> Manipulate fields in rows</h3>
+<p>Step 3 is to generate what will become the column names. After all those regular expressions, we’ll stick to some basic extraction of parts of strings for this. We want the first element to be called header. So we use groups as we saw earlier (TBD), and <code>row_number</code> to get the first item.</p>
+<p>Then converting to columns is done with <code>pivot_wider</code>. [Why not <code>unnest</code>? Because we not dealing with list columns now, but ‘ordinary’ ones.] The order in which this happens is not quite perfect, so we <code>relocate</code> it, even if it will make no difference to the analysis, it will help us when scrolling back and forth in the data viewer.</p>
+<p>That’s steps 3 and 4 done; we’ve finished extracting the fields from the raw text.</p>
+<p>We can move on to parsing the fields, to pull out information from then. In fact, we already did this in section <a href="splitparse.html#splitatcharacter">7.1.1</a>. You could also convert text to dates. Pulling forward the code from those earlier sections we get something like this.</p>
+<p>That’s as far as we need to go. The code generates some warnings of ‘missing pieces’, but otherwise works on these examples. The exercises explore a bit further, including how this ‘basic’ set of code might fail for some NOTAMs.</p>
+</div>
+<div id="exercises-3" class="section level3">
+<h3><span class="header-section-number">7.2.4</span> Exercises</h3>
+<div id="questions-6" class="section level4">
+<h4><span class="header-section-number">7.2.4.1</span> Questions</h4>
+<ol style="list-style-type: decimal">
+<li>How does the regular expression <code>^\\(|\\)$</code> achieve what we need?</li>
+<li>What would <code>str_replace</code> have done differently to <code>str_replace_all</code>?</li>
+<li><code>stringr::str_replace_all</code> would also accept a vector of regular expressions. Predict what using <code>c("^\\(","\\)$")</code> would deliver. Then try it out. [Hint: there are 2 rows.]</li>
+<li>In <code>\\s+(?=[QABCDEFG]\\)\\s)</code>, which closing bracket goes with the opening bracket?</li>
+<li>Create a dataframe with a named list column, for which each entry is a named list. [Hint: I find this surprisingly fiddly. Create a 2-row, 1 field dataframe. Then add the named list column.]</li>
+<li>How can you pull out a single value from this?</li>
+<li>Use <code>str_match</code> to pull the A field directly from the NOTAM field in <code>notam_texts</code>. Try two approaches, one assuming that the string ends in “B)” and another based only on the likely content of the field.</li>
+<li>Create a function that takes a dataframe like ‘notam_texts’ and returns the result of the whole process. What happens if you run it on the last NOTAM in the file and why? In words, how might you solve this?</li>
+<li>In words, how might you solve the ‘missing pieces’ warnings?</li>
+<li>Where would our code struggle if a NOTAM has repeated fields? (I’ve seen this occur: two different (!) versions of fields F and G)?</li>
+</ol>
+</div>
+<div id="answers-6" class="section level4">
+<h4><span class="header-section-number">7.2.4.2</span> Answers</h4>
+<ol style="list-style-type: decimal">
+<li><p>The cheat sheet will tell you: <code>^</code> matches at the start of the string, <code>$</code> at the end. <code>(</code> and <code>)</code> are reserved tokens in regular expressions, so you need to ‘escape’ them to use them as literal characters. <code>|</code> we saw earlier, means ‘or’.</p></li>
+<li><p>It just changes the first occurrence. Compare <code>str_replace(q_fields$q, "/", "-$-")</code> and <code>str_replace_all(q_fields$q, "/", "-$-")</code>.</p></li>
+<li><p>The usual R behaviour is to cycle through the values. So it alternates, using the first for the odd rows (ie the first one) and the second for the even rows. So the first loses the starting ( and the second loses just the ending ).</p></li>
+<li><p>The first closing bracket is preceded by <code>\\</code> so it is treated as a literal character, not part of the code. By elimination, then, it has to be the second one.</p></li>
+<li><p>For example <code>z &lt;- data.frame(id = 1:2)   z$named &lt;- list(a=c(x=1, y=2), b=c(z=4))</code></p></li>
+<li><p>With that example, you can use <code>z$named$a["y"]</code>, for example.</p></li>
+<li><p>Amongst many possible solutions, these work. How would you select A if it contains multiple 3 or 4 letter strings separated by spaces?</p></li>
+<li><p>(Essentially a cut-paste exercise, so result not provided here.) The final NOTAM has a missing “E)” header for the E field, so the splitting approach fails. Two possible solutions: filter to remove, if “E)” not found would perhaps be ok as one outlier amongst thousands; or detect and insert “E)” after C or D to allow the code to work properly.</p></li>
+<li><p>Perhaps there’s a ‘quiet’ option for the function ;-). Otherwise, since the problem is whether or not there’s text to say which NOTAM is being replaced, you could test for length and <code>separate</code> in two different ways: <code>if_else(header is long, separate with 3 column names, separate with 2 column names)</code>.</p></li>
+<li><p>A hard one, but this leads <code>pivot_wider()</code> to create a list column rather than an ordinary one. A nice robust response, but possibly not what you want. In practice, I used the additional parameters <code>values_from = both, values_fn = gdata::first</code> to handle this and arbitrarily pick the first of the duplicate entries. This might not suit your need.</p></li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="groups.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["flights_in_R.pdf", "flights_in_R.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"theme": "sepia"
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION</title>
+  <meta name="description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Sorting Bars, Saving Graphs, Facets | Analysing Flights with R - UNDER CONSTRUCTION" />
+  
+  <meta name="twitter:description" content="This is a training and reference manual for Eurocontrol staff, on how to use RStudio to analyse our traffic data. - UNDER CONSTRUCTION -" />
+  
+
+<meta name="author" content="David Marsh" />
+
+
+<meta name="date" content="2021-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="filter.html"/>
+<link rel="next" href="groups.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Analysing Flights in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> How to use this book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#before-you-start"><i class="fa fa-check"></i><b>1.1</b> Before you start</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ways-to-use-the-material"><i class="fa fa-check"></i><b>1.2</b> Ways to Use the Material</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i><b>1.3</b> Structure of the book</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#whats-gone-wrong"><i class="fa fa-check"></i><b>1.4</b> What’s gone wrong?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Getting started</a><ul>
+<li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> Orientation in RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="start.html"><a href="start.html#first-project"><i class="fa fa-check"></i><b>2.2</b> First project</a></li>
+<li class="chapter" data-level="2.3" data-path="start.html"><a href="start.html#first-code"><i class="fa fa-check"></i><b>2.3</b> First code</a></li>
+<li class="chapter" data-level="2.4" data-path="start.html"><a href="start.html#packages"><i class="fa fa-check"></i><b>2.4</b> First packages</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="start.html"><a href="start.html#twocolons"><i class="fa fa-check"></i><b>2.4.1</b> Package basics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="start.html"><a href="start.html#tidyverse"><i class="fa fa-check"></i><b>2.4.2</b> Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="start.html"><a href="start.html#filetypes"><i class="fa fa-check"></i><b>2.5</b> File types</a></li>
+<li class="chapter" data-level="2.6" data-path="start.html"><a href="start.html#whats-gone-wrong-1"><i class="fa fa-check"></i><b>2.6</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="2.7" data-path="start.html"><a href="start.html#test-yourself"><i class="fa fa-check"></i><b>2.7</b> Test yourself</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="start.html"><a href="start.html#questions"><i class="fa fa-check"></i><b>2.7.1</b> Questions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="start.html"><a href="start.html#answers"><i class="fa fa-check"></i><b>2.7.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="firstLook.html"><a href="firstLook.html"><i class="fa fa-check"></i><b>3</b> First look at data and CO<sub>2</sub> emissions</a><ul>
+<li class="chapter" data-level="3.1" data-path="firstLook.html"><a href="firstLook.html#loadco2"><i class="fa fa-check"></i><b>3.1</b> Looking at data: CO<sub>2</sub> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="firstLook.html"><a href="firstLook.html#extractfield"><i class="fa fa-check"></i><b>3.2</b> Extracting variables</a></li>
+<li class="chapter" data-level="3.3" data-path="firstLook.html"><a href="firstLook.html#someValues"><i class="fa fa-check"></i><b>3.3</b> Extracting a few values</a></li>
+<li class="chapter" data-level="3.4" data-path="firstLook.html"><a href="firstLook.html#co2-scatter-plot"><i class="fa fa-check"></i><b>3.4</b> CO<sub>2</sub> Scatter plot</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="firstLook.html"><a href="firstLook.html#first-draft"><i class="fa fa-check"></i><b>3.4.1</b> First draft</a></li>
+<li class="chapter" data-level="3.4.2" data-path="firstLook.html"><a href="firstLook.html#improve-the-titles"><i class="fa fa-check"></i><b>3.4.2</b> Improve the titles</a></li>
+<li class="chapter" data-level="3.4.3" data-path="firstLook.html"><a href="firstLook.html#statecluster"><i class="fa fa-check"></i><b>3.4.3</b> and with clustering by state</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="firstLook.html"><a href="firstLook.html#whats-gone-wrong-2"><i class="fa fa-check"></i><b>3.5</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="3.6" data-path="firstLook.html"><a href="firstLook.html#test-yourself-1"><i class="fa fa-check"></i><b>3.6</b> Test yourself</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="firstLook.html"><a href="firstLook.html#questions-1"><i class="fa fa-check"></i><b>3.6.1</b> Questions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="firstLook.html"><a href="firstLook.html#answers-1"><i class="fa fa-check"></i><b>3.6.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>4</b> Filtering a dataset and refining the CO<sub>2</sub> graph</a><ul>
+<li class="chapter" data-level="4.1" data-path="filter.html"><a href="filter.html#sequences-of-functions"><i class="fa fa-check"></i><b>4.1</b> Sequences of functions</a></li>
+<li class="chapter" data-level="4.2" data-path="filter.html"><a href="filter.html#filtering-datasets-and-logical-tests"><i class="fa fa-check"></i><b>4.2</b> Filtering datasets and logical tests</a></li>
+<li class="chapter" data-level="4.3" data-path="filter.html"><a href="filter.html#topStates"><i class="fa fa-check"></i><b>4.3</b> Selecting the busiest states</a></li>
+<li class="chapter" data-level="4.4" data-path="filter.html"><a href="filter.html#co2-graph-for-the-top-states"><i class="fa fa-check"></i><b>4.4</b> CO<sub>2</sub> graph for the top states</a></li>
+<li class="chapter" data-level="4.5" data-path="filter.html"><a href="filter.html#labelco2"><i class="fa fa-check"></i><b>4.5</b> Labelling the CO<sub>2</sub> graph</a></li>
+<li class="chapter" data-level="4.6" data-path="filter.html"><a href="filter.html#what-does-the-graph-say-about-co2"><i class="fa fa-check"></i><b>4.6</b> What does the graph say about CO<sub>2</sub>?</a></li>
+<li class="chapter" data-level="4.7" data-path="filter.html"><a href="filter.html#whats-gone-wrong-3"><i class="fa fa-check"></i><b>4.7</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="4.8" data-path="filter.html"><a href="filter.html#exercises"><i class="fa fa-check"></i><b>4.8</b> Exercises</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="filter.html"><a href="filter.html#questions-2"><i class="fa fa-check"></i><b>4.8.1</b> Questions</a></li>
+<li class="chapter" data-level="4.8.2" data-path="filter.html"><a href="filter.html#answers-2"><i class="fa fa-check"></i><b>4.8.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sortbars.html"><a href="sortbars.html"><i class="fa fa-check"></i><b>5</b> Sorting Bars, Saving Graphs, Facets</a><ul>
+<li class="chapter" data-level="5.1" data-path="sortbars.html"><a href="sortbars.html#firstsortedbar"><i class="fa fa-check"></i><b>5.1</b> The simple sorted bar chart - more on CO<sub>2</sub></a></li>
+<li class="chapter" data-level="5.2" data-path="sortbars.html"><a href="sortbars.html#saving-a-plot"><i class="fa fa-check"></i><b>5.2</b> Saving a plot</a></li>
+<li class="chapter" data-level="5.3" data-path="sortbars.html"><a href="sortbars.html#plotting-more-than-one-year"><i class="fa fa-check"></i><b>5.3</b> Plotting more than one year</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="sortbars.html"><a href="sortbars.html#factors"><i class="fa fa-check"></i><b>5.3.1</b> Staggered bars, and factors</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sortbars.html"><a href="sortbars.html#chart-facets-more-years-in-the-bar-chart"><i class="fa fa-check"></i><b>5.3.2</b> Chart facets, more years in the bar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="sortbars.html"><a href="sortbars.html#whats-gone-wrong-4"><i class="fa fa-check"></i><b>5.4</b> What’s gone wrong?</a></li>
+<li class="chapter" data-level="5.5" data-path="sortbars.html"><a href="sortbars.html#exercises-1"><i class="fa fa-check"></i><b>5.5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="sortbars.html"><a href="sortbars.html#questions-3"><i class="fa fa-check"></i><b>5.5.1</b> Questions</a></li>
+<li class="chapter" data-level="5.5.2" data-path="sortbars.html"><a href="sortbars.html#answers-3"><i class="fa fa-check"></i><b>5.5.2</b> Answers</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="sortbars.html"><a href="sortbars.html#extended-exercises"><i class="fa fa-check"></i><b>5.6</b> Extended Exercises</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="sortbars.html"><a href="sortbars.html#questions-4"><i class="fa fa-check"></i><b>5.6.1</b> Questions</a></li>
+<li class="chapter" data-level="5.6.2" data-path="sortbars.html"><a href="sortbars.html#co2hints"><i class="fa fa-check"></i><b>5.6.2</b> Hints</a></li>
+<li class="chapter" data-level="5.6.3" data-path="sortbars.html"><a href="sortbars.html#answers-4"><i class="fa fa-check"></i><b>5.6.3</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="groups.html"><a href="groups.html"><i class="fa fa-check"></i><b>6</b> Looping with groups</a><ul>
+<li class="chapter" data-level="6.1" data-path="groups.html"><a href="groups.html#summarise"><i class="fa fa-check"></i><b>6.1</b> Summarising</a></li>
+<li class="chapter" data-level="6.2" data-path="groups.html"><a href="groups.html#dates"><i class="fa fa-check"></i><b>6.2</b> Dates</a></li>
+<li class="chapter" data-level="6.3" data-path="groups.html"><a href="groups.html#mutate"><i class="fa fa-check"></i><b>6.3</b> Adding variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="splitparse.html"><a href="splitparse.html"><i class="fa fa-check"></i><b>7</b> NOTAMS: Splitting and parsing strings</a><ul>
+<li class="chapter" data-level="7.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-into-many"><i class="fa fa-check"></i><b>7.1</b> Splitting a column into many</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="splitparse.html"><a href="splitparse.html#splitatcharacter"><i class="fa fa-check"></i><b>7.1.1</b> Splitting a column at a character</a></li>
+<li class="chapter" data-level="7.1.2" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-a-regular-expression"><i class="fa fa-check"></i><b>7.1.2</b> Splitting a column at a regular expression</a></li>
+<li class="chapter" data-level="7.1.3" data-path="splitparse.html"><a href="splitparse.html#splitting-a-column-at-an-either-or"><i class="fa fa-check"></i><b>7.1.3</b> Splitting a column at an either-or</a></li>
+<li class="chapter" data-level="7.1.4" data-path="splitparse.html"><a href="splitparse.html#exercises-2"><i class="fa fa-check"></i><b>7.1.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="splitparse.html"><a href="splitparse.html#listcolumns"><i class="fa fa-check"></i><b>7.2</b> List columns</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="splitparse.html"><a href="splitparse.html#splitting-a-field-into-a-list"><i class="fa fa-check"></i><b>7.2.1</b> Splitting a field into a list</a></li>
+<li class="chapter" data-level="7.2.2" data-path="splitparse.html"><a href="splitparse.html#more-realistic-splitting"><i class="fa fa-check"></i><b>7.2.2</b> More realistic splitting</a></li>
+<li class="chapter" data-level="7.2.3" data-path="splitparse.html"><a href="splitparse.html#manipulate-fields-in-rows"><i class="fa fa-check"></i><b>7.2.3</b> Manipulate fields in rows</a></li>
+<li class="chapter" data-level="7.2.4" data-path="splitparse.html"><a href="splitparse.html#exercises-3"><i class="fa fa-check"></i><b>7.2.4</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing Flights with R - UNDER CONSTRUCTION</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sortbars" class="section level1">
+<h1><span class="header-section-number">5</span> Sorting Bars, Saving Graphs, Facets</h1>
+<p>While nothing beats a well hand-crafted chart, there are times when you want to just run the code and get a quick update, as a .png say. In this chapter we see how to do a classic sorted-bar chart and to save it to a file for use elsewhere. We need slightly different methods for simple bar charts and more complex ones.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">In this chapter, you’ll be introduced to:</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>geom_col()</code>, <code>dodge</code>, <code>reorder()</code>, <code>ggsave()</code>, <code>as.factor()</code>, <code>factor()</code>, <code>arrange()</code>, <code>facet_wrap()</code>, <code>select</code>, plots pane</td>
+</tr>
+</tbody>
+</table>
+<div id="firstsortedbar" class="section level2">
+<h2><span class="header-section-number">5.1</span> The simple sorted bar chart - more on CO<sub>2</sub></h2>
+<p>A classic visualisation is the bar chart, sorted from longest to shortest. With <code>ggplot</code> there are a couple of ways to get a bar chart. If you want <code>ggplot</code> to count the rows for you, use <code>geom_bar</code>. Here we already have values for the length of the bar, so we use <code>geom_col</code> instead (for ‘column’ chart).</p>
+<p>For the simplest bar charts, there is a quick way to get the order you want. In place of <code>state_label</code> for the x-axis, you give <code>reorder(state_label, CO2_QTY_TONNES)</code>, the second being the variable to sort by. If you find the bars a bit top-heavy, put a <code>-</code> in front of <code>CO2_QTY_...</code> to reverse the order.</p>
+<p>The final novelty in this graph is <code>coord_flip()</code>. Forty-something State names is a lot of text to cram onto the horizontal axis. So we flip the axes. You’ll need to decide if this trick works where you want to use the graph. We’ll see other ways to separate the labels on the axes in (TBD).</p>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>If you were to google ‘ggplot ordered bar chart’, you might find references to ‘factors’. That becomes necessary, in place of <code>reorder</code>, when the charts are more complicated. We’ll look at that in section <a href="sortbars.html#factors">5.3.1</a>.</p>
+</div>
+<div id="saving-a-plot" class="section level2">
+<h2><span class="header-section-number">5.2</span> Saving a plot</h2>
+<p>You might be looking at the bar chart and thinking that it’s the wrong proportions for your need (portrait rather than landscape, or vice versa) or you might be thinking the axis labels are still a bit squashed together.</p>
+<p>The proportions on your screen will depend on a number of things including the space you have allowed for the ‘Plots’ window. Now, the plots window has an export button which you could use. It allows for re-sizing, but that means you have to do the same manual intervention each time.</p>
+<p>We prefer to use <code>ggsave()</code> to save the most-recent plot, and at the same time set the aspect ratio. Usually it’s worth doing this before working too much on the font sizes, since you don’t really know if there’s a problem until you’ve seen the png.</p>
+<p>Finally, we use the <code>graphs</code> folder we created for the project. Square seems about right for this graph (the width includes the axis text); and having one of the dimensions around 15cm also seems to produce png that are good enough for reports and slides without being too big a file.</p>
+</div>
+<div id="plotting-more-than-one-year" class="section level2">
+<h2><span class="header-section-number">5.3</span> Plotting more than one year</h2>
+<p>I can think of four ways to plot more than one year, and there are no doubt more than that:</p>
+<ol style="list-style-type: decimal">
+<li>as staggered bars, though we probably will have to work hard to make enough space;</li>
+<li>as ‘facets’, creating one sub-plot per year;</li>
+<li>as a few graphs, merged and aligned using an dedicated package like <code>cowplot</code>;</li>
+<li>as multiple graphs using a loop</li>
+</ol>
+<p>Number (3) is particularly useful for combining graphs of different variables, but it’s a bit heavy to deal with here. We’ll deal with (4) in section (TBD) when we look at loops. The first two we will demonstrate in the next sections.</p>
+<div id="factors" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Staggered bars, and factors</h3>
+<p>We took some shortcuts in section <a href="sortbars.html#firstsortedbar">5.1</a>, which will need sorting out for the staggered bars. First we need to choose a couple of years, since there certainly isn’t room for more than two. That’s a filter that we’ve seen before. Secondly, we used <code>state_label</code> before because it was prettier, but this only exists for 2019, so we have to go back to using <code>STATE_NAME</code>. It’s probably time to turn this name into title case once and for all.</p>
+<p>The separation by year is done in the aesthetic <code>aes()</code> as you might expect. We want the bars to be different colours by year. In this case it’s the <code>fill</code> that we specify; <code>colour</code> would add an outline to the bars. To get the bars side by side we set the <code>position = "dodge"</code> parameter in <code>geom_col()</code>.</p>
+<p>The least obvious, final step is that ‘year’ needs to be a discrete variable, whereas currently it’s <code>num</code> which is a continuous number. Slightly oddly, <code>as.integer()</code> doesn’t work: it’s still treated as continuous by <code>ggplot</code>, presumably because there are potentially still quite a lot of integers.</p>
+<p>We could convert to a string with <code>as.character</code>, but we need to start using factors, so let’s do that here.</p>
+<p>Factors in R were originally a way to save space with character variables in a dataset. In <code>annual_co2</code> for example, rather than store ‘ALBANIA’ 10 times, for each row, a factor would give <code>ALBANIA</code> a numeric code and store that. The character strings become the levels. [Try <code>z &lt;- as.factor(annual_co2$STATE_NAME)</code> and see what is said for z in the environment pane. <code>rm(z)</code> to tidy up, if you wish.]</p>
+<p>For this example, we’ll convert <code>YEAR</code> on the fly, with an <code>as.factor</code> in the <code>aes()</code> call.</p>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Look closely at the graph. What is the sort order? Neither the 2010 nor the 2019 bars are actually in order. We’ve asked <code>reorder</code> to do too much. It seems to have sorted by the total of the 2 years, which is a reasonable thing to do in the circumstances. But I think that’s hard for the user of the graph to interpret, and I’d like the ordering to be by 2019.</p>
+<p>We can do this ordering with factors. First define a vector that is in the order we want, using <code>arrange()</code> to sort it. The <code>desc()</code> reverses the order. Then define a factor version of the state names, and insist that it’s in this fixed order. <code>factor()</code> is like <code>as.factor()</code> which we used in the previous chunk of code, but allows these extra parameters.</p>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="chart-facets-more-years-in-the-bar-chart" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Chart facets, more years in the bar chart</h3>
+<p>If you want the reader to compare things, a good rule of thumb is to make sure these things are all in the same graph. We’ve achieved this for comparisons between years and between countries. However, this is a bit of a squeeze, vertically, while there’s lots of empty space. Plus, it doesn’t look like this method would easily cope with a third year, say.</p>
+<p><code>ggplot</code> provides a simple way to split charts into ‘facets’, which can sometimes be a way to show variation across a dimension with just a few values (2 or 3 years, say), while aligning the axes in a sensible way. There’s a bit of a twist in the notation: you can’t just mention a variable name (as you can in <code>aes()</code>), you need either to say <code>vars(YEAR)</code> or use a ‘formula’ notation starting with a tilde <code>~</code>, which involves less typing so that’s what I’ve done here. The <code>_wrap</code> would allow wrapping onto multiple rows, but I just want one row here.</p>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><code>facet_wrap</code> has given all the x- and y-axes the same matching scale, and not bothered to repeat the y-axis labels. So it’s compact. The graph is not bad for comparing relative sizes of the larger States in a given year, and for seeing how the ranking changes. But it’s not that easy to compare amounts between years.</p>
+<p>However, we can use facets to split in a different way, if we arbitrarily put the States into two groups. Remember that <code>[ ]</code> is a way to select elements of the vector, in this case the first 19. We could equally have used <code>head(state_order, 19)</code>, but the <code>[1:19]</code> is a model that is used more often.</p>
+<p>We turn off the scale-matching (<code>scales = "free"</code>), so really it’s two separate graphs, but with one piece of code.</p>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This certainly allows better comparisons of some of the mid-range emitters, and between years. Assuming you’re not after comparison of of Luxembourg and Finland, perhaps this is fit for purpose.</p>
+<p>There are many different distributions in flight data that have this long tail challenge: with most of the flights in a few airports, or a few countries, or by a few aircraft types. It’s easy enough to switch to a logarithmic scale, but that’s then often hard to read. Facets like this are a reasonable alternative, and adaptable. The results are a little distorted by the length of some of the names, for which a crude solution is in question (2) below.</p>
+</div>
+</div>
+<div id="whats-gone-wrong-4" class="section level2">
+<h2><span class="header-section-number">5.4</span> What’s gone wrong?</h2>
+<p>If your saved .png file seems very large, check that you specified the units. <code>ggsave</code> defaults to inches.</p>
+<p>If your axis labels are switched, remember that <code>coord_flip</code> will affect these.</p>
+</div>
+<div id="exercises-1" class="section level2">
+<h2><span class="header-section-number">5.5</span> Exercises</h2>
+<div id="questions-3" class="section level3">
+<h3><span class="header-section-number">5.5.1</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Plot the bar chart of section <a href="sortbars.html#firstsortedbar">5.1</a> with the longest bars at the bottom.</li>
+<li>Plot the bar chart of section <a href="sortbars.html#firstsortedbar">5.1</a> without the 3 near-zero entries. (Hints: View the data. Filter on 2019 and choose a threshold.)</li>
+<li>Test the statement in the text that <code>aes(..., colour=as.factor(YEAR))</code> gives an outline to the bars.</li>
+<li>Use <code>select</code> and <code>!</code> to remove the <code>size</code> variable again. (Hint: Until you’re sure it works, don’t overwrite your dataset but make a temporary one, eg. start with <code>z &lt;-</code>.)</li>
+<li>Read the description of <code>geom_bar</code> in the help file. In the first bar chart, switch to using <code>geom_bar</code> instead - to get the same results. (Hint: A minor addition to the <code>aes()</code>.)</li>
+<li>Save the final faceted bar chart to a png file.</li>
+</ol>
+</div>
+<div id="answers-3" class="section level3">
+<h3><span class="header-section-number">5.5.2</span> Answers</h3>
+<ol style="list-style-type: decimal">
+<li>Use reorder(state_label, -CO2_QTY_TONNES).</li>
+<li>Use <code>filter(YEAR == 2019 &amp; CO2_QTY_TONNES &gt; 100000)</code>.</li>
+<li>Did it?</li>
+<li><code>z &lt;- annual_co2 %&gt;% select(!size)</code>, then if it works, replace <code>z</code>.</li>
+<li>Replace <code>geom_col</code> with <code>geom_bar</code> and add <code>weight =</code> in front of <code>CO2_QTY_TONNES/1e6</code>, thus switching it from the <code>y</code> parameter to the <code>weight</code>.</li>
+<li><code>ggsave("graphs/2facet co2.png", width = 15, height = 10, units = "cm")</code> or some other appropriate proportions. Did you save the correct graph? Remember that by default it saves the last one plotted.</li>
+</ol>
+</div>
+</div>
+<div id="extended-exercises" class="section level2">
+<h2><span class="header-section-number">5.6</span> Extended Exercises</h2>
+<p>In chapters <a href="firstLook.html#firstLook">3</a> to <a href="sortbars.html#sortbars">5</a> we’ve covered some basics of the R language, seen through the process of building graphs of some emissions data. Before moving on to new concepts, you might like to try some extended exercises.</p>
+<p>These do not introduce any new functions, but they might use new parameters for functions that you’ve already seen. So a good place to start if you’re stuck is the help file for the functions that you know about. If that doesn’t work, then there are some hints in section <a href="sortbars.html#co2hints">5.6.2</a>, deliberately placed slightly separate from the questions!</p>
+<p>This book also has a search function, for finding your way back to relevant sections - see the magnifying glass top left. Up and down arrows move from one find to the next.</p>
+<p>It’s good practice to periodically ‘clean’ your environment, that is, to remove all the data saved in it. This is essential before testing, because you often find that you’re relying on something that has been changed as you tweak and improve the code. Click the broom icon in the environment pane before you start the exercises.</p>
+<div id="questions-4" class="section level3">
+<h3><span class="header-section-number">5.6.1</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li>Starting from the final graph in chapter <a href="filter.html#labelco2">4.5</a>, move the label to 2015 and set the colour of the label to black.</li>
+<li>Building on (1) plot the 6 states with fewest flights in 2010, but which had more than 10,000 flights . There’s a bit of overlap, so use a different shape for each one.</li>
+<li>(Harder) Plot the monthly emissions for France from 2015 onwards as a bar chart. We haven’t done dates yet, so use a character string.</li>
+</ol>
+</div>
+<div id="co2hints" class="section level3">
+<h3><span class="header-section-number">5.6.2</span> Hints</h3>
+<ol style="list-style-type: decimal">
+<li>If you’re starting from a ‘clean’ environment, you will need to load the data and re-create <code>top_states</code>. Search in this book for <code>load(</code> and <code>top_states</code>.</li>
+<li>Mostly a question of filtering. Don’t forget to check the text of your graph when it’s done. The help for <code>geom_point</code> lists which aesthetics are understood, so will help you find the parameter name for changing shape (in this case, it’s the obvious answer).</li>
+<li>You need to go back to the code that loads the original excel file. You’ll need to <code>mutate</code> to create a new variable combining two strings <code>str_c</code> (or <code>paste</code>), but you need to put this inside an <code>if else</code> to treat 10-12 different to the other months, or the text won’t sort correctly. Remember what we did to the bar charts when there was long text on the x-axis?
+In the end, it’s an ugly chart but let’s not worry too much about that.</li>
+</ol>
+</div>
+<div id="answers-4" class="section level3">
+<h3><span class="header-section-number">5.6.3</span> Answers</h3>
+<ol style="list-style-type: decimal">
+<li>This exercise is really a lesson in assembling the code into one sequence - it gets a bit broken up in the book. You should probably include your <code>library(tidyverse)</code> statement at the top, for really complete code.</li>
+</ol>
+<p>Notice that we have two <code>colour</code> aesthetics: the default one which is by <code>YEAR</code> and one specifically for the <code>geom_text_repel</code>.</p>
+<p>The other catch is that, because the colour of the text is constant, it appears outside the <code>aes()</code>, not inside.</p>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>This is an exercise in logic in the <code>filter</code>. Did you remember to update the title, footnotes and the legend title?</li>
+</ol>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>You could load from Excel and immediately filter. I do it in two steps, because then I can check the correct field names for the <code>filter</code> and <code>mutate</code> using the environment pane.</li>
+</ol>
+<p>This is an exercise in building up quite complex statements from simple functions. Formatting with line breaks should help a lot.</p>
+<p><img src="05_sortedBars_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="filter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="groups.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["flights_in_R.pdf", "flights_in_R.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"theme": "sepia"
+});
+});
+</script>
+
+</body>
+
+</html>
