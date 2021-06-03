@@ -1,5 +1,6 @@
 /docs
 
+flights_in_R.rds
 flights_in_R.log
 scratchpad.R
 /data/annual_co2.rda
