@@ -8,11 +8,17 @@ The patterns that we explore in this chapter are some of those that you'll use m
 knitr::kable(data.frame(syl=c("`lapply`, `rep`, `function`, `pmin`, `pmax`, `is.list`, `unlist`, `read_xlsx`, `map`, `pmap`, `crossing`")),
              col.names = c("In this chapter, you'll be introduced to:"))
 suppressPackageStartupMessages(library(tidyverse)) # without lots of messages 
+
+
 ```
+
+
 
 ## Summarising {#summarise}
 
-Summarising radically reduces the number of rows in your dataset. You will also lose variables in the process. We saw an example in section \@ref(loadco2), where we summarised to get annual totals. For that monthly data, you can think of it row-wise, as "aggregate the rows so that I just have years", or column-wise, as "get rid of the months". These are essentially the same, and both are achieved with `summarise` and related functions. 
+Summarising radically reduces the number of rows in your dataset. You will also lose variables in the process. We saw an example in section \@ref(loadco2), where we summarised to get annual totals. For that monthly data, you can think of it row-wise, as "aggregate the rows so that I just have years", or column-wise, as "get rid of the months". These are essentially the same, and both are achieved with `summarise` and related functions.
+
+After a `summarise` all that is left are the variables created by `summarise` and the grouping variables.^[There's an exception to this rule, with geographic data using package `sf` that we'll see in chapter \@ref(maps).] 
 
 
 
