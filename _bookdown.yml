@@ -1,6 +1,22 @@
+# K-M (kint & merge) approach, see https://bookdown.org/yihui/bookdown/new-session.html
+new_session: yes
+
 book_filename: "flights_in_R"
-delete_merged_file: true
-language:
-  ui:
-    chapter_name: "Chapter "
 output_dir: "docs"
+delete_merged_file: true
+
+before_chapter_script: "_common.R"
+
+
+rmd_files: [
+  "index.Rmd",
+  "02_start.Rmd",
+  "03_StateCO2.Rmd",
+  "04_FilteredCO2.Rmd",
+  "05_sortedBars.Rmd",
+  # "06_vectorsLoops.Rmd",
+  "07_groupby.Rmd",
+  "90_geodata.Rmd",
+  "91_NOTAMs.Rmd",
+  "99-references.Rmd"
+]
