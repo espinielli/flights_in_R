@@ -8,7 +8,7 @@ It's hard to get far in an analysis without first looking at the data to ask que
 
 In this chapter, we introduce some of the ways to take a quick look at your data. We also introduce some data on CO~2~ emissions per European State from aviation. 
 
-```{r, echo=FALSE}
+```{r first-look-co2, echo=FALSE}
 knitr::kable(data.frame(syl=c("`read_xlsx()`, `<-`, `summary`, `str`, environment pane, `View()`, `unique`, `head`, `c()`, `[]`, `ggplot()`")),
              col.names = c("In this chapter, you'll be introduced to:"))
 ```
@@ -77,7 +77,7 @@ Often you want to keep your groups, but here we don't need to, so we `ungroup` a
 
 There will be more examples of this sort of data manipulation in Chapter \@ref(filter), with more explanation of what's happening. And a lot more when we turn to data wrangling in chapters \@ref(loopsfunctions) and \@ref(groups).
 
-```{r}
+```{r save-annual-co2-data}
 annual_co2 <- aviation_co2 %>%
   select(!STATE_CODE) %>% 
   group_by(YEAR, STATE_NAME) %>%
@@ -92,7 +92,7 @@ save(annual_co2, file = "data/annual_co2.rda")
  
 There are three other important ways to explore the data. Firstly in the environment pane (top right, CTRL-8), where you can click the first line, with name on, to see a summary. You get much the same thing in the console by typing `str(annual_co2)` where `str` is for 'structure'. You should see something like this.
 
-![](/images/CO2inEnvironment.png)
+![](images/CO2inEnvironment.png)
 
 We can see that there are three numeric variables (`num`) and two character variables (`chr`). All five variables have the same number of observations (`r nrow(annual_co2)`). In a tibble or dataframe the columns are always the same length.
 
@@ -100,7 +100,7 @@ The second way to explore the structure, because this is a tibble, is just to ty
 
 The third way gives a window to explore every observation. Click on the dataset name next to the blue arrow or type `View(annual_co2)` in the console (sorry about the upper case 'V', R is like that) and you get a tabular data explorer, which allows you to sort and filter. You should see something like this. [Try out the sorting and filtering in the view window. Filter to show only the Netherlands, and sort by total flights.]
 
-![](/images/CO2inViewAndEnvironment.png)
+![](images/CO2inViewAndEnvironment.png)
 
 ## Extracting variables {#extractfield}
 
@@ -131,14 +131,13 @@ We've just seen how to pull a variable out of a tibble, as a vector. How do we e
 
 The `states` are quite a lot to show in the console. Sometimes you just need to see a quick sample, eg to check if they're in title case, or if they're codes or names. `head()` is useful for showing you the first few (6 by default).
 
-```{r}
+```{r show-states-dataset}
 head(states)
-
 ```
 
 If you want to pull out a single value, or a few of them, again there are multiple ways to do this, but the simplest is this. We show here two ways to select with a vector of numbers: creating a consecutive sequence of numbers (`1:3`); and creating a vector with an arbitrary selection (`c(1, 5, 10)`).
 
-```{r}
+```{r pick-values}
 states[1]
 states[3]
 states[1:3]
@@ -162,11 +161,10 @@ In the simplest code we have:
 * `aes`: gives the x and y first, and here also says choose colour based on year;
 * `geom_point`: says to plot points with these data, ie a scatter plot.
 
-```{r}
+```{r first-scatter}
 ggplot(annual_co2, 
        aes(TF, CO2_QTY_TONNES, colour = YEAR)) +
   geom_point() 
-
 ```
 
 Even this simple example illustrates that:
@@ -184,7 +182,7 @@ Let's at least label the axes so that someone else can see quickly what has been
 
 The label on the legend is meaningful, but to avoid the block capitals we can change that too within the `labs()` statement. It's a 'colour' legend (that's what is in the `aes` call), so you need to refer to 'colour' in the `labs()`. 
 
-```{r}
+```{r scatter-plot-improved-titles}
 
 ggplot(annual_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, colour = YEAR)) +
   geom_point() + 
@@ -205,7 +203,7 @@ We need both to add a line, which follows the pattern of `geom_point`, and group
 
 Out of a sense of neatness, we also add a subscript to CO~2~. The code `bquote(~CO[2]~" (million tonnes)")` took some googling and is cryptic, but it works!
 
-```{r}
+```{r scatterplot-with-clustering}
 ggplot(annual_co2, aes(TF/1e6, CO2_QTY_TONNES/1e6, 
                          colour = YEAR, group = STATE_NAME)) +
   geom_point() + 
